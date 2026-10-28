@@ -1,0 +1,195 @@
+# MycoRadar — Roadmap produit et technique
+
+**Version :** 1.0 — 28 octobre 2026  
+**Statut initial :** à démarrer ; ne pas présenter les étapes comme réalisées sans preuve dans le dépôt.  
+**Zone pilote :** Provence (Bouches-du-Rhône, Var, Vaucluse) ; **produit cible :** France entière, puis Europe/international.  
+**Objectif :** fournir, par espèce et par territoire, une carte de favorabilité de l'habitat, une estimation des conditions de fructification actuelles et futures, l'incertitude, les facteurs explicatifs, la fraîcheur et la provenance des données.
+
+## Règles de produit incontournables
+
+- `score_habitat` (aptitude écologique relativement stable) et `score_fructification` (conditions temporelles) sont distincts. Un score 0–100 **n'est pas automatiquement une probabilité statistique**. N'afficher un pourcentage de probabilité qu'après calibration et validation indépendantes.
+- Pas de promesse de localisation réelle à 10 m sur la base d'une grille graphique fine. Chaque mesure/score porte une résolution effective, la couverture et un niveau de confiance. Les microzones 50–100 m sont une **hypothèse expérimentale**.
+- Une observation positive ne fournit pas automatiquement de vraies absences. Corriger l'effort d'observation, la géoprécision, le biais spatial et la fuite temporelle.
+- Ne jamais présenter un score comme une confirmation d'identification ou de comestibilité. Protéger les espèces et localisations sensibles. Respecter réglementations et restrictions locales d'accès.
+- Aucune donnée simulée n'est affichée en production comme une prévision réelle. Les démonstrations sont étiquetées « démonstration / données fictives ».
+- L'architecture métier ignore les découpages administratifs français : territoires, providers, couches, espèces et calendriers sont configurables par pays/région.
+- Une tâche à la fois, tests observés, preuve par commit/PR ; ne jamais annoncer un déploiement ou un résultat sans l'avoir constaté.
+
+## Critères de succès V1 pilote
+
+- Carte responsive, filtre espèce/date, clic sur cellule/secteur, couche explicative, horodatage, provenance, qualité des données, message explicite si indisponible.
+- Quatre espèces pilotes : **Lactarius sanguifluus**, **Boletus aereus**, **Boletus edulis**, **Cantharellus cibarius**, sous réserve de couverture suffisante des données et vérification taxonomique.
+- Pipeline météo vérifiant les sources **au moins chaque heure** et publication quotidienne (ou plus souvent lorsqu'il y a une donnée nouvelle) des résultats affectés. Les données sources peuvent être plus anciennes ; l'interface le signale.
+- Ingestion reproductible d'au moins une source d'occurrences, une source météo, une source de couverture forestière et une source de terrain/sol, en provenance réelle et sous licence vérifiée.
+- Tests unitaires, d'intégration, géospatiaux et CI verts ; observabilité, sécurité, documentation d'exploitation ; comparatif avec baseline et rapport de validation honnête.
+
+## Architecture cible indicative (à ajuster après inspection du dépôt)
+
+- **Web** : TypeScript, Next.js ou React/Vite selon l'existant, MapLibre GL JS, client géospatial léger ; revalidation de cache HTTP (ETag/TTL), pas d'inférence lourde dans le navigateur.
+- **API** : Python 3.12+, FastAPI, Pydantic, contract OpenAPI ; servir résultats pré-calculés, métadonnées et géométries simplifiées.
+- **Données** : PostgreSQL + PostGIS ; migrations Alembic ; fichiers de couches volumineuses et exports GeoParquet/COG dans stockage objet compatible S3 (Cloudflare R2 possible).
+- **Pipelines** : workers Python (CLI et/ou conteneurs) avec tâches idempotentes, file d'événements, « watermark »/version des fournisseurs, retries bornés, ingestion incrémentale.
+- **Orchestration** : Cloudflare Cron/Queues ou planificateur équivalent pour détecter/publier et répartir les tâches ; exécuteur conteneurisé pour imports, traitement raster, entraînement et recalcul lourds. Ne pas lancer le ML lourd dans un Worker HTTP.
+- **Déploiement** : frontend Cloudflare si pratique, API Python sur service adapté, base PostGIS managée ou autohébergée ; environnements `local`, `staging`, `production` ; secrets hors Git.
+- **Territoires** : entités `region`, `country`, `grid_cell`, `data_provider`, `layer_version`, `taxon`, `prediction_run`, `observation` ; CRS, unité, licence et incertitude stockés systématiquement.
+
+### Actualisation : stratégie à respecter
+
+1. **Toutes les heures**, un déclencheur léger vérifie versions/horodatages disponibles des sources météo et des observations. Gestion des quotas, journaux, retries et alertes.
+2. Lorsqu'une source a réellement changé, importer seulement la plage concernée, valider et recalculer les régions/cellules affectées. Les mises à jour doivent être **idempotentes**.
+3. **Chaque jour**, vérifier les lots absents et publier au plus tard une nouvelle version vérifiée des résultats concernés **si les données nécessaires sont disponibles**. Ne pas prétendre que la fraîcheur du fournisseur est meilleure qu'elle n'est.
+4. Publier des snapshots **atomiques** (un `run_id`, `model_version`, `data_cutoff`, `computed_at`, `effective_resolution_m`, `coverage_status`). Garder le dernier résultat sain en cas d'échec, marquer `stale` et alerter.
+5. Le frontend peut vérifier la nouvelle version toutes les heures, mais évite tout calcul scientifique lourd. ETag, cache par territoire/espèce/échéance, expiration et invalidation contrôlée.
+6. Forêts, relief et sols : ingestion **sur nouvelle édition des sources**, pas une recopie quotidienne inutile ; entraînement ML périodique sur nouveaux jeux validés, pas à chaque visite.
+
+## Phases et tâches séquentielles
+
+Statuts autorisés : `TODO`, `IN_PROGRESS`, `BLOCKED`, `DONE`. **Une tâche est `DONE` seulement si son critère d'acceptation a été réellement vérifié.** Les tâches ci-dessous sont initialement `TODO`.
+
+### P0 — Initialisation, gouvernance et preuves (prérequis)
+
+| ID | Statut | Tâche | Critère de validation |
+|---|---|---|---|
+| MR-001 | TODO | Vérifier dépôt, branche par défaut, droits, CI, code existant et documents ; créer structure initiale adaptée (monorepo uniquement si pertinent) | Inventaire dépôt, documentation de démarrage, commandes locales qui fonctionnent ; aucune suppression de travail existant |
+| MR-002 | TODO | Ajouter `AGENTS.md`, roadmap versionnée, ADR architecture et conventions PR | Instructions persistantes, décision backend vs frontend, conventions clairement testables |
+| MR-003 | TODO | Mettre en place environnement local : frontend, API santé, PostGIS via Compose, `.env.example`, migrations | `docker compose up`, endpoint `/health`, page web qui s'ouvre, sans secret réel |
+| MR-004 | TODO | Ajouter GitHub Actions CI (lint, format, types, unit tests, builds, `git diff --check`) | Actions passent sur PR d'initialisation ; impossible de confondre « non exécuté » et « réussi » |
+| MR-005 | TODO | Préparer gestion des licences, conformité, attribution et registre de fournisseurs | Tableau source/licence/autorisation de cache/redistribution/attribution/fréquence de rafraîchissement ; risques identifiés |
+
+**Jalon M0 :** repo propre, stack exécutable, PR CI verte, décisions documentées.
+
+### P1 — Fondations géospatiales et cartographie
+
+| ID | Statut | Tâche | Critère de validation |
+|---|---|---|---|
+| MR-006 | TODO | Schéma PostGIS (pays/régions, grille, espèces, occurrences, versions de couches, runs) + Alembic | Migrations aller/retour testées, contraintes SRID/indices et exemple SQL |
+| MR-007 | TODO | Grille géographique multi-résolution (`cell_id` stable), territoires pilotes config et masques de forêts | Tests limites, reprojection, intersections, surfaces, zones marines et géométries invalides |
+| MR-008 | TODO | Carte MapLibre : cadrage Provence, fond cartographique légal, légende, zoom, sélection secteur | Fonctionne mobile/bureau ; attribution cartes affichée ; pas de promesses de scores réels |
+| MR-009 | TODO | API `/v1/regions`, `/v1/species`, `/v1/cells`, `/v1/metadata` paginée et documentée | JSON/OpenAPI, tests API géographiques et erreurs typées |
+
+**Jalon M1 :** carte et API connectées à de vrais territoires, sans prédiction fictive masquée.
+
+### P2 — Collecte vérifiable des données publiques
+
+| ID | Statut | Tâche | Critère de validation |
+|---|---|---|---|
+| MR-010 | TODO | Adaptateur occurrences GBIF (éventuellement INPN/OpenObs) + mapping taxonomique | Import test sur échantillon réel, pagination/download, déduplication, licence, précision coordonnées et provenance |
+| MR-011 | TODO | Adaptateur météo historique et prévisions disponibles (Météo-France France, fallback configurable) | Historique + météo récente + prévision différenciés ; quotas/rate limits testés ; attribution |
+| MR-012 | TODO | Couches forêts / landcover (IGN France, couches globales par extension) | Types de végétation et année du jeu source visibles ; géométries nettoyées |
+| MR-013 | TODO | Couches sols, géologie, relief ; fallback SoilGrids (WCS/WebDAV ou fichiers si API indisponible), IGN/BRGM | Provenance/résolution/âge/valeurs manquantes gérés ; tests avec petits fixtures |
+| MR-014 | TODO | Pipeline géospatial de jointure, features datées et tests qualité | Rejouable, idempotent, sans fuite d'information postérieure aux dates observées |
+
+**Jalon M2 :** vraie base de données pilote traçable, robuste aux pannes fournisseurs.
+
+### P3 — Moteur initial de favorabilité (sans ML opaque)
+
+| ID | Statut | Tâche | Critère de validation |
+|---|---|---|---|
+| MR-015 | TODO | Catalogue taxonomique + règles écologiques par espèce sourcées | Quatre espèces, associations forestières documentées, seuils configurables, incertitudes explicites |
+| MR-016 | TODO | Baseline habitat (règles explicables) + qualité des sources | `score_habitat` 0–100 qualifié d'indice, raisons et `data_quality` ; tests bornes/NA |
+| MR-017 | TODO | Baseline fructification : cumuls de pluie, sécheresse antérieure, température, saisonnalité | `score_fructification` calculé seulement si couverture suffisante ; comparaison avec scenarios synthétiques |
+| MR-018 | TODO | API `/v1/predictions`, versioning, fraîcheur, détails explicatifs | Modèle de réponse stable ; `computed_at`, `data_cutoff`, `status`, `confidence`, `effective_resolution_m` |
+| MR-019 | TODO | Carte en couches habitat/fructification, fiche espèce, filtre date, comparaison secteurs | UX mobile validée ; information « score ≠ probabilité » visible ; états vides/stale |
+
+**Jalon M3 :** V1 exploratoire exploitable, scores transparents et aucune précision inventée.
+
+### P4 — Automatisation robuste et exploitation
+
+| ID | Statut | Tâche | Critère de validation |
+|---|---|---|---|
+| MR-020 | TODO | Polling horaire, jobs d'ingestion idempotents, queues et gestion des quotas | Simulation nouvelles données/aucun changement/429/timeout ; aucune double ingestion |
+| MR-021 | TODO | Recalcul incrémental région/espèce/échéance + snapshot atomique | Rejouer deux fois n'altère pas les résultats ; rollback vers dernière version saine |
+| MR-022 | TODO | Publication quotidienne contrôlée, cache CDN/ETag, invalidation et tests d'horloge | Cas nouvelle donnée, données anciennes, retard fournisseur, échec pipeline ; timestamps visibles |
+| MR-023 | TODO | Observabilité (logs structurés, métriques âge données, runs, alertes), sauvegardes et runbook | Échec injecté détecté ; procédure reprise documentée et testée |
+
+**Jalon M4 :** publication autonome vérifiable et résiliente ; « actualisé » signifie précisément ce qui l'est.
+
+### P5 — IA scientifique, calibration et évaluation indépendante
+
+| ID | Statut | Tâche | Critère de validation |
+|---|---|---|---|
+| MR-024 | TODO | Nettoyage observations, qualité taxonomique et effort de prospection | Audit des coordonnées floutées, doublons, biais de collecte, données sensibles |
+| MR-025 | TODO | Protocole train/test spatial et temporel ; pseudo-absences/biais d'échantillonnage | Protocole écrit avant évaluation ; zones et saisons test tenues à l'écart |
+| MR-026 | TODO | Baselines statistiques + premier modèle (ex. GAM/MaxEnt/LightGBM) | Comparaison explicite aux règles et météo simple, courbes de qualité et intervalles |
+| MR-027 | TODO | Calibration si possible, incertitude, explications et model cards | Pas d'affichage « probabilité % » sans calibration prouvée ; résultats par espèce/région |
+| MR-028 | TODO | Validation terrain documentée, y compris sorties sans trouvaille, si protocole fiable | Protocole d'effort, biais, validation indépendante, rapport reproductible |
+| MR-029 | TODO | Expérience pilote microzones 100 m puis 50 m uniquement si gain démontré | Comparaison à échelles plus grossières, étude d'incertitude, aucune extrapolation abusive |
+
+**Jalon M5 :** premiers modèles comparés à des baselines, preuves publiques de performance et limites.
+
+### P6 — Compte, contribution, confidentialité, conformité
+
+| ID | Statut | Tâche | Critère de validation |
+|---|---|---|---|
+| MR-030 | TODO | Auth facultative, carnet de sorties géolocalisées privé, consentement et export | Contrôle d'accès testé, suppression/export, aucune fuite de coordonnées privées |
+| MR-031 | TODO | Formulaire de trouvailles et non-trouvailles + effort de prospection | Données structurées, validation, qualité, distinction absence observée/non-détection |
+| MR-032 | TODO | Protection localisations sensibles, sécurité des espèces, mentions identification | Fuzzing/agrégation selon sensibilité ; disclaimer de comestibilité explicite |
+| MR-033 | TODO | Accessibilité et réglementation d'accès (si sources maintenues) | Sources officielles datées, état inconnu visible, pas de faux « accès autorisé » |
+
+**Jalon M6 :** communauté contributive sans exposer les coins ni les données personnelles.
+
+### P7 — Couverture France et international
+
+| ID | Statut | Tâche | Critère de validation |
+|---|---|---|---|
+| MR-034 | TODO | Déployer régions métropolitaines progressivement après validation pilote | Coûts, quotas, performance, qualité région par région ; états « insuffisant » |
+| MR-035 | TODO | Provider registry multi-pays, taxonomie et calendriers locaux | Ajouter un pays sans modifier le moteur métier ; fuseaux et langues gérés |
+| MR-036 | TODO | Localisation multilingue, conformité pays, politique cartographie | Une région hors France opérationnelle en staging, licence et restrictions documentées |
+| MR-037 | TODO | Industrialiser tuiles vectorielles/raster et pré-calcul à grande échelle | Benchmarks temps de réponse/coût/stockage et stratégie de partition prouvés |
+
+**Jalon M7 :** France entière puis extension pays par pays, sans refonte de l'architecture.
+
+### P8 — Fonctions différenciantes / premium (après preuve de qualité)
+
+| ID | Statut | Tâche | Critère de validation |
+|---|---|---|---|
+| MR-038 | TODO | Comparateur de forêts et classement contextualisé | Comparabilité sourcée, explications et niveaux de confiance |
+| MR-039 | TODO | Alertes de changements de conditions, abonnements opt-in | Notifications bornées, unsubscribe, anti-spam, pas de fausse assurance |
+| MR-040 | TODO | API partenaires / chercheurs, tableaux de bord biodiversité | Contrôles de confidentialité/licence, quotas et audit d'utilisation |
+
+## Modèle minimal de résultat prévisionnel
+
+```json
+{
+  "cell_id": "pilot:cell-identifier",
+  "taxon_id": "taxon-identifier",
+  "valid_at": "2026-10-29T12:00:00Z",
+  "habitat_score": 72,
+  "fructification_score": null,
+  "score_semantics": "relative_favorability_index_not_probability",
+  "confidence": "low",
+  "coverage_status": "partial",
+  "effective_resolution_m": 250,
+  "computed_at": "2026-10-28T05:12:00Z",
+  "data_cutoff": "2026-10-27T00:00:00Z",
+  "model_version": "baseline-0.1.0",
+  "run_id": "example-not-real",
+  "status": "illustrative_example",
+  "factors": [],
+  "sources": []
+}
+```
+
+Ce JSON est un **exemple de contrat**, pas une prédiction ni un jeu de données réel.
+
+## Protocoles pour chaque PR
+
+1. Vérifier branche et remote ; `git fetch --all --prune` avant toute modification ; dépôt propre ou branche indépendante sans écraser du travail non commité.
+2. Choisir **la première tâche `TODO` dont les dépendances sont satisfaites**, sans entreprendre plusieurs phases dans une seule PR ; branche `feat/MR-XXX-description`.
+3. Implémenter verticalement une tranche fonctionnelle testable (code, tests, docs et migrations si requises).
+4. Exécuter tests et CI (pas seulement « écrire des tests »), `git diff --check`, scan secrets/dépendances pertinent ; publier résultats réels et limites.
+5. Ouvrir PR avec ID tâche, objectif, risques, tests observés, captures si UI, critères de recette et plan de rollback. Ne pas merger si les checks requis manquent, échouent ou si la protection bloque.
+6. Mettre la tâche à `DONE` **après validation réelle**, avec SHA/PR ou lien vers preuve ; sinon `IN_PROGRESS` ou `BLOCKED`. Synchroniser la roadmap dans la PR.
+7. Pas de déploiement production, secrets, frais cloud ni écriture dans un autre dépôt sans autorisation distincte.
+
+## Sources à auditer avant intégration
+
+- GBIF occurrence API : https://techdocs.gbif.org/en/openapi/v1/occurrence
+- Météo-France (catalogue) : https://www.data.gouv.fr/organizations/meteo-france/dataservices
+- IGN : https://geoservices.ign.fr/
+- INPN / OpenObs : https://openobs.mnhn.fr/
+- Copernicus Climate Data Store : https://cds.climate.copernicus.eu/
+- SoilGrids (privilégier accès fichier/WCS ; API REST signalée comme indisponible) : https://docs.isric.org/globaldata/soilgrids/
+- Données géologiques : https://www.brgm.fr/
+
+**Obligation :** revalider à la date d'intégration l'accès, les droits de réutilisation commerciale, l'obligation d'attribution, les limites d'API, la résolution et la fraîcheur de chaque fournisseur. Ne jamais coder de promesse de disponibilité sur ces seuls liens.
