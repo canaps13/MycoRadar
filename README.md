@@ -50,6 +50,7 @@ initialiser ces variables dans les terminaux PowerShell utilisés :
 ```powershell
 $env:UV_CACHE_DIR = Join-Path (Get-Location) '.tools/cache'
 $env:UV_PYTHON_INSTALL_DIR = Join-Path (Get-Location) '.tools/python'
+$env:PLAYWRIGHT_BROWSERS_PATH = Join-Path (Get-Location) '.tools/browsers'
 $env:Path = (Resolve-Path .tools/uv).Path + ';' + $env:Path
 ```
 
