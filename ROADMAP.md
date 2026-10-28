@@ -50,7 +50,7 @@ Statuts autorisés : `TODO`, `IN_PROGRESS`, `BLOCKED`, `DONE`. **Une tâche est 
 
 | ID | Statut | Tâche | Critère de validation |
 |---|---|---|---|
-| MR-001 | TODO | Vérifier dépôt, branche par défaut, droits, CI, code existant et documents ; créer structure initiale adaptée (monorepo uniquement si pertinent) | Inventaire dépôt, documentation de démarrage, commandes locales qui fonctionnent ; aucune suppression de travail existant |
+| MR-001 | IN_PROGRESS | Vérifier dépôt, branche par défaut, droits, CI, code existant et documents ; créer structure initiale adaptée (monorepo uniquement si pertinent) | Socle API/web, 3 tests API, 6 tests React et 4 tests navigateur vérifiés ; [inventaire et preuves](docs/MR-001.md). CI distante en attente. |
 | MR-002 | TODO | Ajouter `AGENTS.md`, roadmap versionnée, ADR architecture et conventions PR | Instructions persistantes, décision backend vs frontend, conventions clairement testables |
 | MR-003 | TODO | Mettre en place environnement local : frontend, API santé, PostGIS via Compose, `.env.example`, migrations | `docker compose up`, endpoint `/health`, page web qui s'ouvre, sans secret réel |
 | MR-004 | TODO | Ajouter GitHub Actions CI (lint, format, types, unit tests, builds, `git diff --check`) | Actions passent sur PR d'initialisation ; impossible de confondre « non exécuté » et « réussi » |
