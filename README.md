@@ -211,6 +211,12 @@ Il s'agit d'un aperçu local, pas d'un déploiement de production.
 
 ## Organisation et limites
 
+Avant toute intégration de données : consulter le
+[registre des fournisseurs, licences, cadences et risques](docs/data-providers.md)
+et la [procédure d'admission, de provenance et d'attribution](docs/data-policy.md).
+Ce registre prépare les adaptateurs futurs ; aucune source n'est encore activée.
+
+
 Pour contribuer : [workflow Git et conventions de PR](CONTRIBUTING.md).
 
 - `api/src/mycoradar` : service FastAPI ; `api/tests` : tests HTTP et OpenAPI.
