@@ -40,7 +40,11 @@ Remplacer les commentaires d'aide par des informations propres à la modificatio
 Les commandes applicables au code sont dans le [README](README.md#valider).
 Une modification purement documentaire ne justifie pas à elle seule de nouveaux
 tests applicatifs ; vérifier ses liens, exemples et cohérence avec l'existant.
-Le workflow Bootstrap actuel continue à tester le socle sur les PR.
+Le workflow Bootstrap contrôle lint, format, types, tests unitaires, build et
+navigateur sous Linux/Windows. Le workflow Local environment contrôle Compose,
+PostGIS, migrations et navigateur sur la pile construite. Les résumés Actions
+distinguent les succès des échecs et des contrôles non exécutés ; une étape
+ultérieure ignorée après un échec ne constitue jamais une preuve de réussite.
 
 Pour des données ou scores, documenter les sources, licences, dates, résolution
 effective et couverture ; séparer habitat et fructification et expliciter les
