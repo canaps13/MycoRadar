@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 
-const target = process.env.MYCORADAR_PREVIEW_URL ??
+const target =
+  process.env.MYCORADAR_PREVIEW_URL ??
   "https://mycoradar-preview.valentinlamede13.workers.dev/";
 
 async function read(url) {
@@ -17,12 +18,18 @@ async function verify() {
   const html = await response.text();
   assert.match(html, /<div id="root"><\/div>/, "Entrée React absente");
   assert.match(html, /MycoRadar/i, "Identité MycoRadar absente");
-  const assets = Array.from(html.matchAll(/(?:href|src)="(\/assets\/[^"]+)"/g), (m) => m[1]);
+  const assets = Array.from(
+    html.matchAll(/(?:href|src)="(\/assets\/[^"]+)"/g),
+    (match) => match[1],
+  );
   assert.ok(assets.length >= 2, "Fichiers JS/CSS Vite absents");
   for (const asset of assets) {
     const result = await read(new URL(asset, target));
     assert.equal(result.status, 200, "Asset indisponible: " + asset);
-    assert.ok((await result.arrayBuffer()).byteLength > 0, "Asset vide: " + asset);
+    assert.ok(
+      (await result.arrayBuffer()).byteLength > 0,
+      "Asset vide: " + asset,
+    );
   }
   const api = await read(new URL("/api/health", target));
   assert.equal(api.status, 503, "La preview ne doit pas feindre un backend sain");
@@ -38,8 +45,12 @@ for (let attempt = 1; attempt <= 8; attempt++) {
     success = true;
     break;
   } catch (error) {
-    console.error("Preview non conforme (tentative " + attempt + "/8): " + error.message);
-    if (attempt < 8) await new Promise((resolve) => setTimeout(resolve, 2500));
+    console.error(
+      "Preview non conforme (tentative " + attempt + "/8): " + error.message,
+    );
+    if (attempt < 8) {
+      await new Promise((resolve) => setTimeout(resolve, 2500));
+    }
   }
 }
 if (!success) process.exitCode = 1;

@@ -4,7 +4,8 @@ import worker from "./worker.js";
 
 test("API paths fail closed without a deployed backend", async () => {
   for (const path of ["/api", "/api/health", "/api/v1/predictions"]) {
-    const response = await worker.fetch(new Request("https://example.test" + path), {
+    const request = new Request("https://example.test" + path);
+    const response = await worker.fetch(request, {
       ASSETS: {
         fetch: () => {
           throw new Error("assets must not handle API");
