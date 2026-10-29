@@ -1,0 +1,46 @@
+{
+  "checked_at_utc": "2026-10-29T16:15:50Z",
+  "scope": "Selected catalogue metadata only; no scientific data downloaded; not an ingestion approval",
+  "records": [
+    {
+      "metadata_url": "https://www.data.gouv.fr/api/1/datasets/6569b4473bedf2e7abad3b72/",
+      "id": "6569b4473bedf2e7abad3b72",
+      "title": "Données climatologiques de base - horaires",
+      "publisher": "Météo-France",
+      "license": "lov2",
+      "frequency": "daily"
+    },
+    {
+      "metadata_url": "https://www.data.gouv.fr/api/1/datasets/65bd1247a6238f16e864fa80/",
+      "id": "65bd1247a6238f16e864fa80",
+      "title": "Paquets Arome - Résolution 0,01°",
+      "publisher": "Météo-France",
+      "license": "lov2",
+      "frequency": "continuous"
+    },
+    {
+      "metadata_url": "https://www.data.gouv.fr/api/1/datasets/61489da4b77d1697d00d2feb/",
+      "id": "61489da4b77d1697d00d2feb",
+      "title": "BD Forêt®",
+      "publisher": "Institut national de l'information géographique et forestière",
+      "license": "lov2",
+      "frequency": "irregular"
+    },
+    {
+      "metadata_url": "https://www.data.gouv.fr/api/1/datasets/58e5842688ee386c65805755/",
+      "id": "58e5842688ee386c65805755",
+      "title": "Référentiel à grande échelle (RGE)",
+      "publisher": "Institut national de l'information géographique et forestière",
+      "license": "lov2",
+      "frequency": "irregular"
+    },
+    {
+      "metadata_url": "https://www.data.gouv.fr/api/1/datasets/66631d4a67b5b112fafd0f8a/",
+      "id": "66631d4a67b5b112fafd0f8a",
+      "title": "Cartes géologiques vectorisées et harmonisées à 1/50 000 du BRGM",
+      "publisher": "Bureau de Recherches Géologiques et Minières",
+      "license": "notspecified",
+      "frequency": "punctual"
+    }
+  ]
+}

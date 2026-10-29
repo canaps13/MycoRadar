@@ -51,6 +51,13 @@ effective et couverture ; séparer habitat et fructification et expliciter les
 valeurs absentes. Les fixtures doivent être identifiées comme synthétiques.
 Ne pas publier de données privées ou de secrets dans une PR ou ses captures.
 
+Pour intégrer un fournisseur : appliquer la
+[procédure d'admission et d'attribution](docs/data-policy.md) et mettre à jour
+son entrée dans le [registre des produits](docs/data-providers.md). Vérifier
+les conditions du lot réel, pas seulement celles du portail. Une licence ou un
+droit d'usage inconnu/contradictoire bloque l'opération concernée ; les sources
+marquées `blocked` ne doivent pas être activées sans preuve levant ce blocage.
+
 ## Contrôle automatique des conventions
 
 `PR conventions` vérifie les métadonnées à l'ouverture, la réouverture, la sortie
