@@ -2,6 +2,11 @@
 
 **Statut :** proposition révisable après inspection du code existant. Ne pas réécrire un dépôt déjà structuré pour coller artificiellement à ce document.
 
+**État observé après MR-001 :** FastAPI/Pydantic expose uniquement la santé HTTP ;
+React/TypeScript/Vite affiche une page reliée à cette route. Les ADR-001 à ADR-004
+restent les règles du développement à venir ; les pipelines, scores, PostGIS,
+MapLibre, cache et orchestration décrits ci-dessous ne sont pas encore implémentés.
+
 ## ADR-001 — Calcul côté serveur, présentation côté client
 
 **Décision :** modèles et traitements géospatiaux côté backend ; le frontend cartographie, filtre et compare des résultats pré-calculés. Une revalidation horaire dans le navigateur n'exécute pas l'inférence sur toutes les cellules.
@@ -36,6 +41,30 @@ Pour toute prédiction : modèle, version, jeux sources, run, timestamp calcul/p
 Ne pas utiliser un Worker Cloudflare comme serveur de calcul raster/ML massif ; utiliser un exécuteur Python dédié aux tâches lourdes.
 
 ## Stack proposée
+
+### ADR-005 — Socle retenu pour MR-001
+
+**Statut :** adopté par la PR #1, fusionnée le 29 octobre 2026
+([preuve](https://github.com/canaps13/MycoRadar/pull/1)).
+
+**Contexte :** le dépôt initial ne contenait que les quatre documents de cadrage.
+Une API indépendante et une page légère suffisent pour le premier incrément.
+
+**Décision :** monorepo `api/` (Python 3.12, FastAPI, Pydantic) et `web/`
+(Node 24, React, TypeScript, Vite). Dépendances verrouillées avec uv et npm.
+Le frontend interroge `/api/health` ; le proxy Vite local retire `/api` avant de
+transmettre à `/health`. Cette route vérifie la vie du service HTTP, sans vérifier
+une base ni la disponibilité de données scientifiques. Aucun endpoint de score
+n'est publié. Les états du frontend sont explicitement distincts de la santé API.
+
+**Conséquences :** conserver les services existants ; ajouter la base et ses
+migrations dans MR-003/MR-006, la cartographie dans MR-008 et les calculs uniquement
+côté backend. Le proxy Vite n'est pas une configuration de déploiement production.
+Pas de rendu serveur Next.js, service worker ou infrastructure cloud sans besoin
+observé. Une évolution durable devra préciser contexte, décision, conséquences
+et preuve dans une nouvelle ADR numérotée, sans effacer l'historique existant.
+
+### Cible pour les tâches suivantes
 
 ```text
 web/       TypeScript + React (Next ou Vite selon existant) + MapLibre

@@ -7,6 +7,7 @@ Construire une plateforme extensible France/Europe/monde de favorabilité et de 
 - Lire `ROADMAP.md` pour choisir **la première tâche TODO dont les dépendances sont satisfaites**.
 - Lire `ARCHITECTURE.md` pour les contrats des services, les décisions backend/cache et les garde-fous scientifiques.
 - Examiner l'existant avant de choisir frameworks et arborescence ; conserver ce qui fonctionne et éviter les refontes inutiles.
+- Lire `CONTRIBUTING.md` pour les conventions de branche/PR et leur contrôle automatisé ; utiliser `.github/pull_request_template.md`.
 - Maintenir dans `ROADMAP.md` le statut et les preuves vérifiables des tâches livrées. Ne pas annoncer DONE tant que tests/critères ne sont pas observés.
 
 ## Non-négociable
