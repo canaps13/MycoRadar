@@ -20,6 +20,7 @@ const manifest = JSON.parse((await read(manifestPath)).toString());
 const recipe = [
   manifestPath,
   "web/scripts/prepare-map.ts",
+  "web/scripts/verify-map-bundle.mjs",
   "web/package-lock.json",
 ];
 const recipeHashes = Object.fromEntries(
@@ -163,6 +164,24 @@ if (process.argv.includes("--verify")) {
   await output(
     "web/src/map/catalog.json",
     await format(JSON.stringify(catalog), { parser: "json" }),
+  );
+  const webPaths = (entries: Record<string, string>) =>
+    Object.fromEntries(
+      Object.entries(entries)
+        .filter(([path]) => path.startsWith("web/"))
+        .map(([path, checksum]) => [path.slice(4), checksum]),
+    );
+  await output(
+    "web/map-bundle-receipt.json",
+    JSON.stringify(
+      {
+        schema_version: "display-map-bundle-v1",
+        recipe: webPaths(recipeHashes),
+        outputs: webPaths(outputs),
+      },
+      null,
+      2,
+    ) + "\n",
   );
   await writeFile(
     resolve(root, receiptPath),

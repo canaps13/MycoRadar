@@ -8,11 +8,11 @@
   },
   "scripts": {
     "dev": "vite --host 127.0.0.1 --strictPort",
-    "build": "npm run verify:map && tsc --noEmit && vite build",
+    "build": "node scripts/verify-map-bundle.mjs && tsc --noEmit && vite build",
     "typecheck": "tsc --noEmit",
     "lint": "eslint . --max-warnings 0",
     "preview": "vite preview --host 127.0.0.1 --strictPort",
-    "test": "vitest run && node --test worker.test.mjs",
+    "test": "vitest run && node --test worker.test.mjs scripts/verify-map-bundle.test.mjs && npm run verify:map",
     "format:check": "prettier --check .",
     "format": "prettier --write .",
     "test:e2e": "playwright test",
