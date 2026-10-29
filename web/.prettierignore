@@ -4,3 +4,5 @@ package-lock.json
 test-results
 playwright-report
 coverage
+
+public/map/*.geojson

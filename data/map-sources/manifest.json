@@ -1,0 +1,87 @@
+{
+  "schema_version": "display-map-v1",
+  "context_bounds": [
+    -12,
+    33,
+    20,
+    53
+  ],
+  "pilot_label": "Provence",
+  "pilot_tolerance_degrees": 0.0005,
+  "land_tolerance_degrees": 0.002,
+  "sources": [
+    {
+      "id": "ign",
+      "path": "data/territories/provence/ign-adminexpress-source.geojson",
+      "sha256": "f967afb56063def9d52dbdcbc28faab651906c5472c5c684b66a38e7b35b1a16",
+      "provider": "IGN",
+      "product": "ADMIN EXPRESS COG CARTO - departement",
+      "source_url": "https://data.geopf.fr/wfs/ows?SERVICE=WFS&VERSION=2.0.0&REQUEST=GetFeature&TYPENAMES=ADMINEXPRESS-COG-CARTO.LATEST:departement&OUTPUTFORMAT=application/json&SRSNAME=CRS:84&COUNT=3&CQL_FILTER=code_insee%20IN%20('13'%2C'83'%2C'84')",
+      "license": "Etalab-2.0",
+      "license_url": "https://github.com/etalab/licence-ouverte/blob/master/LO.md",
+      "attribution": "IGN - ADMIN EXPRESS COG CARTO, service LATEST. Edition date not supplied; see source URL. Extract collected 2026-10-29T17:06:20.002622+00:00",
+      "version": "wfs-latest-snapshot-sha256:f967afb56063def9d52dbdcbc28faab651906c5472c5c684b66a38e7b35b1a16",
+      "fetched_at": "2026-10-29T17:06:20.002622+00:00",
+      "source_published_at": null,
+      "effective_resolution_m": null,
+      "visibility": "public"
+    },
+    {
+      "id": "natural-earth",
+      "path": ".tools/mr008/natural-earth-land.geojson",
+      "sha256": "1ac90796408bc6ad6911d69448485d3c4dbf2190370080368a09976e1c9f7416",
+      "provider": "Natural Earth",
+      "product": "Land 1:10 million",
+      "source_url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/ca96624a56bd078437bca8184e78163e5039ad19/geojson/ne_10m_land.geojson",
+      "license": "Public domain",
+      "license_url": "https://www.naturalearthdata.com/about/terms-of-use/",
+      "attribution": "Made with Natural Earth",
+      "version": "git:ca96624a56bd078437bca8184e78163e5039ad19",
+      "fetched_at": "2026-10-29T23:03:28.301Z",
+      "source_published_at": null,
+      "effective_resolution_m": null,
+      "visibility": "public"
+    }
+  ],
+  "territories": [
+    {
+      "id": "FR-13",
+      "name": "Bouches-du-Rhône",
+      "country_code": "FR",
+      "timezone": "Europe/Paris",
+      "boundary": {
+        "layer": "ign-boundaries",
+        "property": "code_insee",
+        "value": "13"
+      },
+      "land": null,
+      "forest": null
+    },
+    {
+      "id": "FR-83",
+      "name": "Var",
+      "country_code": "FR",
+      "timezone": "Europe/Paris",
+      "boundary": {
+        "layer": "ign-boundaries",
+        "property": "code_insee",
+        "value": "83"
+      },
+      "land": null,
+      "forest": null
+    },
+    {
+      "id": "FR-84",
+      "name": "Vaucluse",
+      "country_code": "FR",
+      "timezone": "Europe/Paris",
+      "boundary": {
+        "layer": "ign-boundaries",
+        "property": "code_insee",
+        "value": "84"
+      },
+      "land": null,
+      "forest": null
+    }
+  ]
+}

@@ -226,7 +226,8 @@ La procédure est décrite dans [CLOUDFLARE_PREVIEW](docs/CLOUDFLARE_PREVIEW.md)
 Avant toute intégration de données : consulter le
 [registre des fournisseurs, licences, cadences et risques](docs/data-providers.md)
 et la [procédure d'admission, de provenance et d'attribution](docs/data-policy.md).
-Ce registre prépare les adaptateurs futurs ; aucune source n'est encore activée.
+Ce registre prépare les adaptateurs futurs. MR-008 admet deux extraits
+cartographiques publics pour l'affichage ; aucune source écologique n'est activée.
 
 
 Pour contribuer : [workflow Git et conventions de PR](CONTRIBUTING.md).
@@ -242,8 +243,9 @@ Pour contribuer : [workflow Git et conventions de PR](CONTRIBUTING.md).
   persistantes et suite du développement.
 
 Les jobs Python et contrats partagés prendront leur place lorsqu'ils auront une
-implémentation réelle. Le schéma métier PostGIS relève de MR-006 ; MapLibre
-et le fond cartographique avec attribution de MR-008. Aucun calcul scientifique
+implémentation réelle. Le schéma métier PostGIS relève de MR-006 ; la carte
+MapLibre et ses sources sont décrites dans [la recette MR-008](docs/MR-008.md).
+Aucun calcul scientifique
 n'est exécuté par le navigateur.
 
 Un indice sur 100 n'est pas une probabilité. Aucun résultat ne valide

@@ -6,12 +6,21 @@ const externalBaseURL = process.env.PLAYWRIGHT_BASE_URL;
 export default defineConfig({
   testDir: "./e2e",
   fullyParallel: true,
+  // Bound simultaneous software WebGL contexts on developer machines and CI.
+  workers: 2,
   forbidOnly: !!process.env.CI,
   retries: 0,
   reporter: "list",
   use: {
     baseURL: externalBaseURL ?? "http://127.0.0.1:4173",
     trace: "retain-on-failure",
+    launchOptions: {
+      args: [
+        "--use-gl=angle",
+        "--use-angle=swiftshader",
+        "--enable-unsafe-swiftshader",
+      ],
+    },
   },
   projects: [
     {
