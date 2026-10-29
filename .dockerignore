@@ -1,0 +1,9 @@
+**
+!pyproject.toml
+!uv.lock
+!alembic.ini
+!api/
+!api/src/
+!api/src/**
+!api/migrations/
+!api/migrations/**

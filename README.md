@@ -3,15 +3,94 @@
 Plateforme de favorabilité écologique et de conditions de fructification des
 champignons, conçue pour la France puis d'autres pays. La Provence est le pilote.
 
-Ce premier incrément (MR-001) fournit une API de santé et une page web connectée.
+Le socle fournit une API de santé, une page web connectée et un environnement
+PostGIS local avec migrations versionnées.
 **Aucune source ingérée, carte ni prédiction scientifique disponible.** La santé
 HTTP ne garantit pas la disponibilité des données ou d'une base de données.
 
-## Démarrer en local
+## Démarrer avec Docker Compose (MR-003)
+
+Prérequis : Docker Engine/Desktop en mode conteneurs Linux et Compose v2 ou
+ultérieur. L'image PostGIS retenue est publiée en `linux/amd64` ; les machines
+ARM nécessitent l'émulation Docker. Images de base et PostGIS sont épinglés par
+digest. Aucun compte fournisseur ou service cloud n'est nécessaire.
+
+Copier `.env.example` vers `.env` **uniquement si `.env` n'existe pas**, puis
+adapter les ports ou le mot de passe local. Le mot de passe d'exemple est public,
+réservé à cet environnement de développement. Ne pas l'utiliser en production.
+
+```sh
+docker compose up --build --wait --wait-timeout 180
+```
+
+Sans créer de `.env`, l'exemple peut être utilisé explicitement :
+
+```sh
+docker compose --env-file .env.example up --build --wait --wait-timeout 180
+```
+
+| Service | Adresse locale par défaut |
+|---|---|
+| Web | <http://127.0.0.1:15173> |
+| API / documentation | <http://127.0.0.1:18000/docs> |
+| Santé HTTP | <http://127.0.0.1:18000/health> |
+| Disponibilité PostGIS et migrations | <http://127.0.0.1:18000/ready> |
+| PostgreSQL | `127.0.0.1:55432` |
+
+Les ports sont publiés uniquement sur la boucle locale. Compose attend PostGIS,
+exécute `alembic upgrade head` une fois, attend sa réussite puis lance l'API et
+le web. La migration initiale active PostGIS si nécessaire et versionne ce
+prérequis ; les tables métier restent à MR-006. Les données persistent dans le
+volume du projet `mycoradar-local`.
+
+`/health` reste disponible sans base. `/ready` renvoie HTTP 200 si PostGIS est
+accessible et les migrations sont à jour, sinon HTTP 503 sans détail de connexion.
+**Ni l'un ni l'autre ne certifie la disponibilité de prévisions scientifiques.**
+La page continue donc d'afficher « Prévisions indisponibles ».
+
+```sh
+docker compose ps -a
+docker compose logs --tail 100
+docker compose run --rm migrate
+docker compose stop
+docker compose start
+```
+
+Ajouter `--env-file .env.example` à ces commandes si l'on n'utilise pas `.env`.
+`stop` conserve conteneurs et volume. Ne pas utiliser de nettoyage global ni
+supprimer le volume pour corriger un démarrage. Un changement de mot de passe
+dans `.env` ne change pas le mot de passe d'une base déjà initialisée : conserver
+la configuration compatible ou réaliser une rotation explicite adaptée.
+
+Pour reconstruire le code après modification : relancer `up --build --wait`.
+Les images API/web servent le développement local, sans configuration de
+production ni promesse de déploiement. Le build web est réalisé dans l'image ;
+l'aperçu Vite dans le conteneur utilise
+un proxy interne vers `api:8000`, sans transmettre les identifiants PostgreSQL
+au navigateur.
+
+### Certificat d'un proxy local
+
+Si un build échoue avec `UnknownIssuer` ou `UNABLE_TO_VERIFY_LEAF_SIGNATURE`,
+utiliser un bundle CA PEM **déjà approuvé par votre environnement**. Le conserver
+hors Git, par exemple dans `.tools/build-ca.pem`, puis, sous PowerShell :
+
+```powershell
+$env:BUILD_CA_FILE = (Resolve-Path .tools/build-ca.pem).Path
+docker compose --env-file .env.example -f compose.yaml -f infra/compose.build-ca.yaml up --build --wait --wait-timeout 180
+```
+
+Cette surcharge transmet le certificat via un secret BuildKit éphémère, sans le
+copier dans les images. TLS reste vérifié. Ne pas ajouter le certificat au dépôt
+ni désactiver la vérification TLS. Sans proxy nécessitant ce certificat, la
+commande Compose standard suffit.
+
+## Démarrer les processus sans conteneur
 
 Prérequis : Git, Node.js **24.x**, npm et [uv](https://docs.astral.sh/uv/getting-started/installation/).
 `uv sync` installe Python 3.12 si nécessaire. Aucune clé fournisseur, aucun compte
-cloud et aucune base de données ne sont nécessaires pour MR-001.
+cloud et aucune base ne sont nécessaires pour `/health` ou la page initiale.
+Pour `/ready`, démarrer le service `db` avec Compose et appliquer les migrations.
 
 Depuis la racine du dépôt :
 
@@ -37,6 +116,11 @@ L'API expose <http://127.0.0.1:8000/health>, la documentation interactive
 <http://127.0.0.1:8000/docs> et le contrat <http://127.0.0.1:8000/openapi.json>.
 Le proxy Vite `/api` retire ce préfixe avant de transmettre à l'API locale.
 Le contrôle de santé expire après cinq secondes si le service ne répond pas.
+
+Les variables `PGHOST`, `PGPORT`, `PGDATABASE`, `PGUSER`, `PGPASSWORD` sont lues
+côté serveur depuis l'environnement ou `.env`. Le moteur SQL n'ouvre une
+connexion qu'à son utilisation. Les mots de passe ne sont pas journalisés et
+les URL sont construites sans concaténation de secrets.
 
 Sous PowerShell, utiliser `npm.cmd` si la politique d'exécution bloque `npm.ps1`.
 Dans l'environnement préparé lors de MR-001, uv est disponible via
@@ -72,6 +156,30 @@ npm --prefix web run build
 git diff --check
 ```
 
+Vérifier la pile Compose réellement démarrée :
+
+```sh
+uv run --locked python scripts/check_local_stack.py
+```
+
+Pour tester le navigateur sur cette pile, définir `PLAYWRIGHT_BASE_URL` avec
+l'adresse du web (PowerShell : `$env:PLAYWRIGHT_BASE_URL='http://127.0.0.1:15173'`),
+puis `npm --prefix web run test:e2e`. Playwright utilise alors les services
+existants. Supprimer cette variable pour revenir au test avec serveurs temporaires.
+
+Les tests PostGIS sont explicitement activés par `MYCORADAR_TEST_DATABASE=1`
+et exigent une base isolée dont le nom commence par `mycoradar_test`. Configurer
+les variables `PG*` pour cette base, puis :
+
+```sh
+uv run --locked pytest -m integration
+```
+
+Sans cette activation, les tests d'intégration sont marqués **skipped**, jamais
+présentés comme réussis. Ils vérifient PostGIS réel, le rejeu de migration et le
+retour de version, en conservant l'extension PostGIS et ses données. La CI dédiée
+construit la pile dans une base de test isolée et exécute ces contrôles.
+
 Tests navigateur (les ports 8000 et 4173 doivent être libres ; Playwright lance
 et arrête lui-même l'API et l'aperçu du build) :
 
@@ -94,14 +202,17 @@ Pour contribuer : [workflow Git et conventions de PR](CONTRIBUTING.md).
 
 - `api/src/mycoradar` : service FastAPI ; `api/tests` : tests HTTP et OpenAPI.
 - `web` : React, TypeScript et Vite ; tests de comportement avec Vitest.
-- `.github/workflows/bootstrap.yml` : vérification du socle sous Linux et Windows.
+- `compose.yaml`, `infra/`, `alembic.ini`, `api/migrations` : environnement local
+  et migration PostGIS initiale. Aucune table métier créée prématurément.
+- `.github/workflows/bootstrap.yml` : vérification du socle sous Linux et Windows ;
+  `local-environment.yml` : pile Compose, migrations, PostGIS et navigateur réels.
 - `docs/MR-001.md` : inventaire, décisions et preuves d'exécution.
 - `AGENTS.md`, `ARCHITECTURE.md`, `ROADMAP.md`, `CODEX_PROMPT.md` : instructions
   persistantes et suite du développement.
 
-Les jobs Python, migrations, infrastructures et contrats partagés prendront leur
-place lorsqu'ils auront une implémentation réelle. PostGIS/Compose et la gestion
-de configuration relèvent de MR-003 ; la CI complète relève de MR-004 ; MapLibre
+Les jobs Python et contrats partagés prendront leur place lorsqu'ils auront une
+implémentation réelle. Le schéma métier PostGIS relève de MR-006 ; la CI complète
+relève de MR-004 ; MapLibre
 et le fond cartographique avec attribution de MR-008. Aucun calcul scientifique
 n'est exécuté par le navigateur.
 

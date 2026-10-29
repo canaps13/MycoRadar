@@ -52,7 +52,7 @@ Statuts autorisés : `TODO`, `IN_PROGRESS`, `BLOCKED`, `DONE`. **Une tâche est 
 |---|---|---|---|
 | MR-001 | DONE | Vérifier dépôt, branche par défaut, droits, CI, code existant et documents ; créer structure initiale adaptée (monorepo uniquement si pertinent) | API/web exécutables, 3 tests API, 6 tests React et 4 tests navigateur réussis ; CI Linux/Windows verte sur `359007e` ([exécution](https://github.com/canaps13/MycoRadar/actions/runs/40770178926), [PR #1](https://github.com/canaps13/MycoRadar/pull/1)) ; [inventaire et preuves](docs/MR-001.md). |
 | MR-002 | DONE | Ajouter `AGENTS.md`, roadmap versionnée, ADR architecture et conventions PR | Guide, modèle de PR, ADR-005 et contrôle testable ; 23 tests Python réussis, CI Linux/Windows et conventions vertes sur `f718cd8` ([PR #2](https://github.com/canaps13/MycoRadar/pull/2), [preuves](docs/MR-002.md)). |
-| MR-003 | TODO | Mettre en place environnement local : frontend, API santé, PostGIS via Compose, `.env.example`, migrations | `docker compose up`, endpoint `/health`, page web qui s'ouvre, sans secret réel |
+| MR-003 | IN_PROGRESS | Mettre en place environnement local : frontend, API santé, PostGIS via Compose, `.env.example`, migrations | Pile Compose, configuration et migrations en cours ; validations réelles à consigner dans `docs/MR-003.md`. |
 | MR-004 | TODO | Ajouter GitHub Actions CI (lint, format, types, unit tests, builds, `git diff --check`) | Actions passent sur PR d'initialisation ; impossible de confondre « non exécuté » et « réussi » |
 | MR-005 | TODO | Préparer gestion des licences, conformité, attribution et registre de fournisseurs | Tableau source/licence/autorisation de cache/redistribution/attribution/fréquence de rafraîchissement ; risques identifiés |
 

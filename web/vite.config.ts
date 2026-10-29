@@ -4,7 +4,7 @@ import { defineConfig } from "vitest/config";
 // Local same-origin proxy; no permissive CORS or browser-side credentials needed.
 const proxy = {
   "/api": {
-    target: "http://127.0.0.1:8000",
+    target: process.env.API_PROXY_TARGET ?? "http://127.0.0.1:8000",
     rewrite: (path: string) => path.replace(/^\/api/, ""),
   },
 };
