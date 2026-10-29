@@ -146,9 +146,9 @@ def upgrade() -> None:
             event_end date,
             verbatim_event_date text,
             geometry geometry NOT NULL,
-            coord_uncertainty_m double precision
-                CHECK (coord_uncertainty_m >= 0
-                       AND coord_uncertainty_m < 'Infinity'::float8),
+            location_uncertainty_m double precision
+                CHECK (location_uncertainty_m >= 0
+                       AND location_uncertainty_m < 'Infinity'::float8),
             verification_status text NOT NULL DEFAULT 'unverified'
                 CHECK (verification_status IN ('unverified', 'verified', 'rejected')),
             visibility text NOT NULL DEFAULT 'private'

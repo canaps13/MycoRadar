@@ -9,7 +9,7 @@ WHERE c.geometry && ST_MakeEnvelope(-1, -1, 2, 2, 4326)
 
 -- Explicit visibility filtering is mandatory in future public APIs.
 -- This example returns no private observations or geometries.
-SELECT o.id, o.event_start, o.event_end, o.coord_uncertainty_m,
+SELECT o.id, o.event_start, o.event_end, o.location_uncertainty_m,
        v.license, v.license_url, v.attribution, v.source_url, v.fetched_at
 FROM occurrences o
 JOIN source_versions v ON v.id = o.source_version_id

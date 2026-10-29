@@ -106,7 +106,7 @@ Gestion pagination/limit et bounding box afin d'éviter requêtes incontrôlées
 - `taxa(id, scientific_name, authority, gbif_taxon_key, status)`
 - `source_datasets(id, provider, product, licence, attribution, spatial_resolution_m, ingestion_policy)`
 - `source_versions(id, dataset_id, source_published_at, fetched_at, checksum, status)`
-- `occurrences(id, taxon_id, event_date, geometry, coord_uncertainty_m, source_version_id, verification_status, visibility)`
+- `occurrences(id, taxon_id, event_date, geometry, location_uncertainty_m, source_version_id, verification_status, visibility)`
 - `features(cell_id, feature_date, feature_version, measurements, quality)`
 - `prediction_runs(id, model_version, started_at, completed_at, input_versions, status)`
 - `predictions(cell_id, taxon_id, valid_at, habitat_score, fruiting_score, confidence, coverage, run_id, explanation)`

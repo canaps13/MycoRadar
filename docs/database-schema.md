@@ -33,10 +33,15 @@ entre versions/fournisseurs : cette décision revient à l'ingestion MR-010.
   longitudes [-180, 180] et latitudes [-90, 90], non vides et valides.
   Le SRID absent/0 et un SRID différent sont rejetés. Il faut transformer un
   CRS **connu**, pas simplement renommer son SRID avec `ST_SetSRID`.
+- `cells.resolution_m` décrit la grille de stockage, pas la taille graphique.
+  `display_cell_size_m` sera porté par le rendu/contrat de carte à MR-007/MR-008,
+  sans le déduire d'une résolution effective ou d'une incertitude d'observation.
+  `source_versions.effective_resolution_m` et
+  `occurrences.location_uncertainty_m` sont des mesures indépendantes, nullables.
 - Normaliser un polygone en MultiPolygon explicitement lors de l'ingestion.
   Les découpages à l'antiméridien et la validité des intersections restent à
   MR-007 ; aucune correction silencieuse ni `ST_MakeValid` automatique.
-- `coord_uncertainty_m=NULL` signifie inconnue, jamais zéro implicite.
+- `location_uncertainty_m=NULL` signifie inconnue, jamais zéro implicite.
   `land_fraction=NULL` signifie non calculée. Les résolutions sont positives
   et finies ; l'incertitude est non négative et finie ; NaN/Infinity rejetés.
 - `event_start`/`event_end` sont toutes deux absentes ou forment un intervalle
@@ -66,6 +71,8 @@ permet de distinguer une diffusion restreinte. Aucun endpoint ne les expose ici.
 La colonne n'est pas une politique RLS : les futurs services devront imposer
 authentification, autorisations et masquage avant toute diffusion publique.
 Ne pas exporter les géométries privées/sensibles parce qu'une licence est ouverte.
+La tâche MR-048 impose aussi le filtrage des données sensibles avant diffusion
+ou mise en cache ; cette migration ne valide pas ce jalon.
 
 Index GiST sur les géométries des régions, cellules et occurrences ; index
 pays/région, cellule/région inverse, fournisseur/produit, version/run et

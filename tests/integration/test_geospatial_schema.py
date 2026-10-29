@@ -62,7 +62,7 @@ def test_private_defaults_unknowns_and_multicountry_links(populated: Connection)
     row = populated.execute(text("SELECT * FROM occurrences WHERE id='test:o1'")).mappings().one()
     assert row["visibility"] == "private"
     assert row["verification_status"] == "unverified"
-    assert row["coord_uncertainty_m"] is None
+    assert row["location_uncertainty_m"] is None
     assert row["event_start"] is None and row["event_end"] is None
     assert populated.execute(text("SELECT land_fraction FROM cells")).scalar_one() is None
     assert populated.execute(text("SELECT enabled FROM regions LIMIT 1")).scalar_one() is False
@@ -100,7 +100,7 @@ def test_invalid_observation_location_is_rejected(populated: Connection, wkt: st
 def test_nonfinite_or_negative_measurements_are_rejected(populated: Connection, value: str) -> None:
     for table, column in (
         ("cells", "resolution_m"),
-        ("occurrences", "coord_uncertainty_m"),
+        ("occurrences", "location_uncertainty_m"),
         ("source_versions", "effective_resolution_m"),
     ):
         rejects(populated, f"UPDATE {table} SET {column}=CAST(:value AS float8)", value=value)
@@ -135,7 +135,7 @@ def test_nonfinite_or_negative_measurements_are_rejected(populated: Connection, 
            FROM source_versions""",
         """INSERT INTO occurrences
            SELECT 'test:duplicate', taxon_id, source_version_id, source_record_id,
-                  event_start, event_end, verbatim_event_date, geometry, coord_uncertainty_m,
+                  event_start, event_end, verbatim_event_date, geometry, location_uncertainty_m,
                   verification_status, visibility FROM occurrences""",
     ],
 )
@@ -154,7 +154,7 @@ def test_run_lineage_known_dates_and_validated_version(populated: Connection) ->
     populated.execute(
         text("""
         UPDATE occurrences SET event_start='2026-01-01', event_end='2026-01-31',
-            verbatim_event_date='2026-01', coord_uncertainty_m=1500
+            verbatim_event_date='2026-01', location_uncertainty_m=1500
     """)
     )
     populated.execute(
