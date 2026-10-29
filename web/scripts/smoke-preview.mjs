@@ -1,53 +1,45 @@
 import assert from "node:assert/strict";
 
-const target =
-  process.env.MYCORADAR_PREVIEW_URL ??
-  "https://mycoradar-preview.valentinlamede13.workers.dev/";
+const defaultOrigin = "https://mycoradar-preview.valentinlamede13.workers.dev";
+const origin = process.env.MYCORADAR_PREVIEW_URL || defaultOrigin;
 
-async function read(url) {
-  return fetch(url, {
-    redirect: "error",
+async function get(path) {
+  return fetch(new URL(path, origin), {
     cache: "no-store",
+    redirect: "error",
     signal: AbortSignal.timeout(15000),
   });
 }
 
 async function verify() {
-  const response = await read(target);
-  assert.equal(response.status, 200, "Accueil HTTP 200 attendu");
-  const html = await response.text();
-  assert.match(html, /<div id="root"><\/div>/, "Entrée React absente");
-  assert.match(html, /MycoRadar/i, "Identité MycoRadar absente");
-  const assets = Array.from(
-    html.matchAll(/(?:href|src)="(\/assets\/[^"]+)"/g),
-    (match) => match[1],
-  );
-  assert.ok(assets.length >= 2, "Fichiers JS/CSS Vite absents");
-  for (const asset of assets) {
-    const result = await read(new URL(asset, target));
-    assert.equal(result.status, 200, "Asset indisponible: " + asset);
-    assert.ok((await result.arrayBuffer()).byteLength > 0, "Asset vide: " + asset);
+  const root = await get("/");
+  assert.equal(root.status, 200);
+  const html = await root.text();
+  assert.ok(html.includes('<div id="root"></div>'));
+  assert.match(html, /MycoRadar/i);
+  const assets = html.match(/\/assets\/[^"]+/g) || [];
+  assert.ok(assets.length >= 2);
+  for (const path of assets) {
+    const response = await get(path);
+    assert.equal(response.status, 200);
+    assert.ok((await response.arrayBuffer()).byteLength > 0);
   }
-  const api = await read(new URL("/api/health", target));
-  assert.equal(api.status, 503, "La preview ne doit pas feindre un backend sain");
+  const api = await get("/api/health");
+  assert.equal(api.status, 503);
   const state = await api.json();
   assert.equal(state.reason, "backend_not_deployed");
 }
 
 let success = false;
-for (let attempt = 1; attempt <= 8; attempt++) {
+for (let attempt = 0; attempt < 8; attempt++) {
   try {
     await verify();
-    console.log("Preview vérifiée: " + target + " (tentative " + attempt + ")");
     success = true;
+    console.log("Preview vérifiée: " + origin);
     break;
   } catch (error) {
-    console.error(
-      "Preview non conforme (tentative " + attempt + "/8): " + error.message,
-    );
-    if (attempt < 8) {
-      await new Promise((resolve) => setTimeout(resolve, 2500));
-    }
+    console.error(error);
+    await new Promise((resolve) => setTimeout(resolve, 2500));
   }
 }
 if (!success) process.exitCode = 1;
