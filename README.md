@@ -90,6 +90,8 @@ Il s'agit d'un aperçu local, pas d'un déploiement de production.
 
 ## Organisation et limites
 
+Pour contribuer : [workflow Git et conventions de PR](CONTRIBUTING.md).
+
 - `api/src/mycoradar` : service FastAPI ; `api/tests` : tests HTTP et OpenAPI.
 - `web` : React, TypeScript et Vite ; tests de comportement avec Vitest.
 - `.github/workflows/bootstrap.yml` : vérification du socle sous Linux et Windows.
