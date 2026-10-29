@@ -1,0 +1,25 @@
+# Local configuration and credentials
+.idea/
+.vscode/
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Local tools, Python and JavaScript artifacts
+.tools/
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+node_modules/
+dist/
+coverage/
+playwright-report/
+test-results/
+*.log
+.DS_Store
+Thumbs.db

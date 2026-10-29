@@ -1,0 +1,209 @@
+:root {
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  color: #203c32;
+  background: #f7f6ef;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+.site-header,
+main,
+footer {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+.site-header {
+  min-height: 108px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  border-bottom: 1px solid #d8ded1;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 24px;
+  font-weight: 700;
+  text-decoration: none;
+  color: inherit;
+  letter-spacing: -1px;
+}
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid #42644d;
+  border-radius: 50%;
+  font-family: Georgia, serif;
+  font-weight: 400;
+}
+.stage {
+  font-size: 13px;
+  color: #526449;
+  border: 1px solid #d0d9c6;
+  border-radius: 24px;
+  padding: 8px 13px;
+}
+.intro {
+  padding: 76px 0 56px;
+  max-width: 860px;
+}
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 12px;
+  font-weight: 650;
+  color: #60704f;
+  margin: 0 0 22px;
+}
+h1 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(40px, 5.2vw, 65px);
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -2px;
+  margin: 0 0 28px;
+}
+.lead {
+  max-width: 690px;
+  line-height: 1.8;
+  font-size: 18px;
+  color: #526157;
+  margin-bottom: 32px;
+}
+.availability {
+  display: flex;
+  gap: 14px;
+  align-items: baseline;
+  border-left: 3px solid #ac8c4d;
+  padding: 4px 0 4px 20px;
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  flex-shrink: 0;
+  background: #ac8c4d;
+  border-radius: 50%;
+}
+.availability strong {
+  font-size: 15px;
+}
+.availability p {
+  margin: 7px 0 0;
+  color: #526157;
+  line-height: 1.6;
+  font-size: 14px;
+}
+.principles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid #d8ded1;
+  border-bottom: 1px solid #d8ded1;
+}
+.principles article {
+  padding: 30px 28px;
+}
+.principles article:first-child {
+  padding-left: 0;
+}
+.principles article + article {
+  border-left: 1px solid #d8ded1;
+}
+.number {
+  color: #727d61;
+  font-family: Georgia, serif;
+  font-size: 14px;
+}
+h2 {
+  font-size: 21px;
+  font-weight: 550;
+  margin: 12px 0;
+}
+.principles p {
+  color: #526157;
+  font-size: 15px;
+  line-height: 1.7;
+  margin: 0;
+}
+.science-note {
+  margin: 28px 0 40px;
+  max-width: 800px;
+  line-height: 1.7;
+  font-size: 13px;
+  color: #526157;
+}
+footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding-bottom: 28px;
+  font-size: 12px;
+  color: #526157;
+}
+.api-status {
+  font-weight: 600;
+}
+.offline {
+  color: #97422e;
+}
+a:focus-visible {
+  outline: 3px solid #ac8c4d;
+  outline-offset: 5px;
+}
+@media (max-width: 640px) {
+  .site-header,
+  main,
+  footer {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+  .site-header {
+    min-height: 90px;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+  .stage {
+    font-size: 11px;
+  }
+  .intro {
+    padding: 48px 0 36px;
+  }
+  h1 {
+    letter-spacing: -1px;
+  }
+  .lead {
+    font-size: 16px;
+  }
+  .principles {
+    grid-template-columns: 1fr;
+  }
+  .principles article,
+  .principles article:first-child {
+    padding: 24px 0;
+  }
+  .principles article + article {
+    border-left: 0;
+    border-top: 1px solid #d8ded1;
+  }
+  footer {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
