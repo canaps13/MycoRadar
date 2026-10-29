@@ -28,16 +28,41 @@ jobs:
           node-version: "24"
           cache: npm
           cache-dependency-path: web/package-lock.json
-      - run: uv sync --locked
-      - run: uv run --locked pytest
-      - run: uv run --locked ruff check .
-      - run: uv run --locked ruff format --check .
-      - run: uv run --locked mypy
-      - run: npm --prefix web ci
-      - run: npm --prefix web test
-      - run: npm --prefix web run format:check
-      - run: npm --prefix web run build
-      - run: npx playwright install --with-deps chromium
+      - id: python_install
+        run: uv sync --locked
+      - id: python_unit
+        run: uv run --locked pytest -m "not integration"
+      - id: python_lint
+        run: uv run --locked ruff check .
+      - id: python_format
+        run: uv run --locked ruff format --check .
+      - id: python_types
+        run: uv run --locked mypy
+      - id: web_install
+        run: npm --prefix web ci
+      - id: web_lint
+        run: npm --prefix web run lint
+      - id: web_types
+        run: npm --prefix web run typecheck
+      - id: web_unit
+        run: npm --prefix web test
+      - id: web_format
+        run: npm --prefix web run format:check
+      - id: web_build
+        run: npm --prefix web run build
+      - id: browser_install
+        run: npx playwright install --with-deps chromium
         working-directory: web
-      - run: npm --prefix web run test:e2e
-      - run: git diff --check
+      - id: browser_tests
+        run: npm --prefix web run test:e2e
+      - id: whitespace
+        run: git diff --check
+      - name: Validation outcomes (including skipped checks)
+        if: always()
+        env:
+          CI_STEPS_JSON: ${{ toJSON(steps) }}
+        run: >-
+          python scripts/ci_summary.py
+          python_install python_unit python_lint python_format python_types
+          web_install web_lint web_types web_unit web_format web_build
+          browser_install browser_tests whitespace

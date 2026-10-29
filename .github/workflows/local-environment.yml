@@ -30,15 +30,30 @@ jobs:
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
           node-version: "24"
-      - run: uv sync --locked
-      - run: docker compose --env-file .env.example up --build --wait --wait-timeout 180
-      - run: uv run --locked python scripts/check_local_stack.py
-      - run: uv run --locked pytest -m integration
-      - run: docker compose --env-file .env.example run --rm migrate
-      - run: npm --prefix web ci
-      - run: npx playwright install --with-deps chromium
+      - id: python_install
+        run: uv sync --locked
+      - id: compose_build
+        run: docker compose --env-file .env.example up --build --wait --wait-timeout 180
+      - id: stack_health
+        run: uv run --locked python scripts/check_local_stack.py
+      - id: postgis_tests
+        run: uv run --locked pytest -m integration
+      - id: migration_replay
+        run: docker compose --env-file .env.example run --rm migrate
+      - id: web_install
+        run: npm --prefix web ci
+      - id: browser_install
+        run: npx playwright install --with-deps chromium
         working-directory: web
-      - run: npm --prefix web run test:e2e
+      - id: browser_tests
+        run: npm --prefix web run test:e2e
+      - name: Validation outcomes (including skipped checks)
+        if: always()
+        env:
+          CI_STEPS_JSON: ${{ toJSON(steps) }}
+        run: >-
+          python scripts/ci_summary.py python_install compose_build stack_health
+          postgis_tests migration_replay web_install browser_install browser_tests
       - name: Container state and logs
         if: always()
         run: |
