@@ -148,6 +148,14 @@ Statuts autorisés : `TODO`, `IN_PROGRESS`, `BLOCKED`, `DONE`. **Une tâche est 
 | MR-039 | TODO | Alertes de changements de conditions, abonnements opt-in | Notifications bornées, unsubscribe, anti-spam, pas de fausse assurance |
 | MR-040 | TODO | API partenaires / chercheurs, tableaux de bord biodiversité | Contrôles de confidentialité/licence, quotas et audit d'utilisation |
 
+### Correctif transversal de livraison — sécurité de preview
+
+| ID | Statut | Tâche | Critère de validation |
+|---|---|---|---|
+| MR-042 | IN_PROGRESS | Durcir la preview Cloudflare unique de main : API indisponible explicite, pas de previews secondaires, tests Worker et vérification HTTP post-déploiement | Le Worker répond 503 JSON sur /api/* sans backend ; tests hors ligne réussis ; preview_urls=false ; contrôle des assets et du statut API à chaque déploiement ; preuve du résultat Cloudflare |
+
+La rotation vers un jeton Cloudflare dédié et la protection GitHub de main demandent des permissions d'administration distinctes ; elles ne sont pas réputées réalisées.
+
 ## Modèle minimal de résultat prévisionnel
 
 ```json
