@@ -55,6 +55,7 @@ Statuts autorisés : `TODO`, `IN_PROGRESS`, `BLOCKED`, `DONE`. **Une tâche est 
 | MR-003 | DONE | Mettre en place environnement local : frontend, API santé, PostGIS via Compose, `.env.example`, migrations | Pile Compose saine, migration/rejeu/reprise testés, 34 tests Python locaux dont 3 PostGIS, 4 tests navigateur ; CI Compose et Bootstrap Linux/Windows vertes sur `ecff421` ([PR #3](https://github.com/canaps13/MycoRadar/pull/3), [preuves](docs/MR-003.md)). |
 | MR-004 | TODO | Ajouter GitHub Actions CI (lint, format, types, unit tests, builds, `git diff --check`) | Actions passent sur PR d'initialisation ; impossible de confondre « non exécuté » et « réussi » |
 | MR-005 | TODO | Préparer gestion des licences, conformité, attribution et registre de fournisseurs | Tableau source/licence/autorisation de cache/redistribution/attribution/fréquence de rafraîchissement ; risques identifiés |
+| MR-041 | IN_PROGRESS | Installer une preview Cloudflare unique sur `main`, sans previews de PR | `web/wrangler.toml` versionné, un Worker `mycoradar-preview`, builds `main` seulement, URL publique vérifiée après déploiement ; aucun backend Python fictif |
 
 **Jalon M0 :** repo propre, stack exécutable, PR CI verte, décisions documentées.
 
