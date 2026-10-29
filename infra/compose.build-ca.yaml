@@ -1,0 +1,15 @@
+# Optional build-time trust bundle, kept outside Git and never copied into images.
+services:
+  api:
+    build:
+      secrets: [build_ca]
+  migrate:
+    build:
+      secrets: [build_ca]
+  web:
+    build:
+      secrets: [build_ca]
+
+secrets:
+  build_ca:
+    file: ${BUILD_CA_FILE:?Set BUILD_CA_FILE to an existing trusted PEM CA bundle}

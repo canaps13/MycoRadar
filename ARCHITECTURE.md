@@ -2,10 +2,11 @@
 
 **Statut :** proposition révisable après inspection du code existant. Ne pas réécrire un dépôt déjà structuré pour coller artificiellement à ce document.
 
-**État observé après MR-001 :** FastAPI/Pydantic expose uniquement la santé HTTP ;
-React/TypeScript/Vite affiche une page reliée à cette route. Les ADR-001 à ADR-004
-restent les règles du développement à venir ; les pipelines, scores, PostGIS,
-MapLibre, cache et orchestration décrits ci-dessous ne sont pas encore implémentés.
+**État du socle :** FastAPI/Pydantic expose la santé HTTP et, avec MR-003,
+la disponibilité de PostGIS et des migrations. React/TypeScript/Vite affiche
+une page reliée à la santé HTTP. Les ADR-001 à ADR-004 restent les règles du
+développement à venir ; les pipelines, scores, tables métier, MapLibre, cache
+et orchestration décrits ci-dessous ne sont pas encore implémentés.
 
 ## ADR-001 — Calcul côté serveur, présentation côté client
 
@@ -65,6 +66,13 @@ observé. Une évolution durable devra préciser contexte, décision, conséquen
 et preuve dans une nouvelle ADR numérotée, sans effacer l'historique existant.
 
 ### Cible pour les tâches suivantes
+
+MR-003 ajoute Compose pour le développement, une migration PostGIS initiale et
+`/ready`. La migration vérifie l'extension de manière idempotente ; son retour
+à `base` retire le marqueur de révision et conserve PostGIS, qui peut préexister.
+Les migrations ne sont jamais lancées par une requête HTTP : Compose les exécute
+dans un service dédié avant l'API. Le schéma métier et ses contraintes restent
+à MR-006. La disponibilité technique ne vaut ni couverture ni fraîcheur des données.
 
 ```text
 web/       TypeScript + React (Next ou Vite selon existant) + MapLibre

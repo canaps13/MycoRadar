@@ -1,0 +1,74 @@
+name: mycoradar-local
+
+x-api: &api
+  image: mycoradar-api:local
+  build:
+    context: .
+    dockerfile: infra/api.Dockerfile
+  environment:
+    PGHOST: db
+    PGPORT: "5432"
+    PGDATABASE: ${PGDATABASE:-mycoradar}
+    PGUSER: ${PGUSER:-mycoradar}
+    PGPASSWORD: ${PGPASSWORD:?Copy .env.example to .env or use --env-file .env.example}
+
+services:
+  db:
+    image: postgis/postgis:18-3.6@sha256:4a43e3c3e5d55b9208240fc71db543b79c638766280c625a425bd0a2390989c4
+    platform: linux/amd64
+    environment:
+      POSTGRES_DB: ${PGDATABASE:-mycoradar}
+      POSTGRES_USER: ${PGUSER:-mycoradar}
+      POSTGRES_PASSWORD: ${PGPASSWORD:?Local database password required}
+    ports:
+      - "127.0.0.1:${PGPORT:-55432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U \"$$POSTGRES_USER\" -d \"$$POSTGRES_DB\""]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+      start_period: 10s
+
+  migrate:
+    <<: *api
+    command: ["alembic", "-c", "alembic.ini", "upgrade", "head"]
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: "no"
+
+  api:
+    <<: *api
+    ports:
+      - "127.0.0.1:${API_PORT:-18000}:8000"
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/ready', timeout=5)"]
+      interval: 5s
+      timeout: 6s
+      retries: 12
+      start_period: 10s
+
+  web:
+    build:
+      context: web
+      dockerfile: Dockerfile
+    environment:
+      API_PROXY_TARGET: http://api:8000
+    ports:
+      - "127.0.0.1:${WEB_PORT:-15173}:5173"
+    depends_on:
+      api:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:5173').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+
+volumes:
+  postgres_data:

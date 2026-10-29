@@ -3,7 +3,14 @@ name = "mycoradar-api"
 version = "0.1.0"
 description = "MycoRadar API bootstrap; no scientific predictions published yet."
 requires-python = ">=3.12"
-dependencies = ["fastapi>=0.115,<1", "uvicorn>=0.30,<1"]
+dependencies = [
+    "alembic>=1.14,<2",
+    "fastapi>=0.115,<1",
+    "psycopg[binary]>=3.2,<4",
+    "pydantic-settings>=2,<3",
+    "sqlalchemy>=2,<3",
+    "uvicorn>=0.30,<1",
+]
 
 [dependency-groups]
 dev = ["httpx2>=2,<3", "pytest>=8,<10", "ruff>=0.8,<1", "mypy>=1,<2"]
@@ -15,6 +22,7 @@ package = false
 testpaths = ["api/tests", "tests"]
 pythonpath = ["api/src", "."]
 addopts = "-ra"
+markers = ["integration: requires a real isolated PostGIS database (explicit opt-in)"]
 
 [tool.ruff]
 target-version = "py312"
@@ -26,4 +34,4 @@ select = ["E", "F", "I", "UP", "B"]
 [tool.mypy]
 python_version = "3.12"
 strict = true
-files = ["api/src", "scripts"]
+files = ["api/src", "api/migrations", "scripts"]

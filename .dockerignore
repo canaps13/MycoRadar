@@ -1,0 +1,15 @@
+**
+!pyproject.toml
+!uv.lock
+!alembic.ini
+!api/
+!api/src/
+!api/src/**
+!api/migrations/
+!api/migrations/**
+**/__pycache__
+**/*.py[cod]
+**/.env
+**/.env.*
+**/*.pem
+**/*.key
