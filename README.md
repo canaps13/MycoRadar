@@ -146,15 +146,27 @@ Si npm rencontre `UNABLE_TO_VERIFY_LEAF_SIGNATURE` sur cette machine, utiliser
 Depuis la racine :
 
 ```sh
-uv run --locked pytest
+uv run --locked pytest -m "not integration"
 uv run --locked ruff check .
 uv run --locked ruff format --check .
 uv run --locked mypy
 npm --prefix web test
+npm --prefix web run lint
+npm --prefix web run typecheck
 npm --prefix web run format:check
 npm --prefix web run build
 git diff --check
 ```
+
+La CI `Bootstrap` exécute ces contrôles et les tests navigateur sous Linux et
+Windows. Ruff et ESLint contrôlent le code Python et TypeScript/React ; mypy et
+`typecheck` vérifient les types séparément du build. TypeScript est limité à la
+série 6.0, compatible avec la plage acceptée par typescript-eslint.
+`Local environment` construit Compose et exécute les tests PostGIS sur une base
+isolée. Les tests d'intégration sont exclus du job unitaire, pas déclarés réussis.
+Chaque job de validation produit un tableau des résultats réels dans le résumé
+Actions, même après un échec : réussi, échoué, annulé ou non exécuté.
+Les contrôles restent bloquants ; aucun `continue-on-error` n'est utilisé.
 
 Vérifier la pile Compose réellement démarrée :
 
@@ -211,8 +223,7 @@ Pour contribuer : [workflow Git et conventions de PR](CONTRIBUTING.md).
   persistantes et suite du développement.
 
 Les jobs Python et contrats partagés prendront leur place lorsqu'ils auront une
-implémentation réelle. Le schéma métier PostGIS relève de MR-006 ; la CI complète
-relève de MR-004 ; MapLibre
+implémentation réelle. Le schéma métier PostGIS relève de MR-006 ; MapLibre
 et le fond cartographique avec attribution de MR-008. Aucun calcul scientifique
 n'est exécuté par le navigateur.
 
