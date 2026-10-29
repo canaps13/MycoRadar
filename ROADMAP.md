@@ -1,9 +1,18 @@
 # MycoRadar — Roadmap produit et technique
 
-**Version :** 1.0 — 28 octobre 2026  
+**Version :** 1.1 — 29 octobre 2026  
 **Statut initial :** à démarrer ; ne pas présenter les étapes comme réalisées sans preuve dans le dépôt.  
 **Zone pilote :** Provence (Bouches-du-Rhône, Var, Vaucluse) ; **produit cible :** France entière, puis Europe/international.  
 **Objectif :** fournir, par espèce et par territoire, une carte de favorabilité de l'habitat, une estimation des conditions de fructification actuelles et futures, l'incertitude, les facteurs explicatifs, la fraîcheur et la provenance des données.
+
+## Priorité de livraison : un pilote vérifiable avant la couverture nationale
+
+- **Tranche A, socle visible :** CI et un seul Worker pour `main`, retour API honnête, carte responsive d'un territoire pilote avec fond légal, métadonnées et couches réellement disponibles, sans score de fructification inventé. Voir [plan MVP](docs/MVP_DELIVERY.md).
+- **Tranche B, pilote scientifique :** après audit de couverture, sélectionner **une** des quatre espèces candidates et une zone de Provence ; importer les observations et sources météo/forêt nécessaires en respectant les licences, puis établir une baseline explicable. Ne pas promettre quatre espèces simultanément si la couverture est insuffisante.
+- **Tranche C, extension :** ne passer à quatre espèces et plusieurs territoires qu'après preuve d'un gain sur une validation indépendante. Une belle carte n'est pas une preuve de prédiction fiable.
+- **Gate scientifique obligatoire avant MR-016/MR-017 :** suivre le [protocole d'évaluation](docs/SCIENTIFIC_VALIDATION.md) (échantillonnage, effort, doublons, précision, découpage spatial/temporal, baselines et critères d'échec). Interdire les scores 0–100 non justifiés scientifiquement.
+- **Trois mesures distinctes :** `display_cell_size_m` (maille de rendu), `effective_resolution_m` (résolution démontrée par les données/modèle) et `location_uncertainty_m` (incertitude des observations). Elles ne doivent jamais être déduites l'une de l'autre.
+- **Infrastructure :** la [note de décision d'hébergement](docs/DEPLOYMENT_DECISION.md) impose un budget, une stratégie API Python + PostGIS séparée et un plan de sécurité avant mise en ligne des endpoints de données. Aucune ressource payante ou donnée sensible n'est provisionnée implicitement.
 
 ## Règles de produit incontournables
 
@@ -56,6 +65,8 @@ Statuts autorisés : `TODO`, `IN_PROGRESS`, `BLOCKED`, `DONE`. **Une tâche est 
 | MR-004 | DONE | Ajouter GitHub Actions CI (lint, format, types, unit tests, builds, `git diff --check`) | CI Linux/Windows et Compose/PostGIS vertes sur `e1d067a` ; lint/format/types, 32 tests Python, 6 React et 4 navigateur par OS, 3 intégrations PostGIS ; résumés testés distinguant les étapes non exécutées ([PR #4](https://github.com/canaps13/MycoRadar/pull/4), [preuves](docs/MR-004.md)). |
 | MR-005 | DONE | Préparer gestion des licences, conformité, attribution et registre de fournisseurs | Registre de 11 produits/accès, droits/cache/redistribution/attribution/cadences et risques sourcés au 2026-10-29 ; procédure d'admission et 5 captures catalogue ; CI Linux/Windows, Compose/PostGIS et conventions vertes sur `c94b1e4` ([PR #7](https://github.com/canaps13/MycoRadar/pull/7), [preuves](docs/MR-005.md)). |
 | MR-041 | IN_PROGRESS | Installer une preview Cloudflare unique sur `main`, sans previews de PR | `web/wrangler.toml` versionné, un Worker `mycoradar-preview`, builds `main` seulement, URL publique vérifiée après déploiement ; aucun backend Python fictif |
+| MR-043 | IN_PROGRESS | Clarifier les jalons MVP, l'architecture d'hébergement API et les gates de validation scientifique avant les scores | Plan MVP et critères d'acceptation documentés ; ADR d'hébergement avec budget/risques ; protocole d'évaluation avant MR-016 ; dépendances explicites, CI de documentation vérifiée |
+| MR-049 | BLOCKED | Séparer les autorisations : jeton Workers Builds dédié MycoRadar, protections de branche main avec checks requis | Un jeton nouveau limité à MycoRadar remplace le jeton partagé, sans casser Plume ; branche main protégée contre les pushes/fusions sans checks ; nécessite droits admin GitHub et API Tokens Cloudflare non disponibles actuellement |
 
 **Jalon M0 :** repo propre, stack exécutable, PR CI verte, décisions documentées.
 
@@ -67,6 +78,7 @@ Statuts autorisés : `TODO`, `IN_PROGRESS`, `BLOCKED`, `DONE`. **Une tâche est 
 | MR-007 | TODO | Grille géographique multi-résolution (`cell_id` stable), territoires pilotes config et masques de forêts | Tests limites, reprojection, intersections, surfaces, zones marines et géométries invalides |
 | MR-008 | TODO | Carte MapLibre : cadrage Provence, fond cartographique légal, légende, zoom, sélection secteur | Fonctionne mobile/bureau ; attribution cartes affichée ; pas de promesses de scores réels |
 | MR-009 | TODO | API `/v1/regions`, `/v1/species`, `/v1/cells`, `/v1/metadata` paginée et documentée | JSON/OpenAPI, tests API géographiques et erreurs typées |
+| MR-044 | TODO | Livrer une tranche carte verticale Provence, pour une espèce pilote, sans résultat scientifique fictif | MapLibre affiche vraies géométries et attribution ; sélecteur espèce/date, fiche de provenance/âge/résolution, états loading/partial/unavailable ; tests navigateur et API sur la même branche |
 
 **Jalon M1 :** carte et API connectées à de vrais territoires, sans prédiction fictive masquée.
 
@@ -74,11 +86,14 @@ Statuts autorisés : `TODO`, `IN_PROGRESS`, `BLOCKED`, `DONE`. **Une tâche est 
 
 | ID | Statut | Tâche | Critère de validation |
 |---|---|---|---|
+| MR-048 | TODO | Filtrer à l'ingestion les géolocalisations et taxons sensibles avant leur diffusion ou mise en cache | Tests prouvant l'absence de fuite dans API, tuiles, exports, journaux et URLs ; floutage des positions conservé ; règles de conservation et accès documentées |
 | MR-010 | TODO | Adaptateur occurrences GBIF (éventuellement INPN/OpenObs) + mapping taxonomique | Import test sur échantillon réel, pagination/download, déduplication, licence, précision coordonnées et provenance |
+| MR-045 | TODO | Audit de faisabilité d'une seule espèce pilote : abondance, biais spatiaux/temporels, effort d'échantillonnage et précision | Échantillon réel légal, tableau couverture par saison/région, distribution des incertitudes, doublons et non-détections ; espèce pilote justifiée ou statut BLOCKED faute de données suffisantes |
 | MR-011 | TODO | Adaptateur météo historique et prévisions disponibles (Météo-France France, fallback configurable) | Historique + météo récente + prévision différenciés ; quotas/rate limits testés ; attribution |
 | MR-012 | TODO | Couches forêts / landcover (IGN France, couches globales par extension) | Types de végétation et année du jeu source visibles ; géométries nettoyées |
 | MR-013 | TODO | Couches sols, géologie, relief ; fallback SoilGrids (WCS/WebDAV ou fichiers si API indisponible), IGN/BRGM | Provenance/résolution/âge/valeurs manquantes gérés ; tests avec petits fixtures |
 | MR-014 | TODO | Pipeline géospatial de jointure, features datées et tests qualité | Rejouable, idempotent, sans fuite d'information postérieure aux dates observées |
+| MR-046 | TODO | Protocole d'évaluation indépendant préalablement aux baselines : espace, temps, effort et pseudo-absences | Découpage spatial bloqué et test chronologique gelés, contrôle anti-fuite, baselines naïves, métriques et seuils de non-publication écrits avant MR-016/MR-017 |
 
 **Jalon M2 :** vraie base de données pilote traçable, robuste aux pannes fournisseurs.
 
@@ -89,6 +104,7 @@ Statuts autorisés : `TODO`, `IN_PROGRESS`, `BLOCKED`, `DONE`. **Une tâche est 
 | MR-015 | TODO | Catalogue taxonomique + règles écologiques par espèce sourcées | Quatre espèces, associations forestières documentées, seuils configurables, incertitudes explicites |
 | MR-016 | TODO | Baseline habitat (règles explicables) + qualité des sources | `score_habitat` 0–100 qualifié d'indice, raisons et `data_quality` ; tests bornes/NA |
 | MR-017 | TODO | Baseline fructification : cumuls de pluie, sécheresse antérieure, température, saisonnalité | `score_fructification` calculé seulement si couverture suffisante ; comparaison avec scenarios synthétiques |
+| MR-047 | TODO | Backtesting des facteurs météo et des horizons de fructification avant publication prospective | Comparer observation, réanalyse et prévision sans mélange ; date d'émission et valid_at séparées ; résultats par horizon, contrôle saison/territoire et statut unavailable si qualité insuffisante |
 | MR-018 | TODO | API `/v1/predictions`, versioning, fraîcheur, détails explicatifs | Modèle de réponse stable ; `computed_at`, `data_cutoff`, `status`, `confidence`, `effective_resolution_m` |
 | MR-019 | TODO | Carte en couches habitat/fructification, fiche espèce, filtre date, comparaison secteurs | UX mobile validée ; information « score ≠ probabilité » visible ; états vides/stale |
 
