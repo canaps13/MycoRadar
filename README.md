@@ -223,6 +223,11 @@ La procédure est décrite dans [CLOUDFLARE_PREVIEW](docs/CLOUDFLARE_PREVIEW.md)
 
 ## Organisation et limites
 
+La [grille multirésolution et les masques](docs/grid-job.md) sont produits par
+un job Python hors HTTP. La configuration pilote contient trois contours IGN
+réels et leurs crédits ; terre/forêt restent explicitement indisponibles tant
+que leurs sources ne sont pas admises. Ce support de grille ne fournit aucun score.
+
 Avant toute intégration de données : consulter le
 [registre des fournisseurs, licences, cadences et risques](docs/data-providers.md)
 et la [procédure d'admission, de provenance et d'attribution](docs/data-policy.md).
