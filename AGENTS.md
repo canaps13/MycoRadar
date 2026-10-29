@@ -28,6 +28,14 @@ Construire une plateforme extensible France/Europe/monde de favorabilité et de 
 6. Commit/push sur branche de fonctionnalité et PR si la connexion GitHub le permet et que cela ne contourne pas de contrôle d'accès. Pas de force-push, pas d'écriture directe sur `main`, pas de fusion sans checks requis et politique explicite.
 7. Ne modifier que MycoRadar. Synergia peut inspirer des pratiques, mais aucune dépendance/copie de code ni changement à Synergia sans autorisation.
 
+## Livraison MycoRadar
+
+- Un **seul** Worker Cloudflare `mycoradar-preview`, mis à jour uniquement depuis `main` ; aucune preview ou Worker par PR.
+- Une CI verte ne prouve pas que le HTTP public fonctionne : exiger le smoke post-déploiement et distinguer le SHA construit du SHA publié.
+- Tant que FastAPI n'est pas hébergé publiquement, `/api/*` répond 503 JSON ; ne pas maquiller un backend indisponible en réponse HTML 200.
+- Le jeton de déploiement partagé avec Plume doit être remplacé par un token MycoRadar dédié à privilèges minimaux avant toute révocation de l'ancien.
+- La protection obligatoire de `main` et le jeton dédié ne peuvent pas être annoncés comme actifs sans preuve de leur configuration.
+
 ## Escalade
 - Si l'IDE est ouvert sur un autre dépôt, ne pas traiter ce dépôt. Se placer dans le vrai projet MycoRadar ou demander à l'utilisateur de l'ouvrir dans IntelliJ si l'agent ne peut pas changer de workspace.
 - Ne jamais inventer remote, chemin local, autorisations, secrets ou accès. En cas de refus d'accès, expliquer le blocage exact après les tentatives non destructives utiles ; ne pas répéter indéfiniment l'authentification.

@@ -208,6 +208,19 @@ Le build produit `web/dist`. `npm --prefix web run preview` le sert sur
 <http://127.0.0.1:4173> avec le même proxy local ; garder l'API démarrée.
 Il s'agit d'un aperçu local, pas d'un déploiement de production.
 
+## Preview Cloudflare sur main
+
+Une seule application Workers, `mycoradar-preview`, sert le frontend statique :
+https://mycoradar-preview.valentinlamede13.workers.dev/
+Les builds ne sont déclenchés que par `main`, pas par les PR.
+L'API Python/PostGIS n'est **pas hébergée dans ce Worker** : les requêtes
+`/api/*` doivent répondre HTTP 503 et JSON `backend_not_deployed` au lieu
+de renvoyer trompeusement la page HTML de la SPA.
+
+Le déploiement devra être suivi d'un smoke test HTTP de l'accueil, des fichiers
+Vite et du statut API : `node scripts/smoke-preview.mjs` depuis `web/`.
+La procédure est décrite dans [CLOUDFLARE_PREVIEW](docs/CLOUDFLARE_PREVIEW.md).
+
 ## Organisation et limites
 
 Avant toute intégration de données : consulter le
