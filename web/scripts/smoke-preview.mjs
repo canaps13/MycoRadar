@@ -26,10 +26,7 @@ async function verify() {
   for (const asset of assets) {
     const result = await read(new URL(asset, target));
     assert.equal(result.status, 200, "Asset indisponible: " + asset);
-    assert.ok(
-      (await result.arrayBuffer()).byteLength > 0,
-      "Asset vide: " + asset,
-    );
+    assert.ok((await result.arrayBuffer()).byteLength > 0, "Asset vide: " + asset);
   }
   const api = await read(new URL("/api/health", target));
   assert.equal(api.status, 503, "La preview ne doit pas feindre un backend sain");
