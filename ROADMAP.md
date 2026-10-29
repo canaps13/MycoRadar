@@ -54,7 +54,7 @@ Statuts autorisés : `TODO`, `IN_PROGRESS`, `BLOCKED`, `DONE`. **Une tâche est 
 | MR-002 | DONE | Ajouter `AGENTS.md`, roadmap versionnée, ADR architecture et conventions PR | Guide, modèle de PR, ADR-005 et contrôle testable ; 23 tests Python réussis, CI Linux/Windows et conventions vertes sur `f718cd8` ([PR #2](https://github.com/canaps13/MycoRadar/pull/2), [preuves](docs/MR-002.md)). |
 | MR-003 | DONE | Mettre en place environnement local : frontend, API santé, PostGIS via Compose, `.env.example`, migrations | Pile Compose saine, migration/rejeu/reprise testés, 34 tests Python locaux dont 3 PostGIS, 4 tests navigateur ; CI Compose et Bootstrap Linux/Windows vertes sur `ecff421` ([PR #3](https://github.com/canaps13/MycoRadar/pull/3), [preuves](docs/MR-003.md)). |
 | MR-004 | TODO | Ajouter GitHub Actions CI (lint, format, types, unit tests, builds, `git diff --check`) | Actions passent sur PR d'initialisation ; impossible de confondre « non exécuté » et « réussi » |
-| MR-005 | IN_PROGRESS | Préparer gestion des licences, conformité, attribution et registre de fournisseurs | Tableau source/licence/autorisation de cache/redistribution/attribution/fréquence de rafraîchissement ; risques identifiés |
+| MR-005 | DONE | Préparer gestion des licences, conformité, attribution et registre de fournisseurs | Tableau source/licence/autorisation de cache/redistribution/attribution/fréquence de rafraîchissement ; risques identifiés |
 
 **Jalon M0 :** repo propre, stack exécutable, PR CI verte, décisions documentées.
 
