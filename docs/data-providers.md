@@ -66,6 +66,20 @@ vérifiés restent inconnus : aucun nombre n'est inventé et aucun compte n'a é
 
 ## Risques ouverts et décisions attendues
 
+### Lot API admis par MR-009
+
+Revue le 30 octobre 2026 : [notice IGN](https://www.data.gouv.fr/datasets/admin-express-admin-express-cog-admin-express-cog-carto-admin-express-cog-carto-pe-admin-express-cog-carto-plus-pe)
+et [Licence Ouverte 2.0](https://github.com/etalab/licence-ouverte/blob/master/LO.md).
+`ign-adminexpress-display-20261029` est admis exclusivement pour les contours
+administratifs publics 13/83/84, extrait WFS LATEST d'empreinte `f967afb56063…`.
+Copie, usage commercial, redistribution et dérivé simplifié autorisés sous
+attribution effective IGN et URL source ; cette attribution et le lien de licence
+accompagnent les géométries via `/v1/metadata`. Date d'édition inconnue explicitée,
+collecte datée du 29 octobre 2026, aucune fraîcheur déduite de la notice.
+Le lot est réutilisé sans appel WFS ; quotas non établis, aucun polling activé.
+Pas de donnée personnelle ni de masque forestier. [Manifeste et preuves](MR-009.md).
+Cette admission ne concerne aucun autre produit IGN ni taxon/occurrence.
+
 | Risque | Conséquence / mesure requise avant admission | Responsable de la suite |
 |---|---|---|
 | R1 — BRGM : licence non spécifiée dans la notice producteur | Une [notice tierce](https://www.data.gouv.fr/datasets/cartes-geologiques-departementales-a-1-50-000-bd-charm-50) publiée par Christian Quest affiche LO 2.0 ; cela ne suffit pas à autoriser le lot du producteur. Obtenir les conditions de la distribution BRGM exacte et consigner la résolution de l'écart. La page InfoTerre de conditions essayée n'a pas été lisible avec l'outil utilisé. | MR-013 |

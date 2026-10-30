@@ -77,7 +77,9 @@ export default function App() {
             <span className="dot" aria-hidden="true" />
             <div>
               <strong>Prévisions indisponibles</strong>
-              <p>Aucune source intégrée ni aucun score publié à ce stade.</p>
+              <p>
+                Les données écologiques et les scores restent indisponibles.
+              </p>
             </div>
           </div>
         </section>

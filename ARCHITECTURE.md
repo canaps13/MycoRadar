@@ -86,6 +86,19 @@ Dépendances recommandées : PostgreSQL/PostGIS et Alembic ; Pytest ; Ruff ; myp
 
 ## Endpoints cibles
 
+### ADR-006 — Lecture de publications publiques pour MR-009
+
+L'API géographique initiale lit au démarrage un catalogue pré-calculé, typé,
+borné et vérifié par SHA-256. Elle n'attend pas les migrations MR-006 encore en
+PR et ne recopie pas le job MR-007. La même publication et les mêmes métadonnées
+seront conservées lorsqu'un adaptateur de persistance sera nécessaire ; ce choix
+ne remplace pas PostGIS comme cible de stockage. Aucun calcul scientifique en
+requête. Voir le [contrat, limites et exploitation](docs/MR-009.md).
+
+Les routes `/v1/regions`, `/v1/species`, `/v1/cells`, `/v1/metadata` sont ajoutées
+par MR-009 ; l'absence de publication de taxonomie/grille est explicite. Les
+endpoints de prédiction ci-dessous restent des cibles, sans score publié.
+
 - `GET /health`, `GET /ready`
 - `GET /v1/regions?country=FR`
 - `GET /v1/species?region_id=...`
