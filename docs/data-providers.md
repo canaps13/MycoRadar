@@ -121,7 +121,7 @@ Revue du **30 octobre 2026** : métadonnées du jeu ONF
 DOI [`10.15468/tgap4x`](https://doi.org/10.15468/tgap4x), publié par UAR PatriNat
 (OFB-MNHN-CNRS-IRD), Paris. La licence du jeu et des vingt enregistrements lus
 est CC BY 4.0 ; lien producteur `http://creativecommons.org/licenses/by/4.0/legalcode`,
-[texte Creative Commons consulté](https://creativecommons.org/licenses/by/4.0/).
+[texte juridique Creative Commons consulté](https://creativecommons.org/licenses/by/4.0/legalcode.en).
 Usage commercial, copie et dérivés sont permis sous les obligations d'attribution,
 lien de licence et mention des modifications. Cette lecture de licence ne
 vaut pas autorisation de diffusion d'une localisation ou d'un taxon sensible.
