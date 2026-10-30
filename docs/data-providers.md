@@ -99,3 +99,18 @@ l'attribution effective et l'URL de l'information prévues par le texte, sans
 inventer une édition. Les deux sources sont publiques et ne contiennent aucune
 observation personnelle. OSM et ses services ne sont pas utilisés par MR-008 ;
 le risque R4 reste à instruire si un service OSM est ultérieurement choisi.
+
+### Lot API admis par MR-009
+
+Revue le 30 octobre 2026 : [notice IGN](https://www.data.gouv.fr/datasets/admin-express-admin-express-cog-admin-express-cog-carto-admin-express-cog-carto-pe-admin-express-cog-carto-plus-pe)
+et [Licence Ouverte 2.0](https://github.com/etalab/licence-ouverte/blob/master/LO.md).
+`ign-adminexpress-display-20261029` est admis exclusivement pour les contours
+administratifs publics 13/83/84, extrait WFS LATEST d'empreinte `f967afb56063…`.
+Copie, usage commercial, redistribution et dérivé simplifié autorisés sous
+attribution effective IGN et URL source ; cette attribution et le lien de licence
+accompagnent les géométries via `/v1/metadata`. Date d'édition inconnue explicitée,
+collecte datée du 29 octobre 2026, aucune fraîcheur déduite de la notice.
+Le lot est réutilisé sans appel WFS ; quotas non établis, aucun polling activé.
+Pas de donnée personnelle ni de masque forestier. [Manifeste et preuves](MR-009.md).
+Cette admission ne concerne aucun autre produit IGN ni taxon/occurrence.
+

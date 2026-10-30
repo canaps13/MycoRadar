@@ -19,6 +19,15 @@ def check_stack(api_url: str, web_url: str) -> None:
     with urlopen(web_url, timeout=10) as response:
         if response.status != 200 or "MycoRadar" not in response.read().decode("utf-8"):
             raise RuntimeError("MycoRadar page unavailable")
+    for base in (api_url, f"{web_url}/api"):
+        with urlopen(f"{base}/v1/regions?limit=1&country=FR", timeout=10) as response:
+            page = json.load(response)
+        if page["pagination"]["total"] != 3 or page["items"][0]["id"] != "FR-13":
+            raise RuntimeError("Published catalogue unavailable in API image/proxy")
+        with urlopen(f"{base}/v1/cells?region_id=FR-83", timeout=10) as response:
+            page = json.load(response)
+        if page["status"] != "unavailable" or page["items"]:
+            raise RuntimeError("Unexpected scientific/grid availability")
 
 
 def main() -> None:

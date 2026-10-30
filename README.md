@@ -227,6 +227,11 @@ La procédure est décrite dans [CLOUDFLARE_PREVIEW](docs/CLOUDFLARE_PREVIEW.md)
 
 ## Organisation et limites
 
+MR-009 ajoute le [catalogue géographique API](docs/MR-009.md), paginé et versionné :
+`/v1/regions`, `/v1/species`, `/v1/cells`, `/v1/metadata`. Trois contours IGN sont
+publiés ; taxonomie, grille et résultats scientifiques restent indisponibles.
+OpenAPI sur `/docs` et `/openapi.json`. Aucun hébergement FastAPI public ajouté.
+
 La [grille multirésolution et les masques](docs/grid-job.md) sont produits par
 un job Python hors HTTP. La configuration pilote contient trois contours IGN
 réels et leurs crédits ; terre/forêt restent explicitement indisponibles tant
@@ -236,7 +241,8 @@ Avant toute intégration de données : consulter le
 [registre des fournisseurs, licences, cadences et risques](docs/data-providers.md)
 et la [procédure d'admission, de provenance et d'attribution](docs/data-policy.md).
 Ce registre prépare les adaptateurs futurs. MR-008 admet deux extraits
-cartographiques publics pour l'affichage ; aucune source écologique n'est activée.
+cartographiques publics pour l'affichage et MR-009 en reprend le contour IGN
+dans l'API ; aucune source écologique n'est activée.
 
 
 Pour contribuer : [workflow Git et conventions de PR](CONTRIBUTING.md).

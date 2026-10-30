@@ -90,6 +90,19 @@ Dépendances recommandées : PostgreSQL/PostGIS et Alembic ; Pytest ; Ruff ; myp
 
 ## Endpoints cibles
 
+### Publication géographique MR-009 — Catalogue pré-calculé
+
+L'API géographique initiale lit au démarrage un catalogue pré-calculé, typé,
+borné et vérifié par SHA-256. Elle ne dépend pas d'une ingestion PostGIS en ligne et ne recopie pas
+le job MR-007 ; les migrations MR-006 sont conservées séparément. La même publication et les mêmes métadonnées
+seront conservées lorsqu'un adaptateur de persistance sera nécessaire ; ce choix
+ne remplace pas PostGIS comme cible de stockage. Aucun calcul scientifique en
+requête. Voir le [contrat, limites et exploitation](docs/MR-009.md).
+
+Les routes `/v1/regions`, `/v1/species`, `/v1/cells`, `/v1/metadata` sont ajoutées
+par MR-009 ; l'absence de publication de taxonomie/grille est explicite. Les
+endpoints de prédiction ci-dessous restent des cibles, sans score publié.
+
 - `GET /health`, `GET /ready`
 - `GET /v1/regions?country=FR`
 - `GET /v1/species?region_id=...`

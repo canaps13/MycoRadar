@@ -1,6 +1,7 @@
 """Server-only database configuration; no connection is opened by importing it."""
 
 from functools import lru_cache
+from pathlib import Path
 
 from pydantic import Field, SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -17,6 +18,8 @@ class Settings(BaseSettings):
     pg_database: str = Field(default="mycoradar", validation_alias="PGDATABASE")
     pg_user: str = Field(default="mycoradar", validation_alias="PGUSER")
     pg_password: SecretStr = Field(default=SecretStr(""), validation_alias="PGPASSWORD")
+    catalog_path: Path | None = Field(default=None, validation_alias="MYCORADAR_CATALOG_PATH")
+    catalog_sha256: str | None = Field(default=None, validation_alias="MYCORADAR_CATALOG_SHA256")
 
     @property
     def database_url(self) -> URL:
