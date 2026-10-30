@@ -176,3 +176,12 @@ uniquement une base isolée explicitement activée. Voir
 - latence p95 de l'API et erreurs par endpoint
 - coût par région/espèce et par lot de calcul
 - performance ML *par espèce et par région*, avec dates de validation et incertitude
+
+## ADR-007 — Job de grille et masques (MR-007)
+
+Le support de grille est généré hors HTTP par un job Python borné, avec IDs
+globaux EPSG:6933, inputs publics versionnés, masques à couverture explicite et
+publication atomique sans écrasement. Il ne calcule aucun score et n'active
+aucune ingestion forestière réelle. Les groupes de dépendances isolent ce calcul
+du runtime HTTP. Voir la [décision](docs/adr/007-grid-job.md), le
+[contrat](docs/grid-job.md) et les [preuves](docs/MR-007.md).

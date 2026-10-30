@@ -1,0 +1,105 @@
+{
+  "observed_at_utc": "2026-10-29T17:33:46.182568+00:00",
+  "job_id": "df46c5b7d21bd5d5093cf461571c71edc50cd1d4f5b8a185e9f4590b21834565",
+  "artifact_sha256": "f6118df0ba6fa4e2b10482656c211c48211a1512caf882d05695dd5ac14aafb4",
+  "artifact_bytes": 15501810,
+  "memberships": 19952,
+  "unique_cells": 19551,
+  "candidate_count": 34865,
+  "engine_versions": {
+    "geos": "3.14.1",
+    "grid": "epsg6933-v1",
+    "implementation_sha256": "aebbfc6b6fefa5de6ed33f0f4a4e6408bde7a0e99d5a673b9fa62a857aa0a0c2",
+    "machine": "AMD64",
+    "platform": "Windows",
+    "proj": "9.8.1",
+    "pyproj": "3.8.0",
+    "python": "3.12.16",
+    "shapely": "2.2.0"
+  },
+  "coverage_states": {
+    "unavailable": 19952
+  },
+  "region_resolution_counts": {
+    "FR-13/1000": 5492,
+    "FR-13/2000": 1466,
+    "FR-83/1000": 6444,
+    "FR-83/2000": 1703,
+    "FR-84/1000": 3828,
+    "FR-84/2000": 1019
+  },
+  "replay_created": false,
+  "inputs": {
+    "grid": {
+      "experimental_fine_grid": false,
+      "max_candidates": 50000,
+      "resolutions_m": [
+        1000,
+        2000
+      ]
+    },
+    "layers": {
+      "ign-boundaries": {
+        "crs": "EPSG:4326",
+        "path": "ign-adminexpress-source.geojson",
+        "provenance": {
+          "attribution": "IGN - ADMIN EXPRESS COG CARTO, service LATEST. Edition date not supplied; see source URL. Extract collected 2026-10-29T17:06:20.002622+00:00",
+          "effective_resolution_m": null,
+          "fetched_at": "2026-10-29T17:06:20.002622Z",
+          "license": "Etalab-2.0",
+          "license_url": "https://github.com/etalab/licence-ouverte/blob/master/LO.md",
+          "product": "ADMIN EXPRESS COG CARTO - departement",
+          "provider": "IGN",
+          "source_published_at": null,
+          "source_url": "https://data.geopf.fr/wfs/ows?SERVICE=WFS&VERSION=2.0.0&REQUEST=GetFeature&TYPENAMES=ADMINEXPRESS-COG-CARTO.LATEST:departement&OUTPUTFORMAT=application/json&SRSNAME=CRS:84&COUNT=3&CQL_FILTER=code_insee%20IN%20('13'%2C'83'%2C'84')",
+          "version": "wfs-latest-snapshot-sha256:f967afb56063def9d52dbdcbc28faab651906c5472c5c684b66a38e7b35b1a16",
+          "visibility": "public"
+        },
+        "sha256": "f967afb56063def9d52dbdcbc28faab651906c5472c5c684b66a38e7b35b1a16"
+      }
+    },
+    "schema_version": "grid-manifest-v1",
+    "territories": [
+      {
+        "boundary": {
+          "layer": "ign-boundaries",
+          "property": "code_insee",
+          "value": "13"
+        },
+        "country_code": "FR",
+        "forest": null,
+        "id": "FR-13",
+        "land": null,
+        "name": "Bouches-du-Rhône",
+        "timezone": "Europe/Paris"
+      },
+      {
+        "boundary": {
+          "layer": "ign-boundaries",
+          "property": "code_insee",
+          "value": "83"
+        },
+        "country_code": "FR",
+        "forest": null,
+        "id": "FR-83",
+        "land": null,
+        "name": "Var",
+        "timezone": "Europe/Paris"
+      },
+      {
+        "boundary": {
+          "layer": "ign-boundaries",
+          "property": "code_insee",
+          "value": "84"
+        },
+        "country_code": "FR",
+        "forest": null,
+        "id": "FR-84",
+        "land": null,
+        "name": "Vaucluse",
+        "timezone": "Europe/Paris"
+      }
+    ]
+  },
+  "scope": "Real administrative grid support only. Land and forest masks absent. No prediction."
+}

@@ -5,7 +5,9 @@ champignons, conçue pour la France puis d'autres pays. La Provence est le pilot
 
 Le socle fournit une API de santé, une page web connectée et un environnement
 PostGIS local avec migrations versionnées.
-**Aucune source ingérée, carte ni prédiction scientifique disponible.** La santé
+**Aucune source d'occurrences, météo, forêt ou sol ingérée ; aucune carte ni
+prédiction scientifique disponible.** Les contours administratifs de référence
+du job de grille ne constituent pas une couverture écologique. La santé
 HTTP ne garantit pas la disponibilité des données ou d'une base de données.
 
 ## Démarrer avec Docker Compose (MR-003)
@@ -223,6 +225,11 @@ Vite et du statut API : `node scripts/smoke-preview.mjs` depuis `web/`.
 La procédure est décrite dans [CLOUDFLARE_PREVIEW](docs/CLOUDFLARE_PREVIEW.md).
 
 ## Organisation et limites
+
+La [grille multirésolution et les masques](docs/grid-job.md) sont produits par
+un job Python hors HTTP. La configuration pilote contient trois contours IGN
+réels et leurs crédits ; terre/forêt restent explicitement indisponibles tant
+que leurs sources ne sont pas admises. Ce support de grille ne fournit aucun score.
 
 Avant toute intégration de données : consulter le
 [registre des fournisseurs, licences, cadences et risques](docs/data-providers.md)
