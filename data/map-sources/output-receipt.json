@@ -1,0 +1,16 @@
+{
+  "schema_version": "display-map-receipt-v1",
+  "recipe": {
+    "data/map-sources/manifest.json": "f278d465eccc9f9ea4d4958bbbd98779882551935cdd35cfcc1f82258ec303ce",
+    "web/scripts/prepare-map.ts": "410e924dd437142480e6e0c806105699e9f127243af553e18d96dc8bf798304b",
+    "web/scripts/verify-map-bundle.mjs": "8ee4d571396ba5580d5110ea172b4090c9cc3764146289661757bf05899524ea",
+    "web/package-lock.json": "bfafd2bfffe5d2bee354396b1be146986ec117e56bd688c4eec30cbff63832d2"
+  },
+  "outputs": {
+    "web/public/maplibre-LICENSE.txt": "ee5fc05a0677eaf69601d2c7db0d9ecd6cc27c3abc1d0733bc9ed34707cf8ef2",
+    "web/public/map/land-70b6857e3c4b.geojson": "70b6857e3c4bd3d488a0a94a54b947e88eb1e4d24ba69f149a681cd23a57db2f",
+    "web/public/map/pilot-0a9212bf9164.geojson": "0a9212bf91648e02722bef2cf2f8628a57074498a3992780699b507e80aaade0",
+    "web/src/map/catalog.json": "64366c68aec24930f04770302090c1ef998dc8813366d2fa2814e1f6c2436291",
+    "web/map-bundle-receipt.json": "16816591f7eadf4914df5be282f5a39ad6595db0744b706cd0bc06bcbefe6ee3"
+  }
+}

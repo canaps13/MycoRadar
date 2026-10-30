@@ -2,6 +2,8 @@ import { act, render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import App from "./App";
 
+vi.mock("./map/MapView", () => ({ default: () => <div>Carte</div> }));
+
 describe("MycoRadar bootstrap", () => {
   it("keeps predictions unavailable when the HTTP service is healthy", async () => {
     vi.stubGlobal(

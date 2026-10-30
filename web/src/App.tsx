@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Explorer from "./map/Explorer";
 
 type ApiStatus = "checking" | "online" | "offline";
 
@@ -63,11 +64,7 @@ export default function App() {
       <main>
         <section className="intro" aria-labelledby="page-title">
           <p className="eyebrow">Écologie · Territoires · Saisons</p>
-          <h1 id="page-title">
-            Observer les conditions.
-            <br />
-            Comprendre le vivant.
-          </h1>
+          <h1 id="page-title">Explorer les territoires.</h1>
           <p className="lead">
             Comprendre les conditions favorables aux champignons, à partir de
             données scientifiques traçables. Un premier pilote en Provence, une
@@ -77,10 +74,14 @@ export default function App() {
             <span className="dot" aria-hidden="true" />
             <div>
               <strong>Prévisions indisponibles</strong>
-              <p>Aucune source intégrée ni aucun score publié à ce stade.</p>
+              <p>
+                Les territoires sont visibles ; les données écologiques restent
+                à intégrer.
+              </p>
             </div>
           </div>
         </section>
+        <Explorer />
         <section
           className="principles"
           aria-label="Trois informations distinctes"
