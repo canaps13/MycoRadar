@@ -5,8 +5,9 @@ champignons, conçue pour la France puis d'autres pays. La Provence est le pilot
 
 Le socle fournit une API de santé, une page web connectée et un environnement
 PostGIS local avec migrations versionnées.
-**Aucune source d'occurrences, météo, forêt ou sol ingérée ; aucune prévision
-scientifique disponible.** Une carte administrative de référence est consultable,
+**Aucune prévision scientifique disponible.** MR-010 lit un échantillon GBIF
+en mémoire pour validation ; aucun point d'occurrence n'est diffusé. Les sources
+météo, forêt et sol restent à intégrer. Une carte administrative est consultable,
 sans masque forestier ni indice de fructification. Les contours administratifs de référence
 du job de grille ne constituent pas une couverture écologique. La santé
 HTTP ne garantit pas la disponibilité des données ou d'une base de données.
@@ -230,7 +231,13 @@ La procédure est décrite dans [CLOUDFLARE_PREVIEW](docs/CLOUDFLARE_PREVIEW.md)
 MR-048 fournit le [filtre de prépublication des occurrences](docs/occurrence-privacy.md)
 et une CLI hors réseau : sources/localisations/taxons non autorisés retenus,
 floutage conservé, sorties et journaux contrôlés. Le profil livré refuse tout ;
-aucune observation réelle ou classification sensible n'est importée.
+aucune classification sensible n'est admise.
+
+MR-010 ajoute un [job GBIF paginé et borné](docs/MR-010.md), hors requêtes HTTP :
+rapprochement taxonomique strict, droits contrôlés, provenance et audit agrégé.
+Le test réel lit 20 lignes ONF/INPN sous CC BY 4.0, sans sauvegarder les bruts
+ni publier de coordonnées. Le job utilise les dépendances déjà présentes dans
+l'image API ; le Dockerfile ne nécessite aucune bibliothèque géospatiale ajoutée.
 
 MR-009 ajoute le [catalogue géographique API](docs/MR-009.md), paginé et versionné :
 `/v1/regions`, `/v1/species`, `/v1/cells`, `/v1/metadata`. Trois contours IGN sont

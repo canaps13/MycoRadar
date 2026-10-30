@@ -1,0 +1,86 @@
+{
+    "admission":  {
+                      "accepted":  0,
+                      "excluded":  20,
+                      "processed":  20,
+                      "reasons":  {
+                                      "policy_unavailable":  20
+                                  }
+                  },
+    "receipt":  {
+                    "adapter_version":  "gbif-search-v1",
+                    "coverage_status":  "partial",
+                    "download_doi":  null,
+                    "fetched_at":  "2026-10-30T18:28:32.223628+00:00",
+                    "pages":  [
+                                  {
+                                      "limit":  10,
+                                      "offset":  0,
+                                      "request_url":  "https://api.gbif.org/v1/occurrence/search?datasetKey=017f23ba-bf04-4eb7-a076-04ab2e5de250\u0026taxonKey=5954958\u0026checklistKey=d7dddbf4-2cf0-4f39-9b2a-bb099caae36c\u0026country=FR\u0026hasCoordinate=true\u0026offset=0\u0026limit=10",
+                                      "sha256":  "0c823882a5f7dabfe57a291e12c47da567b2c83811dccfe7e4e736d7ddda60c6"
+                                  },
+                                  {
+                                      "limit":  10,
+                                      "offset":  10,
+                                      "request_url":  "https://api.gbif.org/v1/occurrence/search?datasetKey=017f23ba-bf04-4eb7-a076-04ab2e5de250\u0026taxonKey=5954958\u0026checklistKey=d7dddbf4-2cf0-4f39-9b2a-bb099caae36c\u0026country=FR\u0026hasCoordinate=true\u0026offset=10\u0026limit=10",
+                                      "sha256":  "097dd8f178841d35d5a8586675c62eea4d3c8f4637b5a55d4804844c5b564b0f"
+                                  }
+                              ],
+                    "quality":  {
+                                    "duplicate_identities":  0,
+                                    "generalized":  0,
+                                    "normalized":  20,
+                                    "provider_issue_counts":  {
+                                                                  "CONTINENT_DERIVED_FROM_COORDINATES":  20,
+                                                                  "FOOTPRINT_WKT_MISMATCH":  18,
+                                                                  "TAXON_ID_NOT_FOUND":  20
+                                                              },
+                                    "received":  20,
+                                    "unique_identities":  20,
+                                    "unknown_calendar_dates":  0,
+                                    "unknown_coordinate_uncertainty":  20,
+                                    "unusable_records":  0
+                                },
+                    "raw_records_persisted":  false,
+                    "request":  {
+                                    "checklist_key":  "d7dddbf4-2cf0-4f39-9b2a-bb099caae36c",
+                                    "country":  "FR",
+                                    "dataset_key":  "017f23ba-bf04-4eb7-a076-04ab2e5de250",
+                                    "max_records":  20,
+                                    "page_size":  10,
+                                    "scientific_name":  "Boletus edulis"
+                                },
+                    "sample_version":  "45ca83eedc3e1de85febb6739060f8cd0854267666d65b1789e2aed62b06d489",
+                    "schema_version":  "gbif-sample-v1",
+                    "source":  {
+                                   "citation":  "Inventaire National du Patrimoine Naturel (2022). ONF - Observations et inventaires MOA ONF-ONF - Observations opportunistes et inventaires. UAR PatriNat (OFB-MNHN-CNRS-IRD), Paris. Occurrence dataset https://doi.org/10.15468/tgap4x accessed via GBIF.org on 2026-10-30.",
+                                   "dataset_key":  "017f23ba-bf04-4eb7-a076-04ab2e5de250",
+                                   "doi":  "10.15468/tgap4x",
+                                   "license":  "CC-BY-4.0",
+                                   "license_url":  "http://creativecommons.org/licenses/by/4.0/legalcode",
+                                   "metadata_modified_at":  "2023-07-12T13:55:56.092+00:00",
+                                   "metadata_sha256":  "1f1b73d0218c9729dfb38a2cd8648098b3f74272d83c99b5c4ad04fa3658c924",
+                                   "publisher_key":  "1928bdf0-f5d2-11dc-8c12-b8a03c50a862",
+                                   "source_published_at":  "2022-11-15T00:00:00.000+00:00",
+                                   "source_url":  "https://api.gbif.org/v1/dataset/017f23ba-bf04-4eb7-a076-04ab2e5de250",
+                                   "title":  "ONF - Observations et inventaires MOA ONF-ONF - Observations opportunistes et inventaires"
+                               },
+                    "taxonomy":  {
+                                     "canonical_name":  "Boletus edulis",
+                                     "checklist_key":  "d7dddbf4-2cf0-4f39-9b2a-bb099caae36c",
+                                     "match_sha256":  "ffd09f24977a746ca305268a3667ff87a038f537f8a3014f1fd5518902e324a3",
+                                     "status":  "legacy_backbone_compatibility_not_current_COL",
+                                     "taxon_key":  5954958
+                                 },
+                    "transformations":  [
+                                            "GBIF interpreted WGS84 only",
+                                            "strict species mapping",
+                                            "exact calendar dates only; others unknown",
+                                            "no coordinate changes",
+                                            "personal/free-text fields discarded",
+                                            "location release unknown; MR-048 admission required"
+                                        ],
+                    "transport_end_of_records":  false
+                },
+    "status":  "partial"
+}
