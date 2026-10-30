@@ -77,7 +77,7 @@ Statuts autorisés : `TODO`, `IN_PROGRESS`, `BLOCKED`, `DONE`. **Une tâche est 
 | MR-006 | TODO | Schéma PostGIS (pays/régions, grille, espèces, occurrences, versions de couches, runs) + Alembic | Migrations aller/retour testées, contraintes SRID/indices et exemple SQL |
 | MR-007 | TODO | Grille géographique multi-résolution (`cell_id` stable), territoires pilotes config et masques de forêts | Tests limites, reprojection, intersections, surfaces, zones marines et géométries invalides |
 | MR-008 | TODO | Carte MapLibre : cadrage Provence, fond cartographique légal, légende, zoom, sélection secteur | Fonctionne mobile/bureau ; attribution cartes affichée ; pas de promesses de scores réels |
-| MR-009 | IN_PROGRESS | API `/v1/regions`, `/v1/species`, `/v1/cells`, `/v1/metadata` paginée et documentée | JSON/OpenAPI, tests API géographiques et erreurs typées ; validation en cours, voir docs/MR-009.md |
+| MR-009 | DONE | API `/v1/regions`, `/v1/species`, `/v1/cells`, `/v1/metadata` paginée et documentée | [PR #15](https://github.com/canaps13/MycoRadar/pull/15), code `51a9cb9` : 88 tests Python dont 56 catalogue, 6 navigateur ; OpenAPI, pagination/version, bbox bornée, provenance IGN et erreurs typées ; Linux/Windows, Compose/PostGIS et conventions verts ; [preuves](docs/MR-009.md), [reçu CI](docs/evidence/MR-009-ci.json). PR non fusionnée. |
 | MR-044 | TODO | Livrer une tranche carte verticale Provence, pour une espèce pilote, sans résultat scientifique fictif | MapLibre affiche vraies géométries et attribution ; sélecteur espèce/date, fiche de provenance/âge/résolution, états loading/partial/unavailable ; tests navigateur et API sur la même branche |
 
 **Jalon M1 :** carte et API connectées à de vrais territoires, sans prédiction fictive masquée.
