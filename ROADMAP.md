@@ -74,7 +74,7 @@ Statuts autorisés : `TODO`, `IN_PROGRESS`, `BLOCKED`, `DONE`. **Une tâche est 
 
 | ID | Statut | Tâche | Critère de validation |
 |---|---|---|---|
-| MR-006 | TODO | Schéma PostGIS (pays/régions, grille, espèces, occurrences, versions de couches, runs) + Alembic | Migrations aller/retour testées, contraintes SRID/indices et exemple SQL |
+| MR-006 | DONE | Schéma PostGIS (pays/régions, grille, espèces, occurrences, versions de couches, runs) + Alembic | Migration 11 tables, contraintes SRID/type/2D et index, exemples SQL testés ; 83 tests Python locaux dont 51 PostGIS ; CI Linux/Windows et Compose/PostGIS vertes sur `95024da` ([PR #11](https://github.com/canaps13/MycoRadar/pull/11), [preuves](docs/MR-006.md)). |
 | MR-007 | TODO | Grille géographique multi-résolution (`cell_id` stable), territoires pilotes config et masques de forêts | Tests limites, reprojection, intersections, surfaces, zones marines et géométries invalides |
 | MR-008 | TODO | Carte MapLibre : cadrage Provence, fond cartographique légal, légende, zoom, sélection secteur | Fonctionne mobile/bureau ; attribution cartes affichée ; pas de promesses de scores réels |
 | MR-009 | TODO | API `/v1/regions`, `/v1/species`, `/v1/cells`, `/v1/metadata` paginée et documentée | JSON/OpenAPI, tests API géographiques et erreurs typées |
