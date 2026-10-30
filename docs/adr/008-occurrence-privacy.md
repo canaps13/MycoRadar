@@ -1,6 +1,7 @@
 # ADR-008 — Frontière unique de publication des occurrences
 
-Statut : proposé et implémenté par MR-048, validation CI en cours.
+Statut : livré dans la PR MR-048 #16, CI Linux/Windows et Compose validée sur
+`ff117d5` ; PR ouverte, non fusionnée.
 
 Avant MR-010, aucune chaîne commune ne séparait les candidats d'occurrences des
 données publiables. Les licences seules ne suffisent pas à autoriser les lieux
