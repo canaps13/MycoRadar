@@ -20,6 +20,7 @@ test("the built page reaches the real API without claiming prediction availabili
   await page.screenshot({
     path: testInfo.outputPath("home.png"),
     fullPage: true,
+    scale: "css",
   });
 });
 

@@ -5,8 +5,9 @@ champignons, conçue pour la France puis d'autres pays. La Provence est le pilot
 
 Le socle fournit une API de santé, une page web connectée et un environnement
 PostGIS local avec migrations versionnées.
-**Aucune source d'occurrences, météo, forêt ou sol ingérée ; aucune carte ni
-prédiction scientifique disponible.** Les contours administratifs de référence
+**Aucune source d'occurrences, météo, forêt ou sol ingérée ; aucune prévision
+scientifique disponible.** Une carte administrative de référence est consultable,
+sans masque forestier ni indice de fructification. Les contours administratifs de référence
 du job de grille ne constituent pas une couverture écologique. La santé
 HTTP ne garantit pas la disponibilité des données ou d'une base de données.
 
@@ -234,7 +235,8 @@ que leurs sources ne sont pas admises. Ce support de grille ne fournit aucun sco
 Avant toute intégration de données : consulter le
 [registre des fournisseurs, licences, cadences et risques](docs/data-providers.md)
 et la [procédure d'admission, de provenance et d'attribution](docs/data-policy.md).
-Ce registre prépare les adaptateurs futurs ; aucune source n'est encore activée.
+Ce registre prépare les adaptateurs futurs. MR-008 admet deux extraits
+cartographiques publics pour l'affichage ; aucune source écologique n'est activée.
 
 
 Pour contribuer : [workflow Git et conventions de PR](CONTRIBUTING.md).
@@ -250,8 +252,8 @@ Pour contribuer : [workflow Git et conventions de PR](CONTRIBUTING.md).
   persistantes et suite du développement.
 
 Les jobs Python et contrats partagés prendront leur place lorsqu'ils auront une
-implémentation réelle. MapLibre et le fond cartographique avec attribution
-relèvent de MR-008. Aucun calcul scientifique
+implémentation réelle. La carte MapLibre et ses sources sont décrites dans
+[la recette MR-008](docs/MR-008.md). Aucun calcul scientifique
 n'est exécuté par le navigateur.
 
 Un indice sur 100 n'est pas une probabilité. Aucun résultat ne valide

@@ -80,3 +80,22 @@ vérifiés restent inconnus : aucun nombre n'est inventé et aucun compte n'a é
 Une source supplémentaire (autre pays, fond de carte, landcover global) exige
 sa propre entrée et ses preuves. Aucune ligne n'autorise par défaut l'usage des
 photos, des logos, des observations personnelles ou d'un autre produit du fournisseur.
+
+## Lots cartographiques admis par MR-008
+
+Revue des textes le **29 octobre 2026, vers 23:17 UTC**. Ces deux admissions
+portent uniquement sur les extraits d'affichage décrits dans le
+[manifeste versionné](../data/map-sources/manifest.json) et la [recette MR-008](MR-008.md).
+Elles complètent les candidats de MR-005, sans les activer comme sources écologiques.
+
+| ID / lot et couverture | Preuves consultées | Commercial / copie fichier / redistribution / dérivés | Attribution, accès et décision |
+|---|---|---|---|
+| `ign-adminexpress-display` — IGN ADMIN EXPRESS COG CARTO, WFS LATEST, 13/83/84, empreinte `f967afb56063…` | [Notice IGN publiée sur data.gouv.fr](https://www.data.gouv.fr/datasets/admin-express-admin-express-cog-admin-express-cog-carto-admin-express-cog-carto-pe-admin-express-cog-carto-plus-pe), licence LO 2.0 ; [texte Etalab](https://github.com/etalab/licence-ouverte/blob/master/LO.md) ; [CGU Géoplateforme](https://cartes.gouv.fr/cgu/), version du 15 octobre 2024 | Permis sous attribution et lien effectif à l'information source ; date d'édition inconnue explicitée, collecte distinguée. Copie et dérivé simplifié conservent leur provenance. | IGN, produit, URL du lot et licence affichés ; source publique sans identifiant ; aucun appel WFS client ni polling. Quota non établi, pas de requête supplémentaire nécessaire. `admitted` pour ce lot cartographique public uniquement. |
+| `natural-earth-land-display` — Land 1:10 millions, commit `ca96624a56bd…`, contexte Europe occidentale | [Conditions du producteur](https://www.naturalearthdata.com/about/terms-of-use/) et [fichier du dépôt producteur épinglé](https://github.com/nvkelso/natural-earth-vector/blob/ca96624a56bd078437bca8184e78163e5039ad19/geojson/ne_10m_land.geojson) | Domaine public : usage commercial, copie, redistribution et transformations permis ; pas de garantie d'exactitude. Cache HTTP fournisseur sans objet pour le service client : fichier dérivé local. | Crédit volontaire Natural Earth et lien aux termes visibles. Une collecte du fichier public sans compte, pas de tuiles ni coût de service ; original de 10 Mo gardé hors Git, SHA-256 vérifié avant transformation. `admitted` comme fond de contexte uniquement. |
+
+La mise à jour de la fiche IGN n'est pas attribuée à l'extrait WFS LATEST :
+la date du lot reste inconnue. L'interprétation d'admission LO 2.0 repose sur
+l'attribution effective et l'URL de l'information prévues par le texte, sans
+inventer une édition. Les deux sources sont publiques et ne contiennent aucune
+observation personnelle. OSM et ses services ne sont pas utilisés par MR-008 ;
+le risque R4 reste à instruire si un service OSM est ultérieurement choisi.
