@@ -5,8 +5,12 @@
 **État du socle :** FastAPI/Pydantic expose la santé HTTP et, avec MR-003,
 la disponibilité de PostGIS et des migrations. React/TypeScript/Vite affiche
 une page reliée à la santé HTTP. Les ADR-001 à ADR-004 restent les règles du
-développement à venir ; les pipelines, scores, tables métier, MapLibre, cache
+développement à venir ; les pipelines, scores, features, MapLibre, cache
 et orchestration décrits ci-dessous ne sont pas encore implémentés.
+
+MR-006 ajoute le schéma géographique et de provenance par migration Alembic,
+sans données de référence préchargées ni tables de scores/features. Voir ADR-006
+et [le contrat de stockage](docs/database-schema.md).
 
 ## ADR-001 — Calcul côté serveur, présentation côté client
 
@@ -102,12 +106,47 @@ Gestion pagination/limit et bounding box afin d'éviter requêtes incontrôlées
 - `taxa(id, scientific_name, authority, gbif_taxon_key, status)`
 - `source_datasets(id, provider, product, licence, attribution, spatial_resolution_m, ingestion_policy)`
 - `source_versions(id, dataset_id, source_published_at, fetched_at, checksum, status)`
-- `occurrences(id, taxon_id, event_date, geometry, coord_uncertainty_m, source_version_id, verification_status, visibility)`
+- `occurrences(id, taxon_id, event_date, geometry, location_uncertainty_m, source_version_id, verification_status, visibility)`
 - `features(cell_id, feature_date, feature_version, measurements, quality)`
 - `prediction_runs(id, model_version, started_at, completed_at, input_versions, status)`
 - `predictions(cell_id, taxon_id, valid_at, habitat_score, fruiting_score, confidence, coverage, run_id, explanation)`
 
 Recommandation d'index : GiST sur geometries, composites `cell_id + taxon_id + valid_at + run_id`, partitionnement selon volume après mesure.
+
+## ADR-006 — Schéma géospatial et provenance (MR-006)
+
+**Décision :** conserver SQLAlchemy/Alembic et des migrations SQL PostGIS
+explicites, sans ajouter d'ORM géospatial ni générer des tables à l'import HTTP.
+`0002_geospatial_foundation` ajoute pays/régions, cellules, relations cellule/région,
+taxons, fournisseurs, produits, versions de sources, occurrences, runs et entrées
+de runs. Aucune géométrie ou observation réelle n'est insérée par la migration.
+
+Les géométries canoniques sont en EPSG:4326, 2D, non vides et valides ; régions
+et cellules sont des MultiPolygon, occurrences des Point. Des contraintes
+explicites remplacent les typmods pour rejeter aussi le SRID 0 : un typmod 4326
+peut attribuer ce SRID à une entrée inconnue sans reprojection. Les adaptateurs
+devront connaître le CRS initial, conserver le brut et tracer la transformation.
+
+Les cellules existent indépendamment des régions et s'y rattachent par une
+relation multiple, permettant les frontières sans dupliquer l'identifiant de
+grille. `resolution_m` est le pas nominal de grille, distinct de la résolution
+effective des sources ou des futurs résultats. Cette dernière peut rester nulle.
+
+La provenance est portée par des clés étrangères sans suppression en cascade,
+une empreinte SHA-256, les dates de source/collecte et les versions liées à un
+run. Les occurrences sont privées et non vérifiées par défaut. Les données
+inconnues restent nulles, les sources commencent en attente, les régions désactivées.
+Les règles de droits et de diffusion devront être appliquées par les adaptateurs
+et API ; ces états SQL ne constituent pas un contrôle d'accès utilisateur.
+
+**Conséquences :** validation des géométries au chargement, index GiST et index
+de jointure, aucun calcul scientifique en requête HTTP. Le downgrade retire les
+11 tables métier et leurs données, conserve PostGIS et refuse les dépendances
+externes au lieu d'utiliser CASCADE. Son exécution réelle hors base de test
+requiert l'approbation spécifique prévue par AGENTS.md. Les tests utilisent
+uniquement une base isolée explicitement activée. Voir
+[contrat, limites et exemples SQL](docs/database-schema.md),
+[preuves MR-006](docs/MR-006.md).
 
 ## Sécurité, confidentialité, environnement
 
