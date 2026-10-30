@@ -1,0 +1,9 @@
+{
+  "schema_version": "occurrence-privacy-v1",
+  "version": "deny-by-default-v1",
+  "review_reference": null,
+  "reviewed_at": null,
+  "expires_at": null,
+  "sources": [],
+  "taxa": []
+}

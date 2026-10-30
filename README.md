@@ -227,6 +227,11 @@ La procédure est décrite dans [CLOUDFLARE_PREVIEW](docs/CLOUDFLARE_PREVIEW.md)
 
 ## Organisation et limites
 
+MR-048 fournit le [filtre de prépublication des occurrences](docs/occurrence-privacy.md)
+et une CLI hors réseau : sources/localisations/taxons non autorisés retenus,
+floutage conservé, sorties et journaux contrôlés. Le profil livré refuse tout ;
+aucune observation réelle ou classification sensible n'est importée.
+
 MR-009 ajoute le [catalogue géographique API](docs/MR-009.md), paginé et versionné :
 `/v1/regions`, `/v1/species`, `/v1/cells`, `/v1/metadata`. Trois contours IGN sont
 publiés ; taxonomie, grille et résultats scientifiques restent indisponibles.
