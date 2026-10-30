@@ -178,6 +178,14 @@ publié par cette unité.
 
 ## Scénarios techniques de test prioritaires
 
+MR-010 applique ces garde-fous à un premier lecteur GBIF hors HTTP, limité à
+un échantillon en mémoire. Le job produit provenance et audit agrégé, puis
+appelle MR-048 avec refus de diffusion par défaut. Il n'écrit pas en PostGIS
+et n'alimente pas le catalogue public. Index de recherche mutable, dates
+inconnues et incertitude absente restent explicites ; aucun snapshot atomique
+ni pilote scientifique validé n'est déduit de cette lecture.
+Voir le [contrat MR-010](docs/MR-010.md).
+
 1. Fournisseur météo répond `429`, puis reprend : backoff, pas de spam, conservation dernier snapshot.
 2. Fournisseur publie le même lot deux fois : idempotence et absence de doublons.
 3. Nouveau lot incomplet : pas de publication partielle silencieuse ; statut `partial` ou conservation du dernier sain.
