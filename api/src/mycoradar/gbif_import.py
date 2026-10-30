@@ -308,6 +308,9 @@ def import_sample(request: ImportRequest, client: GBIFClient) -> ImportBatch:
         "unique_identities": len(set(identities)),
         "duplicate_identities": len(identities) - len(set(identities)),
         "normalized": sum("record_license" in row for row in rows),
+        "record_license_counts": dict(
+            sorted(Counter(str(row.get("record_license", "unverified")) for row in rows).items())
+        ),
         "unusable_records": sum("record_license" not in row for row in rows),
         "unknown_calendar_dates": sum(
             row.get("event_date") is None for row in rows if "record_license" in row

@@ -121,6 +121,7 @@ def test_paging_mapping_provenance_and_safe_default_admission() -> None:
         == hashlib.sha256(json.dumps(METADATA).encode()).hexdigest()
     )
     assert receipt["quality"]["received"] == 3
+    assert receipt["quality"]["record_license_counts"] == {"CC-BY-4.0": 3}
     assert receipt["source"]["metadata_modified_at"] != receipt["source"]["source_published_at"]
     policy = PrivacyPolicy()
     publication = admit_sample(batch, policy)

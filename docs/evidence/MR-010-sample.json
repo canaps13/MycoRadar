@@ -11,7 +11,7 @@
                     "adapter_version":  "gbif-search-v1",
                     "coverage_status":  "partial",
                     "download_doi":  null,
-                    "fetched_at":  "2026-10-30T18:28:32.223628+00:00",
+                    "fetched_at":  "2026-10-30T18:33:47.842719+00:00",
                     "pages":  [
                                   {
                                       "limit":  10,
@@ -36,6 +36,9 @@
                                                                   "TAXON_ID_NOT_FOUND":  20
                                                               },
                                     "received":  20,
+                                    "record_license_counts":  {
+                                                                  "CC-BY-4.0":  20
+                                                              },
                                     "unique_identities":  20,
                                     "unknown_calendar_dates":  0,
                                     "unknown_coordinate_uncertainty":  20,

@@ -128,7 +128,7 @@ vaut pas autorisation de diffusion d'une localisation ou d'un taxon sensible.
 
 Décision `admitted-for-memory-audit-only` pour le petit échantillon documenté
 dans le [reçu](evidence/MR-010-sample.json), collecté le 30 octobre 2026 à
-18:28:32 UTC. Filtre France, *Boletus edulis*, deux pages de dix ; aucune portée
+18:33:47 UTC. Filtre France, *Boletus edulis*, deux pages de dix ; aucune portée
 Provence ni représentativité écologique déduite. Les autres lots restent
 `candidate`. Les bruts et leurs champs personnels ne sont pas sauvegardés ;
 seuls métadonnées publiques, empreintes et comptages sont versionnés. Ni cache
