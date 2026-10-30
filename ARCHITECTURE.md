@@ -111,6 +111,12 @@ Recommandation d'index : GiST sur geometries, composites `cell_id + taxon_id + v
 
 ## Sécurité, confidentialité, environnement
 
+[ADR-008](docs/adr/008-occurrence-privacy.md) définit la frontière de prépublication
+MR-048 : politique revue et expirante, refus par défaut, conservation du floutage,
+cinq sorties contrôlées et diagnostics sans données privées. Les futurs adaptateurs
+d'occurrences et caches doivent l'intégrer ; aucun serveur d'occurrences n'est
+publié par cette unité.
+
 - Pas de clé d'API côté navigateur ; `.env.example`, vrais secrets hors contrôle de version.
 - Aucune coordonnée personnelle de cueillette rendue publique par défaut ; position vague ou agrégée pour espèces sensibles.
 - Limitation des appels API, validation de bbox, authentification des opérations admin, RBAC des comptes.

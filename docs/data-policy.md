@@ -87,6 +87,11 @@ Pour SoilGrids, reprendre la référence correspondant à la propriété dans la
 
 ## Confidentialité et correction d'une diffusion
 
+MR-048 ajoute une [frontière de prépublication des occurrences](occurrence-privacy.md)
+que les futurs adaptateurs doivent employer avant tout cache ou sortie publique.
+Le profil livré refuse tout ; une politique technique valide ne constitue pas
+une admission de données. Les revues des droits et de sensibilité restent requises.
+
 Une licence ouverte ne supprime pas les droits des personnes ni les restrictions
 de localisation. Les observations privées restent privées par défaut. Minimiser
 les champs personnels importés, préserver le floutage fourni et ne pas reconstruire

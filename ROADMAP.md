@@ -86,7 +86,7 @@ Statuts autorisés : `TODO`, `IN_PROGRESS`, `BLOCKED`, `DONE`. **Une tâche est 
 
 | ID | Statut | Tâche | Critère de validation |
 |---|---|---|---|
-| MR-048 | TODO | Filtrer à l'ingestion les géolocalisations et taxons sensibles avant leur diffusion ou mise en cache | Tests prouvant l'absence de fuite dans API, tuiles, exports, journaux et URLs ; floutage des positions conservé ; règles de conservation et accès documentées |
+| MR-048 | IN_PROGRESS | Filtrer à l'ingestion les géolocalisations et taxons sensibles avant leur diffusion ou mise en cache | Tests prouvant l'absence de fuite dans API, tuiles, exports, journaux et URLs ; floutage des positions conservé ; règles de conservation et accès documentées ; validation en cours, voir docs/MR-048.md |
 | MR-010 | TODO | Adaptateur occurrences GBIF (éventuellement INPN/OpenObs) + mapping taxonomique | Import test sur échantillon réel, pagination/download, déduplication, licence, précision coordonnées et provenance |
 | MR-045 | TODO | Audit de faisabilité d'une seule espèce pilote : abondance, biais spatiaux/temporels, effort d'échantillonnage et précision | Échantillon réel légal, tableau couverture par saison/région, distribution des incertitudes, doublons et non-détections ; espèce pilote justifiée ou statut BLOCKED faute de données suffisantes |
 | MR-011 | TODO | Adaptateur météo historique et prévisions disponibles (Météo-France France, fallback configurable) | Historique + météo récente + prévision différenciés ; quotas/rate limits testés ; attribution |

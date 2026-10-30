@@ -223,6 +223,11 @@ La procédure est décrite dans [CLOUDFLARE_PREVIEW](docs/CLOUDFLARE_PREVIEW.md)
 
 ## Organisation et limites
 
+MR-048 fournit le [filtre de prépublication des occurrences](docs/occurrence-privacy.md)
+et une CLI hors réseau : sources/localisations/taxons non autorisés retenus,
+floutage conservé, sorties et journaux contrôlés. Le profil livré refuse tout ;
+aucune observation réelle ou classification sensible n'est importée.
+
 Avant toute intégration de données : consulter le
 [registre des fournisseurs, licences, cadences et risques](docs/data-providers.md)
 et la [procédure d'admission, de provenance et d'attribution](docs/data-policy.md).
