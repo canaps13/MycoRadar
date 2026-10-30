@@ -7,6 +7,7 @@ import type {
 import workerUrl from "maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url";
 import "maplibre-gl/dist/maplibre-gl.css";
 import catalog from "./catalog.json";
+import type { Exploration } from "./exploration";
 
 export function bounds(values: number[]): LngLatBoundsLike {
   return [
@@ -15,12 +16,26 @@ export function bounds(values: number[]): LngLatBoundsLike {
   ];
 }
 
-export function mapStyle(): StyleSpecification {
+export function mapStyle(
+  dataset: Exploration | null = null,
+): StyleSpecification {
   return {
     version: 8,
     sources: {
       land: { type: "geojson", data: catalog.land_url },
-      sectors: { type: "geojson", data: catalog.sectors_url },
+      sectors: {
+        type: "geojson",
+        data: dataset
+          ? {
+              type: "FeatureCollection",
+              features: dataset.regions.map((r) => ({
+                type: "Feature",
+                properties: { id: r.id, name: r.name, code: r.code },
+                geometry: r.geometry,
+              })),
+            }
+          : catalog.sectors_url,
+      },
     },
     layers: [
       {
@@ -64,12 +79,18 @@ export function mapStyle(): StyleSpecification {
 }
 
 type Props = {
+  dataset?: Exploration | null;
   selected: string | null;
   onSelect: (id: string | null) => void;
   reset: number;
 };
 
-export default function MapView({ selected, onSelect, reset }: Props) {
+export default function MapView({
+  selected,
+  onSelect,
+  reset,
+  dataset = null,
+}: Props) {
   const container = useRef<HTMLDivElement>(null);
   const instance = useRef<MapLibreMap | null>(null);
   const selection = useRef(selected);
@@ -87,9 +108,12 @@ export default function MapView({ selected, onSelect, reset }: Props) {
 
   useEffect(() => {
     const map = instance.current;
-    if (map?.isStyleLoaded())
-      map.fitBounds(bounds(catalog.bounds), { padding: 44, duration: 0 });
-  }, [reset]);
+    if (map)
+      map.stop().fitBounds(bounds(dataset?.bounds ?? catalog.bounds), {
+        padding: 44,
+        duration: 0,
+      });
+  }, [reset, dataset]);
 
   useEffect(() => {
     let active = true;
@@ -106,11 +130,19 @@ export default function MapView({ selected, onSelect, reset }: Props) {
         const { Map, Marker, NavigationControl, setWorkerUrl } =
           await import("maplibre-gl");
         if (!active || !container.current) return;
+        const extent = dataset?.bounds ?? catalog.bounds;
+        if (
+          extent[0] < catalog.context_bounds[0] ||
+          extent[1] < catalog.context_bounds[1] ||
+          extent[2] > catalog.context_bounds[2] ||
+          extent[3] > catalog.context_bounds[3]
+        )
+          throw Error("Basemap coverage unavailable");
         setWorkerUrl(workerUrl);
         map = new Map({
           container: container.current,
-          style: mapStyle(),
-          bounds: bounds(catalog.bounds),
+          style: mapStyle(dataset),
+          bounds: bounds(extent),
           fitBoundsOptions: { padding: 44 },
           maxBounds: bounds(catalog.context_bounds),
           minZoom: 4,
@@ -147,9 +179,8 @@ export default function MapView({ selected, onSelect, reset }: Props) {
         timer = setTimeout(fail, 15000);
         map.on("load", () => {
           if (!active || !map || failed) return;
-          clearTimeout(timer);
           map.setFilter("selected", ["==", "id", selection.current ?? ""]);
-          for (const sector of catalog.sectors) {
+          for (const sector of dataset?.regions ?? catalog.sectors) {
             const label = document.createElement("span");
             label.className = "sector-label";
             label.dataset.sector = sector.id;
@@ -159,13 +190,18 @@ export default function MapView({ selected, onSelect, reset }: Props) {
               .setLngLat([sector.label_point[0], sector.label_point[1]])
               .addTo(map);
           }
-          setState("ready");
+          map.once("idle", () => {
+            if (active && !failed) {
+              clearTimeout(timer);
+              setState("ready");
+            }
+          });
         });
         map.on("click", "sectors", (event) => {
           const id: unknown = event.features?.[0]?.properties.id;
           if (
             typeof id === "string" &&
-            catalog.sectors.some((s) => s.id === id)
+            (dataset?.regions ?? catalog.sectors).some((s) => s.id === id)
           )
             onSelect(id);
         });
@@ -189,7 +225,7 @@ export default function MapView({ selected, onSelect, reset }: Props) {
       map?.remove();
       instance.current = null;
     };
-  }, [attempt, onSelect]);
+  }, [attempt, onSelect, dataset]);
 
   return (
     <div className="map-frame" data-map-state={state}>

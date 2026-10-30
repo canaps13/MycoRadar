@@ -8,13 +8,13 @@ describe("MycoRadar bootstrap", () => {
   it("keeps predictions unavailable when the HTTP service is healthy", async () => {
     vi.stubGlobal(
       "fetch",
-      vi
-        .fn()
-        .mockResolvedValue(
-          new Response(
-            JSON.stringify({ status: "ok", service: "mycoradar-api" }),
-          ),
+      vi.fn((input: string) =>
+        Promise.resolve(
+          input === "/api/health"
+            ? Response.json({ status: "ok", service: "mycoradar-api" })
+            : new Response("{}", { status: 503 }),
         ),
+      ),
     );
     render(<App />);
     expect(await screen.findByRole("status")).toHaveTextContent(
