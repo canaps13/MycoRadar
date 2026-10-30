@@ -5,7 +5,10 @@ champignons, conçue pour la France puis d'autres pays. La Provence est le pilot
 
 Le socle fournit une API de santé, une page web connectée et un environnement
 PostGIS local avec migrations versionnées.
-**Aucune source ingérée, carte ni prédiction scientifique disponible.** La santé
+**Aucune source d'occurrences, météo, forêt ou sol ingérée ; aucune prévision
+scientifique disponible.** Une carte administrative de référence est consultable,
+sans masque forestier ni indice de fructification. Les contours administratifs de référence
+du job de grille ne constituent pas une couverture écologique. La santé
 HTTP ne garantit pas la disponibilité des données ou d'une base de données.
 
 ## Démarrer avec Docker Compose (MR-003)
@@ -39,9 +42,10 @@ docker compose --env-file .env.example up --build --wait --wait-timeout 180
 
 Les ports sont publiés uniquement sur la boucle locale. Compose attend PostGIS,
 exécute `alembic upgrade head` une fois, attend sa réussite puis lance l'API et
-le web. La migration initiale active PostGIS si nécessaire et versionne ce
-prérequis ; les tables métier restent à MR-006. Les données persistent dans le
-volume du projet `mycoradar-local`.
+le web. La migration initiale active PostGIS ; `0002_geospatial_foundation`
+ajoute les tables géographiques et la provenance, sans charger de données.
+Les données persistent dans le volume du projet `mycoradar-local`.
+Voir le [contrat du schéma et ses limites](docs/database-schema.md).
 
 `/health` reste disponible sans base. `/ready` renvoie HTTP 200 si PostGIS est
 accessible et les migrations sont à jour, sinon HTTP 503 sans détail de connexion.
@@ -228,11 +232,17 @@ MR-009 ajoute le [catalogue géographique API](docs/MR-009.md), paginé et versi
 publiés ; taxonomie, grille et résultats scientifiques restent indisponibles.
 OpenAPI sur `/docs` et `/openapi.json`. Aucun hébergement FastAPI public ajouté.
 
+La [grille multirésolution et les masques](docs/grid-job.md) sont produits par
+un job Python hors HTTP. La configuration pilote contient trois contours IGN
+réels et leurs crédits ; terre/forêt restent explicitement indisponibles tant
+que leurs sources ne sont pas admises. Ce support de grille ne fournit aucun score.
+
 Avant toute intégration de données : consulter le
 [registre des fournisseurs, licences, cadences et risques](docs/data-providers.md)
 et la [procédure d'admission, de provenance et d'attribution](docs/data-policy.md).
-Ce registre prépare les adaptateurs futurs ; seul un extrait administratif IGN
-est admis pour le catalogue MR-009, aucune source écologique n'est activée.
+Ce registre prépare les adaptateurs futurs. MR-008 admet deux extraits
+cartographiques publics pour l'affichage et MR-009 en reprend le contour IGN
+dans l'API ; aucune source écologique n'est activée.
 
 
 Pour contribuer : [workflow Git et conventions de PR](CONTRIBUTING.md).
@@ -240,7 +250,7 @@ Pour contribuer : [workflow Git et conventions de PR](CONTRIBUTING.md).
 - `api/src/mycoradar` : service FastAPI ; `api/tests` : tests HTTP et OpenAPI.
 - `web` : React, TypeScript et Vite ; tests de comportement avec Vitest.
 - `compose.yaml`, `infra/`, `alembic.ini`, `api/migrations` : environnement local
-  et migration PostGIS initiale. Aucune table métier créée prématurément.
+  et migrations PostGIS du socle géographique et de provenance.
 - `.github/workflows/bootstrap.yml` : vérification du socle sous Linux et Windows ;
   `local-environment.yml` : pile Compose, migrations, PostGIS et navigateur réels.
 - `docs/MR-001.md` : inventaire, décisions et preuves d'exécution.
@@ -248,8 +258,8 @@ Pour contribuer : [workflow Git et conventions de PR](CONTRIBUTING.md).
   persistantes et suite du développement.
 
 Les jobs Python et contrats partagés prendront leur place lorsqu'ils auront une
-implémentation réelle. Le schéma métier PostGIS relève de MR-006 ; MapLibre
-et le fond cartographique avec attribution de MR-008. Aucun calcul scientifique
+implémentation réelle. La carte MapLibre et ses sources sont décrites dans
+[la recette MR-008](docs/MR-008.md). Aucun calcul scientifique
 n'est exécuté par le navigateur.
 
 Un indice sur 100 n'est pas une probabilité. Aucun résultat ne valide

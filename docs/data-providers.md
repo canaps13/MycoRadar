@@ -1,6 +1,6 @@
 # Registre des fournisseurs de données
 
-**Revue : 29 octobre 2026 — MR-005.** Ce registre documentaire couvre des
+**Revue : 29 octobre 2026 — MR-005, complété par MR-007.** Ce registre documentaire couvre des
 produits candidats France/monde, sans activer un fournisseur ni ingérer ses données.
 La Provence ne détermine pas les droits des autres territoires. Une autorisation
 sur un produit ne s'étend pas aux autres produits d'un même organisme.
@@ -28,6 +28,7 @@ sélectionnées de cinq catalogues sont conservées dans la
 | `mf-arome-001` — Météo-France / paquets AROME 0,01° / emprise EURW1S100 | [Catalogue du produit](https://www.data.gouv.fr/datasets/paquets-arome-resolution-0-01deg), `lov2` : LO 2.0 | Conditionnel | Conditionnel | Conditionnel | Météo-France, paquet, run émis, échéance, mise à jour et source | `candidate`, MR-011 |
 | `ign-bdforet-v2` — IGN / BD Forêt V2 / France métropolitaine | [Catalogue IGN](https://www.data.gouv.fr/datasets/bd-foret-r), `lov2` : LO 2.0 | Conditionnel | Conditionnel pour fichiers | Conditionnel | IGN, BD Forêt V2, édition et millésime de l'emprise, date de mise à jour et source | `candidate`, MR-012 |
 | `ign-rge-alti` — IGN / RGE ALTI / emprise à vérifier dans chaque livraison | [Catalogue RGE](https://www.data.gouv.fr/datasets/referentiel-a-grande-echelle-rge), `lov2` ; description incluant RGE ALTI sous Licence Ouverte | Conditionnel | Conditionnel pour fichiers | Conditionnel | IGN, RGE ALTI, livraison, emprise, date de mise à jour et source | `candidate`, MR-013 ; vérifier métadonnées du produit livré |
+| `ign-adminexpress-cog-carto` — IGN / limites départementales / France | [Notice producteur](https://www.data.gouv.fr/datasets/admin-express-admin-express-cog-admin-express-cog-carto-admin-express-cog-carto-pe-admin-express-cog-carto-plus-pe), catalogue `5808de39c751df1e0679df72`, `lov2` : LO 2.0 | Conditionnel | Conditionnel | Conditionnel | IGN, ADMIN EXPRESS COG CARTO, URL du lot, date source inconnue et collecte distinctes, transformations | Extrait public des trois départements pilotes admis pour MR-007 ; [manifeste et empreinte](../data/territories/provence/manifest.json). Ce snapshot n'active pas un flux fournisseur. |
 | `isric-soilgrids-2` — ISRIC / SoilGrids 2.0 / monde | [Documentation officielle](https://docs.isric.org/globaldata/soilgrids/) : CC BY 4.0 | Conditionnel | Conditionnel pour rasters | Conditionnel | ISRIC, couche/profondeur/statistique, version, licence, transformations et citation de la [FAQ officielle](https://docs.isric.org/globaldata/soilgrids/SoilGrids_faqs_04.html) | `candidate`, MR-013 ; REST exclu pour l'instant |
 | `brgm-charm50` — BRGM / BD Charm-50 / France métropolitaine | [Notice du BRGM](https://www.data.gouv.fr/datasets/cartes-geologiques-vectorisees-et-harmonisees-a-1-50-000-du-brgm) : API `license=notspecified` ; aucun droit déduit du caractère public du portail | Non établi | Non établi | Non établi | BRGM, carte/livraison, mise à jour ; texte de licence du lot à obtenir | `blocked`, R1 / MR-013 |
 | `inpn-openobs` — INPN/SINP / observations publiques / France | [Portail OpenObs](https://openobs.mnhn.fr/) protégé lors de la consultation ; licence des lots non vérifiée | Non établi | Non établi | Non établi | Producteurs contributeurs et licence du lot à obtenir | `blocked`, R2 / MR-010 |
@@ -57,6 +58,7 @@ vérifiés restent inconnus : aucun nombre n'est inventé et aucun compte n'a é
 | `mf-arome-001` | GRIB2 et documentation des paquets ; limites de téléchargement, cycles disponibles et API à vérifier | Pas temporel 1 h ; catalogue `continuous`, ce qui ne donne pas la cadence exacte d'émission | Vérifier nouveaux runs chaque heure ; conserver heure d'émission et échéance | Grille 0,01° ≠ résolution effective garantie ; prévision ≠ observation ; emprise EURW1S100 |
 | `ign-bdforet-v2` | Fichiers de livraison ; fiche produit désormais sur cartes.gouv.fr ; si API, [CGU Géoplateforme](https://cartes.gouv.fr/cgu/) en plus de la licence | Catalogue `irregular`, millésime local à lire | Import sur nouvelle édition, revue des métadonnées mensuelle | Formations cartographiées ≥ 5 000 m² selon notice ; ce seuil n'est pas une précision métrique |
 | `ign-rge-alti` | Livraison dédiée RGE ALTI ; quotas des services IGN non vérifiés | Catalogue RGE `irregular` | Import sur nouvelle édition, revue mensuelle | CRS, taille de pixel, précision altimétrique, emprise et acquisition propres à la livraison |
+| `ign-adminexpress-cog-carto` | WFS GetFeature borné à 3 départements ; couche et propriété `code_insee` vérifiées par DescribeFeatureType, [CGU Géoplateforme](https://cartes.gouv.fr/cgu/) | `LATEST` n'est pas une date d'édition ; publication du lot non établie | Snapshot gelé MR-007 ; revoir notice et version avant remplacement, aucun polling activé | MultiPolygon WGS84 longitude/latitude ; résolution effective inconnue ; limites administratives, pas masques de forêt/terre |
 | `isric-soilgrids-2` | WCS/WebDAV documentés, à tester sur petit extrait ; documentation annonçant REST suspendu | Pas de calendrier ferme identifié | Import sur nouvelle édition, revue mensuelle | Pixels annoncés 250 m, profondeur/unité/quantiles ; prédictions de sol, pas analyses locales mesurées |
 | `brgm-charm50` | Ne pas importer avant résolution de R1 ; accès InfoTerre à confirmer | Catalogue `punctual`, pas de fraîcheur opérationnelle prouvée | Sur édition après levée du blocage | Échelle 1:50 000 ≠ résolution 50 m ; géologie ≠ mesure directe de pH du sol |
 | `inpn-openobs` | Aucun contournement de protection ; obtenir notice publique et conditions du lot | Inconnue | Après levée du blocage, vérification légère horaire selon quotas | Géoprécision, floutage, sensibilité, date et doublons GBIF à conserver |
@@ -65,6 +67,38 @@ vérifiés restent inconnus : aucun nombre n'est inventé et aucun compte n'a é
 | `osm-standard-tiles` | HTTPS, identification et Referer conformes ; pas de bulk/offline ; service best effort | Selon en-têtes HTTP, pas de SLA | Consultation interactive uniquement si retenu ; pas de polling scientifique | Image de fond, pas donnée écologique ; politique raster distincte du service vectoriel |
 
 ## Risques ouverts et décisions attendues
+
+| Risque | Conséquence / mesure requise avant admission | Responsable de la suite |
+|---|---|---|
+| R1 — BRGM : licence non spécifiée dans la notice producteur | Une [notice tierce](https://www.data.gouv.fr/datasets/cartes-geologiques-departementales-a-1-50-000-bd-charm-50) publiée par Christian Quest affiche LO 2.0 ; cela ne suffit pas à autoriser le lot du producteur. Obtenir les conditions de la distribution BRGM exacte et consigner la résolution de l'écart. La page InfoTerre de conditions essayée n'a pas été lisible avec l'outil utilisé. | MR-013 |
+| R2 — OpenObs : portail protégé et conditions non lues | Rester sur des données publiquement diffusables, vérifier licence, contributeurs et précision autorisée. Aucun accès à des observations sensibles n'est demandé dans MR-005. | MR-010 |
+| R3 — CDS : libellé CC-BY sans texte/version lus | Lire les termes applicables au produit/lot, relever citation, compte, quotas et droits exacts ; ne pas extrapoler une licence Copernicus à tous les jeux CDS. | MR-011 |
+| R4 — ODbL et service de tuiles | Étudier base dérivée/œuvre produite avant combinaison ; choisir un service compatible avec l'usage, les tests automatisés et la confidentialité. Ne pas financer implicitement un hébergeur ni activer un service tiers. | MR-008 |
+| R5 — Attribution perdue dans agrégations/exports | Maintenir les liens de provenance, les licences et crédits de tous les lots contributeurs ; ne pas rebaptiser tout le résultat sous la licence du code. | MR-010 à MR-014, MR-018 |
+| R6 — Sources vieillies, indisponibles ou spatialement grossières | Revoir conditions à chaque nouvelle version ; horodater les contrôles séparément des données ; signaler partial/unavailable/stale selon les faits, sans inventer une précision locale. | Adaptateurs et MR-020 à MR-023 |
+
+Une source supplémentaire (autre pays, fond de carte, landcover global) exige
+sa propre entrée et ses preuves. Aucune ligne n'autorise par défaut l'usage des
+photos, des logos, des observations personnelles ou d'un autre produit du fournisseur.
+
+## Lots cartographiques admis par MR-008
+
+Revue des textes le **29 octobre 2026, vers 23:17 UTC**. Ces deux admissions
+portent uniquement sur les extraits d'affichage décrits dans le
+[manifeste versionné](../data/map-sources/manifest.json) et la [recette MR-008](MR-008.md).
+Elles complètent les candidats de MR-005, sans les activer comme sources écologiques.
+
+| ID / lot et couverture | Preuves consultées | Commercial / copie fichier / redistribution / dérivés | Attribution, accès et décision |
+|---|---|---|---|
+| `ign-adminexpress-display` — IGN ADMIN EXPRESS COG CARTO, WFS LATEST, 13/83/84, empreinte `f967afb56063…` | [Notice IGN publiée sur data.gouv.fr](https://www.data.gouv.fr/datasets/admin-express-admin-express-cog-admin-express-cog-carto-admin-express-cog-carto-pe-admin-express-cog-carto-plus-pe), licence LO 2.0 ; [texte Etalab](https://github.com/etalab/licence-ouverte/blob/master/LO.md) ; [CGU Géoplateforme](https://cartes.gouv.fr/cgu/), version du 15 octobre 2024 | Permis sous attribution et lien effectif à l'information source ; date d'édition inconnue explicitée, collecte distinguée. Copie et dérivé simplifié conservent leur provenance. | IGN, produit, URL du lot et licence affichés ; source publique sans identifiant ; aucun appel WFS client ni polling. Quota non établi, pas de requête supplémentaire nécessaire. `admitted` pour ce lot cartographique public uniquement. |
+| `natural-earth-land-display` — Land 1:10 millions, commit `ca96624a56bd…`, contexte Europe occidentale | [Conditions du producteur](https://www.naturalearthdata.com/about/terms-of-use/) et [fichier du dépôt producteur épinglé](https://github.com/nvkelso/natural-earth-vector/blob/ca96624a56bd078437bca8184e78163e5039ad19/geojson/ne_10m_land.geojson) | Domaine public : usage commercial, copie, redistribution et transformations permis ; pas de garantie d'exactitude. Cache HTTP fournisseur sans objet pour le service client : fichier dérivé local. | Crédit volontaire Natural Earth et lien aux termes visibles. Une collecte du fichier public sans compte, pas de tuiles ni coût de service ; original de 10 Mo gardé hors Git, SHA-256 vérifié avant transformation. `admitted` comme fond de contexte uniquement. |
+
+La mise à jour de la fiche IGN n'est pas attribuée à l'extrait WFS LATEST :
+la date du lot reste inconnue. L'interprétation d'admission LO 2.0 repose sur
+l'attribution effective et l'URL de l'information prévues par le texte, sans
+inventer une édition. Les deux sources sont publiques et ne contiennent aucune
+observation personnelle. OSM et ses services ne sont pas utilisés par MR-008 ;
+le risque R4 reste à instruire si un service OSM est ultérieurement choisi.
 
 ### Lot API admis par MR-009
 
@@ -80,15 +114,3 @@ Le lot est réutilisé sans appel WFS ; quotas non établis, aucun polling activ
 Pas de donnée personnelle ni de masque forestier. [Manifeste et preuves](MR-009.md).
 Cette admission ne concerne aucun autre produit IGN ni taxon/occurrence.
 
-| Risque | Conséquence / mesure requise avant admission | Responsable de la suite |
-|---|---|---|
-| R1 — BRGM : licence non spécifiée dans la notice producteur | Une [notice tierce](https://www.data.gouv.fr/datasets/cartes-geologiques-departementales-a-1-50-000-bd-charm-50) publiée par Christian Quest affiche LO 2.0 ; cela ne suffit pas à autoriser le lot du producteur. Obtenir les conditions de la distribution BRGM exacte et consigner la résolution de l'écart. La page InfoTerre de conditions essayée n'a pas été lisible avec l'outil utilisé. | MR-013 |
-| R2 — OpenObs : portail protégé et conditions non lues | Rester sur des données publiquement diffusables, vérifier licence, contributeurs et précision autorisée. Aucun accès à des observations sensibles n'est demandé dans MR-005. | MR-010 |
-| R3 — CDS : libellé CC-BY sans texte/version lus | Lire les termes applicables au produit/lot, relever citation, compte, quotas et droits exacts ; ne pas extrapoler une licence Copernicus à tous les jeux CDS. | MR-011 |
-| R4 — ODbL et service de tuiles | Étudier base dérivée/œuvre produite avant combinaison ; choisir un service compatible avec l'usage, les tests automatisés et la confidentialité. Ne pas financer implicitement un hébergeur ni activer un service tiers. | MR-008 |
-| R5 — Attribution perdue dans agrégations/exports | Maintenir les liens de provenance, les licences et crédits de tous les lots contributeurs ; ne pas rebaptiser tout le résultat sous la licence du code. | MR-010 à MR-014, MR-018 |
-| R6 — Sources vieillies, indisponibles ou spatialement grossières | Revoir conditions à chaque nouvelle version ; horodater les contrôles séparément des données ; signaler partial/unavailable/stale selon les faits, sans inventer une précision locale. | Adaptateurs et MR-020 à MR-023 |
-
-Une source supplémentaire (autre pays, fond de carte, landcover global) exige
-sa propre entrée et ses preuves. Aucune ligne n'autorise par défaut l'usage des
-photos, des logos, des observations personnelles ou d'un autre produit du fournisseur.
