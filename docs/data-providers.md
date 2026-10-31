@@ -113,3 +113,23 @@ collecte datée du 29 octobre 2026, aucune fraîcheur déduite de la notice.
 Le lot est réutilisé sans appel WFS ; quotas non établis, aucun polling activé.
 Pas de donnée personnelle ni de masque forestier. [Manifeste et preuves](MR-009.md).
 Cette admission ne concerne aucun autre produit IGN ni taxon/occurrence.
+
+## Lecteur météo MR-011
+
+Revue le **31 octobre 2026**. Deux lectures manuelles publiques sont admises
+pour normalisation et reçu agrégé uniquement. [Preuves de sources](evidence/MR-011-sources.json),
+[résultat réel](evidence/MR-011-sample.json), [contrat et limites](MR-011.md).
+Aucune série publique, source écologique validée ou actualisation automatique.
+
+| Produit / lot | Droits et preuves | Accès, attribution et limites |
+|---|---|---|
+| `mf-climatology-daily` — Météo-France, RR–T–Vent quotidien, fichier département 13 `latest-2025-2026` | [Catalogue producteur](https://www.data.gouv.fr/datasets/donnees-climatologiques-de-base-quotidiennes), `lov2` ; [LO 2.0](https://github.com/etalab/licence-ouverte/blob/master/LO.md). Copie, dérivé, redistribution et commercial permis sous attribution effective. Admission limitée à l'essai de station et à sa provenance ; ne concerne pas l'ancien candidat horaire. | Stockage objet public, sans compte ; quota chiffré non établi. Crédit Météo-France, URL du fichier, dates du catalogue et HTTP séparées. `RR` en mm et `TM` en °C ; jours réels et qualité conservés selon le [dictionnaire du produit](https://meteofrance.s3.sbg.io.cloud.ovh.net/data/synchro_ftp/BASE/QUOT/Q_descriptif_champs_RR-T-Vent.csv). Stations métropolitaines seulement pour la convention UTC revue ; aucune interpolation. |
+| `met-norway-locationforecast` — MET Norway, Locationforecast 2.0 compact, point de référence public `43.3, 5.4` | [Politique de licence](https://docs.api.met.no/doc/License.html), CC BY 4.0 retenue ; [texte CC BY](https://creativecommons.org/licenses/by/4.0/legalcode.en). Commercial, copie, dérivé et redistribution permis sous crédits, lien de licence et transformations. Ni icônes ni logos. | [Conditions de service](https://docs.api.met.no/doc/TermsOfService.html), révision du 26 juin 2020 : identification, cache et attentes imposées ; accord au-delà de 20 requêtes/s par application, sans SLA. Crédit « Data from MET Norway », URL de source et normalisation dans le reçu. `updated_at` n'est pas une émission modèle ; résolution effective inconnue. Pas de coordonnées privées transmises ni d'appel navigateur. |
+
+Le cache commun aux relances respecte les dates `Expires`, `max-age` et
+`Retry-After` ainsi qu'un délai local d'au moins une heure. Ce délai local
+n'est pas un quota Météo-France ou une réservation de débit MET Norway.
+Les empreintes identifient les contenus lus, sans garantir leur récupération
+future depuis des URL mutables. Une nouvelle région, un lot, un autre usage
+ou une modification des termes demande une nouvelle revue. AROME, ERA5-Land
+et les produits météo bloqués précédemment ne sont pas activés par cette tâche.
