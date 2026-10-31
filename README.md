@@ -5,8 +5,8 @@ champignons, conçue pour la France puis d'autres pays. La Provence est le pilot
 
 Le socle fournit une API de santé, une page web connectée et un environnement
 PostGIS local avec migrations versionnées.
-**Aucune prévision scientifique disponible.** Un petit extrait SoilGrids est
-normalisé hors ligne pour vérifier le lecteur raster MR-013 ; il n'alimente
+**Aucune prévision scientifique disponible.** De petits extraits SoilGrids et
+RGE ALTI IGN sont normalisés hors ligne pour vérifier le lecteur raster MR-013 ; ils n'alimentent
 aucune couche publique ni aucun score. Les autres sources écologiques ne sont
 pas ingérées sur cette branche. Une carte administrative de référence est consultable,
 sans masque forestier ni indice de fructification. Les contours administratifs de référence
@@ -258,6 +258,10 @@ avec empreinte, CRS, unités, masques et provenance explicites. L'échantillon
 ISRIC versionné contient 64 pixels : 56 valeurs normalisées et huit zéros
 exclus par politique de prudence, sans les déclarer NoData du producteur.
 Millésime, date de fin des données et résolution effective restent inconnus.
+L'extrait IGN comprend 64 altitudes flottantes ; son CRS interne incomplet
+est conservé et signalé comme non équivalent au CRS demandé. Référentiel vertical,
+pas source et rééchantillonnage serveur restent inconnus : le pixel de sortie
+de 1 m ne démontre pas une précision de 1 m.
 
 ```powershell
 $env:PYTHONPATH = 'api/src'
@@ -265,6 +269,8 @@ uv run --locked --group geo python -m mycoradar.raster_job --manifest data/raste
 docker build --target raster-job --tag mycoradar-raster-local --file infra/api.Dockerfile .
 $rasterInput = (Resolve-Path data/rasters/soilgrids-sample).Path
 docker run --rm --network none --mount "type=bind,source=$rasterInput,target=/input,readonly" mycoradar-raster-local python -m mycoradar.raster_job --manifest /input/manifest.json --output /tmp/soil.json
+$terrainInput = (Resolve-Path data/rasters/ign-terrain-sample).Path
+docker run --rm --network none --mount "type=bind,source=$terrainInput,target=/input,readonly" mycoradar-raster-local python -m mycoradar.raster_job --manifest /input/manifest.json --output /tmp/terrain.json
 ```
 
 Créer `.tools` si nécessaire pour la première sortie. Le rejeu identique ne

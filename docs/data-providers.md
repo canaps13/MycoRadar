@@ -137,5 +137,20 @@ et [preuves sources](evidence/MR-013-sources.json).
 
 BRGM R1 demeure bloqué après relecture de la notice producteur : licence
 `notspecified`, extras sans texte applicable à la distribution exacte. Aucune
-donnée géologique téléchargée. RGE ALTI reste candidat, sans livraison terrain
-ingérée ni métadonnées de lot validées dans MR-013.
+donnée géologique téléchargée.
+
+L'extension MR-013 admet un **lot technique public RGE ALTI** de 8 × 8 pixels
+pour tester la lecture numérique hors ligne : notice IGN dédiée `rge-alti-r`,
+licence `lov2` et LO 2.0 relues le 31 octobre 2026, CGU Géoplateforme relues.
+Copie, usage commercial, redistribution et dérivés autorisés sous attribution
+IGN effective, URL source et indication des transformations ; date source
+inconnue explicitée, collecte séparée. Style WMS `normal`, GeoTIFF `float32`
+à une bande, unités en mètres selon le descriptif produit, NoData `-99999`.
+Le WKT livré a un datum incomplet, le référentiel vertical est non vérifié,
+rééchantillonnage serveur et pas natif inconnus ; le pas de sortie 1 m ne
+prouve pas la résolution effective. Aucune admission aux calculs scientifiques.
+Quota WMS inconnu, une requête GetMap ponctuelle identifiée, aucun polling.
+En-tête HTTP `private` conservé, sans activation de cache CDN public.
+[Preuves, licence et URL exacte](evidence/MR-013-terrain-sources.json),
+[manifeste et crédits](../data/rasters/ign-terrain-sample/manifest.json),
+[limites de la livraison](MR-013.md#géoréférencement-et-échantillonnage-incomplets).

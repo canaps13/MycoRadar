@@ -25,6 +25,7 @@ def write_source(
     scale=1.0,
     offset=0.0,
     unit="m",
+    palette=None,
 ):
     values = np.array([[0, 10], [-9999, 20]], dtype="int16") if array is None else array
     with rasterio.Env(GDAL_TIFF_INTERNAL_MASK=True), MemoryFile() as memory:
@@ -43,6 +44,8 @@ def write_source(
             ds.offsets = (offset,)
             if unit is not None:
                 ds.set_band_unit(1, unit)
+            if palette is not None:
+                ds.write_colormap(1, palette)
             if mask is not None:
                 ds.write_mask(mask)
         content = memory.read()
@@ -330,3 +333,93 @@ def test_frozen_real_soilgrids_capture_keeps_undocumented_zeros_ambiguous():
     )
     assert a["source_year"] is None and a["data_cutoff"] is None
     assert a["nominal_source_grid_step_m"] == 250 and a["effective_resolution_m"] is None
+
+
+def test_terrain_requires_explicit_vertical_unknown_or_evidence(manifest):
+    edit(manifest, nature="terrain_model")
+    with pytest.raises(ValidationError, match="vertical reference"):
+        job.build_artifact(manifest)
+    unknown = {"name": None, "evidence_url": None, "note": "Synthetic unknown datum"}
+    edit(manifest, vertical_reference=unknown)
+    assert job.build_artifact(manifest)["vertical_reference"] == unknown
+    edit(manifest, vertical_reference={**unknown, "name": "Invented datum"})
+    with pytest.raises(ValidationError, match="declared together"):
+        job.build_artifact(manifest)
+
+
+def test_wms_delivery_keeps_request_crs_disagreement_without_relabelling(manifest):
+    delivery = {
+        "method": "wms",
+        "requested_crs": "EPSG:4326",
+        "server_resampling": "unknown",
+        "evidence_url": "https://example.invalid/request",
+    }
+    edit(manifest, delivery=delivery)
+    a = job.build_artifact(manifest)
+    assert a["delivery"]["requested_crs_matches_file"] is False
+    assert a["source_raster"]["crs_authority"] == ("EPSG", "6933")
+    edit(manifest, delivery={**delivery, "requested_crs": "EPSG:6933"})
+    assert job.build_artifact(manifest)["delivery"]["requested_crs_matches_file"] is True
+    edit(manifest, delivery={**delivery, "server_resampling": "not_requested"})
+    with pytest.raises(ValidationError, match="server resampling"):
+        job.build_artifact(manifest)
+
+
+def test_colour_palette_cannot_be_used_as_scalar_terrain(manifest):
+    edit(
+        manifest,
+        nature="terrain_model",
+        vertical_reference={"name": None, "evidence_url": None, "note": "Unknown in fixture"},
+    )
+    write_source(
+        manifest,
+        array=np.array([[0, 1], [2, 3]], dtype="uint8"),
+        nodata=255,
+        palette={0: (255, 0, 0, 255), 1: (0, 255, 0, 255)},
+    )
+    with pytest.raises(job.RasterJobError, match="scalar_single_band"):
+        job.build_artifact(manifest)
+
+
+def test_rgb_image_cannot_be_used_as_soil_prediction(manifest):
+    content = manifest.parent / "source.tif"
+    with rasterio.open(
+        content,
+        "w",
+        driver="GTiff",
+        width=2,
+        height=2,
+        count=3,
+        dtype="uint8",
+        crs="EPSG:6933",
+        transform=Affine(10, 0, 0, 0, -10, 20),
+    ) as dataset:
+        dataset.write(np.ones((3, 2, 2), dtype="uint8"))
+    edit(
+        manifest,
+        sha256=hashlib.sha256(content.read_bytes()).hexdigest(),
+        nature="soil_prediction",
+        depth_cm=[0, 5],
+        model_statistic="mean",
+    )
+    with pytest.raises(job.RasterJobError, match="scalar_single_band"):
+        job.build_artifact(manifest)
+
+
+def test_frozen_ign_terrain_preserves_incomplete_crs_and_sampling_unknowns():
+    path = Path(__file__).resolve().parents[2] / "data/rasters/ign-terrain-sample/manifest.json"
+    a = job.build_artifact(path)
+    assert a["nature"] == "terrain_model" and a["source_raster"]["dtype"] == "float32"
+    assert a["quality"]["pixel_count"] == a["quality"]["valid_pixels"] == 64
+    assert a["source_raster"]["nodata_value"] == -99999
+    assert a["source_raster"]["crs_authority"] is None
+    assert a["delivery"]["requested_crs"] == "EPSG:2154"
+    assert a["delivery"]["requested_crs_matches_file"] is False
+    assert a["delivery"]["server_resampling"] == "unknown"
+    assert a["window"]["pixel_spacing_x"] == a["window"]["pixel_spacing_y"] == 1
+    assert a["vertical_reference"]["name"] is None
+    assert a["nominal_source_grid_step_m"] is None
+    assert a["source_year"] is a["data_cutoff"] is a["effective_resolution_m"] is None
+    assert a["sample_summary"]["minimum"] == pytest.approx(166.93, abs=0.0001)
+    assert a["sample_summary"]["maximum"] == pytest.approx(167.53, abs=0.0001)
+    assert a["coverage_status"] == "partial" and a["public_layers_added"] == 0

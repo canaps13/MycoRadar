@@ -71,6 +71,31 @@ class Exclusion(Contract):
     policy_url: Text
 
 
+class VerticalReference(Contract):
+    name: Text | None
+    evidence_url: Text | None
+    note: Text
+
+    @model_validator(mode="after")
+    def evidenced_name(self) -> Self:
+        if (self.name is None) != (self.evidence_url is None):
+            raise ValueError("vertical datum name and evidence must be declared together")
+        return self
+
+
+class Delivery(Contract):
+    method: Literal["file", "wcs", "wms"]
+    requested_crs: Text | None
+    server_resampling: Literal["unknown", "not_requested"]
+    evidence_url: Text
+
+    @model_validator(mode="after")
+    def wms_is_a_rendered_request(self) -> Self:
+        if self.method == "wms" and self.server_resampling != "unknown":
+            raise ValueError("WMS grid sampling cannot establish absence of server resampling")
+        return self
+
+
 class Manifest(Contract):
     schema_version: Literal["raster-manifest-v1"]
     path: Text
@@ -90,6 +115,8 @@ class Manifest(Contract):
     year_evidence_url: Text | None = None
     data_cutoff: AwareDatetime | None = None
     nominal_source_grid_step_m: Annotated[float, Field(gt=0, allow_inf_nan=False)] | None = None
+    vertical_reference: VerticalReference | None = None
+    delivery: Delivery | None = None
 
     @model_validator(mode="after")
     def scientific_metadata(self) -> Self:
@@ -109,6 +136,8 @@ class Manifest(Contract):
             raise ValueError("soil depth and prediction statistic required")
         if self.nature == "categorical_map" and self.valid_range is not None:
             raise ValueError("categorical maps require a separate codebook, not a numeric range")
+        if self.nature == "terrain_model" and self.vertical_reference is None:
+            raise ValueError("terrain needs an explicit known or unknown vertical reference")
         return self
 
 
@@ -167,6 +196,15 @@ def _read(content: bytes, manifest: Manifest) -> dict[str, Any]:
         crs = pyproj.CRS.from_user_input(dataset.crs.to_wkt())
         if not crs.equals(pyproj.CRS.from_user_input(manifest.crs), ignore_axis_order=True):
             raise RasterJobError("crs_mismatch")
+        requested_crs_matches_file = None
+        if manifest.delivery is not None and manifest.delivery.requested_crs is not None:
+            requested_crs_matches_file = crs.equals(
+                pyproj.CRS.from_user_input(manifest.delivery.requested_crs), ignore_axis_order=True
+            )
+        if manifest.nature in {"terrain_model", "soil_prediction"} and (
+            dataset.count != 1 or dataset.colorinterp[0].name not in {"gray", "undefined"}
+        ):
+            raise RasterJobError("scalar_single_band_required")
         if not 1 <= manifest.band <= dataset.count:
             raise RasterJobError("band_outside_dataset")
         if (
@@ -264,6 +302,12 @@ def _read(content: bytes, manifest: Manifest) -> dict[str, Any]:
                 "pixel_spacing_y": abs(transform.e),
                 "crs_axis_units": units,
             },
+            "delivery": {
+                **manifest.delivery.model_dump(mode="json"),
+                "requested_crs_matches_file": requested_crs_matches_file,
+            }
+            if manifest.delivery is not None
+            else None,
             "conversion": conversion,
             "values": values,
             "quality": {
@@ -339,6 +383,11 @@ def build_artifact(manifest_path: Path) -> dict[str, Any]:
         data_cutoff=manifest.data_cutoff.isoformat() if manifest.data_cutoff else None,
         nominal_source_grid_step_m=manifest.nominal_source_grid_step_m,
         effective_resolution_m=manifest.provenance.effective_resolution_m,
+        vertical_reference=(
+            manifest.vertical_reference.model_dump(mode="json")
+            if manifest.vertical_reference is not None
+            else None
+        ),
         exclusion_policy=manifest.exclusion.model_dump(mode="json") if manifest.exclusion else None,
         transformations=[
             "Reviewed local standalone GeoTIFF in memory; internal metadata/masks only",

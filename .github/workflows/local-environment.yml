@@ -42,6 +42,7 @@ jobs:
         run: |
           docker compose --env-file .env.example exec -T api python -c "import importlib.util; assert importlib.util.find_spec('rasterio') is None"
           docker run --rm --network none --mount "type=bind,source=${PWD}/data/rasters/soilgrids-sample,target=/input,readonly" mycoradar-raster-ci python -m mycoradar.raster_job --manifest /input/manifest.json --output /tmp/soil.json
+          docker run --rm --network none --mount "type=bind,source=${PWD}/data/rasters/ign-terrain-sample,target=/input,readonly" mycoradar-raster-ci python -m mycoradar.raster_job --manifest /input/manifest.json --output /tmp/terrain.json
       - id: postgis_tests
         run: uv run --locked pytest -m integration
       - id: migration_replay

@@ -221,5 +221,11 @@ Leur état reste `partial` ou `unavailable` ; leur existence n'admet aucune couc
 au calcul scientifique. Aucune jointure cellule/espèce ou écriture PostGIS dans
 cette tranche. Les dépendances natives restent dans le groupe `geo` et la cible
 Docker explicite `raster-job` ; la cible finale par défaut conserve l'API légère.
-La CI rejoue l'échantillon sans réseau et contrôle l'absence de Rasterio dans
+Les modèles de terrain exigent un référentiel vertical explicitement connu
+avec preuve ou explicitement inconnu. Pour une livraison WMS, le CRS demandé
+reste distinct du CRS effectivement embarqué, leur équivalence est contrôlée,
+et le rééchantillonnage serveur reste inconnu. La lecture technique ne répare
+pas un datum incomplet et n'admet pas le lot à une jointure scientifique.
+Les images RGB ou à palette sont refusées comme valeurs scalaires de sol/terrain.
+La CI rejoue les deux échantillons sans réseau et contrôle l'absence de Rasterio dans
 l'API. Voir [contrat, attribution et limites observées](docs/MR-013.md).
