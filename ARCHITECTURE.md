@@ -204,3 +204,28 @@ publication atomique sans écrasement. Il ne calcule aucun score et n'active
 aucune ingestion forestière réelle. Les groupes de dépendances isolent ce calcul
 du runtime HTTP. Voir la [décision](docs/adr/007-grid-job.md), le
 [contrat](docs/grid-job.md) et les [preuves](docs/MR-007.md).
+
+## Lecteur raster hors HTTP (MR-013)
+
+`mycoradar.raster_job` lit uniquement un GeoTIFF local autonome et vérifié par
+SHA-256, avec fenêtre entière bornée et CRS interne concordant. Pas de VRT,
+sidecar, reprojection, interpolation ou remplissage implicite. Masque GDAL,
+NoData déclaré, non-finis, exclusions opérateur et plage physique restent
+distingués ; une valeur NoData explicite ne redevient pas valide via le masque.
+La conversion d'unité est appliquée une seule fois. Le pas de grille natif,
+le pas nominal du produit et la résolution effective sont des métadonnées distinctes.
+
+Les artefacts versionnés conservent les inconnus de date et de précision, ainsi
+que la nature de la donnée (prédiction de sol, modèle de terrain ou catégorie).
+Leur état reste `partial` ou `unavailable` ; leur existence n'admet aucune couche
+au calcul scientifique. Aucune jointure cellule/espèce ou écriture PostGIS dans
+cette tranche. Les dépendances natives restent dans le groupe `geo` et la cible
+Docker explicite `raster-job` ; la cible finale par défaut conserve l'API légère.
+Les modèles de terrain exigent un référentiel vertical explicitement connu
+avec preuve ou explicitement inconnu. Pour une livraison WMS, le CRS demandé
+reste distinct du CRS effectivement embarqué, leur équivalence est contrôlée,
+et le rééchantillonnage serveur reste inconnu. La lecture technique ne répare
+pas un datum incomplet et n'admet pas le lot à une jointure scientifique.
+Les images RGB ou à palette sont refusées comme valeurs scalaires de sol/terrain.
+La CI rejoue les deux échantillons sans réseau et contrôle l'absence de Rasterio dans
+l'API. Voir [contrat, attribution et limites observées](docs/MR-013.md).
