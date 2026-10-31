@@ -36,6 +36,12 @@ jobs:
         run: docker compose --env-file .env.example up --build --wait --wait-timeout 180
       - id: stack_health
         run: uv run --locked python scripts/check_local_stack.py
+      - id: raster_job_build
+        run: docker build --target raster-job --tag mycoradar-raster-ci --file infra/api.Dockerfile .
+      - id: raster_job_smoke
+        run: |
+          docker compose --env-file .env.example exec -T api python -c "import importlib.util; assert importlib.util.find_spec('rasterio') is None"
+          docker run --rm --network none --mount "type=bind,source=${PWD}/data/rasters/soilgrids-sample,target=/input,readonly" mycoradar-raster-ci python -m mycoradar.raster_job --manifest /input/manifest.json --output /tmp/soil.json
       - id: postgis_tests
         run: uv run --locked pytest -m integration
       - id: migration_replay
@@ -53,7 +59,7 @@ jobs:
           CI_STEPS_JSON: ${{ toJSON(steps) }}
         run: >-
           python scripts/ci_summary.py python_install compose_build stack_health
-          postgis_tests migration_replay web_install browser_install browser_tests
+          raster_job_build raster_job_smoke postgis_tests migration_replay web_install browser_install browser_tests
       - name: Container state and logs
         if: always()
         run: |

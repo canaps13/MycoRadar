@@ -1,0 +1,49 @@
+{
+  "artifact_path": "data/rasters/soilgrids-sample/normalized.json",
+  "artifact_sha256": "549678a60c5cedaebbdf160f954957c68db6d328400cec118943646fc7f8ed83",
+  "manifest_sha256": "1fb6cf7f32f452b80421bf12e1fcb0045173b021f5ade65e0a193bbdf359b92d",
+  "source_sha256": "7193702c31be1f61ebade313202c0af814c2c09f88bf8bb52f3c97b85685e2f6",
+  "job_id": "ac096e6ff1513c67c218fdc6932af0bb1af47d96507c3b2f0848dd947a7d24f6",
+  "engine_versions": {
+    "adapter": "raster-window-v1",
+    "gdal": "3.12.2",
+    "implementation_sha256": "9024ecdac643b9533f41cd9b19e2481d1cab5caa11b99f386314b04d8beacbb0",
+    "machine": "AMD64",
+    "numpy": "2.5.4",
+    "platform": "Windows",
+    "proj": "9.8.1",
+    "pyproj": "3.8.0",
+    "python": "3.12.16",
+    "rasterio": "1.5.2"
+  },
+  "quality": {
+    "conversion_nonfinite_pixels": 0,
+    "declared_nodata_pixels": 0,
+    "gdal_mask_excluded_pixels": 0,
+    "invalid_pixels": 8,
+    "nodata_marked_valid_by_mask": 0,
+    "note": "Counts can overlap; explicit nodata always overrides a valid GDAL mask.",
+    "out_of_range_pixels": 0,
+    "pixel_count": 64,
+    "policy_excluded_pixels": 8,
+    "raw_nonfinite_pixels": 0,
+    "valid_pixels": 56
+  },
+  "coverage_status": "partial",
+  "source_year": null,
+  "data_cutoff": null,
+  "effective_resolution_m": null,
+  "sample_summary": {
+    "maximum": 7.6000000000000005,
+    "mean_over_valid_pixels": 7.457142857142857,
+    "minimum": 7.300000000000001
+  },
+  "replay_observed": {
+    "first_created": true,
+    "second_created": false,
+    "same_job_id": true
+  },
+  "scientific_admission": "Not admitted; model prediction, mean 0-5cm, eight ambiguous zero cells, no uncertainty analysis or source age.",
+  "public_layers_added": 0,
+  "scores_added": 0
+}

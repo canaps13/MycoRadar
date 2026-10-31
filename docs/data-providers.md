@@ -113,3 +113,29 @@ collecte datée du 29 octobre 2026, aucune fraîcheur déduite de la notice.
 Le lot est réutilisé sans appel WFS ; quotas non établis, aucun polling activé.
 Pas de donnée personnelle ni de masque forestier. [Manifeste et preuves](MR-009.md).
 Cette admission ne concerne aucun autre produit IGN ni taxon/occurrence.
+
+### Lot technique raster MR-013
+
+Revue du 31 octobre 2026 : [notice ISRIC](https://isric.org/explore/soilgrids),
+[texte CC BY 4.0](https://creativecommons.org/licenses/by/4.0/legalcode.en),
+[citation](https://docs.isric.org/globaldata/soilgrids/SoilGrids_faqs_04.html) et
+[unités du catalogue](https://maps.isric.org/soilgrids.html). Admission limitée
+à l'extrait WCS `phh2o_0-5cm_mean` de 64 pixels, SHA-256 `7193702c31be…`, pour
+valider le lecteur hors ligne. Copie, usage commercial, redistribution et dérivés
+permis sous attribution ISRIC/Poggio et al. 2021, lien CC BY 4.0 et indication
+des transformations ; manifeste et dérivé conservent ces crédits.
+
+Trois GET WCS identifiés et bornés, sans compte, aucune boucle de collecte ;
+quota inconnu, aucun polling activé, cache HTTP observé `max-age=86400` distinct
+de la copie du lot sous licence. REST non utilisé, WebDAV non exercé. CRS natif
+et pas de grille 250 m préservés ; résolution effective, millésime et date de fin
+des données inconnus. Unité WCS incohérente et huit zéros sans NoData explicite
+conservés comme anomalies ; ces derniers sont exclus par prudence opérateur.
+Ce lot n'est pas admis comme couverture scientifique ou entrée de score.
+Voir [recette et attribution](MR-013.md), [manifeste](../data/rasters/soilgrids-sample/manifest.json)
+et [preuves sources](evidence/MR-013-sources.json).
+
+BRGM R1 demeure bloqué après relecture de la notice producteur : licence
+`notspecified`, extras sans texte applicable à la distribution exacte. Aucune
+donnée géologique téléchargée. RGE ALTI reste candidat, sans livraison terrain
+ingérée ni métadonnées de lot validées dans MR-013.
