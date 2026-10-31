@@ -1,0 +1,145 @@
+{
+  "observed_at": "2026-10-31T15:45:05.5334297Z",
+  "validated_code_sha": "77f74e404b8b037400e23e07a2063081479850b7",
+  "pull_request": "https://github.com/canaps13/MycoRadar/pull/21",
+  "roadmap_status": "IN_PROGRESS",
+  "remaining_criterion": "A dated edition/vintage tied to the extract; 45 precise source years remain unavailable.",
+  "local_validation": [
+    "378 Python tests passed; 51 PostGIS deselected",
+    "35 landcover cases including the explicitly labelled frozen real sample",
+    "Ruff lint/format: 64 files; mypy: 20 sources",
+    "Both Docker targets built on local Docker Desktop Linux",
+    "API: UID 10001, Uvicorn, OpenAPI health, no Shapely/pyproj",
+    "Geo job: source read-only and network none, 45 objects processed",
+    "Windows artifact replay identical; existing output unchanged",
+    "git diff --cached --check; local documentation links verified"
+  ],
+  "observed_compose_log": {
+    "run_id": 41215827039,
+    "url": "https://github.com/canaps13/MycoRadar/actions/runs/41215827039/job/124580019429",
+    "local_export_sha256": "af319669ce45e4b4a4411e06c5a7e88127f64f5a3c9ac8da025ae44ea36df3d6",
+    "hash_note": "Local gh text export hash; not the original GitHub log archive.",
+    "results": [
+      "API absence of Shapely/pyproj asserted; geo target built and run with network disabled",
+      "48 source objects, 45 outputs, 45 unknown years, 0 geometry repairs",
+      "Linux geo job id 0621b460f94f2f4ec9f6b57c1bb20d65d0ae9ab968a150bcef3a168b4c3ff107 matches local Linux container run",
+      "51 passed, 378 deselected in 3.15s",
+      "12 passed (8.1s) browser tests"
+    ]
+  },
+  "sample": "docs/evidence/MR-012-sample.json",
+  "sources": "docs/evidence/MR-012-sources.json",
+  "runs": [
+    {
+      "id": 41215826946,
+      "name": "Bootstrap",
+      "head_sha": "77f74e404b8b037400e23e07a2063081479850b7",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/canaps13/MycoRadar/actions/runs/41215826946",
+      "jobs": [
+        {
+          "id": 124580019286,
+          "name": "Bootstrap (windows-latest)",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/canaps13/MycoRadar/actions/runs/41215826946/job/124580019286",
+          "selected_steps": [
+            {
+              "name": "Run uv run --locked pytest -m \"not integration\"",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run npm --prefix web run test:e2e",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 124580019505,
+          "name": "Bootstrap (ubuntu-latest)",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/canaps13/MycoRadar/actions/runs/41215826946/job/124580019505",
+          "selected_steps": [
+            {
+              "name": "Run uv run --locked pytest -m \"not integration\"",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run npm --prefix web run test:e2e",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 41215827039,
+      "name": "Local environment",
+      "head_sha": "77f74e404b8b037400e23e07a2063081479850b7",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/canaps13/MycoRadar/actions/runs/41215827039",
+      "jobs": [
+        {
+          "id": 124580019429,
+          "name": "Compose and PostGIS",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/canaps13/MycoRadar/actions/runs/41215827039/job/124580019429",
+          "selected_steps": [
+            {
+              "name": "Run docker build --target geo-job --tag mycoradar-geo-ci --file infra/api.Dockerfile .",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run docker compose --env-file .env.example exec -T api python -c \"import importlib.util; assert importlib.util.find_spec('shapely') is None; assert importlib.util.find_spec('pyproj') is None\"",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run uv run --locked pytest -m integration",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run npm --prefix web run test:e2e",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 41215826952,
+      "name": "PR conventions",
+      "head_sha": "77f74e404b8b037400e23e07a2063081479850b7",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/canaps13/MycoRadar/actions/runs/41215826952",
+      "jobs": [
+        {
+          "id": 124580019277,
+          "name": "PR conventions",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/canaps13/MycoRadar/actions/runs/41215826952/job/124580019277",
+          "selected_steps": [
+            {
+              "name": "Run uv run --no-project --python 3.12 python scripts/check_pr.py",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
