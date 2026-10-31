@@ -28,6 +28,23 @@ def check_stack(api_url: str, web_url: str) -> None:
             page = json.load(response)
         if page["status"] != "unavailable" or page["items"]:
             raise RuntimeError("Unexpected scientific/grid availability")
+        with urlopen(
+            f"{base}/v1/exploration?region_id=FR-83&valid_at=2026-10-29", timeout=10
+        ) as response:
+            view = json.load(response)
+        if (
+            view["status"] != "partial"
+            or view["selected_region_id"] != "FR-83"
+            or view["requested_date"] != "2026-10-29"
+            or len(view["regions"]) != 3
+            or view["species"]
+            or view["source_age_days"] is not None
+            or any(
+                view[layer]["status"] != "unavailable" or view[layer]["score"] is not None
+                for layer in ("habitat", "fruiting")
+            )
+        ):
+            raise RuntimeError("Unexpected explorer publication in API image/proxy")
 
 
 def main() -> None:

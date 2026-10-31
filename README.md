@@ -237,6 +237,14 @@ MR-009 ajoute le [catalogue géographique API](docs/MR-009.md), paginé et versi
 publiés ; taxonomie, grille et résultats scientifiques restent indisponibles.
 OpenAPI sur `/docs` et `/openapi.json`. Aucun hébergement FastAPI public ajouté.
 
+MR-044 connecte [l'explorateur carte/date et sa fiche de provenance](docs/MR-044.md)
+à `/v1/exploration`. Les contours proviennent de l'API ; un fond local daté
+reste accessible en cas d'échec. Le filtre espèce reste désactivé jusqu'à
+l'admission du premier taxon pilote. Habitat, fructification, âge des données
+et résolution effective ne sont jamais déduits de la seule présence de contours.
+Le Dockerfile API vérifie son paquet embarqué pendant le build, sans dépendre
+du dossier web ni du dossier de données à la racine du dépôt.
+
 La [grille multirésolution et les masques](docs/grid-job.md) sont produits par
 un job Python hors HTTP. La configuration pilote contient trois contours IGN
 réels et leurs crédits ; terre/forêt restent explicitement indisponibles tant
