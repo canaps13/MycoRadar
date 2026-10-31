@@ -65,8 +65,14 @@ du brouillon, au push et à la modification du titre ou du corps de la PR :
 
 - branche `feat/MR-XXX-description`, titre `MR-XXX : description`, même ID ;
 - cible `main`, ID présent dans la table de la roadmap ;
-- statut de cette tâche `IN_PROGRESS` ou `DONE` ;
+- statut de cette tâche `IN_PROGRESS`, `DONE` ou `BLOCKED` ;
 - trois rubriques obligatoires renseignées, au-delà des commentaires HTML.
+
+Une PR peut consigner un résultat bloquant observé, notamment un audit scientifique
+qui ne permet pas d'admettre un pilote. Pour une tâche `BLOCKED`, ajouter la
+rubrique `Blocage et reprise` avec le motif et les conditions concrètes de reprise.
+Les trois rubriques habituelles et tous les autres contrôles restent obligatoires.
+Le contrôle vérifie la présence du texte ; sa justification reste à examiner en revue.
 
 Le contrôle lit le JSON GitHub depuis `GITHUB_EVENT_PATH` ; titre et corps ne
 sont jamais interpolés dans une commande shell. Il n'utilise ni secret ni droit

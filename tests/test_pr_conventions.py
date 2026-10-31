@@ -45,10 +45,40 @@ def test_invalid_metadata_is_rejected(change: dict[str, str]) -> None:
 
 
 @pytest.mark.parametrize(
-    "roadmap", ["MR-002 only mentioned in text", "| MR-002 | TODO |", "| MR-002 | BLOCKED |"]
+    "roadmap", ["MR-002 only mentioned in text", "| MR-002 | TODO |", "| MR-002 | UNKNOWN |"]
 )
 def test_task_must_be_registered_and_started(roadmap: str) -> None:
     assert validate_pull_request(VALID_PR, roadmap)
+
+
+def test_documented_blocked_outcome_can_be_reviewed() -> None:
+    body = (
+        BODY + "\n## Blocage et reprise\nDonnées insuffisantes ; reprendre après audit régional.\n"
+    )
+    assert (
+        validate_pull_request(
+            replace(VALID_PR, body=body), ROADMAP.replace("IN_PROGRESS", "BLOCKED")
+        )
+        == []
+    )
+
+
+@pytest.mark.parametrize("content", ["", "<!-- motif à compléter -->"])
+def test_blocked_outcome_requires_an_explicit_explanation(content: str) -> None:
+    errors = validate_pull_request(
+        replace(VALID_PR, body=BODY + "\n## Blocage et reprise\n" + content),
+        ROADMAP.replace("IN_PROGRESS", "BLOCKED"),
+    )
+    assert errors == ["Une tâche BLOCKED exige la rubrique Blocage et reprise renseignée."]
+
+
+def test_blocked_outcome_keeps_all_other_checks() -> None:
+    body = "## Blocage et reprise\nDonnées insuffisantes ; reprendre après audit régional.\n"
+    errors = validate_pull_request(
+        replace(VALID_PR, base="other", title="MR-003 : autre tâche", body=body),
+        ROADMAP.replace("IN_PROGRESS", "BLOCKED"),
+    )
+    assert len(errors) == 5
 
 
 def test_an_unfilled_template_is_rejected() -> None:
