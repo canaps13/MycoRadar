@@ -1,0 +1,61 @@
+{
+  "reviewed_at": "2026-10-31T15:29:55.740745+00:00",
+  "catalog_url": "https://www.data.gouv.fr/api/1/datasets/bd-foret-r/",
+  "catalog_id": "61489da4b77d1697d00d2feb",
+  "publisher_id": "534fff80a3a7292c64a77e41",
+  "catalog_license": "lov2",
+  "catalog_last_modified": "2024-12-09T16:11:25.057000+00:00",
+  "license_url": "https://github.com/etalab/licence-ouverte/blob/master/LO.md",
+  "terms_url": "https://cartes.gouv.fr/cgu/",
+  "terms_revision": "2024-10-15",
+  "wfs_documentation": "https://cartes.gouv.fr/aide/fr/guides-utilisateur/utiliser-les-services-de-la-geoplateforme/diffusion/wfs/",
+  "published_wfs_limit_per_ip_per_second": 30,
+  "capabilities_url": "https://data.geopf.fr/wfs/ows?SERVICE=WFS&VERSION=2.0.0&REQUEST=GetCapabilities",
+  "type_name": "LANDCOVER.FORESTINVENTORY.V2:formation_vegetale",
+  "describe_feature_type_sha256": "007441be6a2ef98d694b950c2674fdc2bf61b5f2ecb76e82b2b653f079e62b4b",
+  "observed_fields": [
+    "id",
+    "code_tfv",
+    "tfv",
+    "tfv_g11",
+    "essence",
+    "geom"
+  ],
+  "source_year_field_present": false,
+  "source": {
+    "attribution": "IGN - BD Foret V2, public WFS extract; source year unavailable; retrieval separate from acquisition.",
+    "effective_resolution_m": null,
+    "fetched_at": "2026-10-31T15:14:06.211502Z",
+    "license": "Etalab-2.0",
+    "license_url": "https://github.com/etalab/licence-ouverte/blob/master/LO.md",
+    "product": "BD Foret V2 - formation vegetale",
+    "provider": "IGN",
+    "source_published_at": null,
+    "source_url": "https://data.geopf.fr/wfs/ows?SERVICE=WFS&VERSION=2.0.0&REQUEST=GetFeature&TYPENAMES=LANDCOVER.FORESTINVENTORY.V2%3Aformation_vegetale&OUTPUTFORMAT=application%2Fjson&SRSNAME=CRS%3A84&BBOX=5.55%2C43.30%2C5.57%2C43.32%2CCRS%3A84&COUNT=500",
+    "version": "wfs-snapshot-sha256:30efa1578e8b4899a96bcf5d14dbdcfde922d51768389623d06c65c3752de506",
+    "visibility": "public"
+  },
+  "bbox": [
+    5.55,
+    43.3,
+    5.57,
+    43.32
+  ],
+  "response_timestamp": "2026-10-31T15:14:06.112Z",
+  "entity_sha256": "30efa1578e8b4899a96bcf5d14dbdcfde922d51768389623d06c65c3752de506",
+  "archive_sha256": "eb3c76648c4e3c87fa27d502794857ca4f636d80ae0bc1276d969ffa0cf6d642",
+  "rights_interpretation": {
+    "commercial_copy_redistribution_derivatives": "permitted for this reviewed public extract under LO 2.0 attribution",
+    "required_credit": "IGN - BD Foret V2; source URL and unknown source vintage; capture date separate",
+    "usage": "bounded local normalization and public landcover artifact, no private observations or access-right claim",
+    "automatic_polling": false,
+    "account_created": false,
+    "cloud_resource_created": false
+  },
+  "limitations": [
+    "per_feature_year_unavailable",
+    "not_current_ground_cover_validation",
+    "no_binary_forest_or_negative_inference",
+    "no_source_effective_resolution_established"
+  ]
+}
