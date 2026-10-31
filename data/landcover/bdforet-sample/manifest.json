@@ -1,0 +1,33 @@
+{
+  "schema_version": "landcover-manifest-v1",
+  "path": "source.geojson.gz",
+  "sha256": "eb3c76648c4e3c87fa27d502794857ca4f636d80ae0bc1276d969ffa0cf6d642",
+  "entity_sha256": "30efa1578e8b4899a96bcf5d14dbdcfde922d51768389623d06c65c3752de506",
+  "compression": "gzip",
+  "crs": "OGC:CRS84",
+  "bbox": [
+    5.55,
+    43.3,
+    5.57,
+    43.32
+  ],
+  "provenance": {
+    "provider": "IGN",
+    "product": "BD Foret V2 - formation vegetale",
+    "source_url": "https://data.geopf.fr/wfs/ows?SERVICE=WFS&VERSION=2.0.0&REQUEST=GetFeature&TYPENAMES=LANDCOVER.FORESTINVENTORY.V2%3Aformation_vegetale&OUTPUTFORMAT=application%2Fjson&SRSNAME=CRS%3A84&BBOX=5.55%2C43.30%2C5.57%2C43.32%2CCRS%3A84&COUNT=500",
+    "license": "Etalab-2.0",
+    "license_url": "https://github.com/etalab/licence-ouverte/blob/master/LO.md",
+    "attribution": "IGN - BD Foret V2, public WFS extract; source year unavailable; retrieval separate from acquisition.",
+    "version": "wfs-snapshot-sha256:30efa1578e8b4899a96bcf5d14dbdcfde922d51768389623d06c65c3752de506",
+    "fetched_at": "2026-10-31T15:14:06.211502+00:00",
+    "source_published_at": null,
+    "effective_resolution_m": null,
+    "visibility": "public"
+  },
+  "product_production_period": [
+    2007,
+    2018
+  ],
+  "product_metadata_url": "https://cartes.gouv.fr/aide/fr/partenaires/ign/referentiels-description-territoire/foret/bd-foret-v2/",
+  "repair_invalid": false
+}

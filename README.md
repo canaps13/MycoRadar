@@ -5,8 +5,9 @@ champignons, conçue pour la France puis d'autres pays. La Provence est le pilot
 
 Le socle fournit une API de santé, une page web connectée et un environnement
 PostGIS local avec migrations versionnées.
-**Aucune source d'occurrences, météo, forêt ou sol ingérée ; aucune prévision
-scientifique disponible.** Une carte administrative de référence est consultable,
+**Aucune prévision mycologique disponible.** Un [extrait de végétation IGN](docs/MR-012.md)
+est normalisé hors HTTP ; son millésime précis reste inconnu et aucun masque
+forestier ni résultat écologique n'est activé. Une carte administrative de référence est consultable,
 sans masque forestier ni indice de fructification. Les contours administratifs de référence
 du job de grille ne constituent pas une couverture écologique. La santé
 HTTP ne garantit pas la disponibilité des données ou d'une base de données.

@@ -204,3 +204,11 @@ publication atomique sans écrasement. Il ne calcule aucun score et n'active
 aucune ingestion forestière réelle. Les groupes de dépendances isolent ce calcul
 du runtime HTTP. Voir la [décision](docs/adr/007-grid-job.md), le
 [contrat](docs/grid-job.md) et les [preuves](docs/MR-007.md).
+
+MR-012 ajoute un job de normalisation de couches polygonales publiques :
+empreintes, découpage égale-aire, catégories et millésimes explicitement inconnus
+si absents. Il ne déduit pas d'absence de forêt ni de masque MR-007 à partir des
+zones non cartographiées. `infra/api.Dockerfile` offre une cible explicite
+`geo-job` avec le groupe géographique existant ; sa cible par défaut `api`
+conserve Uvicorn sans ces dépendances lourdes. Aucun calcul géographique en
+requête HTTP. [Contrat et limites](docs/MR-012.md).
