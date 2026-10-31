@@ -35,8 +35,10 @@ def validate_pull_request(pr: PullRequest, roadmap: str) -> list[str]:
         task = re.search(rf"^\|\s*{re.escape(branch[1])}\s*\|\s*(\w+)\s*\|", roadmap, re.MULTILINE)
         if task is None:
             errors.append("La tâche de la branche doit figurer dans la table de la roadmap.")
-        elif task[1] not in {"IN_PROGRESS", "DONE"}:
-            errors.append("La tâche doit être IN_PROGRESS ou DONE selon les preuves disponibles.")
+        elif task[1] not in {"IN_PROGRESS", "DONE", "BLOCKED"}:
+            errors.append(
+                "La tâche doit être IN_PROGRESS, DONE ou BLOCKED selon les preuves disponibles."
+            )
 
     body = re.sub(r"<!--.*?-->", "", pr.body.replace("\r\n", "\n"), flags=re.DOTALL)
     headings = list(re.finditer(r"^##[ \t]+(.+?)[ \t]*$", body, re.MULTILINE))
@@ -47,6 +49,9 @@ def validate_pull_request(pr: PullRequest, roadmap: str) -> list[str]:
     for name in REQUIRED_SECTIONS:
         if not sections.get(name):
             errors.append(f"Rubrique obligatoire à renseigner : {name}.")
+    if branch and task is not None and task[1] == "BLOCKED":
+        if not sections.get("Blocage et reprise"):
+            errors.append("Une tâche BLOCKED exige la rubrique Blocage et reprise renseignée.")
     return errors
 
 

@@ -3,6 +3,12 @@
 ## Portée du pilote
 Provence (Bouches-du-Rhône, Var, Vaucluse) en configuration, et non en règle métier codée en dur. Quatre espèces restent des candidates : Lactarius sanguifluus, Boletus aereus, Boletus edulis, Cantharellus cibarius. Le choix de **la première espèce** dépend de l'audit MR-045, pas d'une préférence esthétique.
 
+L'[audit initial MR-045](MR-045.md) ne permet pas d'admettre une espèce :
+le reçu de vingt occurrences françaises ne mesure ni la couverture saisonnière
+des départements pilotes ni l'effort, et toutes ses incertitudes géographiques
+sont inconnues. Le pilote scientifique reste bloqué selon les conditions de
+reprise documentées ; les territoires peuvent toujours être affichés sans score.
+
 ## Étapes de livraison
 1. **A — Carte honnête :** vrai fond cartographique et crédits visibles, vraies limites de territoires et couverture, filtre espèce/date (désactivé/état vide si données absentes), un Worker Cloudflare unique alimenté uniquement par main. Ne jamais afficher de faux scores en production.
 2. **B — Données contrôlées :** occurrences, météo et forêt de producteurs admis, dates distinctes d'observation/publication/ingestion, qualité et résolution connues ou « inconnues », preuve de licence, couverture et rafraîchissement.
