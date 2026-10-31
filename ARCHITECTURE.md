@@ -189,6 +189,16 @@ publié par cette unité.
 
 ## Indicateurs d'exploitation
 
+MR-011 ajoute un lecteur météo hors HTTP, sans nouveau service : observations
+quotidiennes aux stations Météo-France et prévision ponctuelle MET Norway
+explicitement sélectionnée. Le cache opérateur conserve empreintes et délais
+HTTP ; une revalidation ne renouvelle pas la première disponibilité connue.
+Observation, jour de classement, mise à jour du produit et heure d'émission
+restent distincts. Cette dernière est inconnue pour le JSON MET utilisé :
+aucun backtesting ou résultat mycologique n'en est admis. Pas d'interpolation
+ni de résolution effective déduite d'une station ou d'une maille fournisseur.
+Voir [contrat, limites et preuves MR-011](docs/MR-011.md).
+
 - âge des dernières données publiées et âge par source
 - taux de jobs réussis / retentatives / rejoués, temps de publication
 - couverture de cellules effectivement modélisées et ratio « données insuffisantes »

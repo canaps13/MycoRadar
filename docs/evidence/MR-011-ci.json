@@ -1,0 +1,135 @@
+{
+  "observed_at": "2026-10-31T07:54:26.3615538Z",
+  "validated_code_sha": "5555f2380d18554a5535b63c657a3ecf8f660dcd",
+  "pull_request": "https://github.com/canaps13/MycoRadar/pull/20",
+  "scope": "Bounded offline weather readers; no scientific pilot admission, public series or deployment.",
+  "local_checks": [
+    "415 Python tests passed; 51 PostGIS deselected",
+    "72 new synthetic weather tests",
+    "Ruff lint and format: 68 files",
+    "mypy: 22 source files",
+    "CLI help, documentation links and aggregate evidence verified",
+    "git diff --cached --check"
+  ],
+  "observed_compose_log": {
+    "run_id": 41181950614,
+    "url": "https://github.com/canaps13/MycoRadar/actions/runs/41181950614/job/124480995282",
+    "local_export_sha256": "1178d6a7753f2190afcef1f04bcd157b63687c003a61e95cc9cd1030a8cfe3b1",
+    "hash_note": "Hash of the local gh text export, not of the original GitHub log archive.",
+    "results": [
+      "weather_job --help printed usage inside the built API image",
+      "51 passed, 415 deselected in 4.49s",
+      "12 passed (11.3s) browser tests"
+    ]
+  },
+  "sample": "docs/evidence/MR-011-sample.json",
+  "rights_and_sources": "docs/evidence/MR-011-sources.json",
+  "runs": [
+    {
+      "id": 41181950596,
+      "name": "Bootstrap",
+      "head_sha": "5555f2380d18554a5535b63c657a3ecf8f660dcd",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/canaps13/MycoRadar/actions/runs/41181950596",
+      "jobs": [
+        {
+          "id": 124480995665,
+          "name": "Bootstrap (windows-latest)",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/canaps13/MycoRadar/actions/runs/41181950596/job/124480995665",
+          "selected_steps": [
+            {
+              "name": "Run uv run --locked pytest -m \"not integration\"",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run npm --prefix web run test:e2e",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 124480995868,
+          "name": "Bootstrap (ubuntu-latest)",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/canaps13/MycoRadar/actions/runs/41181950596/job/124480995868",
+          "selected_steps": [
+            {
+              "name": "Run uv run --locked pytest -m \"not integration\"",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run npm --prefix web run test:e2e",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 41181950614,
+      "name": "Local environment",
+      "head_sha": "5555f2380d18554a5535b63c657a3ecf8f660dcd",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/canaps13/MycoRadar/actions/runs/41181950614",
+      "jobs": [
+        {
+          "id": 124480995282,
+          "name": "Compose and PostGIS",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/canaps13/MycoRadar/actions/runs/41181950614/job/124480995282",
+          "selected_steps": [
+            {
+              "name": "Run docker compose --env-file .env.example exec -T api python -m mycoradar.weather_job --help",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run uv run --locked pytest -m integration",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run npm --prefix web run test:e2e",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 41181950491,
+      "name": "PR conventions",
+      "head_sha": "5555f2380d18554a5535b63c657a3ecf8f660dcd",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/canaps13/MycoRadar/actions/runs/41181950491",
+      "jobs": [
+        {
+          "id": 124480995401,
+          "name": "PR conventions",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/canaps13/MycoRadar/actions/runs/41181950491/job/124480995401",
+          "selected_steps": [
+            {
+              "name": "Run uv run --no-project --python 3.12 python scripts/check_pr.py",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

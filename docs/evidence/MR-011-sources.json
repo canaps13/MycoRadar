@@ -1,0 +1,74 @@
+{
+  "reviewed_at": "2026-10-31T07:38:26.692177+00:00",
+  "scope": "Two bounded public sample captures; normalization/provenance only; no scientific admission or public weather series.",
+  "mf_daily": {
+    "catalog_url": "https://www.data.gouv.fr/api/1/datasets/donnees-climatologiques-de-base-quotidiennes/",
+    "catalog_id": "6569b51ae64326786e4e8e1a",
+    "publisher_id": "534fff8ba3a7292c64a77ed4",
+    "catalog_last_modified": "2026-10-31T07:17:37.201000+00:00",
+    "catalog_license": "lov2",
+    "license_url": "https://github.com/etalab/licence-ouverte/blob/master/LO.md",
+    "resources": [
+      {
+        "id": "ec28c23c-534e-431b-aafc-fa9c19b1d439",
+        "title": "Q_descriptif_champs_RR-T-Vent.csv",
+        "url": "https://meteofrance.s3.sbg.io.cloud.ovh.net/data/synchro_ftp/BASE/QUOT/Q_descriptif_champs_RR-T-Vent.csv",
+        "last_modified": "2026-07-21T07:02:43+00:00",
+        "filesize": 3563
+      },
+      {
+        "id": "eb4d0600-e90b-4517-a429-599ed13dbae0",
+        "title": "QUOT_departement_13_periode_2025-2026_RR-T-Vent",
+        "url": "https://meteofrance.s3.sbg.io.cloud.ovh.net/data/synchro_ftp/BASE/QUOT/Q_13_latest-2025-2026_RR-T-Vent.csv.gz",
+        "last_modified": "2026-10-29T06:54:08+00:00",
+        "filesize": 461231
+      }
+    ],
+    "dictionary_sha256": "3bd93b1ce297b31a257e907460cc1a2ec2940e63fbecbec6b2e2857678e3f2af",
+    "file_source": {
+      "cache_state": "local_cache",
+      "checked_at": "2026-10-31T07:22:59.651068+00:00",
+      "effective_url": null,
+      "fetched_at": "2026-10-31T07:22:59.651068+00:00",
+      "hash_representation": "HTTP entity bytes after Content-Encoding decoding",
+      "http_expires": null,
+      "http_last_modified": "Sat, 31 Oct 2026 06:53:03 GMT",
+      "sha256": "290fb43b67381ef50768f3dbeee6c106301f8f3d757290e1c67c315ef944357b",
+      "url": "https://meteofrance.s3.sbg.io.cloud.ovh.net/data/synchro_ftp/BASE/QUOT/Q_13_latest-2025-2026_RR-T-Vent.csv.gz"
+    },
+    "admission": "sample normalization only under attribution; no private location or ecological model admission",
+    "storage_quota": null
+  },
+  "met_norway": {
+    "license_url": "https://docs.api.met.no/doc/License.html",
+    "terms_url": "https://docs.api.met.no/doc/TermsOfService.html",
+    "data_model_url": "https://docs.api.met.no/doc/locationforecast/datamodel.html",
+    "format_url": "https://docs.api.met.no/doc/ForecastJSON.html",
+    "chosen_license": "CC-BY-4.0",
+    "chosen_license_text": "https://creativecommons.org/licenses/by/4.0/legalcode.en",
+    "terms_revision": "2020-06-26",
+    "attribution": "Data from MET Norway; normalization, no icons or logos",
+    "requests_per_second_requiring_agreement_above": 20,
+    "source": {
+      "cache_state": "local_cache",
+      "checked_at": "2026-10-31T07:23:01.590008+00:00",
+      "effective_url": null,
+      "fetched_at": "2026-10-31T07:23:01.590008+00:00",
+      "hash_representation": "HTTP entity bytes after Content-Encoding decoding",
+      "http_expires": "Sat, 31 Oct 2026 07:53:17 GMT",
+      "http_last_modified": "Sat, 31 Oct 2026 07:23:01 GMT",
+      "sha256": "9915263f095c8232e165fed4de307aece46f7fd030c8f71bc6b1e6742695aec2",
+      "url": "https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=43.3&lon=5.4"
+    },
+    "point_scope": "Public coarse urban reference point, no user or collecting location.",
+    "admission": "sample normalization and aggregate provenance under attribution; no future/private location request authorized"
+  },
+  "operations": {
+    "commercial_copy_derivative_and_redistribution": "permitted for the reviewed sample under source licence obligations; interpretation of LO 2.0 and CC BY 4.0",
+    "no_account_or_spend": true,
+    "automatic_polling_enabled": false,
+    "raw_capture_files_in_git": false,
+    "forecast_model_issue_time_known": false,
+    "effective_scientific_resolution_known": false
+  }
+}
