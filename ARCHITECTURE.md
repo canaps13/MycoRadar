@@ -178,6 +178,12 @@ publié par cette unité.
 
 ## Scénarios techniques de test prioritaires
 
+MR-046 ajoute un [audit local du protocole d'évaluation](docs/MR-046.md), sans
+coordonnées ni labels dans son contrat ou ses reçus. Il contrôle partitions,
+dépendances et disponibilité déclarées ; il ne calcule ni modèle ni score et
+ne prouve pas l'indépendance géographique à partir d'empreintes. Le brouillon
+pilote reste bloqué. Aucun accès depuis les routes HTTP ou nouvelle dépendance.
+
 1. Fournisseur météo répond `429`, puis reprend : backoff, pas de spam, conservation dernier snapshot.
 2. Fournisseur publie le même lot deux fois : idempotence et absence de doublons.
 3. Nouveau lot incomplet : pas de publication partielle silencieuse ; statut `partial` ou conservation du dernier sain.
