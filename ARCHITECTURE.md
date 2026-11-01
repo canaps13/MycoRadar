@@ -178,6 +178,14 @@ publié par cette unité.
 
 ## Scénarios techniques de test prioritaires
 
+MR-010 applique ces garde-fous à un premier lecteur GBIF hors HTTP, limité à
+un échantillon en mémoire. Le job produit provenance et audit agrégé, puis
+appelle MR-048 avec refus de diffusion par défaut. Il n'écrit pas en PostGIS
+et n'alimente pas le catalogue public. Index de recherche mutable, dates
+inconnues et incertitude absente restent explicites ; aucun snapshot atomique
+ni pilote scientifique validé n'est déduit de cette lecture.
+Voir le [contrat MR-010](docs/MR-010.md).
+
 1. Fournisseur météo répond `429`, puis reprend : backoff, pas de spam, conservation dernier snapshot.
 2. Fournisseur publie le même lot deux fois : idempotence et absence de doublons.
 3. Nouveau lot incomplet : pas de publication partielle silencieuse ; statut `partial` ou conservation du dernier sain.
@@ -204,3 +212,17 @@ publication atomique sans écrasement. Il ne calcule aucun score et n'active
 aucune ingestion forestière réelle. Les groupes de dépendances isolent ce calcul
 du runtime HTTP. Voir la [décision](docs/adr/007-grid-job.md), le
 [contrat](docs/grid-job.md) et les [preuves](docs/MR-007.md).
+
+## Rejeu d'entrées GBIF hors HTTP — MR-010
+
+Le job GBIF accepte soit une requête GET bornée en mémoire, soit un manifeste
+local `gbif-snapshot-v1`. Le transport local vérifie chemin contenu, SHA-256,
+séquence exacte de requêtes attendues et budgets avant de reprendre les mêmes
+contrôles taxonomiques, de droits, de pagination et de confidentialité. Une entrée
+supplémentaire, manquante ou corrompue invalide tout le reçu avant émission.
+Le rejeu n'écrit pas les réponses, n'utilise pas de réseau et ne modifie aucun
+serveur HTTP. Une capture fournie par un opérateur reste une déclaration,
+pas une preuve signée par GBIF ; sa date est distincte de l'exécution du rejeu.
+Les fichiers bruts réels restent privés et hors Git. Aucun mode de publication
+ou d'admission implicite de localisation n'est ajouté. Voir le
+[contrat et la preuve synthétique](docs/MR-010.md#rejeu-local-sans-réseau).

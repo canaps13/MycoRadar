@@ -113,3 +113,44 @@ collecte datée du 29 octobre 2026, aucune fraîcheur déduite de la notice.
 Le lot est réutilisé sans appel WFS ; quotas non établis, aucun polling activé.
 Pas de donnée personnelle ni de masque forestier. [Manifeste et preuves](MR-009.md).
 Cette admission ne concerne aucun autre produit IGN ni taxon/occurrence.
+
+## Échantillon GBIF MR-010
+
+Revue du **30 octobre 2026** : métadonnées du jeu ONF
+[`017f23ba-bf04-4eb7-a076-04ab2e5de250`](https://api.gbif.org/v1/dataset/017f23ba-bf04-4eb7-a076-04ab2e5de250),
+DOI [`10.15468/tgap4x`](https://doi.org/10.15468/tgap4x), publié par UAR PatriNat
+(OFB-MNHN-CNRS-IRD), Paris. La licence du jeu et des vingt enregistrements lus
+est CC BY 4.0 ; lien producteur `http://creativecommons.org/licenses/by/4.0/legalcode`,
+[texte juridique Creative Commons consulté](https://creativecommons.org/licenses/by/4.0/legalcode.en).
+Usage commercial, copie et dérivés sont permis sous les obligations d'attribution,
+lien de licence et mention des modifications. Cette lecture de licence ne
+vaut pas autorisation de diffusion d'une localisation ou d'un taxon sensible.
+
+Décision `admitted-for-memory-audit-only` pour le petit échantillon documenté
+dans le [reçu](evidence/MR-010-sample.json), collecté le 30 octobre 2026 à
+18:33:47 UTC. Filtre France, *Boletus edulis*, deux pages de dix ; aucune portée
+Provence ni représentativité écologique déduite. Les autres lots restent
+`candidate`. Les bruts et leurs champs personnels ne sont pas sauvegardés ;
+seuls métadonnées publiques, empreintes et comptages sont versionnés. Ni cache
+durable de points, ni redistribution de points ou médias n'est admis par cette
+revue. Les droits et conditions d'un futur lot devront être revérifiés.
+
+La citation complète du producteur, la licence, son DOI, l'éditeur, les URL de
+lecture et les transformations accompagnent le reçu. Les signalements du
+producteur ne sont pas effacés : incertitude géographique absente sur vingt
+lignes, dix-huit désaccords empreinte/coordonnées et vingt IDs taxonomiques
+producteur non retrouvés. Publication du registre en 2022 et modification en
+2023 restent distinctes de la date de collecte et des dates d'observation.
+
+[L'API GBIF](https://techdocs.gbif.org/en/openapi/) impose un usage borné et peut
+retourner 429 selon sa charge, sans débit garanti. Le job utilise un User-Agent
+du projet, des délais/retries limités et n'appelle jamais les pages web pour
+extraire des données. L'[accord GBIF](https://www.gbif.org/terms/data-user) était
+lisible dans l'index du moteur de recherche ; ses ouvertures directes ont
+renvoyé 403, ce qui est consigné sans prétendre avoir consulté ces réponses.
+Le service public `api.gbif.org` et les termes Creative Commons étaient accessibles.
+
+La diffusion reste refusée par MR-048, y compris pour cet échantillon sous
+licence compatible. Les règles de sensibilité/localisation ne sont pas établies.
+L'accès direct INPN/OpenObs reste `blocked` (R2) : ce lot accessible via GBIF
+ne prouve pas les droits ni l'accessibilité d'un autre service.
