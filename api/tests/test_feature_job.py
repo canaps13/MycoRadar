@@ -127,6 +127,16 @@ def test_half_open_validity_interval(
     assert run(tmp_path, definition)["features"][0]["reason"] == "outside_validity_interval"
 
 
+def test_source_resolution_is_not_the_join_resolution(
+    tmp_path: Path, definition: dict[str, Any]
+) -> None:
+    definition["layers"][0]["source"]["effective_resolution_m"] = 250.0
+    row = run(tmp_path, definition)["features"][0]
+    assert row["source_effective_resolution_m"] == 250
+    assert row["effective_resolution_m"] is None
+    assert row["display_cell_size_m"] == 1000
+
+
 def test_equal_instant_with_offset_is_not_future(
     tmp_path: Path, definition: dict[str, Any]
 ) -> None:

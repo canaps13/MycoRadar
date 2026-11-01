@@ -1,12 +1,12 @@
 {
   "schema_version": "feature-join-execution-v1",
-  "recorded_at": "2026-11-01T16:34:59.080865+00:00",
+  "recorded_at": "2026-11-01T16:38:41.959423+00:00",
   "input_kind": "synthetic",
-  "input_sha256": "0e588f18d1c38d4a6153b8d99b2d5911de2346d815ea90d9a2365226c383d67d",
+  "input_sha256": "c77e019ca4416f1b7fed109bead6a37db49afedaa0ec730ee484b364ff594529",
   "scientific_admission": false,
   "real_sources_imported": false,
   "native": {
-    "job_id": "ae4bb95fdd0edcccae218eaa462bb8806ee02f94448137d7a70207a7d51b0b97",
+    "job_id": "3fd9a911ca0f6625345e842a221c4c21bfab5e2101ec6f1d7b1e5a07ac6f801f",
     "engine_versions": {
       "python": "3.12.16",
       "shapely": "2.2.0",
@@ -16,11 +16,18 @@
       "numpy": "2.5.4",
       "pydantic": "2.14.1",
       "platform": "Windows-11-10.0.26300-SP0",
-      "implementation_sha256": "fd22a5be2cec7cca8fbf464a3c7ca5cdcb4c6086ac86f9ac37cd1cc0fb1244c4"
+      "implementation_sha256": "89de792cdb0c1a3d849eec1014586d4994970ef9f151e56563fd112fab2e6402"
+    },
+    "smoke": {
+      "job_id": "3fd9a911ca0f6625345e842a221c4c21bfab5e2101ec6f1d7b1e5a07ac6f801f",
+      "rows": 3,
+      "replay_identical": true,
+      "status": "partial",
+      "input_kind": "synthetic"
     }
   },
   "docker": {
-    "job_id": "07f4b9fd246e1e7c65fc3835dae69384c4580a36033f0ea33413bc5367becb75",
+    "job_id": "7222040b1cc3ba4a1112c3f084d31a9b1f0774a068761668a8e0cce1dedb275b",
     "engine_versions": {
       "python": "3.12.16",
       "shapely": "2.2.0",
@@ -30,11 +37,18 @@
       "numpy": "2.5.4",
       "pydantic": "2.14.1",
       "platform": "Linux-6.18.54.1-microsoft-standard-WSL2-x86_64-with-glibc2.41",
-      "implementation_sha256": "fd22a5be2cec7cca8fbf464a3c7ca5cdcb4c6086ac86f9ac37cd1cc0fb1244c4"
+      "implementation_sha256": "89de792cdb0c1a3d849eec1014586d4994970ef9f151e56563fd112fab2e6402"
     },
     "network": "none",
     "input_mount": "read_only",
-    "uid": 10001
+    "uid": 10001,
+    "smoke": {
+      "job_id": "7222040b1cc3ba4a1112c3f084d31a9b1f0774a068761668a8e0cce1dedb275b",
+      "rows": 3,
+      "replay_identical": true,
+      "status": "partial",
+      "input_kind": "synthetic"
+    }
   },
   "native_docker_feature_rows_equal": true,
   "cross_platform_job_ids_equal": false,
@@ -59,6 +73,7 @@
       "source_data_cutoff": "2026-01-01T00:00:00+00:00",
       "source_published_at": "2026-01-02T00:00:00+00:00",
       "source_fetched_at": "2026-01-02T12:00:00+00:00",
+      "source_effective_resolution_m": null,
       "effective_resolution_m": null,
       "display_cell_size_m": 1000,
       "location_uncertainty_m": null
@@ -80,6 +95,7 @@
       "source_data_cutoff": "2026-01-01T00:00:00+00:00",
       "source_published_at": "2026-01-02T00:00:00+00:00",
       "source_fetched_at": "2026-01-04T00:00:00+00:00",
+      "source_effective_resolution_m": null,
       "effective_resolution_m": null,
       "display_cell_size_m": 1000,
       "location_uncertainty_m": null
@@ -101,15 +117,16 @@
       "source_data_cutoff": "2026-01-01T00:00:00+00:00",
       "source_published_at": "2026-01-02T00:00:00+00:00",
       "source_fetched_at": "2026-01-02T12:00:00+00:00",
+      "source_effective_resolution_m": null,
       "effective_resolution_m": null,
       "display_cell_size_m": 1000,
       "location_uncertainty_m": null
     }
   ],
   "observed_validation": {
-    "python_passed": 391,
+    "python_passed": 392,
     "python_postgis_skipped": 51,
-    "new_feature_tests": 48,
+    "new_feature_tests": 49,
     "ruff_lint": "passed",
     "ruff_format": "passed",
     "mypy_sources": 21,
@@ -126,5 +143,7 @@
     "PostGIS/Compose integration suite",
     "frontend unit/build/browser suites"
   ],
-  "ci": "pending"
+  "ci": "pending",
+  "implementation_commit": null,
+  "input_bytes_match_git_blob": true
 }

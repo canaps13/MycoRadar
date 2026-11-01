@@ -243,7 +243,8 @@ def build_artifact(path: Path) -> dict[str, Any]:
                         else None
                     ),
                     "source_fetched_at": layer.source.fetched_at.isoformat(),
-                    "effective_resolution_m": layer.source.effective_resolution_m,
+                    "source_effective_resolution_m": layer.source.effective_resolution_m,
+                    "effective_resolution_m": None,
                     "display_cell_size_m": cell.display_cell_size_m,
                     "location_uncertainty_m": None,
                 }
