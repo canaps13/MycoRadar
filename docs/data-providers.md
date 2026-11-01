@@ -113,3 +113,24 @@ collecte datée du 29 octobre 2026, aucune fraîcheur déduite de la notice.
 Le lot est réutilisé sans appel WFS ; quotas non établis, aucun polling activé.
 Pas de donnée personnelle ni de masque forestier. [Manifeste et preuves](MR-009.md).
 Cette admission ne concerne aucun autre produit IGN ni taxon/occurrence.
+
+## Extrait de végétation MR-012
+
+Revue le **31 octobre 2026** : [catalogue IGN BD Forêt](https://www.data.gouv.fr/datasets/bd-foret-r)
+(`lov2`), [LO 2.0](https://github.com/etalab/licence-ouverte/blob/master/LO.md),
+[CGU Géoplateforme](https://cartes.gouv.fr/cgu/) du 15 octobre 2024 et
+[service WFS](https://cartes.gouv.fr/aide/fr/guides-utilisateur/utiliser-les-services-de-la-geoplateforme/diffusion/wfs/).
+Le lot `LANDCOVER.FORESTINVENTORY.V2:formation_vegetale`, bbox WGS84
+`5.55,43.30,5.57,43.32`, est admis pour archivage et dérivé cartographique public
+sous crédit IGN, lien source et date de collecte séparée du millésime inconnu.
+Usage commercial, copie et redistribution permis sous ces obligations ; il
+ne s'agit pas d'une admission d'habitat actuel ou d'accès à la forêt.
+
+Une réponse bornée de 48 objets est archivée, puis découpée en 45 objets valides.
+La documentation annonce un seuil de cartographie de 5 000 m², sans en faire une
+précision métrique. Le service WFS documente 30 requêtes/s/IP ; aucune collecte
+automatique ou requête de localisation privée n'est ajoutée. L'année exacte
+manque dans le schéma du service ; la période de production 2007–2018 ne la
+remplace pas. `partial`, absence de masque binaire et millésimes inconnus sont
+conservés. [Preuves](evidence/MR-012-sources.json), [extrait archivé](../data/landcover/bdforet-sample/README.md),
+[contrat et poursuite MR-012](MR-012.md).

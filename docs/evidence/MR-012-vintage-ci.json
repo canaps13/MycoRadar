@@ -1,0 +1,209 @@
+{
+  "observed_at": "2026-11-01T18:30:27.994267+00:00",
+  "validated_code_sha": "eca3f76e7d3ddafcd5ebd5a1887422d6304593b8",
+  "pull_request": "https://github.com/canaps13/MycoRadar/pull/21",
+  "roadmap_status": "DONE",
+  "scope": "Technical MR-012 criteria: typed vegetation, valid clipped geometries and source-photography year documented for this bounded reviewed extract. No present-day cover, binary forest mask, scientific pilot admission, API publication or deployment.",
+  "local_validation": [
+    "380 Python passed; 51 integration deselected",
+    "37 landcover tests, including frozen IGN metadata and all 48 reference-object comparisons",
+    "Ruff lint and format (66 files), mypy (20 sources), git diff --check",
+    "Windows replay identical and existing file preserved",
+    "Docker default API: UID 10001, /health, no Shapely/pyproj",
+    "Docker geo-job: readonly source mount, network none, 45 valid objects, zero unknown source years"
+  ],
+  "initial_failed_checks": [
+    "Ruff identified one long assertion; formatting corrected before push.",
+    "Initial API probe expected /health/live, which is not an API route; corrected /health OpenAPI probe passed with no API change."
+  ],
+  "not_run_locally": [
+    "51 PostGIS integration and full Compose/browser stack: covered by CI; no migration or UI change in the vintage correction."
+  ],
+  "historical_ci_receipt": "docs/evidence/MR-012-ci.json",
+  "vintage_evidence": "docs/evidence/MR-012-vintage.json",
+  "sample": "docs/evidence/MR-012-sample.json",
+  "observed_logs": [
+    {
+      "run_id": 41336385410,
+      "local_export_sha256": "b9500918a9f74f6cff25e80607307cae4b06d32ecccdd4058cce19faa06c0169",
+      "hash_note": "Local gh UTF-8 text export hash, not the GitHub log archive.",
+      "observed_log_lines": [
+        "Bootstrap (windows-latest)\tRun uv run --locked pytest -m \"not integration\"\t2026-11-01T18:24:23.1637063Z ===================== 380 passed, 51 deselected in 17.73s =====================",
+        "Bootstrap (windows-latest)\tRun npm --prefix web run test:e2e\t2026-11-01T18:30:10.4392191Z   12 passed (25.6s)",
+        "Bootstrap (ubuntu-latest)\tRun uv run --locked pytest -m \"not integration\"\t2026-11-01T18:24:00.9143050Z ===================== 380 passed, 51 deselected in 11.13s ======================",
+        "Bootstrap (ubuntu-latest)\tRun npm --prefix web run test:e2e\t2026-11-01T18:25:27.2925353Z   12 passed (11.9s)"
+      ]
+    },
+    {
+      "run_id": 41336385411,
+      "local_export_sha256": "5d83e5d1da09e4e9b1681783dbc1f7834e5c9c1008b516516a9cedb55292b949",
+      "hash_note": "Local gh UTF-8 text export hash, not the GitHub log archive.",
+      "observed_log_lines": [
+        "Compose and PostGIS\tRun docker compose --env-file .env.example exec -T api python -c \"import importlib.util; assert importlib.util.find_spec('shapely') is None; assert importlib.util.find_spec('pyproj') is None\"\t2026-11-01T18:25:25.0855708Z {\"coverage_status\": \"partial\", \"created\": true, \"job_id\": \"3f29f2594a41674a1948b93e6cce3e3972af7bc8f7df7988d02f69cab8eeb221\", \"quality\": {\"duplicate_identities\": 0, \"legacy_punctuation_transcoded\": 9, \"non_polygon_parts_removed\": 0, \"output\": 45, \"outside_or_boundary_only\": 3, \"overlap_area_m2\": 0.0, \"received\": 48, \"repaired_geometries\": 0, \"summed_mapped_area_m2\": 1692692.0740733568, \"union_mapped_area_m2\": 1692692.0740733568, \"unknown_source_year\": 0, \"vegetation_counts\": {\"FF1-00-00\": 2, \"FF2-00\": 6, \"FF2-57-57\": 9, \"FF31\": 4, \"FF32\": 10, \"FO1\": 3, \"FO3\": 6, \"LA4\": 5}}}",
+        "Compose and PostGIS\tRun uv run --locked pytest -m integration\t2026-11-01T18:25:31.7036360Z ====================== 51 passed, 380 deselected in 5.65s ======================",
+        "Compose and PostGIS\tRun npm --prefix web run test:e2e\t2026-11-01T18:27:03.7111571Z   12 passed (15.2s)"
+      ]
+    }
+  ],
+  "runs": [
+    {
+      "id": 41336385410,
+      "name": "Bootstrap",
+      "head_sha": "eca3f76e7d3ddafcd5ebd5a1887422d6304593b8",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/canaps13/MycoRadar/actions/runs/41336385410",
+      "jobs": [
+        {
+          "id": 124936995488,
+          "name": "Bootstrap (windows-latest)",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/canaps13/MycoRadar/actions/runs/41336385410/job/124936995488",
+          "selected_steps": [
+            {
+              "name": "Run uv run --locked pytest -m \"not integration\"",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run uv run --locked ruff check .",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run uv run --locked ruff format --check .",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run uv run --locked mypy",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run npm --prefix web run test:e2e",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run git diff --check",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 124936995675,
+          "name": "Bootstrap (ubuntu-latest)",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/canaps13/MycoRadar/actions/runs/41336385410/job/124936995675",
+          "selected_steps": [
+            {
+              "name": "Run uv run --locked pytest -m \"not integration\"",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run uv run --locked ruff check .",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run uv run --locked ruff format --check .",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run uv run --locked mypy",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run npm --prefix web run test:e2e",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run git diff --check",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 41336385411,
+      "name": "Local environment",
+      "head_sha": "eca3f76e7d3ddafcd5ebd5a1887422d6304593b8",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/canaps13/MycoRadar/actions/runs/41336385411",
+      "jobs": [
+        {
+          "id": 124936995403,
+          "name": "Compose and PostGIS",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/canaps13/MycoRadar/actions/runs/41336385411/job/124936995403",
+          "selected_steps": [
+            {
+              "name": "Run docker build --target geo-job --tag mycoradar-geo-ci --file infra/api.Dockerfile .",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run docker compose --env-file .env.example exec -T api python -c \"import importlib.util; assert importlib.util.find_spec('shapely') is None; assert importlib.util.find_spec('pyproj') is None\"",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run uv run --locked pytest -m integration",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run docker compose --env-file .env.example run --rm migrate",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run npm --prefix web run test:e2e",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 41336385408,
+      "name": "PR conventions",
+      "head_sha": "eca3f76e7d3ddafcd5ebd5a1887422d6304593b8",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/canaps13/MycoRadar/actions/runs/41336385408",
+      "jobs": [
+        {
+          "id": 124936995469,
+          "name": "PR conventions",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/canaps13/MycoRadar/actions/runs/41336385408/job/124936995469",
+          "selected_steps": [
+            {
+              "name": "Run uv run --no-project --python 3.12 python scripts/check_pr.py",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
