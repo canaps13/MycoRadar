@@ -1,7 +1,7 @@
 {
   "schema_version": "evaluation-execution-v1",
   "recorded_at": "2026-11-01T17:15:32.293391+00:00",
-  "implementation_commit": null,
+  "implementation_commit": "22c6ad2f7d5a94d4e6197a822e844cec89015627",
   "implementation_sha256": "06738cce7f73e24044d6c006e9d79df60d37351160e58963f1a37341c94045a7",
   "base_commit": "36e4ee8015e55b1358ec24b7ad65a5cae65e211f",
   "fixture_reports": {
@@ -110,5 +110,5 @@
   ],
   "real_data_ingested": false,
   "scientific_validation": "not_performed",
-  "ci": "pending"
+  "ci": "see MR-046-ci.json (same implementation, green, no rerun)"
 }
