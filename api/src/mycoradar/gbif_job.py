@@ -1,4 +1,4 @@
-"""Read a bounded public GBIF sample in memory; emit only a provenance/aggregate receipt."""
+"""Audit bounded live or local GBIF responses; emit only provenance and aggregates."""
 
 import argparse
 import json
@@ -10,6 +10,7 @@ from pydantic import ValidationError
 
 from mycoradar.gbif_client import GBIFClient, GBIFError
 from mycoradar.gbif_import import ImportRequest, admit_sample, import_sample
+from mycoradar.gbif_snapshot import replay_snapshot
 from mycoradar.occurrence_outputs import audit_payload
 from mycoradar.occurrence_privacy import AdmissionError, PrivacyPolicy
 
@@ -22,14 +23,19 @@ class _Parser(argparse.ArgumentParser):
 def main() -> int:
     try:
         parser = _Parser(description=__doc__)
-        parser.add_argument("--request", type=Path, required=True)
+        mode = parser.add_mutually_exclusive_group(required=True)
+        mode.add_argument("--request", type=Path)
+        mode.add_argument("--snapshot", type=Path)
         args = parser.parse_args()
-        with args.request.open("rb") as stream:
-            content = stream.read(65537)
-        if len(content) > 65536:
-            raise GBIFError("request_file_budget_exceeded")
-        request = ImportRequest.model_validate_json(content)
-        batch = import_sample(request, GBIFClient())
+        if args.snapshot is not None:
+            batch = replay_snapshot(args.snapshot)
+        else:
+            with args.request.open("rb") as stream:
+                content = stream.read(65537)
+            if len(content) > 65536:
+                raise GBIFError("request_file_budget_exceeded")
+            request = ImportRequest.model_validate_json(content)
+            batch = import_sample(request, GBIFClient())
         # This command has no publication switch. Scientific/location admission is a separate gate.
         policy = PrivacyPolicy()
         publication = admit_sample(batch, policy)
@@ -56,6 +62,11 @@ def main() -> int:
             "record_scope_mismatch",
             "pagination_invalid",
             "dataset_changed",
+            "snapshot_input_invalid",
+            "snapshot_budget_exceeded",
+            "snapshot_sequence_mismatch",
+            "snapshot_checksum_mismatch",
+            "snapshot_capture_incoherent",
         }
         code = str(error) if str(error) in allowed else "import_failed"
     except (OSError, UnicodeError, ValidationError, AdmissionError):

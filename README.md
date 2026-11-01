@@ -238,6 +238,20 @@ rapprochement taxonomique strict, droits contrôlés, provenance et audit agrég
 Le test réel lit 20 lignes ONF/INPN sous CC BY 4.0, sans sauvegarder les bruts
 ni publier de coordonnées. Le job utilise les dépendances déjà présentes dans
 l'image API ; le Dockerfile ne nécessite aucune bibliothèque géospatiale ajoutée.
+Le mode `--snapshot` rejoue des réponses JSON locales ordonnées et vérifiées
+par SHA-256, sans accès réseau ni publication de points. La date de capture
+déclarée est conservée ; elle n'est pas remplacée par l'heure du rejeu.
+
+```powershell
+$env:PYTHONPATH='api/src'
+uv run --locked python -m mycoradar.gbif_job --snapshot data/gbif/offline-synthetic/snapshot.json
+```
+
+Ce fixture est entièrement inventé et identifié `synthetic` ; il ne constitue
+pas une observation réelle. Pour les fichiers réels fournis par un opérateur,
+utiliser un stockage privé hors Git après revue des droits de copie et de
+sensibilité. Le lecteur ne crée pas de snapshot depuis GBIF. Voir le
+[contrat de rejeu et ses limites](docs/MR-010.md#rejeu-local-sans-réseau).
 
 MR-009 ajoute le [catalogue géographique API](docs/MR-009.md), paginé et versionné :
 `/v1/regions`, `/v1/species`, `/v1/cells`, `/v1/metadata`. Trois contours IGN sont
