@@ -227,6 +227,11 @@ La procédure est décrite dans [CLOUDFLARE_PREVIEW](docs/CLOUDFLARE_PREVIEW.md)
 
 ## Organisation et limites
 
+MR-014 prépare la [jointure géographique et datée](docs/MR-014.md) hors HTTP,
+avec [fixture entièrement synthétique](data/features/offline-synthetic/README.md),
+rejeu atomique et cible Docker `feature-job`. Les sources réelles restent à
+préparer et à admettre ; aucun score ou résultat scientifique n'est publié.
+
 MR-048 fournit le [filtre de prépublication des occurrences](docs/occurrence-privacy.md)
 et une CLI hors réseau : sources/localisations/taxons non autorisés retenus,
 floutage conservé, sorties et journaux contrôlés. Le profil livré refuse tout ;

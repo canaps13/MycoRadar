@@ -1,0 +1,312 @@
+{
+  "schema_version": "feature-join-manifest-v1",
+  "input_kind": "synthetic",
+  "geometry_crs": "EPSG:4326",
+  "as_of": "2026-01-03T00:00:00Z",
+  "target_at": "2026-01-03T00:00:00Z",
+  "cells": [
+    {
+      "cell_id": "test:cell",
+      "display_cell_size_m": 1000,
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              0.008,
+              0.0
+            ],
+            [
+              0.008,
+              0.004
+            ],
+            [
+              0.0,
+              0.004
+            ],
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.008,
+              0.0
+            ]
+          ]
+        ]
+      }
+    }
+  ],
+  "layers": [
+    {
+      "feature_id": "test:continuous",
+      "unit": "test-unit",
+      "aggregation": "area_weighted_mean",
+      "value_kind": "continuous_intensive",
+      "temporal_kind": "historical_observation",
+      "valid_from": "2026-01-02T00:00:00Z",
+      "valid_until": "2026-01-04T00:00:00Z",
+      "source_data_cutoff": "2026-01-01T00:00:00Z",
+      "source": {
+        "id": "test:source",
+        "provider": "Synthetic fixture",
+        "product": "Invented values, not observations",
+        "version": "test-v1",
+        "source_url": "https://example.invalid/synthetic",
+        "license": "CC0-1.0",
+        "license_url": "https://example.invalid/license",
+        "attribution": "MycoRadar, synthetic test only",
+        "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "source_published_at": "2026-01-02T00:00:00Z",
+        "fetched_at": "2026-01-02T12:00:00Z",
+        "effective_resolution_m": null,
+        "transformations": [],
+        "visibility": "public"
+      },
+      "patches": [
+        {
+          "id": "test:left",
+          "value": 2.0,
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  0.002,
+                  0.0
+                ],
+                [
+                  0.002,
+                  0.004
+                ],
+                [
+                  0.0,
+                  0.004
+                ],
+                [
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.002,
+                  0.0
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "id": "test:right",
+          "value": 6.0,
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  0.008,
+                  0.0
+                ],
+                [
+                  0.008,
+                  0.004
+                ],
+                [
+                  0.002,
+                  0.004
+                ],
+                [
+                  0.002,
+                  0.0
+                ],
+                [
+                  0.008,
+                  0.0
+                ]
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "feature_id": "test:future",
+      "unit": "test-unit",
+      "aggregation": "area_weighted_mean",
+      "value_kind": "continuous_intensive",
+      "temporal_kind": "historical_observation",
+      "valid_from": "2026-01-02T00:00:00Z",
+      "valid_until": "2026-01-04T00:00:00Z",
+      "source_data_cutoff": "2026-01-01T00:00:00Z",
+      "source": {
+        "id": "test:future-source",
+        "provider": "Synthetic fixture",
+        "product": "Invented values, not observations",
+        "version": "test-v1",
+        "source_url": "https://example.invalid/synthetic",
+        "license": "CC0-1.0",
+        "license_url": "https://example.invalid/license",
+        "attribution": "MycoRadar, synthetic test only",
+        "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "source_published_at": "2026-01-02T00:00:00Z",
+        "fetched_at": "2026-01-04T00:00:00Z",
+        "effective_resolution_m": null,
+        "transformations": [],
+        "visibility": "public"
+      },
+      "patches": [
+        {
+          "id": "test:left",
+          "value": 2.0,
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  0.002,
+                  0.0
+                ],
+                [
+                  0.002,
+                  0.004
+                ],
+                [
+                  0.0,
+                  0.004
+                ],
+                [
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.002,
+                  0.0
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "id": "test:right",
+          "value": 6.0,
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  0.008,
+                  0.0
+                ],
+                [
+                  0.008,
+                  0.004
+                ],
+                [
+                  0.002,
+                  0.004
+                ],
+                [
+                  0.002,
+                  0.0
+                ],
+                [
+                  0.008,
+                  0.0
+                ]
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "feature_id": "test:missing",
+      "unit": "test-unit",
+      "aggregation": "area_weighted_mean",
+      "value_kind": "continuous_intensive",
+      "temporal_kind": "historical_observation",
+      "valid_from": "2026-01-02T00:00:00Z",
+      "valid_until": "2026-01-04T00:00:00Z",
+      "source_data_cutoff": "2026-01-01T00:00:00Z",
+      "source": {
+        "id": "test:source",
+        "provider": "Synthetic fixture",
+        "product": "Invented values, not observations",
+        "version": "test-v1",
+        "source_url": "https://example.invalid/synthetic",
+        "license": "CC0-1.0",
+        "license_url": "https://example.invalid/license",
+        "attribution": "MycoRadar, synthetic test only",
+        "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "source_published_at": "2026-01-02T00:00:00Z",
+        "fetched_at": "2026-01-02T12:00:00Z",
+        "effective_resolution_m": null,
+        "transformations": [],
+        "visibility": "public"
+      },
+      "patches": [
+        {
+          "id": "test:left",
+          "value": 2.0,
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  0.002,
+                  0.0
+                ],
+                [
+                  0.002,
+                  0.004
+                ],
+                [
+                  0.0,
+                  0.004
+                ],
+                [
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.002,
+                  0.0
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "id": "test:right",
+          "value": null,
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  0.008,
+                  0.0
+                ],
+                [
+                  0.008,
+                  0.004
+                ],
+                [
+                  0.002,
+                  0.004
+                ],
+                [
+                  0.002,
+                  0.0
+                ],
+                [
+                  0.008,
+                  0.0
+                ]
+              ]
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
