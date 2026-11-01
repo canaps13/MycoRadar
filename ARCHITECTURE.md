@@ -178,6 +178,11 @@ publié par cette unité.
 
 ## Scénarios techniques de test prioritaires
 
+MR-015 prépare un [catalogue interne de noms et associations](docs/MR-015.md),
+lu hors HTTP avec réponses taxonomiques vérifiées par empreinte. Les associations
+rapportées et paramètres désactivés ne constituent ni admission de pilote ni
+score. Le catalogue public API et ses espèces restent distincts et inchangés.
+
 1. Fournisseur météo répond `429`, puis reprend : backoff, pas de spam, conservation dernier snapshot.
 2. Fournisseur publie le même lot deux fois : idempotence et absence de doublons.
 3. Nouveau lot incomplet : pas de publication partielle silencieuse ; statut `partial` ou conservation du dernier sain.

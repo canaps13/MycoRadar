@@ -1,0 +1,137 @@
+{
+  "recorded_at": "2026-11-01T17:52:26.536311+00:00",
+  "purpose": "Internal candidate names and bibliographic facts; no occurrence or scientific-score admission",
+  "taxonomy": {
+    "registry_url": "https://api.gbif.org/v1/dataset/d7dddbf4-2cf0-4f39-9b2a-bb099caae36c",
+    "registry_raw_sha256": "ee4d81a3ab6f0705b21d71f559eec222db7fe4bde4cdb133c844d92dca38fa3e",
+    "selected_registry_fields": {
+      "key": "d7dddbf4-2cf0-4f39-9b2a-bb099caae36c",
+      "title": "GBIF Backbone Taxonomy",
+      "license": "http://creativecommons.org/licenses/by/4.0/legalcode",
+      "pubDate": "2023-08-28T00:00:00.000+00:00",
+      "modified": "2023-11-17T17:05:37.477+00:00",
+      "doi": "10.15468/39omei",
+      "citation": {
+        "text": "GBIF Secretariat (2023). GBIF Backbone Taxonomy. Checklist dataset https://doi.org/10.15468/39omei accessed via GBIF.org on 2026-11-01.",
+        "citationProvidedBySource": false
+      }
+    },
+    "metadata_url": "https://api.gbif.org/v2/species/match/metadata",
+    "index_before": {
+      "clbDatasetKey": "53147",
+      "datasetKey": "d7dddbf4-2cf0-4f39-9b2a-bb099caae36c",
+      "datasetAlias": "GBIF",
+      "datasetTitle": "GBIF Backbone Taxonomy",
+      "sizeInMB": 1343,
+      "nameUsageCount": 7746724,
+      "nameUsageByRankCount": {
+        "KINGDOM": 19,
+        "PHYLUM": 347,
+        "CLASS": 845,
+        "ORDER": 3092,
+        "FAMILY": 34356,
+        "GENUS": 547518,
+        "SPECIES": 4994322,
+        "SUBSPECIES": 380481,
+        "VARIETY": 421934,
+        "FORM": 87936,
+        "UNRANKED": 1275874
+      }
+    },
+    "index_after": {
+      "clbDatasetKey": "53147",
+      "datasetKey": "d7dddbf4-2cf0-4f39-9b2a-bb099caae36c",
+      "datasetAlias": "GBIF",
+      "datasetTitle": "GBIF Backbone Taxonomy",
+      "sizeInMB": 1343,
+      "nameUsageCount": 7746724,
+      "nameUsageByRankCount": {
+        "KINGDOM": 19,
+        "PHYLUM": 347,
+        "CLASS": 845,
+        "ORDER": 3092,
+        "FAMILY": 34356,
+        "GENUS": 547518,
+        "SPECIES": 4994322,
+        "SUBSPECIES": 380481,
+        "VARIETY": 421934,
+        "FORM": 87936,
+        "UNRANKED": 1275874
+      }
+    },
+    "matching_build_sha": "2e33c6ef0768b75f39cccdbfd17b7a8439d6602f",
+    "index_before_after_equal": true,
+    "snapshot_atomic": false,
+    "rights_review": {
+      "license": "CC-BY-4.0",
+      "license_text": "https://creativecommons.org/licenses/by/4.0/legalcode.en",
+      "scope": "Eight captured taxonomic responses, attribution in data/species/README.md; no occurrence or media rights inferred",
+      "commercial_file_copy_redistribution": "conditional_on_CC_BY_attribution",
+      "http_cache_policy": "not_evaluated_or_enabled"
+    },
+    "raw_registry_and_service_metadata_in_repo": false,
+    "reason_for_selection": "Only taxonomic/licence metadata retained; unnecessary service contact fields omitted"
+  },
+  "bibliography": [
+    {
+      "id": "tang-2021",
+      "citation": "Tang N, Lebreton A, Xu W, Dai Y, Yu F, Martin FM (2021). Transcriptome Profiling Reveals Differential Gene Expression of Secreted Proteases and Highly Specific Gene Repertoires Involved in Lactarius?Pinus Symbioses. Frontiers in Plant Science 12:714393. doi:10.3389/fpls.2021.714393",
+      "url": "https://www.frontiersin.org/journals/plant-science/articles/10.3389/fpls.2021.714393/full",
+      "published_year": 2021,
+      "consulted_at": "2026-11-01T17:42:16.388460Z",
+      "access_basis": "full_text",
+      "text_license": "CC-BY-4.0",
+      "document_body_included": false,
+      "training_use": "not_admitted"
+    },
+    {
+      "id": "agueda-2008",
+      "citation": "?gueda B, Parlad? J, Fern?ndez-Toir?n LM, Cisneros ?, de Miguel AM, Modrego MP, Mart?nez-Pe?a F, Pera J (2008). Mycorrhizal synthesis between Boletus edulis species complex and rockroses (Cistus sp.). Mycorrhiza 18:443?449. doi:10.1007/s00572-008-0192-3",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/18695982/",
+      "published_year": 2008,
+      "consulted_at": "2026-11-01T17:42:16.388460Z",
+      "access_basis": "abstract",
+      "text_license": "unknown_copyright",
+      "document_body_included": false,
+      "training_use": "not_admitted"
+    },
+    {
+      "id": "moore-1989",
+      "citation": "Moore LM, Jansen AE, van Griensven LJLD (1989). Pure culture synthesis of ectomycorrhizas with Cantharellus cibarius. Acta Botanica Neerlandica 38(3):273?278.",
+      "url": "https://natuurtijdschriften.nl/pub/540739",
+      "published_year": 1989,
+      "consulted_at": "2026-11-01T17:42:16.388460Z",
+      "access_basis": "abstract",
+      "text_license": "CC-BY-3.0-NL",
+      "document_body_included": false,
+      "training_use": "not_admitted"
+    },
+    {
+      "id": "olariaga-2016",
+      "citation": "Olariaga I, Moreno G, Manj?n JL, Salcedo I, Hofstetter V, Rodr?guez D, Buyck B (online 2016). Cantharellus (Cantharellales, Basidiomycota) revisited in Europe through a multigene phylogeny. doi:10.1007/s13225-016-0376-7",
+      "url": "https://ira.agroscope.ch/de-CH/publication/36209",
+      "published_year": 2016,
+      "consulted_at": "2026-11-01T17:42:16.388460Z",
+      "access_basis": "abstract",
+      "text_license": "unknown_copyright",
+      "document_body_included": false,
+      "training_use": "not_admitted"
+    }
+  ],
+  "access_limits": [
+    "ScienceDirect article landing page returned 403; J-STAGE PDF and Annales Botanici Fennici PDF timed out in web tool. These sources were not used for additional host facts.",
+    "PubMed 21494822 direct view returned no substantive body; no additional field-host association was taken from that view.",
+    "Only publisher Frontiers results and supplementary caption, PubMed 18695982 abstract, Natuurtijdschriften abstract/rights notice and Agroscope abstract were used for the curated facts/concept warning."
+  ],
+  "content_not_copied": [
+    "article bodies",
+    "PDFs",
+    "images",
+    "sequences",
+    "experimental tables",
+    "occurrences",
+    "coordinates"
+  ],
+  "bibliographic_training_admission": "not_admitted",
+  "scientific_validation": "not_performed"
+}

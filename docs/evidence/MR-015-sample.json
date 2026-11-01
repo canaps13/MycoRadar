@@ -1,0 +1,96 @@
+{
+  "schema_version": "species-catalog-execution-v1",
+  "recorded_at": "2026-11-01T17:52:26.536311+00:00",
+  "implementation_commit": null,
+  "catalog_sha256": "220cd2aaa72a0b3f9b52f77ce04202db14de20eecc3af38ca271bce2f7fff233",
+  "implementation_sha256": "695da0db7ea4228b8dd8b9742327e2f9a72de92537a356feff5110982d88fd71",
+  "receipt": {
+    "schema_version": "species-ecology-receipt-v1",
+    "catalog_sha256": "220cd2aaa72a0b3f9b52f77ce04202db14de20eecc3af38ca271bce2f7fff233",
+    "implementation_sha256": "695da0db7ea4228b8dd8b9742327e2f9a72de92537a356feff5110982d88fd71",
+    "status": "partial",
+    "content_kind": "real_bibliographic_catalog",
+    "taxonomic_reference": "gbif_backbone_legacy",
+    "candidates": [
+      {
+        "id": "candidate:lactarius-sanguifluus",
+        "canonical_name": "Lactarius sanguifluus",
+        "reference_usage_key": "5248648",
+        "name_match": "exact_accepted_species",
+        "association_count": 1,
+        "configured_thresholds": 0,
+        "pilot_admission": "not_admitted",
+        "effective_resolution_m": null,
+        "habitat_score": null,
+        "fruiting_score": null
+      },
+      {
+        "id": "candidate:boletus-aereus",
+        "canonical_name": "Boletus aereus",
+        "reference_usage_key": "8733688",
+        "name_match": "exact_accepted_species",
+        "association_count": 1,
+        "configured_thresholds": 0,
+        "pilot_admission": "not_admitted",
+        "effective_resolution_m": null,
+        "habitat_score": null,
+        "fruiting_score": null
+      },
+      {
+        "id": "candidate:boletus-edulis",
+        "canonical_name": "Boletus edulis",
+        "reference_usage_key": "5954958",
+        "name_match": "exact_accepted_species",
+        "association_count": 1,
+        "configured_thresholds": 0,
+        "pilot_admission": "not_admitted",
+        "effective_resolution_m": null,
+        "habitat_score": null,
+        "fruiting_score": null
+      },
+      {
+        "id": "candidate:cantharellus-cibarius",
+        "canonical_name": "Cantharellus cibarius",
+        "reference_usage_key": "5249504",
+        "name_match": "exact_accepted_species",
+        "association_count": 2,
+        "configured_thresholds": 0,
+        "pilot_admission": "not_admitted",
+        "effective_resolution_m": null,
+        "habitat_score": null,
+        "fruiting_score": null
+      }
+    ],
+    "source_count": 4,
+    "publication_allowed": false,
+    "scientific_validation": "not_performed"
+  },
+  "native_docker_receipts_equal": true,
+  "docker": {
+    "image": "mycoradar-api:mr015",
+    "network": "none",
+    "input_mount": "read_only",
+    "uid": 10001,
+    "geo_dependencies_installed": false,
+    "health_contract_present": true
+  },
+  "cli_two_processes_repeat_identical": true,
+  "local_validation": {
+    "python_passed": 396,
+    "new_species_tests": 53,
+    "postgis_skipped": 51,
+    "ruff_lint": "passed",
+    "ruff_format": "passed",
+    "mypy_sources": 21,
+    "docker_build": "passed",
+    "public_catalog_and_main_unchanged_from_base": true
+  },
+  "not_run_locally": [
+    "PostGIS integration suite",
+    "frontend unit/build/browser suites"
+  ],
+  "ci": "pending",
+  "occurrence_requests": 0,
+  "pilot_admitted": false,
+  "score_computed": false
+}
