@@ -301,6 +301,19 @@ def test_nonfinite_distances_rejected(tmp_path: Path, definition: dict[str, Any]
         audit_file(path)
 
 
+@pytest.mark.parametrize("bad", [1735689600, 1735689600000, True, "1735689600", "2025-01-01"])
+@pytest.mark.parametrize("scope", ["freeze", "record"])
+def test_no_implicit_epoch_or_date_precision_conversion(
+    tmp_path: Path, definition: dict[str, Any], bad: object, scope: str
+) -> None:
+    if scope == "freeze":
+        definition["frozen_at"] = bad
+    else:
+        definition["assignments"][0]["feature_available_at"] = bad
+    with pytest.raises(ValueError):
+        run(tmp_path, definition)
+
+
 def test_stdout_is_aggregate_deterministic_without_network_or_writes(
     tmp_path: Path,
     definition: dict[str, Any],

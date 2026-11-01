@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 from typing import Annotated, Literal, Self
 
-from pydantic import AwareDatetime, BaseModel, ConfigDict, Field, model_validator
+from pydantic import AwareDatetime, BaseModel, BeforeValidator, ConfigDict, Field, model_validator
 
 MAX_BYTES = 4 * 1024 * 1024
 Digest = Annotated[str, Field(pattern=r"^[0-9a-f]{64}$")]
@@ -14,6 +14,15 @@ Positive = Annotated[float, Field(strict=True, gt=0, allow_inf_nan=False)]
 Count = Annotated[int, Field(strict=True, ge=1)]
 Fraction = Annotated[float, Field(strict=True, gt=0, le=1, allow_inf_nan=False)]
 Baselines = Literal["seasonality", "simple_habitat", "simple_weather"]
+
+
+def _explicit_time(value: object) -> str:
+    if not isinstance(value, str) or "T" not in value:
+        raise ValueError("An explicit ISO datetime string with timezone is required")
+    return value
+
+
+Timestamp = Annotated[AwareDatetime, BeforeValidator(_explicit_time)]
 
 
 class Contract(BaseModel):
@@ -51,12 +60,12 @@ class Assignment(Contract):
     visit_group_sha256: Digest | None
     cell_group_sha256: Digest | None
     duplicate_group_sha256: Digest | None
-    event_start: AwareDatetime
-    event_end: AwareDatetime
-    prediction_at: AwareDatetime
-    feature_data_cutoff: AwareDatetime | None
-    feature_available_at: AwareDatetime | None
-    label_available_at: AwareDatetime | None
+    event_start: Timestamp
+    event_end: Timestamp
+    prediction_at: Timestamp
+    feature_data_cutoff: Timestamp | None
+    feature_available_at: Timestamp | None
+    label_available_at: Timestamp | None
     nearest_development_distance_m: Annotated[float, Field(strict=True, ge=0)] | None
 
     @model_validator(mode="after")
@@ -71,9 +80,9 @@ class Plan(Contract):
     input_kind: Literal["synthetic", "private_operator_manifest"]
     observation_basis: Literal["presence_only"]
     state: Literal["draft", "frozen"]
-    frozen_at: AwareDatetime | None
-    model_selection_started_at: AwareDatetime | None
-    test_labels_accessed_at: AwareDatetime | None
+    frozen_at: Timestamp | None
+    model_selection_started_at: Timestamp | None
+    test_labels_accessed_at: Timestamp | None
     pilot_admission_sha256: Digest | None
     source_manifest_sha256: Digest | None
     taxon_scope_sha256: Digest | None
