@@ -143,7 +143,7 @@
     "PostGIS/Compose integration suite",
     "frontend unit/build/browser suites"
   ],
-  "ci": "pending",
-  "implementation_commit": null,
+  "ci": "see MR-014-ci.json (same implementation, green, no rerun)",
+  "implementation_commit": "9e1e9e34e2e1460bbb52eaae069dbabdc0e5ddcf",
   "input_bytes_match_git_blob": true
 }
