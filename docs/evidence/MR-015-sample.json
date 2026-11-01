@@ -1,7 +1,7 @@
 {
   "schema_version": "species-catalog-execution-v1",
   "recorded_at": "2026-11-01T17:52:26.536311+00:00",
-  "implementation_commit": null,
+  "implementation_commit": "39a00cfc2d2868e913e34c39310bd9af505c7f58",
   "catalog_sha256": "220cd2aaa72a0b3f9b52f77ce04202db14de20eecc3af38ca271bce2f7fff233",
   "implementation_sha256": "695da0db7ea4228b8dd8b9742327e2f9a72de92537a356feff5110982d88fd71",
   "receipt": {
@@ -89,7 +89,7 @@
     "PostGIS integration suite",
     "frontend unit/build/browser suites"
   ],
-  "ci": "pending",
+  "ci": "see MR-015-ci.json (same implementation, green, no rerun)",
   "occurrence_requests": 0,
   "pilot_admitted": false,
   "score_computed": false
