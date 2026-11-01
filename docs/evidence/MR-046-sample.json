@@ -1,0 +1,114 @@
+{
+  "schema_version": "evaluation-execution-v1",
+  "recorded_at": "2026-11-01T17:07:54.136291+00:00",
+  "implementation_commit": null,
+  "implementation_sha256": "999ca6a094da9e8d3b2d236fea148e980054142c2715d912978c3942bc81196f",
+  "base_commit": "36e4ee8015e55b1358ec24b7ad65a5cae65e211f",
+  "fixture_reports": {
+    "synthetic.json": {
+      "schema_version": "evaluation-audit-v1",
+      "implementation_sha256": "999ca6a094da9e8d3b2d236fea148e980054142c2715d912978c3942bc81196f",
+      "input_sha256": "963983ee8c4a8579565800c24f5d88b19883828ddc874a4a5eb99b5919473c58",
+      "input_kind": "synthetic",
+      "structural_status": "passed",
+      "blockers": [],
+      "counts": {
+        "development": 2,
+        "test": 2,
+        "inner_folds": 2,
+        "development_blocks": 2,
+        "test_blocks": 2,
+        "test_time_blocks": 2
+      },
+      "observation_basis": "presence_only",
+      "probability_evaluation_supported": false,
+      "scientific_validation": "not_performed",
+      "model_training_authorized": false,
+      "publication_allowed": false
+    },
+    "synthetic-leakage.json": {
+      "schema_version": "evaluation-audit-v1",
+      "implementation_sha256": "999ca6a094da9e8d3b2d236fea148e980054142c2715d912978c3942bc81196f",
+      "input_sha256": "156ff3e49a7329d2a07b853d643749419b7e7d50a8b8a5f083850da470fb2956",
+      "input_kind": "synthetic",
+      "structural_status": "blocked",
+      "blockers": [
+        "dependency_group_crosses_partitions",
+        "feature_information_leakage"
+      ],
+      "counts": {
+        "development": 2,
+        "test": 2,
+        "inner_folds": 2,
+        "development_blocks": 2,
+        "test_blocks": 2,
+        "test_time_blocks": 2
+      },
+      "observation_basis": "presence_only",
+      "probability_evaluation_supported": false,
+      "scientific_validation": "not_performed",
+      "model_training_authorized": false,
+      "publication_allowed": false
+    },
+    "pilot-plan.json": {
+      "schema_version": "evaluation-audit-v1",
+      "implementation_sha256": "999ca6a094da9e8d3b2d236fea148e980054142c2715d912978c3942bc81196f",
+      "input_sha256": "e5c04e186a7d3335ed24d298a1abb9e7b6b7c1eff33339a504468f78d4cfb0b5",
+      "input_kind": "private_operator_manifest",
+      "structural_status": "blocked",
+      "blockers": [
+        "admission_or_design_evidence_missing",
+        "decision_thresholds_unjustified",
+        "inner_cv_needs_multiple_folds",
+        "partition_missing",
+        "protocol_not_frozen",
+        "spatial_design_unjustified"
+      ],
+      "counts": {
+        "development": 0,
+        "test": 0,
+        "inner_folds": 0,
+        "development_blocks": 0,
+        "test_blocks": 0,
+        "test_time_blocks": 0
+      },
+      "observation_basis": "presence_only",
+      "probability_evaluation_supported": false,
+      "scientific_validation": "not_performed",
+      "model_training_authorized": false,
+      "publication_allowed": false
+    }
+  },
+  "native_docker_reports_equal": true,
+  "docker": {
+    "image": "mycoradar-api:mr046",
+    "network": "none",
+    "input_mount": "read_only",
+    "uid": 10001,
+    "geo_dependencies_installed": false,
+    "health_contract_present": true
+  },
+  "native_and_docker_smokes": {
+    "synthetic_structure": "passed",
+    "leakage_case": "blocked",
+    "pilot_plan": "blocked",
+    "repeat_identical": true,
+    "publication_allowed": false
+  },
+  "local_validation": {
+    "python_passed": 408,
+    "new_protocol_tests": 65,
+    "postgis_skipped": 51,
+    "ruff_lint": "passed",
+    "ruff_format": "passed",
+    "mypy_sources": 21,
+    "docker_build": "passed"
+  },
+  "not_run_locally": [
+    "PostGIS integration suite",
+    "frontend unit/build/browser suites"
+  ],
+  "real_data_ingested": false,
+  "scientific_validation": "not_performed",
+  "ci": "pending"
+}

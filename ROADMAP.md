@@ -93,7 +93,7 @@ Statuts autorisés : `TODO`, `IN_PROGRESS`, `BLOCKED`, `DONE`. **Une tâche est 
 | MR-012 | TODO | Couches forêts / landcover (IGN France, couches globales par extension) | Types de végétation et année du jeu source visibles ; géométries nettoyées |
 | MR-013 | TODO | Couches sols, géologie, relief ; fallback SoilGrids (WCS/WebDAV ou fichiers si API indisponible), IGN/BRGM | Provenance/résolution/âge/valeurs manquantes gérés ; tests avec petits fixtures |
 | MR-014 | TODO | Pipeline géospatial de jointure, features datées et tests qualité | Rejouable, idempotent, sans fuite d'information postérieure aux dates observées |
-| MR-046 | TODO | Protocole d'évaluation indépendant préalablement aux baselines : espace, temps, effort et pseudo-absences | Découpage spatial bloqué et test chronologique gelés, contrôle anti-fuite, baselines naïves, métriques et seuils de non-publication écrits avant MR-016/MR-017 |
+| MR-046 | IN_PROGRESS | Protocole d'évaluation indépendant préalablement aux baselines : espace, temps, effort et pseudo-absences | [Protocole](docs/MR-046.md), [brouillon pilote](data/evaluation/pilot-plan.json), [preuve locale](docs/evidence/MR-046-sample.json) : 408 tests Python dont 65 nouveaux ; audit Docker hors réseau réussi, API légère. CI en attente. Cas complets synthétiques uniquement ; seuils justifiés, admission du pilote et gel du vrai test encore bloqués avant MR-016/MR-017. |
 
 **Jalon M2 :** vraie base de données pilote traçable, robuste aux pannes fournisseurs.
 

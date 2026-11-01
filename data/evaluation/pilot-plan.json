@@ -1,0 +1,41 @@
+{
+  "schema_version": "evaluation-plan-v1",
+  "input_kind": "private_operator_manifest",
+  "observation_basis": "presence_only",
+  "state": "draft",
+  "frozen_at": null,
+  "model_selection_started_at": null,
+  "test_labels_accessed_at": null,
+  "pilot_admission_sha256": null,
+  "source_manifest_sha256": null,
+  "taxon_scope_sha256": null,
+  "territory_scope_sha256": null,
+  "sampling_bias_review_sha256": null,
+  "background_scope_sha256": null,
+  "baseline_configs_sha256": null,
+  "metric_definition_sha256": null,
+  "split_construction_sha256": null,
+  "baselines": [
+    "seasonality",
+    "simple_habitat",
+    "simple_weather"
+  ],
+  "spatial_design": {
+    "autocorrelation_range_m": null,
+    "minimum_separation_m": null,
+    "justification_sha256": null
+  },
+  "decision_rule": {
+    "primary_metric": "presence_capture_at_area_fraction",
+    "area_fraction": null,
+    "minimum_capture_gain": null,
+    "minimum_development_blocks": null,
+    "minimum_test_blocks": null,
+    "minimum_test_time_blocks": null,
+    "uncertainty": "blocked_bootstrap",
+    "require_gain_lower_bound": true,
+    "require_equal_coverage": true,
+    "justification_sha256": null
+  },
+  "assignments": []
+}

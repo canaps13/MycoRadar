@@ -23,3 +23,8 @@ L'indice 0–100 exprime une favorabilité **relative** ; aucun pourcentage de p
 
 ## Seuils de décision
 Avant implémentation : figer les métriques, les seuils minimaux d'échantillons/blocs temporels et les critères de gain vs baseline dans une PR de protocole (MR-046). Si ces seuils ne peuvent pas être justifiés, garder `BLOCKED` pour la publication de scores. Une carte avec données réelles sans prédiction reste acceptable.
+
+Le [protocole MR-046](MR-046.md) décrit ces choix et le contrôle hors HTTP des
+partitions déclarées. Le [plan pilote](../data/evaluation/pilot-plan.json) reste
+un brouillon bloqué, sans seuil arbitraire ni test réel gelé. Le succès mécanique
+d'un exemple synthétique n'autorise ni entraînement ni publication scientifique.
