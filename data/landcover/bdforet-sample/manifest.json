@@ -17,7 +17,7 @@
     "source_url": "https://data.geopf.fr/wfs/ows?SERVICE=WFS&VERSION=2.0.0&REQUEST=GetFeature&TYPENAMES=LANDCOVER.FORESTINVENTORY.V2%3Aformation_vegetale&OUTPUTFORMAT=application%2Fjson&SRSNAME=CRS%3A84&BBOX=5.55%2C43.30%2C5.57%2C43.32%2CCRS%3A84&COUNT=500",
     "license": "Etalab-2.0",
     "license_url": "https://github.com/etalab/licence-ouverte/blob/master/LO.md",
-    "attribution": "IGN - BD Foret V2, public WFS extract; source year unavailable; retrieval separate from acquisition.",
+    "attribution": "IGN - BD Foret V2, aerial photography 2008, edition 2014-04-01; WFS capture in 2026, not current ground cover.",
     "version": "wfs-snapshot-sha256:30efa1578e8b4899a96bcf5d14dbdcfde922d51768389623d06c65c3752de506",
     "fetched_at": "2026-10-31T15:14:06.211502+00:00",
     "source_published_at": null,
@@ -29,5 +29,8 @@
     2018
   ],
   "product_metadata_url": "https://cartes.gouv.fr/aide/fr/partenaires/ign/referentiels-description-territoire/foret/bd-foret-v2/",
-  "repair_invalid": false
+  "repair_invalid": false,
+  "source_year": 2008,
+  "year_meaning": "acquisition",
+  "year_evidence_url": "https://data.geopf.fr/telechargement/resource/BDFORET/BDFORET_2-0__SHP_LAMB93_D013_2014-04-01"
 }

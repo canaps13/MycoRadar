@@ -1,0 +1,660 @@
+<?xml version="1.0" encoding="utf-8"?>
+<gmd:MD_Metadata xmlns:gco="http://www.isotc211.org/2005/gco"
+                 xmlns:gts="http://www.isotc211.org/2005/gts"
+                 xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                 xmlns:gml="http://www.opengis.net/gml"
+                 xmlns:gsr="http://www.isotc211.org/2005/gsr"
+                 xmlns:gmx="http://www.isotc211.org/2005/gmx"
+                 xmlns:gss="http://www.isotc211.org/2005/gss"
+                 xmlns:xlink="http://www.w3.org/1999/xlink"
+                 xmlns:gmd="http://www.isotc211.org/2005/gmd"
+                 xmlns:srv="http://www.isotc211.org/2005/srv"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xmlns:xi="http://www.w3.org/2001/XInclude"
+                 uuid="IGNF_BDF_2-0_SHP_LAMB93_D013">
+   <gmd:fileIdentifier>
+      <gco:CharacterString>IGNF_BDF_2-0_SHP_LAMB93_D013.xml</gco:CharacterString>
+   </gmd:fileIdentifier>
+   <gmd:language>
+      <gmd:LanguageCode codeList="https://registre.ign.fr/ign/legacy/isoCodeListsExtensions.xml#LanguageCode"
+                        codeListValue="fre">fre</gmd:LanguageCode>
+   </gmd:language>
+   <gmd:characterSet>
+      <gmd:MD_CharacterSetCode codeList="https://registre.ign.fr/ign/legacy/isoCodeListsExtensions.xml#MD_CharacterSetCode"
+                               codeListValue="utf8">utf8</gmd:MD_CharacterSetCode>
+   </gmd:characterSet>
+   <gmd:hierarchyLevel>
+      <gmd:MD_ScopeCode codeList="https://registre.ign.fr/ign/legacy/isoCodeListsExtensions.xml#MD_ScopeCode"
+                        codeListValue="dataset">dataset</gmd:MD_ScopeCode>
+   </gmd:hierarchyLevel>
+   <gmd:hierarchyLevelName>
+      <gco:CharacterString>Lot</gco:CharacterString>
+   </gmd:hierarchyLevelName>
+   <gmd:contact>
+      <gmd:CI_ResponsibleParty>
+         <gmd:organisationName>
+            <gco:CharacterString>Institut national de l'information géographique et forestière (IGN-F)</gco:CharacterString>
+         </gmd:organisationName>
+         <gmd:contactInfo>
+            <gmd:CI_Contact>
+               <gmd:address>
+                  <gmd:CI_Address>
+                     <gmd:deliveryPoint>
+                        <gco:CharacterString>IGN - Service clients</gco:CharacterString>
+                     </gmd:deliveryPoint>
+                     <gmd:deliveryPoint>
+                        <gco:CharacterString>73 avenue de Paris</gco:CharacterString>
+                     </gmd:deliveryPoint>
+                     <gmd:city>
+                        <gco:CharacterString>SAINT-MANDE cedex</gco:CharacterString>
+                     </gmd:city>
+                     <gmd:postalCode>
+                        <gco:CharacterString>94165</gco:CharacterString>
+                     </gmd:postalCode>
+                     <gmd:country>
+                        <gco:CharacterString>FRANCE</gco:CharacterString>
+                     </gmd:country>
+                     <gmd:electronicMailAddress>
+                        <gco:CharacterString>contact.geoservices@ign.fr</gco:CharacterString>
+                     </gmd:electronicMailAddress>
+                  </gmd:CI_Address>
+               </gmd:address>
+            </gmd:CI_Contact>
+         </gmd:contactInfo>
+         <gmd:role>
+            <gmd:CI_RoleCode codeList="https://registre.ign.fr/ign/legacy/isoCodeListsExtensions.xml#CI_RoleCode"
+                             codeListValue="pointOfContact">pointOfContact</gmd:CI_RoleCode>
+         </gmd:role>
+      </gmd:CI_ResponsibleParty>
+   </gmd:contact>
+   <gmd:dateStamp>
+      <gco:Date>2022-09-14</gco:Date>
+   </gmd:dateStamp>
+   <gmd:metadataStandardName>
+      <gco:CharacterString>ISO 19115</gco:CharacterString>
+   </gmd:metadataStandardName>
+   <gmd:metadataStandardVersion>
+      <gco:CharacterString>2003 Cor.1:2006</gco:CharacterString>
+   </gmd:metadataStandardVersion>
+   <gmd:spatialRepresentationInfo>
+      <gmd:MD_VectorSpatialRepresentation id="IGNF_BDF_2-0_SHP_LAMB93_D013.spatialRepresentationInfo_1">
+         <gmd:topologyLevel>
+            <gmd:MD_TopologyLevelCode codeList="https://registre.ign.fr/ign/legacy/isoCodeListsExtensions.xml#MD_TopologyLevelCode"
+                                      codeListValue="geometryOnly">geometryOnly</gmd:MD_TopologyLevelCode>
+         </gmd:topologyLevel>
+      </gmd:MD_VectorSpatialRepresentation>
+   </gmd:spatialRepresentationInfo>
+   <gmd:referenceSystemInfo>
+      <gmd:MD_ReferenceSystem>
+         <gmd:referenceSystemIdentifier>
+            <gmd:RS_Identifier>
+               <gmd:code>
+                  <gmx:Anchor xlink:href="https://registre.ign.fr/ign/IGNF/IGNF.xml#LAMB93">RGF93 v1 Lambert 93</gmx:Anchor>
+               </gmd:code>
+               <gmd:codeSpace>
+                  <gco:CharacterString>urn:ogc:def:crs:IGNF:1.1</gco:CharacterString>
+               </gmd:codeSpace>
+            </gmd:RS_Identifier>
+         </gmd:referenceSystemIdentifier>
+      </gmd:MD_ReferenceSystem>
+   </gmd:referenceSystemInfo>
+   <gmd:identificationInfo>
+      <gmd:MD_DataIdentification>
+         <gmd:citation>
+            <gmd:CI_Citation>
+               <gmd:title>
+                  <gco:CharacterString>BDFORET_2-0 traitement du 2022-09-14</gco:CharacterString>
+               </gmd:title>
+               <gmd:date>
+                  <gmd:CI_Date>
+                     <gmd:date>
+                        <gco:Date>2022-09-14</gco:Date>
+                     </gmd:date>
+                     <gmd:dateType>
+                        <gmd:CI_DateTypeCode codeList="https://registre.ign.fr/ign/legacy/isoCodeListsExtensions.xml#CI_DateTypeCode"
+                                             codeListValue="creation">creation</gmd:CI_DateTypeCode>
+                     </gmd:dateType>
+                  </gmd:CI_Date>
+               </gmd:date>
+               <gmd:edition>
+                  <gco:CharacterString>2014</gco:CharacterString>
+               </gmd:edition>
+               <gmd:editionDate>
+                  <gco:Date>2014-04-01</gco:Date>
+               </gmd:editionDate>
+               <gmd:identifier>
+                  <gmd:MD_Identifier id="IGNF_BDF_2-0_SHP_LAMB93_D013.identifier">
+                     <gmd:code>
+                        <gco:CharacterString>IGNF_BDF_2-0_SHP_LAMB93_D013</gco:CharacterString>
+                     </gmd:code>
+                  </gmd:MD_Identifier>
+               </gmd:identifier>
+               <gmd:series>
+                  <gmd:CI_Series>
+                     <gmd:name>
+                        <gco:CharacterString>IGNF_BDFORET_2-0.xml</gco:CharacterString>
+                     </gmd:name>
+                     <gmd:issueIdentification>
+                        <gco:CharacterString>Produit</gco:CharacterString>
+                     </gmd:issueIdentification>
+                  </gmd:CI_Series>
+               </gmd:series>
+            </gmd:CI_Citation>
+         </gmd:citation>
+         <gmd:abstract>
+            <gco:CharacterString>La BD Forêt® version 2.0 est une base de données de référence pour l’espace forestier et les milieux semi-naturels. Elle constitue le référentiel géographique de description des essences forestières. Elle décrit les formations végétales forestières et naturelles par une approche de la couverture du sol traduisant une description de la densité de couvert du peuplement, de sa composition et de l’essence dominante, pour les éléments de plus de 5 000 m² (soit 0,5 hectare).</gco:CharacterString>
+         </gmd:abstract>
+         <gmd:status>
+            <gmd:MD_ProgressCode codeList="https://registre.ign.fr/ign/legacy/isoCodeListsExtensions.xml#MD_ProgressCode"
+                                 codeListValue="onGoing">onGoing</gmd:MD_ProgressCode>
+         </gmd:status>
+         <gmd:pointOfContact>
+            <gmd:CI_ResponsibleParty>
+               <gmd:organisationName>
+                  <gco:CharacterString>Institut national de l'information géographique et forestière (IGN-F)</gco:CharacterString>
+               </gmd:organisationName>
+               <gmd:contactInfo>
+                  <gmd:CI_Contact>
+                     <gmd:address>
+                        <gmd:CI_Address>
+                           <gmd:deliveryPoint>
+                              <gco:CharacterString>IGN - Service clients</gco:CharacterString>
+                           </gmd:deliveryPoint>
+                           <gmd:deliveryPoint>
+                              <gco:CharacterString>73 avenue de Paris</gco:CharacterString>
+                           </gmd:deliveryPoint>
+                           <gmd:city>
+                              <gco:CharacterString>SAINT-MANDE cedex</gco:CharacterString>
+                           </gmd:city>
+                           <gmd:postalCode>
+                              <gco:CharacterString>94165</gco:CharacterString>
+                           </gmd:postalCode>
+                           <gmd:country>
+                              <gco:CharacterString>FRANCE</gco:CharacterString>
+                           </gmd:country>
+                           <gmd:electronicMailAddress>
+                              <gco:CharacterString>contact.geoservices@ign.fr</gco:CharacterString>
+                           </gmd:electronicMailAddress>
+                        </gmd:CI_Address>
+                     </gmd:address>
+                  </gmd:CI_Contact>
+               </gmd:contactInfo>
+               <gmd:role>
+                  <gmd:CI_RoleCode codeList="https://registre.ign.fr/ign/legacy/isoCodeListsExtensions.xml#CI_RoleCode"
+                                   codeListValue="pointOfContact">pointOfContact</gmd:CI_RoleCode>
+               </gmd:role>
+            </gmd:CI_ResponsibleParty>
+         </gmd:pointOfContact>
+         <gmd:resourceMaintenance>
+            <gmd:MD_MaintenanceInformation id="IGNF_BDFORET_2-0.resourceMaintenance_1">
+               <gmd:maintenanceAndUpdateFrequency>
+                  <gmd:MD_MaintenanceFrequencyCode codeList="https://registre.ign.fr/ign/legacy/isoCodeListsExtensions.xml#MD_MaintenanceFrequencyCode"
+                                                   codeListValue="irregular">irregular</gmd:MD_MaintenanceFrequencyCode>
+               </gmd:maintenanceAndUpdateFrequency>
+               <gmd:maintenanceNote>
+                  <gco:CharacterString>La politique de mise à jour en continu de la BD Forêt® version 2.0 conduit à une actualité des données différente selon les classes d'objets : en effet, la mise à jour est assurée selon des cycles spécifiques aux informations.</gco:CharacterString>
+               </gmd:maintenanceNote>
+            </gmd:MD_MaintenanceInformation>
+         </gmd:resourceMaintenance>
+         <gmd:resourceFormat>
+            <gmd:MD_Format>
+               <gmd:name>
+                  <gco:CharacterString>AV</gco:CharacterString>
+               </gmd:name>
+               <gmd:version>
+                  <gco:CharacterString>non renseigné</gco:CharacterString>
+               </gmd:version>
+            </gmd:MD_Format>
+         </gmd:resourceFormat>
+         <gmd:descriptiveKeywords>
+            <gmd:MD_Keywords>
+               <gmd:keyword>non renseigné</gmd:keyword>
+               <gmd:thesaurusName>
+                  <gmd:CI_Citation>
+                     <gmd:title>
+                        <gco:CharacterString>GEMET - INSPIRE themes, version 1.0</gco:CharacterString>
+                     </gmd:title>
+                     <gmd:date>
+                        <gmd:CI_Date>
+                           <gmd:date>
+                              <gco:Date>non renseigné</gco:Date>
+                           </gmd:date>
+                           <gmd:dateType>
+                              <gmd:CI_DateTypeCode codeList="https://registre.ign.fr/ign/legacy/isoCodeListsExtensions.xml#CI_DateTypeCode"
+                                                   codeListValue="publication">publication</gmd:CI_DateTypeCode>
+                           </gmd:dateType>
+                        </gmd:CI_Date>
+                     </gmd:date>
+                  </gmd:CI_Citation>
+               </gmd:thesaurusName>
+            </gmd:MD_Keywords>
+         </gmd:descriptiveKeywords>
+         <gmd:descriptiveKeywords>
+            <gmd:MD_Keywords>
+               <gmd:keyword>
+                  <gco:CharacterString>non renseigné</gco:CharacterString>
+               </gmd:keyword>
+               <gmd:type>
+                  <gmd:MD_KeywordTypeCode codeList="https://registre.ign.fr/ign/legacy/isoCodeListsExtensions.xml#MD_KeywordTypeCode"
+                                          codeListValue="theme">theme</gmd:MD_KeywordTypeCode>
+               </gmd:type>
+            </gmd:MD_Keywords>
+         </gmd:descriptiveKeywords>
+         <gmd:resourceSpecificUsage>
+            <gmd:MD_Usage id="IGNF_BDFORET_2-0.resourceSpecificUsage_1">
+               <gmd:specificUsage>
+                  <gco:CharacterString>Echelles d'affichage</gco:CharacterString>
+               </gmd:specificUsage>
+               <gmd:userDeterminedLimitations>
+                  <gco:CharacterString>Echelles comprises entre le 1 : 5 000 et le 1 : 50 000.</gco:CharacterString>
+               </gmd:userDeterminedLimitations>
+               <gmd:userContactInfo>
+                  <gmd:CI_ResponsibleParty>
+                     <gmd:organisationName>
+                        <gco:CharacterString>Institut national de l'information géographique et forestière (IGN-F)</gco:CharacterString>
+                     </gmd:organisationName>
+                     <gmd:contactInfo>
+                        <gmd:CI_Contact>
+                           <gmd:address>
+                              <gmd:CI_Address>
+                                 <gmd:deliveryPoint>
+                                    <gco:CharacterString>IGN - Service clients</gco:CharacterString>
+                                 </gmd:deliveryPoint>
+                                 <gmd:deliveryPoint>
+                                    <gco:CharacterString>73 avenue de Paris</gco:CharacterString>
+                                 </gmd:deliveryPoint>
+                                 <gmd:city>
+                                    <gco:CharacterString>SAINT-MANDE cedex</gco:CharacterString>
+                                 </gmd:city>
+                                 <gmd:postalCode>
+                                    <gco:CharacterString>94165</gco:CharacterString>
+                                 </gmd:postalCode>
+                                 <gmd:country>
+                                    <gco:CharacterString>FRANCE</gco:CharacterString>
+                                 </gmd:country>
+                                 <gmd:electronicMailAddress>
+                                    <gco:CharacterString>contact.geoservices@ign.fr</gco:CharacterString>
+                                 </gmd:electronicMailAddress>
+                              </gmd:CI_Address>
+                           </gmd:address>
+                        </gmd:CI_Contact>
+                     </gmd:contactInfo>
+                     <gmd:role>
+                        <gmd:CI_RoleCode codeList="https://registre.ign.fr/ign/legacy/isoCodeListsExtensions.xml#CI_RoleCode"
+                                         codeListValue="custodian">custodian</gmd:CI_RoleCode>
+                     </gmd:role>
+                  </gmd:CI_ResponsibleParty>
+               </gmd:userContactInfo>
+            </gmd:MD_Usage>
+         </gmd:resourceSpecificUsage>
+         <gmd:resourceConstraints>
+            <gmd:MD_Constraints id="IGNF_BDFORET_2-0.resourceConstraints_1">
+               <gmd:useLimitation>
+                  <gco:CharacterString>Base de données soumise aux conditions générales d'utilisation des fichiers IGN.</gco:CharacterString>
+               </gmd:useLimitation>
+            </gmd:MD_Constraints>
+         </gmd:resourceConstraints>
+         <gmd:resourceConstraints>
+            <gmd:MD_LegalConstraints id="IGNF_BDFORET_2-0.LegalConstraints_1">
+               <gmd:accessConstraints>
+                  <gmd:MD_RestrictionCode codeList="https://registre.ign.fr/ign/legacy/isoCodeListsExtensions.xml#MD_RestrictionCode"
+                                          codeListValue="license">license</gmd:MD_RestrictionCode>
+               </gmd:accessConstraints>
+               <gmd:useConstraints>
+                  <gmd:MD_RestrictionCode codeList="http://registre.ign.fr/ign/legacy/codelist/isoCodeListsExtensions/MD_RestrictionCode"
+                                          codeListValue="otherRestrictions"/>
+               </gmd:useConstraints>
+               <gmd:otherConstraints xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString>Pas de restriction d'accès public selon INSPIRE</gco:CharacterString>
+               </gmd:otherConstraints>
+               <gmd:otherConstraints>
+                  <gco:CharacterString/>
+               </gmd:otherConstraints>
+            </gmd:MD_LegalConstraints>
+         </gmd:resourceConstraints>
+         <gmd:resourceConstraints>
+            <gmd:MD_SecurityConstraints>
+               <gmd:useLimitation>
+                  <gco:CharacterString>Aucune contrainte</gco:CharacterString>
+               </gmd:useLimitation>
+               <gmd:classification>
+                  <gmd:MD_ClassificationCode codeList="https://registre.ign.fr/ign/legacy/isoCodeListsExtensions.xml#MD_ClassificationCode"
+                                             codeListValue="unclassified">unclassified</gmd:MD_ClassificationCode>
+               </gmd:classification>
+            </gmd:MD_SecurityConstraints>
+         </gmd:resourceConstraints>
+         <gmd:spatialRepresentationType>
+            <gmd:MD_SpatialRepresentationTypeCode codeList="https://registre.ign.fr/ign/legacy/isoCodeListsExtensions.xml#MD_SpatialRepresentationTypeCode"
+                                                  codeListValue="vector">vector</gmd:MD_SpatialRepresentationTypeCode>
+         </gmd:spatialRepresentationType>
+         <gmd:spatialResolution>
+            <gmd:MD_Resolution>
+               <gmd:equivalentScale>
+                  <gmd:MD_RepresentativeFraction id="IGNF_BDFORET_2-0.spatialResolution_1">
+                     <gmd:denominator>
+                        <gco:Integer>25000</gco:Integer>
+                     </gmd:denominator>
+                  </gmd:MD_RepresentativeFraction>
+               </gmd:equivalentScale>
+            </gmd:MD_Resolution>
+         </gmd:spatialResolution>
+         <gmd:language>
+            <gmd:LanguageCode codeList="https://registre.ign.fr/ign/legacy/isoCodeListsExtensions.xml#LanguageCode"
+                              codeListValue="fre">fre</gmd:LanguageCode>
+         </gmd:language>
+         <gmd:topicCategory>
+            <gmd:MD_TopicCategoryCode>non renseigné</gmd:MD_TopicCategoryCode>
+         </gmd:topicCategory>
+         <gmd:extent>
+            <gmd:EX_Extent>
+               <gmd:description>
+                  <gco:CharacterString>Extraction - Commande : dpsg2022-09-00123</gco:CharacterString>
+               </gmd:description>
+               <gmd:geographicElement>
+                  <gmd:EX_GeographicBoundingBox>
+                     <gmd:westBoundLongitude>
+                        <gco:Decimal>4.2290</gco:Decimal>
+                     </gmd:westBoundLongitude>
+                     <gmd:eastBoundLongitude>
+                        <gco:Decimal>5.8147</gco:Decimal>
+                     </gmd:eastBoundLongitude>
+                     <gmd:southBoundLatitude>
+                        <gco:Decimal>43.1581</gco:Decimal>
+                     </gmd:southBoundLatitude>
+                     <gmd:northBoundLatitude>
+                        <gco:Decimal>43.9213</gco:Decimal>
+                     </gmd:northBoundLatitude>
+                  </gmd:EX_GeographicBoundingBox>
+               </gmd:geographicElement>
+               <gmd:geographicElement>
+                  <gmd:EX_GeographicDescription>
+                     <gmd:geographicIdentifier>
+                        <gmd:RS_Identifier>
+                           <gmd:authority>
+                              <gmd:CI_Citation>
+                                 <gmd:title>
+                                    <gco:CharacterString>Codes INSEE : ISO3166 ou COG</gco:CharacterString>
+                                 </gmd:title>
+                                 <gmd:date>
+                                    <gmd:CI_Date>
+                                       <gmd:date>
+                                          <gco:Date>2005</gco:Date>
+                                       </gmd:date>
+                                       <gmd:dateType>
+                                          <gmd:CI_DateTypeCode codeList="https://registre.ign.fr/ign/legacy/isoCodeListsExtensions.xml#CI_DateTypeCode"
+                                                               codeListValue="publication">publication</gmd:CI_DateTypeCode>
+                                       </gmd:dateType>
+                                    </gmd:CI_Date>
+                                 </gmd:date>
+                                 <gmd:citedResponsibleParty>
+                                    <gmd:CI_ResponsibleParty>
+                                       <gmd:organisationName>
+                                          <gco:CharacterString>INSEE</gco:CharacterString>
+                                       </gmd:organisationName>
+                                       <gmd:contactInfo>
+                                          <gmd:CI_Contact>
+                                             <gmd:onlineResource>
+                                                <gmd:CI_OnlineResource>
+                                                   <gmd:linkage>
+                                                      <gmd:URL>http://xml.insee.fr/schema/index.html</gmd:URL>
+                                                   </gmd:linkage>
+                                                   <gmd:protocol>
+                                                      <gco:CharacterString>HTTP</gco:CharacterString>
+                                                   </gmd:protocol>
+                                                   <gmd:function>
+                                                      <gmd:CI_OnLineFunctionCode codeList="https://registre.ign.fr/ign/legacy/isoCodeListsExtensions.xml#CI_OnLineFunctionCode"
+                                                                                 codeListValue="information">information</gmd:CI_OnLineFunctionCode>
+                                                   </gmd:function>
+                                                </gmd:CI_OnlineResource>
+                                             </gmd:onlineResource>
+                                          </gmd:CI_Contact>
+                                       </gmd:contactInfo>
+                                       <gmd:role>
+                                          <gmd:CI_RoleCode codeList="https://registre.ign.fr/ign/legacy/isoCodeListsExtensions.xml#CI_RoleCode"
+                                                           codeListValue="custodian">custodian</gmd:CI_RoleCode>
+                                       </gmd:role>
+                                    </gmd:CI_ResponsibleParty>
+                                 </gmd:citedResponsibleParty>
+                              </gmd:CI_Citation>
+                           </gmd:authority>
+                           <gmd:code>
+                              <gco:CharacterString>D013</gco:CharacterString>
+                           </gmd:code>
+                           <gmd:codeSpace>
+                              <gco:CharacterString>http://xml.insee.fr/schema/cog.xsd#xpointer(//*[@name='Code_Département_stype'])</gco:CharacterString>
+                           </gmd:codeSpace>
+                           <gmd:version>
+                              <gco:CharacterString>2006</gco:CharacterString>
+                           </gmd:version>
+                        </gmd:RS_Identifier>
+                     </gmd:geographicIdentifier>
+                  </gmd:EX_GeographicDescription>
+               </gmd:geographicElement>
+            </gmd:EX_Extent>
+         </gmd:extent>
+         <gmd:extent>
+            <gmd:EX_Extent>
+               <gmd:description>
+                  <gco:CharacterString>Dates de démarrage et de fin de la cartographie du département</gco:CharacterString>
+               </gmd:description>
+               <gmd:temporalElement>
+                  <gmd:EX_TemporalExtent>
+                     <gmd:extent>
+                        <gml:TimePeriod gml:id="BDF_2-0_SHP_LAMB93_D013.temporalExtent_1">
+                           <gml:beginPosition>2009-07-06</gml:beginPosition>
+                           <gml:endPosition>2011-01-07</gml:endPosition>
+                        </gml:TimePeriod>
+                     </gmd:extent>
+                  </gmd:EX_TemporalExtent>
+               </gmd:temporalElement>
+            </gmd:EX_Extent>
+         </gmd:extent>
+         <gmd:supplementalInformation>
+            <gco:CharacterString>Initiée en 2007, la BD Forêt® version 2.0 remplace la version 1.0 produite historiquement par l’Inventaire forestier national, qui est désormais diffusée par l’Institut national de l’information géographique et forestière(IGN). La BD Forêt® version 2.0 est réalisée par emprises départementales sur le territoire métropolitain.</gco:CharacterString>
+         </gmd:supplementalInformation>
+      </gmd:MD_DataIdentification>
+   </gmd:identificationInfo>
+   <gmd:distributionInfo>
+      <gmd:MD_Distribution>
+         <gmd:distributionFormat>
+            <gmd:MD_Format id="IGNF_BDF_2-0_SHP_LAMB93_D013.distributionFormat.AV">
+               <gmd:name>
+                  <gco:CharacterString>non renseigné</gco:CharacterString>
+               </gmd:name>
+               <gmd:version>
+                  <gco:CharacterString>non renseigné</gco:CharacterString>
+               </gmd:version>
+               <gmd:fileDecompressionTechnique>
+                  <gco:CharacterString>gunzip</gco:CharacterString>
+               </gmd:fileDecompressionTechnique>
+               <gmd:formatDistributor>
+                  <gmd:MD_Distributor>
+                     <gmd:distributorContact>
+                        <gmd:CI_ResponsibleParty>
+                           <gmd:organisationName>
+                              <gco:CharacterString>non renseigné</gco:CharacterString>
+                           </gmd:organisationName>
+                           <gmd:contactInfo>
+                              <gmd:CI_Contact>
+                                 <gmd:onlineResource>
+                                    <gmd:CI_OnlineResource>
+                                       <gmd:linkage>
+                                          <gmd:URL>non renseigné</gmd:URL>
+                                       </gmd:linkage>
+                                       <gmd:protocol>
+                                          <gco:CharacterString>non renseigné</gco:CharacterString>
+                                       </gmd:protocol>
+                                    </gmd:CI_OnlineResource>
+                                 </gmd:onlineResource>
+                              </gmd:CI_Contact>
+                           </gmd:contactInfo>
+                           <gmd:role>
+                              <gmd:CI_RoleCode codeList="https://registre.ign.fr/ign/legacy/isoCodeListsExtensions.xml#CI_RoleCode"
+                                               codeListValue="originator">originator</gmd:CI_RoleCode>
+                           </gmd:role>
+                        </gmd:CI_ResponsibleParty>
+                     </gmd:distributorContact>
+                  </gmd:MD_Distributor>
+               </gmd:formatDistributor>
+            </gmd:MD_Format>
+         </gmd:distributionFormat>
+         <gmd:distributor>
+            <gmd:MD_Distributor id="IGNF_BDF_2-0_SHP_LAMB93_D013.distributor.IGN-F">
+               <gmd:distributorContact>
+                  <gmd:CI_ResponsibleParty>
+                     <gmd:organisationName>
+                        <gco:CharacterString>Institut national de l'information géographique et forestière (IGN-F)</gco:CharacterString>
+                     </gmd:organisationName>
+                     <gmd:contactInfo>
+                        <gmd:CI_Contact>
+                           <gmd:address>
+                              <gmd:CI_Address>
+                                 <gmd:deliveryPoint>
+                                    <gco:CharacterString>IGN - Service clients</gco:CharacterString>
+                                 </gmd:deliveryPoint>
+                                 <gmd:deliveryPoint>
+                                    <gco:CharacterString>73 avenue de Paris</gco:CharacterString>
+                                 </gmd:deliveryPoint>
+                                 <gmd:city>
+                                    <gco:CharacterString>SAINT-MANDE cedex</gco:CharacterString>
+                                 </gmd:city>
+                                 <gmd:postalCode>
+                                    <gco:CharacterString>94165</gco:CharacterString>
+                                 </gmd:postalCode>
+                                 <gmd:country>
+                                    <gco:CharacterString>FRANCE</gco:CharacterString>
+                                 </gmd:country>
+                                 <gmd:electronicMailAddress>
+                                    <gco:CharacterString>contact.geoservices@ign.fr</gco:CharacterString>
+                                 </gmd:electronicMailAddress>
+                              </gmd:CI_Address>
+                           </gmd:address>
+                        </gmd:CI_Contact>
+                     </gmd:contactInfo>
+                     <gmd:role>
+                        <gmd:CI_RoleCode codeList="https://registre.ign.fr/ign/legacy/isoCodeListsExtensions.xml#CI_RoleCode"
+                                         codeListValue="pointOfContact">pointOfContact</gmd:CI_RoleCode>
+                     </gmd:role>
+                  </gmd:CI_ResponsibleParty>
+               </gmd:distributorContact>
+               <gmd:distributionOrderProcess>
+                  <gmd:MD_StandardOrderProcess>
+                     <gmd:fees>
+                        <gco:CharacterString>Voir catalogue des prix IGN</gco:CharacterString>
+                     </gmd:fees>
+                     <gmd:orderingInstructions>
+                        <gco:CharacterString>Voir site internet www.ign.fr</gco:CharacterString>
+                     </gmd:orderingInstructions>
+                  </gmd:MD_StandardOrderProcess>
+               </gmd:distributionOrderProcess>
+            </gmd:MD_Distributor>
+         </gmd:distributor>
+         <gmd:transferOptions>
+            <gmd:MD_DigitalTransferOptions>
+               <gmd:onLine>
+                  <gmd:CI_OnlineResource>
+                     <gmd:linkage>
+                        <gmd:URL>http://www.ign.fr/</gmd:URL>
+                     </gmd:linkage>
+                     <gmd:function>
+                        <gmd:CI_OnLineFunctionCode codeList="https://registre.ign.fr/ign/legacy/isoCodeListsExtensions.xml#CI_OnLineFunctionCode"
+                                                   codeListValue="information">information</gmd:CI_OnLineFunctionCode>
+                     </gmd:function>
+                  </gmd:CI_OnlineResource>
+               </gmd:onLine>
+               <gmd:onLine>
+                  <gmd:CI_OnlineResource>
+                     <gmd:linkage>
+                        <gmd:URL>http://www.geoportail.fr/</gmd:URL>
+                     </gmd:linkage>
+                     <gmd:function>
+                        <gmd:CI_OnLineFunctionCode codeList="https://registre.ign.fr/ign/legacy/isoCodeListsExtensions.xml#CI_OnLineFunctionCode"
+                                                   codeListValue="information">information</gmd:CI_OnLineFunctionCode>
+                     </gmd:function>
+                  </gmd:CI_OnlineResource>
+               </gmd:onLine>
+            </gmd:MD_DigitalTransferOptions>
+         </gmd:transferOptions>
+      </gmd:MD_Distribution>
+   </gmd:distributionInfo>
+   <gmd:dataQualityInfo>
+      <gmd:DQ_DataQuality>
+         <gmd:scope>
+            <gmd:DQ_Scope>
+               <gmd:level>
+                  <gmd:MD_ScopeCode codeList="https://registre.ign.fr/ign/legacy/isoCodeListsExtensions.xml#MD_ScopeCode"
+                                    codeListValue="dataset">dataset</gmd:MD_ScopeCode>
+               </gmd:level>
+            </gmd:DQ_Scope>
+         </gmd:scope>
+         <gmd:lineage>
+            <gmd:LI_Lineage>
+               <gmd:statement>
+                  <gco:CharacterString>PVA_2008,</gco:CharacterString>
+               </gmd:statement>
+               <gmd:processStep>
+                  <gmd:LI_ProcessStep>
+                     <gmd:description>
+                        <gco:CharacterString>Information spécifique au lot</gco:CharacterString>
+                     </gmd:description>
+                     <gmd:rationale>
+                        <gco:CharacterString>production</gco:CharacterString>
+                     </gmd:rationale>
+                     <gmd:dateTime>
+                        <gco:DateTime/>
+                     </gmd:dateTime>
+                     <gmd:processor>
+                        <gmd:CI_ResponsibleParty>
+                           <gmd:organisationName>
+                              <gco:CharacterString>Institut national de l'information géographique et forestière (IGN-F)</gco:CharacterString>
+                           </gmd:organisationName>
+                           <gmd:contactInfo>
+                              <gmd:CI_Contact>
+                                 <gmd:address>
+                                    <gmd:CI_Address>
+                                       <gmd:deliveryPoint>
+                                          <gco:CharacterString>IGN - Service clients</gco:CharacterString>
+                                       </gmd:deliveryPoint>
+                                       <gmd:deliveryPoint>
+                                          <gco:CharacterString>73 avenue de Paris</gco:CharacterString>
+                                       </gmd:deliveryPoint>
+                                       <gmd:city>
+                                          <gco:CharacterString>SAINT-MANDE cedex</gco:CharacterString>
+                                       </gmd:city>
+                                       <gmd:postalCode>
+                                          <gco:CharacterString>94165</gco:CharacterString>
+                                       </gmd:postalCode>
+                                       <gmd:country>
+                                          <gco:CharacterString>FRANCE</gco:CharacterString>
+                                       </gmd:country>
+                                       <gmd:electronicMailAddress>
+                                          <gco:CharacterString>contact.geoservices@ign.fr</gco:CharacterString>
+                                       </gmd:electronicMailAddress>
+                                    </gmd:CI_Address>
+                                 </gmd:address>
+                              </gmd:CI_Contact>
+                           </gmd:contactInfo>
+                           <gmd:role>
+                              <gmd:CI_RoleCode codeList="https://registre.ign.fr/ign/legacy/isoCodeListsExtensions.xml#CI_RoleCode"
+                                               codeListValue="originator">originator</gmd:CI_RoleCode>
+                           </gmd:role>
+                        </gmd:CI_ResponsibleParty>
+                     </gmd:processor>
+                  </gmd:LI_ProcessStep>
+               </gmd:processStep>
+            </gmd:LI_Lineage>
+         </gmd:lineage>
+      </gmd:DQ_DataQuality>
+   </gmd:dataQualityInfo>
+   <gmd:metadataConstraints>
+      <gmd:MD_SecurityConstraints>
+         <gmd:useLimitation>
+            <gco:CharacterString>Aucune contrainte</gco:CharacterString>
+         </gmd:useLimitation>
+         <gmd:classification>
+            <gmd:MD_ClassificationCode codeList="https://registre.ign.fr/ign/legacy/isoCodeListsExtensions.xml#MD_ClassificationCode"
+                                       codeListValue="unclassified">unclassified</gmd:MD_ClassificationCode>
+         </gmd:classification>
+      </gmd:MD_SecurityConstraints>
+   </gmd:metadataConstraints>
+</gmd:MD_Metadata>

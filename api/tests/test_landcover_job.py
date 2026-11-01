@@ -3,13 +3,16 @@
 import gzip
 import hashlib
 import json
+import xml.etree.ElementTree as ET
 from copy import deepcopy
 from pathlib import Path
 
 import pytest
+import shapely
 from mycoradar import landcover_job as job
 from mycoradar.grid_job import canonical_json, write_artifact
 from pydantic import ValidationError
+from pyproj import CRS, Transformer
 from shapely.geometry import MultiPolygon, Polygon, box, mapping, shape
 
 
@@ -335,14 +338,71 @@ def test_cli_publishes_atomically_and_failures_never_echo_documents(manifest, tm
     assert json.loads(result.out)["status"] == "unavailable"
 
 
-def test_frozen_real_ign_extract_has_valid_clipped_categories_and_unknown_years():
+def test_frozen_real_ign_extract_has_valid_clipped_categories_and_documented_photo_year():
     path = Path(__file__).resolve().parents[2] / "data/landcover/bdforet-sample/manifest.json"
     a = job.build_artifact(path)
     assert a["quality"]["received"] == 48 and a["quality"]["output"] == 45
     assert a["quality"]["repaired_geometries"] == 0
-    assert a["quality"]["unknown_source_year"] == 45
+    assert a["quality"]["unknown_source_year"] == 0
     assert a["quality"]["vegetation_counts"]["LA4"] == 5
     assert all(shape(f["geometry"]).is_valid for f in a["features"])
+    assert all(f["properties"]["source_year"] == 2008 for f in a["features"])
+    assert all(f["properties"]["year_meaning"] == "acquisition" for f in a["features"])
+    assert all(f["properties"]["current_ground_cover_verified"] is False for f in a["features"])
+    assert a["coverage_status"] == "partial" and a["forest_fraction"] is None
+
+
+def test_real_departmental_metadata_dates_photography_separately_from_edition_and_capture():
+    root = Path(__file__).resolve().parents[2]
+    folder = root / "data/landcover/bdforet-sample"
+    evidence = json.loads((root / "docs/evidence/MR-012-vintage.json").read_bytes())
+    metadata = (folder / "department-metadata.xml").read_bytes()
+    assert hashlib.sha256(metadata).hexdigest() == evidence["metadata_sha256"]
+    xml = ET.fromstring(metadata)
+    ns = {"gmd": "http://www.isotc211.org/2005/gmd", "gco": "http://www.isotc211.org/2005/gco"}
+    lineage = xml.findtext(".//gmd:LI_Lineage/gmd:statement/gco:CharacterString", namespaces=ns)
+    edition = xml.findtext(".//gmd:editionDate/gco:Date", namespaces=ns)
+    assert lineage == evidence["metadata_lineage"] == "PVA_2008,"
+    assert edition == evidence["edition_date"] == "2014-04-01"
+    spec = job.Manifest.model_validate_json((folder / "manifest.json").read_bytes())
+    assert spec.source_year == evidence["source_year"] == 2008
+    assert spec.year_meaning == evidence["year_meaning"] == "acquisition"
+    assert spec.year_evidence_url == evidence["resource_url"]
+    assert spec.provenance.fetched_at.year == 2026
+    assert spec.provenance.source_published_at is None
+
+
+def test_all_frozen_wfs_objects_match_dated_departmental_ids_attributes_and_geometries():
+    root = Path(__file__).resolve().parents[2]
+    folder = root / "data/landcover/bdforet-sample"
+    evidence = json.loads((root / "docs/evidence/MR-012-vintage.json").read_bytes())
+    reference = (folder / "reference-lambert93.geojson.gz").read_bytes()
+    assert hashlib.sha256(reference).hexdigest() == evidence["reference_sha256"]
+    raw = gzip.decompress(reference)
+    assert hashlib.sha256(raw).hexdigest() == evidence["reference_entity_sha256"]
+    original = gzip.decompress((folder / "source.geojson.gz").read_bytes())
+    assert hashlib.sha256(original).hexdigest() == evidence["wfs_entity_sha256"]
+    wfs = {f["properties"]["id"]: f for f in json.loads(original)["features"]}
+    data = json.loads(raw)
+    assert data["crs"]["properties"]["name"] == "EPSG:2154"
+    source = {f["properties"]["ID"]: f for f in data["features"]}
+    assert len(source) == len(data["features"]) == len(wfs) == 48
+    assert set(source) == set(wfs)
+    transformer = Transformer.from_crs("OGC:CRS84", CRS.from_epsg(2154), always_xy=True)
+    for identifier, feature in source.items():
+        assert feature["properties"] == {
+            k.upper(): v for k, v in wfs[identifier]["properties"].items()
+        }
+        original_shape = shape(feature["geometry"])
+        wfs_shape = shapely.transform(
+            shape(wfs[identifier]["geometry"]), transformer.transform, interleaved=False
+        )
+        assert len(shapely.get_coordinates(original_shape)) == len(
+            shapely.get_coordinates(wfs_shape)
+        )
+        # Numeric serialization/reprojection comparison, never an accuracy claim on the ground.
+        assert original_shape.hausdorff_distance(wfs_shape) < 0.001
+    assert evidence["comparison"]["tolerance_is_ground_accuracy"] is False
 
 
 @pytest.mark.parametrize("coordinate", [True, "0.005", float("nan"), float("inf")])

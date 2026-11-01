@@ -23,7 +23,7 @@
   ],
   "source_year_field_present": false,
   "source": {
-    "attribution": "IGN - BD Foret V2, public WFS extract; source year unavailable; retrieval separate from acquisition.",
+    "attribution": "IGN - BD Foret V2, aerial photography 2008, edition 2014-04-01; WFS capture in 2026, not current ground cover.",
     "effective_resolution_m": null,
     "fetched_at": "2026-10-31T15:14:06.211502Z",
     "license": "Etalab-2.0",
@@ -46,16 +46,17 @@
   "archive_sha256": "eb3c76648c4e3c87fa27d502794857ca4f636d80ae0bc1276d969ffa0cf6d642",
   "rights_interpretation": {
     "commercial_copy_redistribution_derivatives": "permitted for this reviewed public extract under LO 2.0 attribution",
-    "required_credit": "IGN - BD Foret V2; source URL and unknown source vintage; capture date separate",
+    "required_credit": "IGN - BD Foret V2; source aerial photographs 2008, edition 2014-04-01; WFS capture 2026 separate",
     "usage": "bounded local normalization and public landcover artifact, no private observations or access-right claim",
     "automatic_polling": false,
     "account_created": false,
     "cloud_resource_created": false
   },
   "limitations": [
-    "per_feature_year_unavailable",
     "not_current_ground_cover_validation",
     "no_binary_forest_or_negative_inference",
     "no_source_effective_resolution_established"
-  ]
+  ],
+  "vintage_reviewed_at": "2026-11-01T18:20:00.576932+00:00",
+  "vintage_evidence": "docs/evidence/MR-012-vintage.json"
 }
