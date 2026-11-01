@@ -1,0 +1,130 @@
+{
+  "schema_version": "feature-join-execution-v1",
+  "recorded_at": "2026-11-01T16:34:59.080865+00:00",
+  "input_kind": "synthetic",
+  "input_sha256": "0e588f18d1c38d4a6153b8d99b2d5911de2346d815ea90d9a2365226c383d67d",
+  "scientific_admission": false,
+  "real_sources_imported": false,
+  "native": {
+    "job_id": "ae4bb95fdd0edcccae218eaa462bb8806ee02f94448137d7a70207a7d51b0b97",
+    "engine_versions": {
+      "python": "3.12.16",
+      "shapely": "2.2.0",
+      "geos": "3.14.1",
+      "pyproj": "3.8.0",
+      "proj": "9.8.1",
+      "numpy": "2.5.4",
+      "pydantic": "2.14.1",
+      "platform": "Windows-11-10.0.26300-SP0",
+      "implementation_sha256": "fd22a5be2cec7cca8fbf464a3c7ca5cdcb4c6086ac86f9ac37cd1cc0fb1244c4"
+    }
+  },
+  "docker": {
+    "job_id": "07f4b9fd246e1e7c65fc3835dae69384c4580a36033f0ea33413bc5367becb75",
+    "engine_versions": {
+      "python": "3.12.16",
+      "shapely": "2.2.0",
+      "geos": "3.14.1",
+      "pyproj": "3.8.0",
+      "proj": "9.8.1",
+      "numpy": "2.5.4",
+      "pydantic": "2.14.1",
+      "platform": "Linux-6.18.54.1-microsoft-standard-WSL2-x86_64-with-glibc2.41",
+      "implementation_sha256": "fd22a5be2cec7cca8fbf464a3c7ca5cdcb4c6086ac86f9ac37cd1cc0fb1244c4"
+    },
+    "network": "none",
+    "input_mount": "read_only",
+    "uid": 10001
+  },
+  "native_docker_feature_rows_equal": true,
+  "cross_platform_job_ids_equal": false,
+  "rows": [
+    {
+      "cell_id": "test:cell",
+      "feature_id": "test:continuous",
+      "target_at": "2026-01-03T00:00:00+00:00",
+      "as_of": "2026-01-03T00:00:00+00:00",
+      "value": 5.0,
+      "unit": "test-unit",
+      "status": "available",
+      "reason": null,
+      "usable_area_fraction": 1.0,
+      "contributing_patch_ids": [
+        "test:left",
+        "test:right"
+      ],
+      "source_id": "test:source",
+      "source_version": "test-v1",
+      "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "source_data_cutoff": "2026-01-01T00:00:00+00:00",
+      "source_published_at": "2026-01-02T00:00:00+00:00",
+      "source_fetched_at": "2026-01-02T12:00:00+00:00",
+      "effective_resolution_m": null,
+      "display_cell_size_m": 1000,
+      "location_uncertainty_m": null
+    },
+    {
+      "cell_id": "test:cell",
+      "feature_id": "test:future",
+      "target_at": "2026-01-03T00:00:00+00:00",
+      "as_of": "2026-01-03T00:00:00+00:00",
+      "value": null,
+      "unit": "test-unit",
+      "status": "unavailable",
+      "reason": "source_not_available_as_of",
+      "usable_area_fraction": 0.0,
+      "contributing_patch_ids": [],
+      "source_id": "test:future-source",
+      "source_version": "test-v1",
+      "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "source_data_cutoff": "2026-01-01T00:00:00+00:00",
+      "source_published_at": "2026-01-02T00:00:00+00:00",
+      "source_fetched_at": "2026-01-04T00:00:00+00:00",
+      "effective_resolution_m": null,
+      "display_cell_size_m": 1000,
+      "location_uncertainty_m": null
+    },
+    {
+      "cell_id": "test:cell",
+      "feature_id": "test:missing",
+      "target_at": "2026-01-03T00:00:00+00:00",
+      "as_of": "2026-01-03T00:00:00+00:00",
+      "value": null,
+      "unit": "test-unit",
+      "status": "unavailable",
+      "reason": "incomplete_usable_coverage",
+      "usable_area_fraction": 0.25,
+      "contributing_patch_ids": [],
+      "source_id": "test:source",
+      "source_version": "test-v1",
+      "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "source_data_cutoff": "2026-01-01T00:00:00+00:00",
+      "source_published_at": "2026-01-02T00:00:00+00:00",
+      "source_fetched_at": "2026-01-02T12:00:00+00:00",
+      "effective_resolution_m": null,
+      "display_cell_size_m": 1000,
+      "location_uncertainty_m": null
+    }
+  ],
+  "observed_validation": {
+    "python_passed": 391,
+    "python_postgis_skipped": 51,
+    "new_feature_tests": 48,
+    "ruff_lint": "passed",
+    "ruff_format": "passed",
+    "mypy_sources": 21,
+    "docker_builds": [
+      "api",
+      "feature-job"
+    ],
+    "cli_replay_native": "passed, identical bytes and mtime",
+    "cli_replay_docker": "passed, identical bytes and mtime",
+    "api_uid": 10001,
+    "api_geo_dependencies": false
+  },
+  "not_run_locally": [
+    "PostGIS/Compose integration suite",
+    "frontend unit/build/browser suites"
+  ],
+  "ci": "pending"
+}
