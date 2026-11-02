@@ -116,7 +116,7 @@ Statuts autorisés : `TODO`, `IN_PROGRESS`, `BLOCKED`, `DONE`. **Une tâche est 
 |---|---|---|---|
 | MR-020 | TODO | Polling horaire, jobs d'ingestion idempotents, queues et gestion des quotas | Simulation nouvelles données/aucun changement/429/timeout ; aucune double ingestion |
 | MR-021 | TODO | Recalcul incrémental région/espèce/échéance + snapshot atomique | Rejouer deux fois n'altère pas les résultats ; rollback vers dernière version saine |
-| MR-022 | TODO | Publication quotidienne contrôlée, cache CDN/ETag, invalidation et tests d'horloge | Cas nouvelle donnée, données anciennes, retard fournisseur, échec pipeline ; timestamps visibles |
+| MR-022 | IN_PROGRESS | Publication quotidienne contrôlée, cache CDN/ETag, invalidation et tests d’horloge | Tranche ETag des quatre GET du catalogue admis : 304 sans corps après validation, cache privé avec revalidation, erreurs no-store et provenance conservée. 377 Python dont 34 cas cache et smoke HTTP Uvicorn réussis ; nouvelle CI à observer. Publication quotidienne et activation CDN non livrées. [Contrat](docs/MR-022.md), [preuve locale](docs/evidence/MR-022-local.json). |
 | MR-023 | TODO | Observabilité (logs structurés, métriques âge données, runs, alertes), sauvegardes et runbook | Échec injecté détecté ; procédure reprise documentée et testée |
 
 **Jalon M4 :** publication autonome vérifiable et résiliente ; « actualisé » signifie précisément ce qui l'est.
