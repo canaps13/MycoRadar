@@ -7,7 +7,7 @@ import os
 import re
 import sqlite3
 import tempfile
-from collections.abc import Iterator
+from collections.abc import Callable, Iterator
 from contextlib import contextmanager
 from datetime import UTC, datetime
 from pathlib import Path
@@ -35,14 +35,13 @@ class InputVersion(Contract):
     sha256: Digest
 
 
-class Entry(Contract):
+class Target(Contract):
     region_id: Id
     taxon_id: Id
     valid_at: str
     layer: Literal["habitat", "fruiting"]
     model_version: Id
     input_versions: Annotated[tuple[InputVersion, ...], Field(min_length=1, max_length=16)]
-    sha256: Digest
 
     @field_validator("valid_at")
     @classmethod
@@ -66,6 +65,10 @@ class Entry(Contract):
         ).hexdigest()
 
 
+class Entry(Target):
+    sha256: Digest
+
+
 class Update(Entry):
     path: Annotated[str, Field(min_length=1, max_length=2048)]
 
@@ -73,6 +76,11 @@ class Update(Entry):
 class Batch(Contract):
     schema_version: Literal["snapshot-batch-v1"]
     updates: Annotated[tuple[Update, ...], Field(min_length=1, max_length=32)]
+
+
+class RecomputePlan(Contract):
+    schema_version: Literal["recompute-plan-v1"]
+    targets: Annotated[tuple[Target, ...], Field(min_length=1, max_length=32)]
 
 
 class Snapshot(Contract):
@@ -178,6 +186,44 @@ class Store:
             parse_object(data)
             entry = Entry.model_validate(update.model_dump(exclude={"path"}))
             prepared.append((entry, data))
+        return self._commit(prepared, expected=expected)
+
+    def recompute(
+        self, plan_path: Path, calculate: Callable[[Target], bytes], *, expected: str | None
+    ) -> dict[str, object]:
+        """Invoke an explicit caller adapter only for changed dependencies, outside the lock."""
+        plan = RecomputePlan.model_validate(parse_object(read_bytes(plan_path, MAX_MANIFEST)))
+        keys = {target.key() for target in plan.targets}
+        if len(keys) != len(plan.targets):
+            raise ValueError("duplicate_target")
+        if self.head() != expected:
+            raise Conflict("snapshot_head_conflict")
+        old = self.read(expected) if expected else None
+        entries = old.entries if old else {}
+        if len(keys | entries.keys()) > 128:
+            raise ValueError("snapshot_budget_exceeded")
+        prepared = []
+        for target in plan.targets:
+            prior = entries.get(target.key())
+            if (
+                prior
+                and prior.model_version == target.model_version
+                and prior.input_versions == target.input_versions
+            ):
+                continue
+            metadata = target.model_dump(mode="json")
+            # A callback receives its own metadata copy, never the committed version declaration.
+            data = calculate(Target.model_validate(metadata))
+            if type(data) is not bytes or len(data) > MAX_PAYLOAD:
+                raise ValueError("invalid_calculation_output")
+            parse_object(data)
+            entry = Entry.model_validate({**metadata, "sha256": hashlib.sha256(data).hexdigest()})
+            prepared.append((entry, data))
+        return {**self._commit(prepared, expected=expected), "calculated_targets": len(prepared)}
+
+    def _commit(
+        self, prepared: list[tuple[Entry, bytes]], *, expected: str | None
+    ) -> dict[str, object]:
         with self._lock():
             previous = self.head()
             if previous != expected:

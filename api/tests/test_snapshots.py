@@ -181,3 +181,89 @@ def test_rollback_fails_if_expected_head_is_stale(setup):
     old = store.publish(write(), expected=None)
     with pytest.raises(Conflict):
         store.rollback(old["run_id"], expected="0" * 64)
+
+
+def plan_file(store, batch):
+    path = store.root.parent / "plan.json"
+    targets = [
+        {k: v for k, v in row.items() if k not in {"path", "sha256"}} for row in batch["updates"]
+    ]
+    path.write_bytes(canonical({"schema_version": "recompute-plan-v1", "targets": targets}))
+    return path
+
+
+def test_recompute_calls_only_affected_target_then_no_callback_on_replay(setup):
+    store, batch, write = setup
+    batch["updates"].append({**batch["updates"][0], "region_id": "synthetic-south"})
+    old = store.publish(write(), expected=None)
+    original = store.read().entries
+    batch["updates"][0] = {**batch["updates"][0], "model_version": "synthetic-v2"}
+    calls = []
+
+    def calculate(target):
+        calls.append(target.region_id)
+        return canonical({"synthetic": True, "score": None})
+
+    plan = plan_file(store, batch)
+    new = store.recompute(plan, calculate, expected=old["run_id"])
+    assert calls == ["synthetic-north"] and new["calculated_targets"] == 1
+    for key, entry in original.items():
+        if entry.region_id == "synthetic-south":
+            assert store.read().entries[key] == entry
+    again = store.recompute(plan, lambda _: pytest.fail("unchanged target"), expected=new["run_id"])
+    assert again["created"] is False and again["calculated_targets"] == 0
+
+
+def test_calculation_runs_outside_lock_and_concurrent_commit_is_not_overwritten(setup):
+    store, batch, write = setup
+    old = store.publish(write(), expected=None)
+    batch["updates"][0]["model_version"] = "planned-v2"
+    plan = plan_file(store, batch)
+    concurrent = []
+
+    def calculate(_target):
+        batch["updates"][0]["model_version"] = "concurrent-v3"
+        concurrent.append(store.publish(write(), expected=old["run_id"])["run_id"])
+        return canonical({"synthetic": True})
+
+    with pytest.raises(Conflict):
+        store.recompute(plan, calculate, expected=old["run_id"])
+    assert store.head() == concurrent[0]
+
+
+def test_late_calculation_failure_keeps_snapshot_and_earlier_outputs_private(setup):
+    store, batch, write = setup
+    old = store.publish(write(), expected=None)
+    before = set((store.root / "objects").iterdir())
+    batch["updates"] = [{**batch["updates"][0], "region_id": f"synthetic-{i}"} for i in range(2)]
+
+    def calculate(target):
+        if target.region_id.endswith("1"):
+            raise RuntimeError("Synthetic model failure")
+        return canonical({"synthetic": True, "changed": 1})
+
+    with pytest.raises(RuntimeError):
+        store.recompute(plan_file(store, batch), calculate, expected=old["run_id"])
+    assert store.head() == old["run_id"] and set((store.root / "objects").iterdir()) == before
+
+
+@pytest.mark.parametrize("output", [b"NaN", b"[]", b"{", "not bytes", b" " * 1048577])
+def test_invalid_calculator_output_is_never_staged(setup, output):
+    store, batch, _ = setup
+    with pytest.raises(ValueError):
+        store.recompute(plan_file(store, batch), lambda _: output, expected=None)
+    assert store.head() is None
+
+
+def test_callback_metadata_mutation_does_not_change_declared_versions(setup):
+    store, batch, _ = setup
+
+    def calculate(target):
+        target.model_version = "mutated"
+        target.input_versions[0].sha256 = "f" * 64
+        return canonical({"synthetic": True})
+
+    store.recompute(plan_file(store, batch), calculate, expected=None)
+    entry = next(iter(store.read().entries.values()))
+    assert entry.model_version == "synthetic-model-v1"
+    assert entry.input_versions[0].sha256 == "a" * 64

@@ -45,6 +45,12 @@ jobs:
           python /smoke.py --input /input
       - id: postgis_tests
         run: uv run --locked pytest -m integration
+      - id: recompute_smoke
+        run: >-
+          docker run --rm --network none
+          --mount "type=bind,source=${PWD}/scripts/check_snapshot_plan.py,target=/smoke.py,readonly"
+          "$(docker compose --env-file .env.example images -q api)"
+          python /smoke.py
       - id: migration_replay
         run: docker compose --env-file .env.example run --rm migrate
       - id: web_install
@@ -60,7 +66,7 @@ jobs:
           CI_STEPS_JSON: ${{ toJSON(steps) }}
         run: >-
           python scripts/ci_summary.py python_install compose_build stack_health snapshot_smoke
-          postgis_tests migration_replay web_install browser_install browser_tests
+          postgis_tests recompute_smoke migration_replay web_install browser_install browser_tests
       - name: Container state and logs
         if: always()
         run: |
