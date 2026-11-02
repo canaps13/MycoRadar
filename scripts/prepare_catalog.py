@@ -7,6 +7,7 @@ from pathlib import Path
 
 from mycoradar.catalog import DEFAULT_CATALOG
 from mycoradar.catalog_models import Snapshot
+from mycoradar.exploration import CONTEXT_PATH, ExplorerContext
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -62,20 +63,29 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true")
     args = parser.parse_args()
-    content = build_catalog()
-    checksum = hashlib.sha256(content).hexdigest() + "\n"
-    if args.check:
-        if (
-            DEFAULT_CATALOG.read_bytes() != content
-            or DEFAULT_CATALOG.with_suffix(".sha256").read_text(encoding="ascii") != checksum
-        ):
-            raise ValueError("Regenerate the committed catalogue and checksum")
-        print("Catalogue inputs, publication and SHA-256 verified.")
-    else:
-        DEFAULT_CATALOG.parent.mkdir(parents=True, exist_ok=True)
-        DEFAULT_CATALOG.write_bytes(content)
-        DEFAULT_CATALOG.with_suffix(".sha256").write_text(checksum, encoding="ascii")
-        print(f"Published {DEFAULT_CATALOG.name}: {checksum.strip()}")
+    manifest = json.loads((ROOT / "data/catalog/manifest.json").read_text(encoding="utf-8"))
+    context = ExplorerContext.model_validate(manifest["explorer"])
+    publications = (
+        (DEFAULT_CATALOG, build_catalog()),
+        (CONTEXT_PATH, (context.model_dump_json() + "\n").encode()),
+    )
+    for path, content in publications:
+        checksum = hashlib.sha256(content).hexdigest() + "\n"
+        if args.check:
+            if (
+                path.read_bytes() != content
+                or path.with_suffix(".sha256").read_text(encoding="ascii") != checksum
+            ):
+                raise ValueError("Regenerate the committed catalogue/context and checksums")
+        else:
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_bytes(content)
+            path.with_suffix(".sha256").write_text(checksum, encoding="ascii")
+    print(
+        "Catalogue and explorer context verified."
+        if args.check
+        else "Catalogue and explorer context published."
+    )
 
 
 if __name__ == "__main__":
