@@ -18,8 +18,17 @@ def not_modified(header: str | None, current: str) -> bool:
     if value == "*":
         return True
     tags: list[str] = []
+    empty = 0
     position = 0
     while position < len(value):
+        if value[position] == ",":
+            empty += 1
+            if empty > 32:
+                return False
+            position += 1
+            while position < len(value) and value[position] in " \t":
+                position += 1
+            continue
         match = ENTITY_TAG.match(value, position)
         if match is None or len(tags) >= 32:
             return False
@@ -34,4 +43,4 @@ def not_modified(header: str | None, current: str) -> bool:
         position += 1
         while position < len(value) and value[position] in " \t":
             position += 1
-    return False
+    return current.removeprefix("W/") in tags

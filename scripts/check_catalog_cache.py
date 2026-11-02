@@ -16,13 +16,14 @@ def check_endpoint(base: str) -> None:
         body = json.load(response)
         assert body["items"][0]["id"] == "FR-13"
         assert body["items"][0]["geometry"]["type"] == "MultiPolygon"
-    try:
-        with urlopen(Request(url, headers={"If-None-Match": tag}), timeout=10):
-            raise AssertionError("Expected 304")
-    except HTTPError as response:
-        assert response.code == 304 and response.read() == b""
-        assert response.headers["ETag"] == tag
-        assert response.headers["Cache-Control"] == "private, no-cache"
+    for validator in (tag, f", {tag},, "):
+        try:
+            with urlopen(Request(url, headers={"If-None-Match": validator}), timeout=10):
+                raise AssertionError("Expected 304")
+        except HTTPError as response:
+            assert response.code == 304 and response.read() == b""
+            assert response.headers["ETag"] == tag
+            assert response.headers["Cache-Control"] == "private, no-cache"
     for query, expected in (
         ("limit=0", 422),
         ("catalog_version=" + "0" * 64, 409),

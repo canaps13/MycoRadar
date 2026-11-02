@@ -2,8 +2,8 @@
   "observed_at": "2026-11-02T19:49:58.437036+00:00",
   "scope": "ETag revalidation of admitted catalogue only; no shared CDN or scientific publication.",
   "tests": {
-    "python_passed": 377,
-    "cache_cases": 34,
+    "python_passed": 379,
+    "cache_cases": 36,
     "postgis_deselected": 51,
     "ruff_lint": "passed",
     "ruff_format": "passed",
@@ -13,10 +13,11 @@
     "server": "Uvicorn; stopped after verification",
     "surface": "API only; proxy covered by CI",
     "conditional_304_verified": true,
-    "typed_errors_remain_no_store": true
+    "typed_errors_remain_no_store": true,
+    "empty_list_elements_verified": true
   },
   "implementation_sha256": {
-    "http_cache.py": "b5e9b10aa2f93510a7787cfea8ce30c358ec9ce2332d572eb8401ad9e6f91bbb",
+    "http_cache.py": "84b01ee5f64a508ab17037ec246febdc8b06c0d33610b01bf1e5d4085119056e",
     "catalog_api.py": "2d06f3ebb7dee513b512bf72b68de3e46d7214c1be363a295a818864f01868c1"
   },
   "cache_control": "private, no-cache",
