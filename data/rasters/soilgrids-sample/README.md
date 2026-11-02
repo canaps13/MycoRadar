@@ -9,7 +9,11 @@ Licence [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
 conserve URL, SHA-256, CRS, licence et conventions. `normalized.json` est une
 sortie Windows gelée : conversion × 0,1 en pH, huit zéros ambigus exclus par
 politique opérateur. Leur sens n'est pas établi et aucun NoData producteur
-n'est déclaré. Pas de couche publique ni score issu de cet échantillon.
+n'est déclaré dans ce fichier WCS. Le [repli fichier natif](../soilgrids-file-sample/README.md)
+retrouve ces huit positions sous forme de NoData explicites, avec 56 autres
+valeurs identiques ; cette comparaison ne modifie pas le fichier WCS ni ses
+métadonnées absentes et n'établit aucune convention globale de zéro.
+Pas de couche publique ni score issu de cet échantillon.
 
 Millésime, fin de période des données et résolution effective inconnus.
 Prédiction moyenne 0–5 cm, pas mesure locale. Voir la

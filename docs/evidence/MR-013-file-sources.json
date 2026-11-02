@@ -1,0 +1,88 @@
+{
+  "reviewed_at": "2026-11-01T19:06:08.837656+00:00",
+  "scope": "Bounded technical file fallback, native declared NoData and comparison to the frozen WCS window; no scientific coverage admission.",
+  "product_url": "https://isric.org/explore/soilgrids",
+  "license": "CC-BY-4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "citation": "Poggio et al. (2021), SOIL 7, 217-240, doi:10.5194/soil-7-217-2021",
+  "rights": {
+    "commercial": "permitted under attribution",
+    "file_copy": "permitted under attribution",
+    "redistribution_and_derivatives": "permitted with credit, license link and transformation notice",
+    "public_cdn_cache": "not activated; no Cache-Control header observed for the tile",
+    "admission": "This small technical lot only; no scores, public layer or scientific input admitted."
+  },
+  "source_url": "https://files.isric.org/soilgrids/latest/data/phh2o/phh2o_0-5cm_mean/tileSG-008-047/tileSG-008-047_2-2.tif",
+  "source_bytes": 323071,
+  "source_sha256": "7935699afa69f6d82d560d5aae52fed4d8436956bb7a9d053a1d9ba0145a001d",
+  "fetched_at": "2026-11-01T19:03:15.289042+00:00",
+  "fetched_at_basis": "Local write completion UTC for captured bytes; not source observation/publication date.",
+  "http_status": 200,
+  "http_headers": {
+    "Connection": "keep-alive",
+    "Access-Control-Allow-Origin": "*",
+    "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+    "Accept-Ranges": "bytes",
+    "Content-Length": "323071",
+    "Content-Type": "image/tiff",
+    "Date": "Sun, 01 Nov 2026 19:03:15 GMT",
+    "ETag": "\"10778942601-1586244226-323071\"",
+    "Last-Modified": "Tue, 07 Apr 2020 07:23:46 GMT"
+  },
+  "transport_last_modified_is_acquisition_date": false,
+  "publisher_checksums": {
+    "url": "https://files.isric.org/soilgrids/latest/data/phh2o/phh2o_0-5cm_mean/tileSG-008-047/checksum.sha256.txt",
+    "path": "data/rasters/soilgrids-file-sample/checksum.sha256.txt",
+    "sha256": "b99fffde71fbc322d7272133b967561355c32d142772ffb3a5d4917e619f66b2",
+    "matched_filename": "tileSG-008-047_2-2.tif"
+  },
+  "vrt": {
+    "source_url": "https://files.isric.org/soilgrids/latest/data/phh2o/phh2o_0-5cm_mean.vrt",
+    "sha256": "28bf9ceef0ee29a2d29926929b1760eddb6749b4f31ed212e8d536a226892f0d",
+    "bytes": 3524139,
+    "local_archive_sha256": "200c8a03df6fd13082acf585b46e80c245b30a7c6b897f5b6b51ebddf4e34563",
+    "fetched_at": "2026-11-01T19:02:45.743209+00:00",
+    "source_relative_path": "./phh2o_0-5cm_mean/tileSG-008-047/tileSG-008-047_2-2.tif",
+    "source_mapping_xml": "<ComplexSource>\n      <SourceFilename relativeToVRT=\"1\">./phh2o_0-5cm_mean/tileSG-008-047/tileSG-008-047_2-2.tif</SourceFilename>\n      <SourceBand>1</SourceBand>\n      <SourceProperties RasterXSize=\"600\" RasterYSize=\"268\" DataType=\"Int16\" BlockXSize=\"600\" BlockYSize=\"6\" />\n      <SrcRect xOff=\"0\" yOff=\"0\" xSize=\"600\" ySize=\"268\" />\n      <DstRect xOff=\"84849\" yOff=\"14041\" xSize=\"600\" ySize=\"268\" />\n      <NODATA>-32768</NODATA>\n    </ComplexSource>\n    ",
+    "nodata": "-32768",
+    "transform": " -1.9949750000000000e+07,  2.5000000000000000e+02,  0.0000000000000000e+00,  8.3610000000000000e+06,  0.0000000000000000e+00, -2.5000000000000000e+02",
+    "handling": "Archived metadata, parsed as XML only. Never opened by GDAL; source raster_job still refuses VRT and network sources."
+  },
+  "window": {
+    "global_vrt_column": 85117,
+    "global_vrt_row": 14160,
+    "tile_column": 268,
+    "tile_row": 119,
+    "width": 8,
+    "height": 8
+  },
+  "comparison": {
+    "wcs_source_sha256": "7193702c31be1f61ebade313202c0af814c2c09f88bf8bb52f3c97b85685e2f6",
+    "raw_values_equal_except_missing": true,
+    "valid_values_compared": 56,
+    "native_declared_nodata_pixels": 8,
+    "wcs_zero_at_native_nodata_pixels": 8,
+    "zero_is_universal_nodata_rule": false,
+    "grid_transform_numerically_equal": true,
+    "note": "The VRT mapping and equal numeric window transforms support this indexed array comparison. Different captures and CRS representations do not establish a general WCS NoData convention, current ground properties or source freshness."
+  },
+  "crs_comparison": {
+    "file_wkt": "PROJCS[\"Interrupted_Goode_Homolosine\",GEOGCS[\"GCS_unnamed ellipse\",DATUM[\"unknown\",SPHEROID[\"Unknown\",6378137,298.257223563]],PRIMEM[\"Greenwich\",0],UNIT[\"Degree\",0.0174532925199433]],PROJECTION[\"Interrupted_Goode_Homolosine\"],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+    "mosaic_wkt": "PROJCS[\"Interrupted_Goode_Homolosine\",GEOGCS[\"GCS_WGS_1984 ellipse\",DATUM[\"D_WGS_1984\",SPHEROID[\"WGS_1984\",6378137,298.257223563]],PRIMEM[\"Greenwich\",0],UNIT[\"Degree\",0.017453292519943295]],PROJECTION[\"Interrupted_Goode_Homolosine\"],UNIT[\"Meter\",1]]",
+    "file_equals_mosaic": true,
+    "file_equals_wcs": false,
+    "mosaic_equals_wcs": false,
+    "note": "Raw WKT kept. File datum is unknown; native/mosaic omit parameters present explicitly in WCS. No CRS relabeling or cross-source reprojection is performed. Array comparison does not establish independently validated geolocation."
+  },
+  "unknowns": [
+    "source acquisition year",
+    "exact source publication date",
+    "data cutoff",
+    "effective resolution",
+    "independently validated local geolocation",
+    "prediction uncertainty in this mean-only sample",
+    "service quotas"
+  ],
+  "request_policy": "Identified HTTPS GET of one 3.5MB VRT metadata document, one 323071-byte tile and one 623-byte checksum; 20-30s timeout, no account, no bulk transfer, no automated polling, no private location.",
+  "output": "data/rasters/soilgrids-file-sample/normalized.json"
+}

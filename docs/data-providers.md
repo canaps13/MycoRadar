@@ -136,8 +136,26 @@ Voir [recette et attribution](MR-013.md), [manifeste](../data/rasters/soilgrids-
 et [preuves sources](evidence/MR-013-sources.json).
 
 BRGM R1 demeure bloqué après relecture de la notice producteur : licence
-`notspecified`, extras sans texte applicable à la distribution exacte. Aucune
-donnée géologique téléchargée.
+`notspecified`, extras sans texte applicable à la distribution exacte. La
+[revue du 1er novembre](evidence/MR-013-brgm-availability.json) constate la
+fermeture annoncée sur [InfoTerre](https://infoterre.brgm.fr/) et les routes
+de conditions/PDF/téléchargement en 404. Le texte historique du moteur de
+recherche n'est pas une preuve de distribution actuelle ; aucune révocation
+de licence n'est déduite de la fermeture. Aucune donnée géologique téléchargée.
+
+Repli fichier SoilGrids revu le 1er novembre 2026 : la fiche ISRIC confirme
+CC BY 4.0 et REST suspendu. Le GeoTIFF natif `tileSG-008-047_2-2.tif`, 323 071
+octets, est admis comme lot **technique** sous attribution ISRIC/Poggio et al.,
+DOI, lien de licence et transformations. SHA-256 conforme à celui publié ;
+index VRT archivé, uniquement analysé comme XML, sans ouverture GDAL. Trois
+ressources capturées (index, fichier, checksums), pas de compte ni polling.
+Copie, usage commercial, redistribution et dérivés permis sous CC BY 4.0 ;
+aucun cache CDN activé ni quota inventé. Une fenêtre 8 × 8 contient 56 valeurs
+et huit NoData déclarés ; le pas nominal 250 m n'est pas une résolution effective.
+Le WKT livré est préservé, sans réaffectation au CRS WCS non équivalent ; dates
+scientifiques inconnues et aucune admission aux scores/jointures. Voir
+[données et rejeu](../data/rasters/soilgrids-file-sample/README.md),
+[preuve et droits](evidence/MR-013-file-sources.json).
 
 L'extension MR-013 admet un **lot technique public RGE ALTI** de 8 × 8 pixels
 pour tester la lecture numérique hors ligne : notice IGN dédiée `rge-alti-r`,

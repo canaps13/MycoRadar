@@ -257,6 +257,9 @@ Le [lecteur et sa recette](docs/MR-013.md) traitent une fenêtre GeoTIFF locale
 avec empreinte, CRS, unités, masques et provenance explicites. L'échantillon
 ISRIC versionné contient 64 pixels : 56 valeurs normalisées et huit zéros
 exclus par politique de prudence, sans les déclarer NoData du producteur.
+Le [repli fichier natif](data/rasters/soilgrids-file-sample/README.md) retrouve
+les mêmes 56 valeurs et huit NoData explicitement déclarés, sans exclusion
+opérateur. La concordance est contrôlée sans réaffecter les CRS divergents.
 Millésime, date de fin des données et résolution effective restent inconnus.
 L'extrait IGN comprend 64 altitudes flottantes ; son CRS interne incomplet
 est conservé et signalé comme non équivalent au CRS demandé. Référentiel vertical,
@@ -269,6 +272,8 @@ uv run --locked --group geo python -m mycoradar.raster_job --manifest data/raste
 docker build --target raster-job --tag mycoradar-raster-local --file infra/api.Dockerfile .
 $rasterInput = (Resolve-Path data/rasters/soilgrids-sample).Path
 docker run --rm --network none --mount "type=bind,source=$rasterInput,target=/input,readonly" mycoradar-raster-local python -m mycoradar.raster_job --manifest /input/manifest.json --output /tmp/soil.json
+$nativeSoilInput = (Resolve-Path data/rasters/soilgrids-file-sample).Path
+docker run --rm --network none --mount "type=bind,source=$nativeSoilInput,target=/input,readonly" mycoradar-raster-local python -m mycoradar.raster_job --manifest /input/manifest.json --output /tmp/native-soil.json
 $terrainInput = (Resolve-Path data/rasters/ign-terrain-sample).Path
 docker run --rm --network none --mount "type=bind,source=$terrainInput,target=/input,readonly" mycoradar-raster-local python -m mycoradar.raster_job --manifest /input/manifest.json --output /tmp/terrain.json
 ```

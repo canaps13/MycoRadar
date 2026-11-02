@@ -1,7 +1,9 @@
-"""Invented GeoTIFFs, plus one explicitly labelled frozen real SoilGrids WCS capture."""
+"""Invented GeoTIFFs and explicitly labelled frozen real soil/terrain captures."""
 
+import gzip
 import hashlib
 import json
+import xml.etree.ElementTree as ET
 from pathlib import Path
 
 import numpy as np
@@ -11,7 +13,9 @@ from affine import Affine
 from mycoradar import raster_job as job
 from mycoradar.grid_job import canonical_json, write_artifact
 from pydantic import ValidationError
+from pyproj import CRS
 from rasterio.io import MemoryFile
+from rasterio.windows import Window
 
 
 def write_source(
@@ -333,6 +337,92 @@ def test_frozen_real_soilgrids_capture_keeps_undocumented_zeros_ambiguous():
     )
     assert a["source_year"] is None and a["data_cutoff"] is None
     assert a["nominal_source_grid_step_m"] == 250 and a["effective_resolution_m"] is None
+
+
+def test_frozen_native_soil_file_preserves_declared_nodata_without_operator_exclusions():
+    path = Path(__file__).resolve().parents[2] / "data/rasters/soilgrids-file-sample/manifest.json"
+    spec = job.Manifest.model_validate_json(path.read_bytes())
+    assert spec.exclusion is None
+    a = job.build_artifact(path)
+    assert a["quality"]["pixel_count"] == 64 and a["quality"]["valid_pixels"] == 56
+    assert a["quality"]["declared_nodata_pixels"] == a["quality"]["invalid_pixels"] == 8
+    assert a["quality"]["gdal_mask_excluded_pixels"] == 8
+    assert a["quality"]["policy_excluded_pixels"] == 0
+    assert a["source_raster"]["nodata_value"] == -32768
+    assert a["source_raster"]["width"] == 600 and a["source_raster"]["height"] == 268
+    assert a["source_raster"]["crs_authority"] is None
+    assert a["window"]["column"] == 268 and a["window"]["row"] == 119
+    assert a["delivery"]["method"] == "file"
+    assert a["delivery"]["requested_crs_matches_file"] is None
+    assert a["source_year"] is a["data_cutoff"] is a["effective_resolution_m"] is None
+    assert a["coverage_status"] == "partial" and a["public_layers_added"] == 0
+
+
+def test_frozen_native_tile_has_publisher_checksum_and_non_resampled_mosaic_window():
+    root = Path(__file__).resolve().parents[2]
+    folder = root / "data/rasters/soilgrids-file-sample"
+    evidence = json.loads((root / "docs/evidence/MR-013-file-sources.json").read_bytes())
+    digest = hashlib.sha256((folder / "source.tif").read_bytes()).hexdigest()
+    assert digest == evidence["source_sha256"]
+    checksums = (folder / "checksum.sha256.txt").read_bytes()
+    assert hashlib.sha256(checksums).hexdigest() == evidence["publisher_checksums"]["sha256"]
+    assert digest + "  tileSG-008-047_2-2.tif" in checksums.decode().splitlines()
+    archive = (folder / "source.vrt.gz").read_bytes()
+    assert hashlib.sha256(archive).hexdigest() == evidence["vrt"]["local_archive_sha256"]
+    raw = gzip.decompress(archive)
+    assert hashlib.sha256(raw).hexdigest() == evidence["vrt"]["sha256"]
+    # Metadata only: never execute the VRT or resolve its external source references.
+    mosaic = ET.fromstring(raw)
+    assert mosaic.findtext("VRTRasterBand/NoDataValue") == "-32768"
+    sources = [
+        s
+        for s in mosaic.findall(".//ComplexSource")
+        if s.findtext("SourceFilename") == evidence["vrt"]["source_relative_path"]
+    ]
+    assert len(sources) == 1
+    source = sources[0]
+    src, dst = source.find("SrcRect"), source.find("DstRect")
+    assert src is not None and dst is not None
+    assert src.attrib == {"xOff": "0", "yOff": "0", "xSize": "600", "ySize": "268"}
+    assert dst.attrib == {"xOff": "84849", "yOff": "14041", "xSize": "600", "ySize": "268"}
+    window = evidence["window"]
+    assert window["tile_column"] == window["global_vrt_column"] - int(dst.attrib["xOff"])
+    assert window["tile_row"] == window["global_vrt_row"] - int(dst.attrib["yOff"])
+    gt = [float(n) for n in mosaic.findtext("GeoTransform").split(",")]
+    transform = Affine.from_gdal(*gt) @ Affine.translation(85117, 14160)
+    with rasterio.open(folder / "source.tif") as dataset:
+        assert dataset.window_transform(Window(268, 119, 8, 8)) == transform
+
+
+def test_real_native_window_correspondence_keeps_wcs_zero_policy_and_crs_discrepancy():
+    root = Path(__file__).resolve().parents[2]
+    native = root / "data/rasters/soilgrids-file-sample"
+    wcs = root / "data/rasters/soilgrids-sample"
+    evidence = json.loads((root / "docs/evidence/MR-013-file-sources.json").read_bytes())
+    assert (
+        hashlib.sha256((wcs / "source.tif").read_bytes()).hexdigest()
+        == evidence["comparison"]["wcs_source_sha256"]
+    )
+    with rasterio.open(native / "source.tif") as n, rasterio.open(wcs / "source.tif") as w:
+        selection = Window(268, 119, 8, 8)
+        values = n.read(1, window=selection)
+        missing = values == n.nodata
+        assert int(missing.sum()) == 8
+        assert w.nodata is None and np.all(w.read_masks(1) == 255)
+        assert np.all(w.read(1)[missing] == 0)
+        assert np.array_equal(values[~missing], w.read(1)[~missing])
+        assert n.window_transform(selection) == w.transform
+        # Equal numeric transforms/values are not an independent geolocation validation.
+        assert CRS(n.crs).equals(CRS(w.crs), ignore_axis_order=True) is False
+        spec = job.Manifest.model_validate_json((native / "manifest.json").read_bytes())
+        assert CRS(spec.crs).equals(CRS(n.crs), ignore_axis_order=True)
+    a = job.build_artifact(native / "manifest.json")
+    b = job.build_artifact(wcs / "manifest.json")
+    assert a["values"] == b["values"]
+    assert a["quality"]["declared_nodata_pixels"] == 8
+    assert b["quality"]["declared_nodata_pixels"] == 0
+    assert b["quality"]["policy_excluded_pixels"] == 8
+    assert evidence["comparison"]["zero_is_universal_nodata_rule"] is False
 
 
 def test_terrain_requires_explicit_vertical_unknown_or_evidence(manifest):
