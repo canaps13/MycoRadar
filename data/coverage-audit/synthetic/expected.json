@@ -1,0 +1,37 @@
+{
+  "adapter_version": "gbif-month-facets-audit-v1",
+  "capture_kind": "synthetic",
+  "count_semantics": "Indexed rows in declared query scope; not abundance or biological absence. Scopes may overlap; never sum regions.",
+  "dataset_key": "00000000-0000-4000-8000-000000000001",
+  "declared_taxon": "Synthetic test taxon",
+  "disclosure": "Only zero, 1-4 withheld or at least 5; no exact positive counts, URLs, coordinates or occurrence rows.",
+  "manifest_sha256": "9291f12a37025d06e9204e249de054dca51770b1b87fae36d1b18ca054293e48",
+  "regions": [
+    {
+      "fetched_at": "2000-01-01T00:00:00+00:00",
+      "indexed_count_band": "5_or_more",
+      "region_id": "synthetic-region",
+      "seasons": {
+        "autumn": "5_or_more",
+        "spring": "0_indexed",
+        "summer": "1_to_4_withheld",
+        "winter": "5_or_more"
+      },
+      "source_sha256": "411eb5a108b0957097c1346908dddce7f0b60d9693f265598a3aba6f7375df91",
+      "unknown_month_band": "1_to_4_withheld"
+    }
+  ],
+  "release_review_required": true,
+  "rights_review": "Required separately; checksums and query filters are not source signatures.",
+  "schema_version": "pilot-coverage-audit-v1",
+  "scientific_status": "blocked",
+  "selected_pilot_taxon": null,
+  "status": "partial",
+  "unmeasured": [
+    "sampling_effort",
+    "coordinate_uncertainty",
+    "duplicates",
+    "identification_quality",
+    "non_detections"
+  ]
+}
