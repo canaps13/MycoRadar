@@ -19,7 +19,11 @@ class QueueError(ValueError):
     """No provider body, query, credential or exception is persisted."""
 
 
-class InvalidRetryDelay(QueueError):
+class HaltSource(QueueError):
+    """An adapter rejects its source; operator review is required before resuming."""
+
+
+class InvalidRetryDelay(HaltSource):
     pass
 
 
@@ -177,7 +181,7 @@ class JobQueue:
                 version = row["version"]
             if version is None:
                 raise QueueError("unchanged_without_version")
-        except InvalidRetryDelay:
+        except HaltSource:
             return self._finish_poll(source, token, None, -1)
         except (RetryLater, TimeoutError, OSError, QueueError) as error:
             delay = error.retry_after_s if isinstance(error, RetryLater) else 0
@@ -319,7 +323,7 @@ class JobQueue:
             return "idle"
         try:
             ingest(job)  # The adapter must commit idempotently using job.id.
-        except InvalidRetryDelay:
+        except HaltSource:
             return "halted" if self.finish(job, halt=True) else "stale"
         except (RetryLater, TimeoutError, OSError) as error:
             delay = error.retry_after_s if isinstance(error, RetryLater) else 0
