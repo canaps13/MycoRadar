@@ -1,0 +1,41 @@
+{
+  "observed_at": "2026-11-02T18:32:01.485373+00:00",
+  "scope": "Synthetic local multi-process smoke; no real provider or scientific input.",
+  "smoke_result": {
+    "concurrent_claim_winners": 1,
+    "counts": {
+      "dead": 0,
+      "done": 2,
+      "queued": 0,
+      "running": 0
+    },
+    "lease_recovered": true,
+    "provider_cooldown_respected": true,
+    "real_sources_polled": 0,
+    "scope": "synthetic_queue_smoke",
+    "timeout_recovered": true,
+    "unchanged_deduplicated": true
+  },
+  "engine": {
+    "python": "3.12.16",
+    "sqlite": "3.53.1",
+    "platform": "Windows"
+  },
+  "implementation_sha256": "e5649eddcecc13a360cdad25f697b5b834ee0806e4695d61832f641149a4957b",
+  "script_sha256": "43c83b48912c5d8dd718928a9d0331be6eb0f4be572064137bbc7e325c559c19",
+  "local_validation": {
+    "python_passed": 375,
+    "queue_tests": 32,
+    "postgis_deselected": 51,
+    "ruff_lint": "passed",
+    "ruff_format": "passed",
+    "mypy": "passed (21 sources)",
+    "diff_check": "passed"
+  },
+  "docker_local": "not executed: Docker Desktop daemon pipe absent",
+  "ci": "pending",
+  "cloud_activation": false,
+  "real_sources_polled": 0,
+  "deployment_performed": false,
+  "merge_performed": false
+}

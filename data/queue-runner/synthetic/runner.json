@@ -1,0 +1,10 @@
+{
+  "schema_version": "queue-runner-v1",
+  "sources": [
+    {
+      "id": "synthetic-file",
+      "root": "input",
+      "pipeline_version": "intake-v1"
+    }
+  ]
+}
