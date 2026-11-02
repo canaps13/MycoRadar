@@ -1,0 +1,327 @@
+{
+  "observed_at": "2026-11-02T17:59:46.402591+00:00",
+  "implementation_head": "61a7c1e",
+  "runs": [
+    {
+      "attempt": 1,
+      "conclusion": "success",
+      "headSha": "61a7c1e40409afda8c46f481d10e0f6ae30bff77",
+      "jobs": [
+        {
+          "completedAt": "2026-11-02T17:59:20Z",
+          "conclusion": "success",
+          "databaseId": 125448060646,
+          "name": "Bootstrap (windows-latest)",
+          "startedAt": "2026-11-02T17:52:04Z",
+          "status": "completed",
+          "steps": [
+            {
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run uv sync --locked",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run uv run --locked pytest -m \"not integration\"",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run uv run --locked ruff check .",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run uv run --locked ruff format --check .",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run uv run --locked mypy",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run npm --prefix web ci",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run npm --prefix web run lint",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run npm --prefix web run typecheck",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run npm --prefix web test",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run npm --prefix web run format:check",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run npm --prefix web run build",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run npx playwright install --with-deps chromium",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run npm --prefix web run test:e2e",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run git diff --check",
+              "conclusion": "success"
+            },
+            {
+              "name": "Validation outcomes (including skipped checks)",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ],
+          "url": "https://github.com/canaps13/MycoRadar/actions/runs/41495159988/job/125448060646"
+        },
+        {
+          "completedAt": "2026-11-02T17:55:31Z",
+          "conclusion": "success",
+          "databaseId": 125448061109,
+          "name": "Bootstrap (ubuntu-latest)",
+          "startedAt": "2026-11-02T17:52:04Z",
+          "status": "completed",
+          "steps": [
+            {
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run uv sync --locked",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run uv run --locked pytest -m \"not integration\"",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run uv run --locked ruff check .",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run uv run --locked ruff format --check .",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run uv run --locked mypy",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run npm --prefix web ci",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run npm --prefix web run lint",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run npm --prefix web run typecheck",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run npm --prefix web test",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run npm --prefix web run format:check",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run npm --prefix web run build",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run npx playwright install --with-deps chromium",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run npm --prefix web run test:e2e",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run git diff --check",
+              "conclusion": "success"
+            },
+            {
+              "name": "Validation outcomes (including skipped checks)",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ],
+          "url": "https://github.com/canaps13/MycoRadar/actions/runs/41495159988/job/125448061109"
+        }
+      ],
+      "url": "https://github.com/canaps13/MycoRadar/actions/runs/41495159988"
+    },
+    {
+      "attempt": 1,
+      "conclusion": "success",
+      "headSha": "61a7c1e40409afda8c46f481d10e0f6ae30bff77",
+      "jobs": [
+        {
+          "completedAt": "2026-11-02T17:55:29Z",
+          "conclusion": "success",
+          "databaseId": 125448061614,
+          "name": "Compose and PostGIS",
+          "startedAt": "2026-11-02T17:52:04Z",
+          "status": "completed",
+          "steps": [
+            {
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run uv sync --locked",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run docker compose --env-file .env.example up --build --wait --wait-timeout 180",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run uv run --locked python scripts/check_local_stack.py",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run docker run --rm --network none --mount \"type=bind,source=${PWD}/data/coverage-audit/synthetic,target=/input,readonly\" \"$(docker compose --env-file .env.example images -q api)\" python -m mycoradar.coverage_audit --manifest /input/manifest.json",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run uv run --locked pytest -m integration",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run docker compose --env-file .env.example run --rm migrate",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run npm --prefix web ci",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run npx playwright install --with-deps chromium",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run npm --prefix web run test:e2e",
+              "conclusion": "success"
+            },
+            {
+              "name": "Validation outcomes (including skipped checks)",
+              "conclusion": "success"
+            },
+            {
+              "name": "Container state and logs",
+              "conclusion": "success"
+            },
+            {
+              "name": "Stop containers and preserve database volume",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ],
+          "url": "https://github.com/canaps13/MycoRadar/actions/runs/41495160145/job/125448061614"
+        }
+      ],
+      "url": "https://github.com/canaps13/MycoRadar/actions/runs/41495160145"
+    }
+  ],
+  "scope": "Monthly facet audit validated on 61a7c1e. Subsequent proof-only commits require separate checks.",
+  "observed_results": {
+    "python_per_os": 371,
+    "browser_per_job": 12,
+    "postgis_in_compose": 51,
+    "offline_coverage_smoke": "success",
+    "attempts": 1
+  }
+}

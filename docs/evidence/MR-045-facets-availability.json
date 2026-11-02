@@ -1,0 +1,52 @@
+{
+  "recorded_at": "2026-11-02T17:51:10.723407+00:00",
+  "observed_on": "2026-11-02",
+  "scope": "One bounded aggregate request then one simplified diagnostic control; no retries, no authentication, no occurrence rows obtained.",
+  "queries": [
+    {
+      "url": "https://api.gbif.org/v1/occurrence/search?datasetKey=017f23ba-bf04-4eb7-a076-04ab2e5de250&taxonKey=5954958&checklistKey=d7dddbf4-2cf0-4f39-9b2a-bb099caae36c&country=FR&hasCoordinate=true&hasGeospatialIssue=false&license=CC_BY_4_0&geometry=POLYGON%28%284.23021603+43.15742622%2C5.81343366+43.15742622%2C5.81343366+43.92413424%2C4.23021603+43.92413424%2C4.23021603+43.15742622%29%29&facet=month&facetLimit=12&facetMincount=1&limit=0&offset=0",
+      "http_status": 500,
+      "scope": "FR-13 public IGN display envelope, not exact department"
+    },
+    {
+      "url": "https://api.gbif.org/v1/occurrence/search?datasetKey=017f23ba-bf04-4eb7-a076-04ab2e5de250&taxonKey=5954958&country=FR&facet=month&facetLimit=12&limit=0",
+      "http_status": 500,
+      "scope": "Simplified France control; not used as a valid local capture"
+    }
+  ],
+  "source": {
+    "metadata_url": "https://api.gbif.org/v1/dataset/017f23ba-bf04-4eb7-a076-04ab2e5de250",
+    "metadata_sha256": "af8083fd67667cd37ca0680decf714fedfa368bd64eebf199227d6a2a1edc7fe",
+    "license": "http://creativecommons.org/licenses/by/4.0/legalcode",
+    "title": "ONF - Observations et inventaires MOA ONF-ONF - Observations opportunistes et inventaires",
+    "doi": "10.15468/tgap4x",
+    "modified": "2023-07-12T13:55:56.092+00:00",
+    "rights_review": "Bounded aggregate query under CC BY with ONF/PatriNat citation and DOI; no occurrence redistribution, no scientific admission."
+  },
+  "api_specification": {
+    "url": "https://techdocs.gbif.org/openapi/occurrence.json",
+    "sha256": "ffde21586ee99495708d1fcb37cb88f792c50605fbb7a263217b3936f07fce39",
+    "parameters_reviewed": [
+      "limit=0",
+      "facet=month",
+      "facetLimit=12",
+      "facetMincount=1",
+      "geometry",
+      "license=CC_BY_4_0"
+    ]
+  },
+  "gbif_terms": {
+    "url": "https://www.gbif.org/terms/data-user",
+    "direct_http_status": 403,
+    "official_index_read": true,
+    "note": "Attribution and publisher licence obligations reviewed in official indexed text; direct HTTP refusal not bypassed."
+  },
+  "counts_obtained": false,
+  "coverage_by_region_and_season": null,
+  "coordinate_uncertainty": null,
+  "sampling_effort": null,
+  "non_detections": null,
+  "private_locations_sent": false,
+  "selected_pilot_taxon": null,
+  "scientific_status": "blocked"
+}
