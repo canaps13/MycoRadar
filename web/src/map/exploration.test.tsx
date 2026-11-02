@@ -143,6 +143,31 @@ describe("connected explorer", () => {
     await act(() => vi.advanceTimersByTimeAsync(5000));
     expect(screen.getByText(/API cartographique indisponible/)).toBeVisible();
   });
+
+  it("retains only the last verified contours when a later publication loses provenance", async () => {
+    const broken = explorationFixture({ selected_region_id: "FR-83" });
+    broken.regions[0].source_ids = [];
+    const fetcher = vi
+      .fn()
+      .mockResolvedValueOnce(Response.json(explorationFixture()))
+      .mockResolvedValueOnce(Response.json(broken))
+      .mockImplementation((input: string) =>
+        Promise.resolve(responseFor(input)),
+      );
+    vi.stubGlobal("fetch", fetcher);
+    render(<Explorer />);
+    await screen.findByText(/Données partielles/);
+    fireEvent.click(screen.getByRole("button", { name: "Var 83" }));
+    expect(
+      await screen.findByText(/dernière publication reçue conservée/),
+    ).toBeVisible();
+    expect(screen.getByLabelText("Espèce pilote")).toBeDisabled();
+    expect(screen.getAllByText("Indisponible")).toHaveLength(2);
+    fireEvent.click(
+      screen.getByRole("button", { name: "Recharger les données" }),
+    );
+    expect(await screen.findByText(/Données partielles/)).toBeVisible();
+  });
 });
 
 describe("API runtime validation", () => {
@@ -161,5 +186,66 @@ describe("API runtime validation", () => {
     const result = parseExploration(explorationFixture());
     expect(result.regions[0].source_ids).toContain(result.sources[0].id);
     expect(result.habitat.score).toBeNull();
+  });
+
+  it.each([
+    { name: "missing source references", region: { source_ids: [] } },
+    { name: "unresolved source", region: { source_ids: ["missing"] } },
+    {
+      name: "empty polygon",
+      region: { geometry: { type: "Polygon", coordinates: [] } },
+    },
+    {
+      name: "empty member of a multipolygon",
+      region: { geometry: { type: "MultiPolygon", coordinates: [[]] } },
+    },
+    {
+      name: "unclosed ring",
+      region: {
+        geometry: {
+          type: "Polygon",
+          coordinates: [
+            [
+              [5, 43],
+              [6, 43],
+              [6, 44],
+              [5, 44],
+            ],
+          ],
+        },
+      },
+    },
+    {
+      name: "ring with fewer than three distinct vertices",
+      region: {
+        geometry: {
+          type: "Polygon",
+          coordinates: [
+            [
+              [5, 43],
+              [6, 43],
+              [6, 43],
+              [5, 43],
+            ],
+          ],
+        },
+      },
+    },
+  ])("rejects $name before initializing a map", ({ region }) => {
+    const fixture = explorationFixture();
+    const data = {
+      ...fixture,
+      regions: [{ ...fixture.regions[0], ...region }],
+    };
+    expect(() => parseExploration(data)).toThrow();
+  });
+
+  it("rejects ambiguous source identities even when their references resolve", () => {
+    const fixture = explorationFixture();
+    fixture.sources.push({
+      ...fixture.sources[0],
+      license: "conflicting license",
+    });
+    expect(() => parseExploration(fixture)).toThrow();
   });
 });

@@ -112,15 +112,24 @@ function geometry(value: unknown): Polygon | MultiPolygon {
         : null;
   if (!polygons?.length) throw Error("Invalid geometry");
   let vertices = 0;
-  for (const polygon of polygons)
-    for (const ring of list(polygon, 10000)) {
+  for (const polygon of polygons) {
+    const rings = list(polygon, 10000);
+    if (!rings.length) throw Error("Empty polygon");
+    for (const ring of rings) {
       const coordinates = list(ring, 100000);
       if (coordinates.length < 4) throw Error("Invalid ring");
+      const first = point(coordinates[0]);
+      const last = point(coordinates[coordinates.length - 1]);
+      if (first[0] !== last[0] || first[1] !== last[1])
+        throw Error("Unclosed ring");
+      const distinct = new Set<string>();
       for (const coordinate of coordinates) {
-        point(coordinate);
+        distinct.add(point(coordinate).join(","));
         if (++vertices > 100000) throw Error("Geometry budget exceeded");
       }
+      if (distinct.size < 3) throw Error("Degenerate ring");
     }
+  }
   return data as unknown as Polygon | MultiPolygon;
 }
 function layer(value: unknown): Exploration["habitat"] {
@@ -197,8 +206,11 @@ export function parseExploration(value: unknown): Exploration {
     };
   });
   if (
-    regions.some((r) =>
-      r.source_ids.some((id) => !sources.some((s) => s.id === id)),
+    new Set(sources.map((s) => s.id)).size !== sources.length ||
+    regions.some(
+      (r) =>
+        !r.source_ids.length ||
+        r.source_ids.some((id) => !sources.some((s) => s.id === id)),
     )
   )
     throw Error("Missing provenance");
