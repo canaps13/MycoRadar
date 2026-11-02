@@ -115,7 +115,7 @@ Statuts autorisés : `TODO`, `IN_PROGRESS`, `BLOCKED`, `DONE`. **Une tâche est 
 | ID | Statut | Tâche | Critère de validation |
 |---|---|---|---|
 | MR-020 | TODO | Polling horaire, jobs d'ingestion idempotents, queues et gestion des quotas | Simulation nouvelles données/aucun changement/429/timeout ; aucune double ingestion |
-| MR-021 | TODO | Recalcul incrémental région/espèce/échéance + snapshot atomique | Rejouer deux fois n'altère pas les résultats ; rollback vers dernière version saine |
+| MR-021 | IN_PROGRESS | Recalcul incrémental région/espèce/échéance + snapshot atomique | Tranche de staging privé : objets immuables, dépendances comparées par cible, tête atomique avec précondition, concurrence et rollback validés ; 360 tests Python dont 17 snapshots, smoke réel multiprocessus réussi, nouvelle CI à observer. Recalcul scientifique et branchement aux adaptateurs admis non livrés. [Contrat](docs/MR-021.md), [preuve locale](docs/evidence/MR-021-local.json), [ADR-010](docs/adr/010-private-atomic-snapshots.md). |
 | MR-022 | TODO | Publication quotidienne contrôlée, cache CDN/ETag, invalidation et tests d'horloge | Cas nouvelle donnée, données anciennes, retard fournisseur, échec pipeline ; timestamps visibles |
 | MR-023 | TODO | Observabilité (logs structurés, métriques âge données, runs, alertes), sauvegardes et runbook | Échec injecté détecté ; procédure reprise documentée et testée |
 

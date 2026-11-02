@@ -1,0 +1,32 @@
+{
+  "observed_at": "2026-11-02T19:07:06.538559+00:00",
+  "scope": "Synthetic private snapshot stage only; no scientific calculation or public output.",
+  "smoke": {
+    "scope": "synthetic_snapshot_smoke",
+    "concurrent_winners": 1,
+    "changed_targets": 1,
+    "unaffected_target_retained": true,
+    "replay_preserved": true,
+    "rollback_verified": true,
+    "publication_allowed": false
+  },
+  "python": "3.12.16",
+  "sqlite": "3.53.1",
+  "platform": "Windows",
+  "implementation_sha256": "243c999715bad8dd2636a8f988023a0061614ea636df4153fa56faa6f664f292",
+  "shared_io_sha256": "f5093b3b435b0386c6694aaca1ff4c198a5d65c7e1fda3f16f0242d385911c3f",
+  "shared_io_identical_to_MR020": true,
+  "validation": {
+    "python_passed": 360,
+    "snapshot_tests": 17,
+    "postgis_deselected": 51,
+    "ruff_lint": "passed",
+    "ruff_format": "passed",
+    "mypy": "passed (22 sources)",
+    "diff_check": "passed"
+  },
+  "docker_local": "not executed; daemon unavailable",
+  "ci": "pending",
+  "scientific_validation": "not_performed",
+  "publication_allowed": false
+}

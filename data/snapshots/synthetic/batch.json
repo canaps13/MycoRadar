@@ -1,0 +1,35 @@
+{
+  "schema_version": "snapshot-batch-v1",
+  "updates": [
+    {
+      "region_id": "synthetic-north",
+      "taxon_id": "synthetic-taxon",
+      "valid_at": "2000-01-01T00:00:00Z",
+      "layer": "habitat",
+      "model_version": "synthetic-model-v1",
+      "input_versions": [
+        {
+          "source_id": "synthetic-source",
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      ],
+      "sha256": "fa1eca1a70b68436cf93ba0bd3375851f18cdce71af47c52a841084d783caf41",
+      "path": "payload.json"
+    },
+    {
+      "region_id": "synthetic-south",
+      "taxon_id": "synthetic-taxon",
+      "valid_at": "2000-01-01T00:00:00Z",
+      "layer": "habitat",
+      "model_version": "synthetic-model-v1",
+      "input_versions": [
+        {
+          "source_id": "synthetic-source",
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      ],
+      "sha256": "fa1eca1a70b68436cf93ba0bd3375851f18cdce71af47c52a841084d783caf41",
+      "path": "payload.json"
+    }
+  ]
+}
