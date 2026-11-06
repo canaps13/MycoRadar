@@ -1,0 +1,27 @@
+{
+  "task": "MR-023",
+  "scope": "admitted-public-catalogue-recovery-only",
+  "observed_on": "2026-11-06",
+  "platform": "Windows",
+  "python_unit_passed": 369,
+  "recovery_cases_passed": 26,
+  "postgis_deselected": 51,
+  "ruff_lint": "passed",
+  "ruff_format": "passed",
+  "mypy": {"status": "passed", "source_files": 21},
+  "git_diff_check": "passed",
+  "real_cli_and_http_smoke": {
+    "command": "python scripts/check_catalog_recovery.py",
+    "status": "ok",
+    "injected_corruption_detected": true,
+    "exact_bytes_restored": true,
+    "restored_http_verified": true,
+    "unknown_source_date_alerted": true,
+    "database_backup_tested": false
+  },
+  "local_docker": "not_executed_daemon_LinuxEngine_pipe_unavailable",
+  "ci": "pending_at_commit_see_PR_for_observed_results",
+  "public_service_changed": false,
+  "scientific_admission_changed": false,
+  "remaining": ["PostGIS backup and restore", "off-machine backup", "job metrics", "hosted alert delivery"]
+}

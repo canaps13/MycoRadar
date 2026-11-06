@@ -117,7 +117,7 @@ Statuts autorisés : `TODO`, `IN_PROGRESS`, `BLOCKED`, `DONE`. **Une tâche est 
 | MR-020 | TODO | Polling horaire, jobs d'ingestion idempotents, queues et gestion des quotas | Simulation nouvelles données/aucun changement/429/timeout ; aucune double ingestion |
 | MR-021 | TODO | Recalcul incrémental région/espèce/échéance + snapshot atomique | Rejouer deux fois n'altère pas les résultats ; rollback vers dernière version saine |
 | MR-022 | TODO | Publication quotidienne contrôlée, cache CDN/ETag, invalidation et tests d'horloge | Cas nouvelle donnée, données anciennes, retard fournisseur, échec pipeline ; timestamps visibles |
-| MR-023 | TODO | Observabilité (logs structurés, métriques âge données, runs, alertes), sauvegardes et runbook | Échec injecté détecté ; procédure reprise documentée et testée |
+| MR-023 | IN_PROGRESS | Observabilité (logs structurés, métriques âge données, runs, alertes), sauvegardes et runbook | Tranche autonome du catalogue public MR-009 : diagnostics JSON agrégés, âges publication/source/collecte distincts, alertes dates inconnues/horloge, sauvegarde et restauration sans écrasement. 369 tests Python locaux dont 26 nouveaux cas réussis ; corruption injectée détectée puis vrai HTTP restauré vérifié. [Runbook et limites](docs/MR-023.md), [preuve locale](docs/evidence/MR-023-local.json) ; CI image finale à observer. PostGIS, sauvegarde hors machine et supervision des jobs restent à livrer. |
 
 **Jalon M4 :** publication autonome vérifiable et résiliente ; « actualisé » signifie précisément ce qui l'est.
 

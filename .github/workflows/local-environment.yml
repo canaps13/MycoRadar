@@ -36,6 +36,11 @@ jobs:
         run: docker compose --env-file .env.example up --build --wait --wait-timeout 180
       - id: stack_health
         run: uv run --locked python scripts/check_local_stack.py
+      - id: catalog_recovery_smoke
+        run: >-
+          docker run --rm --network none
+          -v "${{ github.workspace }}/scripts:/checks:ro"
+          mycoradar-api:local python /checks/check_catalog_recovery.py
       - id: postgis_tests
         run: uv run --locked pytest -m integration
       - id: migration_replay
@@ -52,7 +57,7 @@ jobs:
         env:
           CI_STEPS_JSON: ${{ toJSON(steps) }}
         run: >-
-          python scripts/ci_summary.py python_install compose_build stack_health
+          python scripts/ci_summary.py python_install compose_build stack_health catalog_recovery_smoke
           postgis_tests migration_replay web_install browser_install browser_tests
       - name: Container state and logs
         if: always()
