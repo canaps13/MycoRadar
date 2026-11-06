@@ -117,7 +117,7 @@ Statuts autorisés : `TODO`, `IN_PROGRESS`, `BLOCKED`, `DONE`. **Une tâche est 
 | MR-020 | TODO | Polling horaire, jobs d'ingestion idempotents, queues et gestion des quotas | Simulation nouvelles données/aucun changement/429/timeout ; aucune double ingestion |
 | MR-021 | TODO | Recalcul incrémental région/espèce/échéance + snapshot atomique | Rejouer deux fois n'altère pas les résultats ; rollback vers dernière version saine |
 | MR-022 | TODO | Publication quotidienne contrôlée, cache CDN/ETag, invalidation et tests d'horloge | Cas nouvelle donnée, données anciennes, retard fournisseur, échec pipeline ; timestamps visibles |
-| MR-023 | TODO | Observabilité (logs structurés, métriques âge données, runs, alertes), sauvegardes et runbook | Échec injecté détecté ; procédure reprise documentée et testée |
+| MR-023 | IN_PROGRESS | Observabilité (logs structurés, métriques âge données, runs, alertes), sauvegardes et runbook | Catalogue : sauvegarde sans écrasement, métriques/alertes et vrai HTTP restauré ; CI verte sur `ef7503d` ([PR #29](https://github.com/canaps13/MycoRadar/pull/29)). Extension : [exercice PostGIS synthétique](docs/postgis-recovery.md) avec dump, corruption refusée, comparaison lignes/index/contraintes et rollback sur conflit ; 392 tests Python locaux dont 23 nouveaux garde-fous réussis, exécution PostGIS de cette révision à observer en CI. [Runbook catalogue](docs/MR-023.md), [preuve locale de l'extension](docs/evidence/MR-023-postgis-local.json). Sauvegarde d'exploitation, stockage hors machine et supervision des jobs restent à livrer. |
 
 **Jalon M4 :** publication autonome vérifiable et résiliente ; « actualisé » signifie précisément ce qui l'est.
 
