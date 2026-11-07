@@ -125,7 +125,7 @@ Statuts autorisés : `TODO`, `IN_PROGRESS`, `BLOCKED`, `DONE`. **Une tâche est 
 
 | ID | Statut | Tâche | Critère de validation |
 |---|---|---|---|
-| MR-024 | TODO | Nettoyage observations, qualité taxonomique et effort de prospection | Audit des coordonnées floutées, doublons, biais de collecte, données sensibles |
+| MR-024 | IN_PROGRESS | Nettoyage observations, qualité taxonomique et effort de prospection | Audit local privé : identités contradictoires/invalides écartées, copies exactes comptées, coïncidences signalées sans fusion, dates/précision inconnues et effort non mesuré explicites. 391 tests Python locaux dont 48 nouveaux cas et rejeu CLI réussis ; CI image finale à observer. Uniquement fixture inventé, zéro ligne diffusée ; [contrat et limites](docs/MR-024.md), [preuve locale](docs/evidence/MR-024-local.json). Corpus réel, biais spatiaux et nettoyage scientifiquement admis restent à réaliser. |
 | MR-025 | TODO | Protocole train/test spatial et temporel ; pseudo-absences/biais d'échantillonnage | Protocole écrit avant évaluation ; zones et saisons test tenues à l'écart |
 | MR-026 | TODO | Baselines statistiques + premier modèle (ex. GAM/MaxEnt/LightGBM) | Comparaison explicite aux règles et météo simple, courbes de qualité et intervalles |
 | MR-027 | TODO | Calibration si possible, incertitude, explications et model cards | Pas d'affichage « probabilité % » sans calibration prouvée ; résultats par espèce/région |
