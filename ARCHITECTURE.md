@@ -163,6 +163,11 @@ uniquement une base isolée explicitement activée. Voir
 
 ## Sécurité, confidentialité, environnement
 
+[MR-024](docs/MR-024.md) ajoute un audit local privé des observations normalisées,
+hors HTTP. Il ne produit aucune ligne nettoyée ni capacité de publication :
+contradictions et inconnus restent explicites, coïncidences non fusionnées et
+effort non mesuré. L'admission scientifique et MR-048 restent des gates distincts.
+
 [ADR-008](docs/adr/008-occurrence-privacy.md) définit la frontière de prépublication
 MR-048 : politique revue et expirante, refus par défaut, conservation du floutage,
 cinq sorties contrôlées et diagnostics sans données privées. Les futurs adaptateurs
