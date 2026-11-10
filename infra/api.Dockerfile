@@ -13,10 +13,11 @@ RUN --mount=type=secret,id=build_ca \
     else uv sync --locked --no-dev; fi
 COPY alembic.ini ./
 COPY api ./api
+RUN python -m mycoradar.exploration --check-bundle
 RUN useradd --uid 10001 --create-home appuser
 USER appuser
 EXPOSE 8000
-CMD ["uvicorn", "mycoradar.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "mycoradar.main:app", "--host", "0.0.0.0", "--port", "8000", "--no-access-log"]
 
 # Explicit offline feature job; the default HTTP image keeps production dependencies only.
 FROM api-runtime AS feature-job
