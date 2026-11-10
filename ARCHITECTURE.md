@@ -237,5 +237,5 @@ reste distinct du CRS effectivement embarqué, leur équivalence est contrôlée
 et le rééchantillonnage serveur reste inconnu. La lecture technique ne répare
 pas un datum incomplet et n'admet pas le lot à une jointure scientifique.
 Les images RGB ou à palette sont refusées comme valeurs scalaires de sol/terrain.
-La CI rejoue les deux échantillons sans réseau et contrôle l'absence de Rasterio dans
+La CI rejoue les trois échantillons sans réseau et contrôle l'absence de Rasterio dans
 l'API. Voir [contrat, attribution et limites observées](docs/MR-013.md).
