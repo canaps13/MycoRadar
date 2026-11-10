@@ -1,0 +1,30 @@
+{
+  "task": "MR-044",
+  "date": "2026-11-10",
+  "base_sha": "9e2ea997fd370df9cfadbb891b828f8ede90645a",
+  "regression": {
+    "original_loader_failed": 8,
+    "corrected_exploration_passed": 28,
+    "includes_equal_boundary": true
+  },
+  "python_suite": {
+    "passed": 371,
+    "integration_deselected": 51
+  },
+  "checks_passed": [
+    "ruff check",
+    "ruff format --check",
+    "mypy (20 sources)",
+    "prepare_catalog.py --check",
+    "exploration --check-bundle",
+    "git diff --check"
+  ],
+  "not_run_locally": {
+    "docker": "dockerDesktopLinuxEngine pipe absent",
+    "postgis": "No isolated database",
+    "frontend": "No frontend change; CI validation pending"
+  },
+  "scientific_admission": "not_performed",
+  "task_status": "IN_PROGRESS",
+  "deployment_performed": false
+}
