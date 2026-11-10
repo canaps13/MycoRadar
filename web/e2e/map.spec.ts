@@ -15,6 +15,10 @@ test("real MapLibre renders, selects polygons, zooms and recenters with local at
   });
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/");
+  await expect(page.locator("[data-api-state]")).toHaveAttribute(
+    "data-api-state",
+    "partial",
+  );
   const map = page.locator("[data-map-state]");
   await expect(map).toHaveAttribute("data-map-state", "ready", {
     timeout: 20000,
@@ -79,6 +83,7 @@ test("real MapLibre renders, selects polygons, zooms and recenters with local at
 test("a failed map source leaves honest results and usable sector selection, then retries", async ({
   page,
 }) => {
+  await page.route("**/api/v1/exploration*", (route) => route.abort());
   await page.route("**/map/pilot-*.geojson", (route) => route.abort());
   await page.goto("/");
   await expect(

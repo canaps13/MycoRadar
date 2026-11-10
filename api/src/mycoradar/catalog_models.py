@@ -182,7 +182,11 @@ class Page[T](Contract):
 
 class ErrorDetail(Contract):
     code: Literal[
-        "invalid_query", "region_not_found", "catalog_version_conflict", "catalog_unavailable"
+        "invalid_query",
+        "region_not_found",
+        "catalog_version_conflict",
+        "catalog_unavailable",
+        "taxon_not_admitted",
     ]
     message: str
 

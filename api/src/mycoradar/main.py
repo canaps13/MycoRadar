@@ -12,6 +12,8 @@ from sqlalchemy import Engine
 from mycoradar.catalog import DEFAULT_CATALOG, Catalog
 from mycoradar.catalog_api import CatalogError, catalog_error_handler, query_error_handler, router
 from mycoradar.database import database_is_ready, get_engine
+from mycoradar.exploration import ExplorerBundle
+from mycoradar.exploration import router as exploration_router
 from mycoradar.settings import get_settings
 
 
@@ -26,8 +28,10 @@ async def lifespan(application: FastAPI) -> AsyncIterator[None]:
         except (OSError, UnicodeError):
             checksum = None
     application.state.catalog = Catalog(path, checksum or "")
+    application.state.explorer = ExplorerBundle(application.state.catalog)
     yield
     application.state.catalog = None
+    application.state.explorer = None
 
 
 app = FastAPI(
@@ -37,6 +41,7 @@ app = FastAPI(
     lifespan=lifespan,
 )
 app.include_router(router)
+app.include_router(exploration_router)
 app.add_exception_handler(CatalogError, catalog_error_handler)
 app.add_exception_handler(RequestValidationError, query_error_handler)
 
