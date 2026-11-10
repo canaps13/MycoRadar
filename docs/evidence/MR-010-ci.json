@@ -1,0 +1,67 @@
+{
+  "observed_at": "2026-10-30 18:41:46 UTC",
+  "validated_code_sha": "a72443fbd37622cf351ec53e79745f699feec2d5",
+  "trigger": "workflow_dispatch",
+  "step_details_available": false,
+  "step_details_note": "GitHub returned empty step arrays; these do not assert individual step execution. Final Compose log retrieval returned HTTP 503.",
+  "earlier_observed_log": {
+    "run_id": 41107786553,
+    "code_sha": "98e019d51c8147e74b70f9bb604b041cb2e505f6",
+    "url": "https://github.com/canaps13/MycoRadar/actions/runs/41107786553",
+    "observed_at": "2026-10-30 18:35:03 UTC",
+    "observed_results": [
+      "docker compose exec -T api python -m mycoradar.gbif_job --help printed usage successfully",
+      "51 passed, 411 deselected in 3.32s",
+      "12 passed (8.4s) browser tests"
+    ]
+  },
+  "dependency": {
+    "pull_request": "https://github.com/canaps13/MycoRadar/pull/16",
+    "head_sha": "f1f148d68dd9861127ab9b71c9d0e2094df18599",
+    "merged": false
+  },
+  "pull_request": null,
+  "roadmap_status": "IN_PROGRESS",
+  "pending_step": "Open a PR containing only MR-010 after authorized integration of MR-048; no PR convention CI is claimed.",
+  "real_sample": "docs/evidence/MR-010-sample.json",
+  "runs": [
+    {
+      "id": 41108111999,
+      "name": "Bootstrap",
+      "head_sha": "a72443fbd37622cf351ec53e79745f699feec2d5",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/canaps13/MycoRadar/actions/runs/41108111999",
+      "jobs": [
+        {
+          "name": "Bootstrap (ubuntu-latest)",
+          "conclusion": "success",
+          "url": "https://github.com/canaps13/MycoRadar/actions/runs/41108111999/job/124243180652",
+          "steps": []
+        },
+        {
+          "name": "Bootstrap (windows-latest)",
+          "conclusion": "success",
+          "url": "https://github.com/canaps13/MycoRadar/actions/runs/41108111999/job/124243180917",
+          "steps": []
+        }
+      ]
+    },
+    {
+      "id": 41108115734,
+      "name": "Local environment",
+      "head_sha": "a72443fbd37622cf351ec53e79745f699feec2d5",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/canaps13/MycoRadar/actions/runs/41108115734",
+      "jobs": [
+        {
+          "name": "Compose and PostGIS",
+          "conclusion": "success",
+          "url": "https://github.com/canaps13/MycoRadar/actions/runs/41108115734/job/124243194078",
+          "steps": []
+        }
+      ]
+    }
+  ]
+}

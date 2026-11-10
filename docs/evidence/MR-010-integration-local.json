@@ -1,0 +1,29 @@
+{
+  "task": "MR-010",
+  "date": "2026-11-10",
+  "integration_merge": "02e8fdca5bcea257286641d1ac938716f3e72c0a",
+  "main_sha": "65a05e9fec67cebbc06a321d06736290f60063eb",
+  "python": {
+    "passed": 480,
+    "integration_deselected": 51,
+    "new_cases": 9
+  },
+  "checks_passed": [
+    "ruff check .",
+    "ruff format --check .",
+    "mypy (25 sources)",
+    "prepare_catalog.py --check",
+    "exploration --check-bundle",
+    "check_gbif_replay.py --snapshot synthetic-fixture",
+    "git diff --check"
+  ],
+  "not_run_locally": {
+    "docker": "LinuxEngine pipe absent",
+    "postgis": "No isolated local database",
+    "frontend": "CI runs the synchronized web suites"
+  },
+  "new_live_requests": 0,
+  "scientific_admission": "not_performed",
+  "deployment": false,
+  "status": "IN_PROGRESS"
+}

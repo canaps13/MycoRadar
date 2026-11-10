@@ -1,0 +1,40 @@
+{
+  "schema_version": "gbif-snapshot-v1",
+  "capture_kind": "synthetic",
+  "captured_at": "2026-01-04T00:00:00Z",
+  "request": {
+    "dataset_key": "11111111-1111-4111-8111-111111111111",
+    "scientific_name": "Testus syntheticus",
+    "country": "FR",
+    "page_size": 2,
+    "max_records": 3,
+    "checklist_key": "d7dddbf4-2cf0-4f39-9b2a-bb099caae36c"
+  },
+  "responses": [
+    {
+      "url": "https://api.gbif.org/v1/species/match?name=Testus+syntheticus&kingdom=Fungi&strict=true",
+      "path": "response-0.json",
+      "sha256": "0960d3613468ab962b459f808fb2e015208491829e0ea9c4bf2077e6ff5f223b"
+    },
+    {
+      "url": "https://api.gbif.org/v1/dataset/11111111-1111-4111-8111-111111111111",
+      "path": "response-1.json",
+      "sha256": "3c01365ec9cd8202d31169da50f676ad20911fb0cbe36c468148d3c5e85e1a9b"
+    },
+    {
+      "url": "https://api.gbif.org/v1/occurrence/search?datasetKey=11111111-1111-4111-8111-111111111111&taxonKey=123&checklistKey=d7dddbf4-2cf0-4f39-9b2a-bb099caae36c&country=FR&hasCoordinate=true&offset=0&limit=2",
+      "path": "response-2.json",
+      "sha256": "8aeda1c319c6d7b29970db2be6133195f494cd7c0ec504ce6465fcd1756876ca"
+    },
+    {
+      "url": "https://api.gbif.org/v1/occurrence/search?datasetKey=11111111-1111-4111-8111-111111111111&taxonKey=123&checklistKey=d7dddbf4-2cf0-4f39-9b2a-bb099caae36c&country=FR&hasCoordinate=true&offset=2&limit=1",
+      "path": "response-3.json",
+      "sha256": "bfca25ca39a094eb1124f0a24493998b2e6720084f82bb152b8a205fa565036a"
+    },
+    {
+      "url": "https://api.gbif.org/v1/dataset/11111111-1111-4111-8111-111111111111",
+      "path": "response-4.json",
+      "sha256": "3c01365ec9cd8202d31169da50f676ad20911fb0cbe36c468148d3c5e85e1a9b"
+    }
+  ]
+}
