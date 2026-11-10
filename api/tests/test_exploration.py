@@ -189,3 +189,43 @@ def test_explorer_requests_do_not_read_disk(
 def test_openapi_explorer_contract_is_concrete(client: TestClient) -> None:
     operation = client.get("/openapi.json").json()["paths"]["/v1/exploration"]["get"]
     assert {"200", "404", "409", "422", "503"} <= set(operation["responses"])
+
+
+@pytest.mark.parametrize("field", ["bounds", "context_bounds"])
+@pytest.mark.parametrize("edge", range(4))
+def test_checksummed_context_excluding_published_territory_fails_closed(
+    client: TestClient, tmp_path: Path, field: str, edge: int
+) -> None:
+    context = json.loads(CONTEXT_PATH.read_bytes())
+    # Still a valid WGS84 box, but its edge cuts through the real pilot.
+    context[field][edge] = [5.0, 43.5, 6.0, 44.0][edge]
+    content = json.dumps(context).encode()
+    path = tmp_path / "context.json"
+    path.write_bytes(content)
+    path.with_suffix(".sha256").write_text(hashlib.sha256(content).hexdigest())
+    catalog = Catalog(DEFAULT_CATALOG, DEFAULT_CATALOG.with_suffix(".sha256").read_text().strip())
+    app.state.explorer = ExplorerBundle(catalog, path)
+    assert app.state.explorer.context is None
+    response = client.get("/v1/exploration")
+    assert response.status_code == 503
+    assert response.json()["error"]["code"] == "catalog_unavailable"
+    assert "coordinates" not in response.text
+    assert client.get("/health").status_code == 200
+
+
+def test_context_accepts_exact_region_envelope_and_display_boundary(tmp_path: Path) -> None:
+    catalog = Catalog(DEFAULT_CATALOG, DEFAULT_CATALOG.with_suffix(".sha256").read_text().strip())
+    context = json.loads(CONTEXT_PATH.read_bytes())
+    boxes = [catalog.region_index[sector["id"]].bounds for sector in context["sectors"]]
+    envelope = [
+        min(b[0] for b in boxes),
+        min(b[1] for b in boxes),
+        max(b[2] for b in boxes),
+        max(b[3] for b in boxes),
+    ]
+    context["bounds"] = context["context_bounds"] = envelope
+    content = json.dumps(context).encode()
+    path = tmp_path / "context.json"
+    path.write_bytes(content)
+    path.with_suffix(".sha256").write_text(hashlib.sha256(content).hexdigest())
+    assert ExplorerBundle(catalog, path).context is not None

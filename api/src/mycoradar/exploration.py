@@ -59,6 +59,10 @@ class ExplorerContext(Contract):
             west, south, east, north = box
             if not (-180 <= west < east <= 180 and -90 <= south < north <= 90):
                 raise ValueError("Invalid display bounds")
+        west, south, east, north = self.context_bounds
+        w, s, e, n = self.bounds
+        if not (west <= w < e <= east and south <= s < n <= north):
+            raise ValueError("Overview bounds exceed display coverage")
         if len({s.id for s in self.sectors}) != len(self.sectors):
             raise ValueError("Duplicate display sector")
         return self
@@ -85,6 +89,9 @@ class ExplorerBundle:
                 if region is None or context.source_id not in region.source_ids:
                     return
                 w, s, e, n = region.bounds
+                west, south, east, north = context.bounds
+                if not (west <= w <= e <= east and south <= s <= n <= north):
+                    return
                 if not (w <= sector.label_point[0] <= e and s <= sector.label_point[1] <= n):
                     return
             if not set(context.species_ids) <= {s.id for s in snapshot.species}:
