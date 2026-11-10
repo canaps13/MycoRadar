@@ -1,0 +1,40 @@
+{
+  "task": "MR-011",
+  "date": "2026-11-10",
+  "main_sha": "65a05e9",
+  "merge_commit": "8439dd9",
+  "scope": "HTTP ETag conditional revalidation; no live provider requests",
+  "python": {
+    "passed": 454,
+    "integration_deselected": 51,
+    "weather_passed": 83,
+    "new_cases": 11
+  },
+  "negative_regression": {
+    "original_client_failed": 6,
+    "original_client_passed": 5,
+    "deselected": 72,
+    "corrected_weather_passed": 83
+  },
+  "checks_passed": [
+    "ruff check .",
+    "ruff format --check .",
+    "mypy (24 sources)",
+    "prepare_catalog.py --check",
+    "exploration --check-bundle",
+    "native check_weather_cache.py",
+    "git diff --check"
+  ],
+  "not_run_locally": {
+    "docker": "LinuxEngine pipe absent",
+    "postgis": "No isolated local database",
+    "frontend": "Unchanged; synchronized suites run in CI"
+  },
+  "new_live_requests": 0,
+  "deployment": false,
+  "status": "IN_PROGRESS",
+  "references": [
+    "https://www.rfc-editor.org/rfc/rfc9110.html#name-if-none-match",
+    "https://www.rfc-editor.org/rfc/rfc9111.html#name-validation"
+  ]
+}

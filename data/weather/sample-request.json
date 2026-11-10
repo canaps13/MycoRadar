@@ -1,0 +1,16 @@
+{
+  "mf": {
+    "url": "https://meteofrance.s3.sbg.io.cloud.ovh.net/data/synchro_ftp/BASE/QUOT/Q_13_latest-2025-2026_RR-T-Vent.csv.gz",
+    "station_id": "13054001",
+    "start_day": "2025-01-01",
+    "end_day": "2026-10-29",
+    "resource_updated_at": "2026-10-29T06:54:08+00:00"
+  },
+  "forecast": {
+    "provider": "met-norway",
+    "public_reference": true,
+    "reference_id": "marseille-public-reference",
+    "latitude": "43.3",
+    "longitude": "5.4"
+  }
+}

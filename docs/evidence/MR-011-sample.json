@@ -1,0 +1,126 @@
+{
+  "forecast": {
+    "adapter_version": "weather-sample-v1",
+    "attribution": "Data from MET Norway; normalized temperature and precipitation, no icons",
+    "availability_semantics": "first local retrieval, not historical availability",
+    "available_at": "2026-10-31T07:23:01.590008+00:00",
+    "batch_version": "b4a6d5c2ed43456361f5d95eaea97241d6ea30c8e7abbc67e4d5f928b7e73cde",
+    "classification_reference_day": "2026-10-31",
+    "coverage_status": "partial",
+    "effective_resolution_m": null,
+    "evaluated_at": "2026-10-31T07:43:37.043300+00:00",
+    "forecast_updated_at": "2026-10-31T07:17:20+00:00",
+    "future_step_count": 91,
+    "http_cache_expired": false,
+    "issue_time_semantics": "product update is not model issuance; backtesting not admitted",
+    "issued_at": null,
+    "kind_counts": {
+      "forecast": 184
+    },
+    "kind_status": {
+      "forecast": "partial"
+    },
+    "lead_time_hours": null,
+    "license": "CC-BY-4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "measurement_count": 184,
+    "nominal_model_resolution_m": null,
+    "normalized_content_sha256": "ab91b2576461c1944866ad0d23a9fdd6897fb36e75787dd6c40fd375d380b94c",
+    "provider": "met-norway-locationforecast",
+    "public_measurements_added": 0,
+    "quality_counts": {
+      "missing": 1,
+      "usable": 183
+    },
+    "raw_records_persisted_in_git": false,
+    "request": {
+      "latitude": "43.3",
+      "longitude": "5.4",
+      "provider": "met-norway",
+      "public_reference": true,
+      "reference_id": "marseille-public-reference"
+    },
+    "schema_version": "weather-sample-v1",
+    "source": {
+      "cache_state": "local_cache",
+      "checked_at": "2026-10-31T07:23:01.590008+00:00",
+      "effective_url": null,
+      "fetched_at": "2026-10-31T07:23:01.590008+00:00",
+      "hash_representation": "HTTP entity bytes after Content-Encoding decoding",
+      "http_expires": "Sat, 31 Oct 2026 07:53:17 GMT",
+      "http_last_modified": "Sat, 31 Oct 2026 07:23:01 GMT",
+      "sha256": "9915263f095c8232e165fed4de307aece46f7fd030c8f71bc6b1e6742695aec2",
+      "url": "https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=43.3&lon=5.4"
+    },
+    "source_model_resolution_note": "regional models; per-record resolution not supplied",
+    "transformation": "instant temperature; next 1h else 6h rain; no summation/disaggregation",
+    "usable_measurement_count": 183,
+    "valid_at_max": "2026-11-09T12:00:00Z",
+    "valid_at_min": "2026-10-31T07:00:00Z"
+  },
+  "observations": {
+    "adapter_version": "weather-sample-v1",
+    "attribution": "Meteo-France - daily climatological observations; source URL and resource update retained",
+    "availability_semantics": "first local retrieval, not historical availability",
+    "available_at": "2026-10-31T07:22:59.651068+00:00",
+    "batch_version": "094ec6b49706043b65ae735dd228b8f8db9ae05e6e5057a74e1da84519fcb6f4",
+    "catalog_url": "https://www.data.gouv.fr/datasets/donnees-climatologiques-de-base-quotidiennes",
+    "classification_reference_day": "2026-10-31",
+    "coverage_status": "partial",
+    "daily_temperature_interval": "daily mean of hourly temperatures; exact bounds not asserted",
+    "duplicate_rows": 0,
+    "effective_resolution_m": null,
+    "evaluated_at": "2026-10-31T07:43:36.893156+00:00",
+    "fully_usable_day_count": 667,
+    "http_cache_expired": null,
+    "kind_counts": {
+      "historical_observation": 1322,
+      "recent_observation": 12
+    },
+    "kind_status": {
+      "historical_observation": "partial",
+      "recent_observation": "partial"
+    },
+    "license": "Etalab-2.0",
+    "license_url": "https://github.com/etalab/licence-ouverte/blob/master/LO.md",
+    "measurement_count": 1334,
+    "missing_days": 0,
+    "observed_day_max": "2026-10-29",
+    "observed_day_min": "2025-01-01",
+    "provider": "meteo-france-daily",
+    "public_measurements_added": 0,
+    "quality_counts": {
+      "usable": 1334
+    },
+    "rainfall_interval": "06:00 UTC J to 06:00 UTC J+1; assigned to J; metropolitan only",
+    "raw_records_persisted_in_git": false,
+    "recency_rule": "last seven calendar days relative to evaluated_at, not a freshness guarantee",
+    "request": {
+      "end_day": "2026-10-29",
+      "resource_updated_at": "2026-10-29T06:54:08Z",
+      "start_day": "2025-01-01",
+      "station_id": "13054001",
+      "url": "https://meteofrance.s3.sbg.io.cloud.ovh.net/data/synchro_ftp/BASE/QUOT/Q_13_latest-2025-2026_RR-T-Vent.csv.gz"
+    },
+    "scanned_rows": 13329,
+    "schema_version": "weather-sample-v1",
+    "selected_days": 667,
+    "source": {
+      "cache_state": "local_cache",
+      "checked_at": "2026-10-31T07:22:59.651068+00:00",
+      "effective_url": null,
+      "fetched_at": "2026-10-31T07:22:59.651068+00:00",
+      "hash_representation": "HTTP entity bytes after Content-Encoding decoding",
+      "http_expires": null,
+      "http_last_modified": "Sat, 31 Oct 2026 06:53:03 GMT",
+      "sha256": "290fb43b67381ef50768f3dbeee6c106301f8f3d757290e1c67c315ef944357b",
+      "url": "https://meteofrance.s3.sbg.io.cloud.ovh.net/data/synchro_ftp/BASE/QUOT/Q_13_latest-2025-2026_RR-T-Vent.csv.gz"
+    },
+    "source_resource_updated_at": "2026-10-29T06:54:08+00:00",
+    "transformation": "RR/TM decimal units unchanged; quality 0/1 only; no spatial interpolation",
+    "usable_measurement_count": 1334
+  },
+  "schema_version": "weather-job-v1",
+  "status": "partial",
+  "capture_note": "Bounded identified GET captures; fetched_at is local capture-file completion time. Final redirect URL was not recorded in the manual capture and remains null. Offline CLI replay from a seeded private cache, with no second provider request."
+}
