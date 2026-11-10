@@ -1,0 +1,42 @@
+{
+  "task": "MR-013",
+  "date": "2026-11-10",
+  "main_sha": "65a05e9",
+  "integration_merge": "1752660",
+  "python": {
+    "passed": 408,
+    "integration_deselected": 51,
+    "raster_cases": 37
+  },
+  "checks_passed": [
+    "ruff check .",
+    "ruff format --check .",
+    "mypy (22 sources)",
+    "prepare_catalog.py --check",
+    "exploration --check-bundle",
+    "git diff --check",
+    "native check_raster_replay.py"
+  ],
+  "replay": {
+    "sample_count": 3,
+    "each_created_then_unchanged": true,
+    "bytes_and_job_id_stable_per_environment": true,
+    "values_units_and_quality_equal_frozen_references": true,
+    "negative_control": "Changed conversion scale in temporary WCS manifest: CLI exits 0 with 56 valid pixels, smoke exits 1"
+  },
+  "pending_ci": [
+    "API UID 10001, no native geo modules, actual --no-access-log argument",
+    "raster-job UID 10001, all three frozen real-CLI replays without network",
+    "PostGIS, migration replay, browser suites"
+  ],
+  "not_run_locally": {
+    "docker": "LinuxEngine pipe absent",
+    "postgis": "No isolated local database",
+    "frontend": "Synchronized suites run in CI"
+  },
+  "geological_data_downloaded": false,
+  "new_soil_or_terrain_requests": 0,
+  "scientific_admission": "not_performed",
+  "deployment": false,
+  "task_status": "IN_PROGRESS"
+}

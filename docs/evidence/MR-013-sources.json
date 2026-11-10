@@ -1,0 +1,108 @@
+{
+  "recorded_at": "2026-10-31T17:20:38.930732+00:00",
+  "review_date": "2026-10-31",
+  "review_scope": "Public metadata, CC BY 4.0 terms, one bounded WCS soil subset; no terrain or geological data fetched.",
+  "isric": {
+    "product_url": "https://isric.org/explore/soilgrids",
+    "wcs_documentation_url": "https://docs.isric.org/globaldata/soilgrids/wcs.html",
+    "units_url": "https://maps.isric.org/soilgrids.html",
+    "layer_url": "https://dev-maps.isric.org/generated/soilgrids/phh2o.html",
+    "citation_url": "https://docs.isric.org/globaldata/soilgrids/SoilGrids_faqs_04.html",
+    "license": "CC-BY-4.0",
+    "legalcode_url": "https://creativecommons.org/licenses/by/4.0/legalcode.en",
+    "citation_doi": "10.5194/soil-7-217-2021",
+    "capture_at": "2026-10-31T17:03:15.402945+00:00",
+    "capture_at_basis": "Local UTC capture file timestamp; distinct from source publication or data acquisition.",
+    "source_url": "https://maps.isric.org/mapserv?map=%2Fmap%2Fphh2o.map&SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&COVERAGEID=phh2o_0-5cm_mean&FORMAT=GEOTIFF_INT16&SUBSET=X%281329500%2C1331500%29&SUBSET=Y%284819000%2C4821000%29&SUBSETTINGCRS=http%3A%2F%2Fwww.opengis.net%2Fdef%2Fcrs%2FEPSG%2F0%2F152160",
+    "effective_url": "https://maps.isric.org/mapserv?map=%2Fmap%2Fphh2o.map&SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&COVERAGEID=phh2o_0-5cm_mean&FORMAT=GEOTIFF_INT16&SUBSET=X%281329500%2C1331500%29&SUBSET=Y%284819000%2C4821000%29&SUBSETTINGCRS=http%3A%2F%2Fwww.opengis.net%2Fdef%2Fcrs%2FEPSG%2F0%2F152160",
+    "http_status_observed": 200,
+    "http_headers": {
+      "Date": "Sat, 31 Oct 2026 17:03:15 GMT",
+      "Content-Type": "image/tiff",
+      "Cache-Control": "public, max-age=86400"
+    },
+    "source_bytes": 1138,
+    "sha256": "7193702c31be1f61ebade313202c0af814c2c09f88bf8bb52f3c97b85685e2f6",
+    "requests": [
+      {
+        "kind": "GetCapabilities",
+        "url": "https://maps.isric.org/mapserv?map=/map/phh2o.map&SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCapabilities",
+        "sha256": "48e8870168597da96d1f9a762e061405eacc2e78ea46074e3d47a0adcd33b60f"
+      },
+      {
+        "kind": "DescribeCoverage",
+        "url": "https://maps.isric.org/mapserv?map=/map/phh2o.map&SERVICE=WCS&VERSION=2.0.1&REQUEST=DescribeCoverage&COVERAGEID=phh2o_0-5cm_mean",
+        "sha256": "967770398980215524e116d8e9a8c6901202f8072a07b709a99430530026012e",
+        "archived_metadata": "MR-013-soil-describe.xml"
+      },
+      {
+        "kind": "GetCoverage",
+        "url": "https://maps.isric.org/mapserv?map=%2Fmap%2Fphh2o.map&SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&COVERAGEID=phh2o_0-5cm_mean&FORMAT=GEOTIFF_INT16&SUBSET=X%281329500%2C1331500%29&SUBSET=Y%284819000%2C4821000%29&SUBSETTINGCRS=http%3A%2F%2Fwww.opengis.net%2Fdef%2Fcrs%2FEPSG%2F0%2F152160"
+      }
+    ],
+    "request_policy": "One identified HTTPS GET per WCS operation, timeout 20-25s, response budget 2MB, no retry loop; public reference area, no private locations.",
+    "user_agent": "MycoRadar/0.1 (+https://github.com/canaps13/MycoRadar)",
+    "quota": null,
+    "rest": "Not used; product page announces temporarily paused REST without resumption date.",
+    "webdav": "Documented alternative, not exercised.",
+    "wcs_metadata_discrepancy": {
+      "uom_code": "W.m-2.Sr-1",
+      "nil_values": [],
+      "decision": "Generic radiance label not used as soil unit; layer catalogue explicitly says pH x 10. Preserve discrepancy."
+    },
+    "grid": {
+      "native_crs": "PROJCS[\"unknown\",GEOGCS[\"unknown\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"Degree\",0.0174532925199433]],PROJECTION[\"Interrupted_Goode_Homolosine\"],PARAMETER[\"central_meridian\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "wcs_crs_identifier": "http://www.opengis.net/def/crs/EPSG/0/152160",
+      "actual_pixel_spacing_native_m": [
+        250,
+        250
+      ],
+      "nominal_product_grid_m": 250,
+      "effective_resolution_m": null,
+      "resampling_requested": false
+    },
+    "unknowns": [
+      "exact raster release date",
+      "data cutoff",
+      "effective spatial resolution",
+      "meaning of raw zero values",
+      "service quotas"
+    ],
+    "decision": "Bounded public technical sample admitted under CC BY 4.0 with attribution and transformation notice. Not admitted as scientific coverage or score input."
+  },
+  "brgm": {
+    "captured_at": "2026-10-31T17:17:58.5133864+00:00",
+    "url": "https://www.data.gouv.fr/api/1/datasets/cartes-geologiques-vectorisees-et-harmonisees-a-1-50-000-du-brgm/",
+    "id": "66631d4a67b5b112fafd0f8a",
+    "title": "Cartes géologiques vectorisées et harmonisées à 1/50 000 du BRGM",
+    "license": "notspecified",
+    "organization_id": "66601e784637c6bfa87b06ca",
+    "last_modified": "2025-06-12T12:20:52.080000+00:00",
+    "last_update": "2026-10-30T03:56:01.482000+00:00",
+    "extras": {
+      "dcat": {
+        "accessRights": [
+          "http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/noLimitations"
+        ],
+        "license": [
+          "http://inspire.ec.europa.eu/metadata-codelist/ConditionsApplyingToAccessAndUse/noConditionsApply"
+        ],
+        "provenance": [
+          "BD-CHARM : Carte géologique de France à 1/50000 au format numérique vecteur issue de la numérisation de la carte imprimée"
+        ],
+        "rights": [
+          "Limite d'utilisation liée à l'échelle",
+          "Aucune condition ne s’applique",
+          "Données ouvertes"
+        ],
+        "spatial_resolution": "1/50000"
+      }
+    },
+    "decision": "R1 remains blocked: top-level license notspecified and no exact distribution license text established. Metadata only; no geological data fetched."
+  },
+  "terrain": {
+    "product_url": "https://www.data.gouv.fr/datasets/rge-alti-r",
+    "provider": "IGN",
+    "decision": "Candidate only; no actual terrain delivery fetched or validated, unavailable in this sample."
+  }
+}

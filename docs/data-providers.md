@@ -113,3 +113,62 @@ collecte datée du 29 octobre 2026, aucune fraîcheur déduite de la notice.
 Le lot est réutilisé sans appel WFS ; quotas non établis, aucun polling activé.
 Pas de donnée personnelle ni de masque forestier. [Manifeste et preuves](MR-009.md).
 Cette admission ne concerne aucun autre produit IGN ni taxon/occurrence.
+
+### Lot technique raster MR-013
+
+Revue du 31 octobre 2026 : [notice ISRIC](https://isric.org/explore/soilgrids),
+[texte CC BY 4.0](https://creativecommons.org/licenses/by/4.0/legalcode.en),
+[citation](https://docs.isric.org/globaldata/soilgrids/SoilGrids_faqs_04.html) et
+[unités du catalogue](https://maps.isric.org/soilgrids.html). Admission limitée
+à l'extrait WCS `phh2o_0-5cm_mean` de 64 pixels, SHA-256 `7193702c31be…`, pour
+valider le lecteur hors ligne. Copie, usage commercial, redistribution et dérivés
+permis sous attribution ISRIC/Poggio et al. 2021, lien CC BY 4.0 et indication
+des transformations ; manifeste et dérivé conservent ces crédits.
+
+Trois GET WCS identifiés et bornés, sans compte, aucune boucle de collecte ;
+quota inconnu, aucun polling activé, cache HTTP observé `max-age=86400` distinct
+de la copie du lot sous licence. REST non utilisé, WebDAV non exercé. CRS natif
+et pas de grille 250 m préservés ; résolution effective, millésime et date de fin
+des données inconnus. Unité WCS incohérente et huit zéros sans NoData explicite
+conservés comme anomalies ; ces derniers sont exclus par prudence opérateur.
+Ce lot n'est pas admis comme couverture scientifique ou entrée de score.
+Voir [recette et attribution](MR-013.md), [manifeste](../data/rasters/soilgrids-sample/manifest.json)
+et [preuves sources](evidence/MR-013-sources.json).
+
+BRGM R1 demeure bloqué après relecture de la notice producteur : licence
+`notspecified`, extras sans texte applicable à la distribution exacte. La
+[revue du 1er novembre](evidence/MR-013-brgm-availability.json) constate la
+fermeture annoncée sur [InfoTerre](https://infoterre.brgm.fr/) et les routes
+de conditions/PDF/téléchargement en 404. Le texte historique du moteur de
+recherche n'est pas une preuve de distribution actuelle ; aucune révocation
+de licence n'est déduite de la fermeture. Aucune donnée géologique téléchargée.
+
+Repli fichier SoilGrids revu le 1er novembre 2026 : la fiche ISRIC confirme
+CC BY 4.0 et REST suspendu. Le GeoTIFF natif `tileSG-008-047_2-2.tif`, 323 071
+octets, est admis comme lot **technique** sous attribution ISRIC/Poggio et al.,
+DOI, lien de licence et transformations. SHA-256 conforme à celui publié ;
+index VRT archivé, uniquement analysé comme XML, sans ouverture GDAL. Trois
+ressources capturées (index, fichier, checksums), pas de compte ni polling.
+Copie, usage commercial, redistribution et dérivés permis sous CC BY 4.0 ;
+aucun cache CDN activé ni quota inventé. Une fenêtre 8 × 8 contient 56 valeurs
+et huit NoData déclarés ; le pas nominal 250 m n'est pas une résolution effective.
+Le WKT livré est préservé, sans réaffectation au CRS WCS non équivalent ; dates
+scientifiques inconnues et aucune admission aux scores/jointures. Voir
+[données et rejeu](../data/rasters/soilgrids-file-sample/README.md),
+[preuve et droits](evidence/MR-013-file-sources.json).
+
+L'extension MR-013 admet un **lot technique public RGE ALTI** de 8 × 8 pixels
+pour tester la lecture numérique hors ligne : notice IGN dédiée `rge-alti-r`,
+licence `lov2` et LO 2.0 relues le 31 octobre 2026, CGU Géoplateforme relues.
+Copie, usage commercial, redistribution et dérivés autorisés sous attribution
+IGN effective, URL source et indication des transformations ; date source
+inconnue explicitée, collecte séparée. Style WMS `normal`, GeoTIFF `float32`
+à une bande, unités en mètres selon le descriptif produit, NoData `-99999`.
+Le WKT livré a un datum incomplet, le référentiel vertical est non vérifié,
+rééchantillonnage serveur et pas natif inconnus ; le pas de sortie 1 m ne
+prouve pas la résolution effective. Aucune admission aux calculs scientifiques.
+Quota WMS inconnu, une requête GetMap ponctuelle identifiée, aucun polling.
+En-tête HTTP `private` conservé, sans activation de cache CDN public.
+[Preuves, licence et URL exacte](evidence/MR-013-terrain-sources.json),
+[manifeste et crédits](../data/rasters/ign-terrain-sample/manifest.json),
+[limites de la livraison](MR-013.md#géoréférencement-et-échantillonnage-incomplets).

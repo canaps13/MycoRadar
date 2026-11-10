@@ -1,0 +1,34 @@
+{
+  "reviewed_at": "2026-11-10T10:26:25.167523+00:00",
+  "scope": "Bounded public metadata and terms availability only; no geological data requested",
+  "checks": [
+    {
+      "url": "https://infoterre.brgm.fr/",
+      "http_status": 200,
+      "sha256": "ff60dfc520d5612f6d0b0eacc792515cb585ac28adbf29e94f440cb4138735b1"
+    },
+    {
+      "url": "https://infoterre.brgm.fr/page/conditions-dutilisation-donnees",
+      "http_status": 404
+    },
+    {
+      "url": "https://infoterre.brgm.fr/sites/default/files/upload/documents/conditions-utilisation-infoterre.pdf",
+      "http_status": 404
+    },
+    {
+      "url": "https://infoterre.brgm.fr/formulaire/telechargement-cartes-geologiques-departementales-150-000-bd-charm-50",
+      "http_status": 404
+    },
+    {
+      "url": "https://www.data.gouv.fr/api/1/datasets/cartes-geologiques-vectorisees-et-harmonisees-a-1-50-000-du-brgm/",
+      "http_status": 200,
+      "sha256": "cc05585434ae345f081b0d5db36e40ba09cba234f296c9d10f6aeaa236794cb6",
+      "catalog_id": "66631d4a67b5b112fafd0f8a",
+      "catalog_license": "notspecified"
+    }
+  ],
+  "geological_data_downloaded": false,
+  "authentication_or_contact_attempted": false,
+  "homepage_review": "Official page still announces preventive closure, unavailable detailed documents and an indicative late-December beta schedule. Alternative services are not a distribution licence.",
+  "decision": "R1 remains blocked unless applicable terms for the exact geological distribution are established; closure does not itself revoke a licence."
+}
