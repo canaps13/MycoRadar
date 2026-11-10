@@ -41,7 +41,7 @@ jobs:
       - id: offline_gbif_replay
         run: |
           api_image="$(docker compose --env-file .env.example images -q api)"
-          docker run --rm --network none --mount "type=bind,source=${PWD}/data/gbif/offline-synthetic,target=/input,readonly" "$api_image" python -m mycoradar.gbif_job --snapshot /input/snapshot.json
+          docker run --rm --network none --mount "type=bind,source=${PWD}/data/gbif/offline-synthetic,target=/input,readonly" --mount "type=bind,source=${PWD}/scripts/check_gbif_replay.py,target=/check_gbif_replay.py,readonly" "$api_image" python /check_gbif_replay.py --snapshot /input/snapshot.json
       - id: postgis_tests
         run: uv run --locked pytest -m integration
       - id: migration_replay
