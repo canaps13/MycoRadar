@@ -1,0 +1,44 @@
+{
+  "task": "MR-012",
+  "date": "2026-11-10",
+  "main_sha": "65a05e9",
+  "integration_merge": "e8d5e51",
+  "python": {
+    "passed": 408,
+    "integration_deselected": 51
+  },
+  "checks_passed": [
+    "ruff check .",
+    "ruff format --check .",
+    "mypy (22 sources)",
+    "prepare_catalog.py --check",
+    "exploration --check-bundle",
+    "git diff --check",
+    "native check_landcover_replay.py"
+  ],
+  "replay": {
+    "received": 48,
+    "features": 45,
+    "categories": 8,
+    "acquisition_year": 2008,
+    "unknown_years": 0,
+    "bytes_unchanged": true,
+    "job_id_unchanged": true,
+    "second_created": false,
+    "negative_control": "Changed acquisition year in temporary manifest: CLI exits 0, smoke exits 1"
+  },
+  "runtime_checks_pending_ci": [
+    "API UID 10001, no numpy/shapely/pyproj, actual --no-access-log argument",
+    "geo-job UID 10001 and frozen real-CLI replay without network",
+    "PostGIS, migration replay and browser suites"
+  ],
+  "not_run_locally": {
+    "docker": "LinuxEngine pipe absent",
+    "postgis": "No isolated local database",
+    "frontend": "Synchronized suites run in CI"
+  },
+  "new_live_requests": 0,
+  "scientific_admission": "not_performed",
+  "deployment": false,
+  "status": "IN_PROGRESS"
+}

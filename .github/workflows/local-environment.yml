@@ -40,8 +40,8 @@ jobs:
         run: docker build --target geo-job --tag mycoradar-geo-ci --file infra/api.Dockerfile .
       - id: geo_job_smoke
         run: |
-          docker compose --env-file .env.example exec -T api python -c "import importlib.util; assert importlib.util.find_spec('shapely') is None; assert importlib.util.find_spec('pyproj') is None"
-          docker run --rm --network none --mount "type=bind,source=${PWD}/data/landcover/bdforet-sample,target=/input,readonly" mycoradar-geo-ci python -m mycoradar.landcover_job --manifest /input/manifest.json --output /tmp/landcover.geojson
+          docker compose --env-file .env.example exec -T api python -c "import importlib.util, os; from pathlib import Path; assert os.getuid() == 10001; assert all(importlib.util.find_spec(m) is None for m in ('numpy', 'shapely', 'pyproj')); assert b'--no-access-log' in Path('/proc/1/cmdline').read_bytes().split(bytes([0]))"
+          docker run --rm --network none --mount "type=bind,source=${PWD}/data/landcover/bdforet-sample,target=/input,readonly" --mount "type=bind,source=${PWD}/scripts/check_landcover_replay.py,target=/check_landcover_replay.py,readonly" mycoradar-geo-ci python /check_landcover_replay.py --manifest /input/manifest.json --require-container-user
       - id: postgis_tests
         run: uv run --locked pytest -m integration
       - id: migration_replay
