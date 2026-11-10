@@ -41,5 +41,51 @@
       "Display simplification tolerance 0.0005 degrees; no ecological interpretation",
       "Longitude/latitude CRS:84, effective resolution unknown"
     ]
+  },
+  "explorer": {
+    "schema_version": "explorer-context-v1",
+    "label": "Provence",
+    "timezone": "Europe/Paris",
+    "bounds": [
+      4.23021603,
+      42.98202923,
+      6.93344824,
+      44.43153331
+    ],
+    "context_bounds": [
+      -12,
+      33,
+      20,
+      53
+    ],
+    "source_id": "ign-adminexpress-display-20261029",
+    "source_sha256": "f967afb56063def9d52dbdcbc28faab651906c5472c5c684b66a38e7b35b1a16",
+    "sectors": [
+      {
+        "id": "FR-13",
+        "code": "13",
+        "label_point": [
+          4.841526464614261,
+          43.682817674292004
+        ]
+      },
+      {
+        "id": "FR-83",
+        "code": "83",
+        "label_point": [
+          6.244904579028316,
+          43.437747785200195
+        ]
+      },
+      {
+        "id": "FR-84",
+        "code": "84",
+        "label_point": [
+          5.207183461572267,
+          43.97951644020507
+        ]
+      }
+    ],
+    "species_ids": []
   }
 }

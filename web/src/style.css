@@ -114,6 +114,75 @@ summary:focus-visible {
   grid-template-columns: minmax(0, 1fr) 290px;
   border-top: 1px solid #d8ded1;
 }
+.explorer-filters {
+  display: flex;
+  align-items: end;
+  gap: 16px;
+  padding: 0 24px 16px;
+  flex-wrap: wrap;
+}
+.explorer-filters label {
+  display: grid;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.explorer-filters input,
+.explorer-filters select {
+  font: inherit;
+  background: #fffef8;
+  border: 1px solid #bdcab8;
+  color: #203c32;
+  border-radius: 6px;
+  padding: 10px;
+  min-height: 42px;
+  max-width: 100%;
+}
+.explorer-filters select:disabled {
+  color: #657063;
+  background: #eff0e8;
+}
+.date-zone {
+  font-size: 11px;
+  color: #526157;
+  padding-bottom: 12px;
+}
+.data-connection {
+  margin: 0;
+  padding: 12px 24px;
+  border-top: 1px solid #d8ded1;
+  font-size: 12px;
+  line-height: 1.7;
+  background: #f0f2e8;
+}
+.data-connection button {
+  border: 0;
+  background: transparent;
+  text-decoration: underline;
+  margin-left: 10px;
+  padding: 5px 0;
+  font-size: 12px;
+}
+.data-connection.unavailable {
+  background: #f5ead8;
+}
+.confidence-detail {
+  margin-top: 22px;
+  font-size: 11px;
+  line-height: 1.7;
+  color: #526157;
+}
+.confidence-detail summary {
+  cursor: pointer;
+  color: #203c32;
+  font-weight: 600;
+}
+.confidence-detail dl div {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  margin: 10px 0;
+}
 .map-column {
   min-width: 0;
 }
