@@ -199,6 +199,13 @@ publié par cette unité.
 
 ## Indicateurs d'exploitation
 
+MR-014 prépare un [job de jointure environnementale datée](docs/MR-014.md),
+sans import depuis les routes HTTP. Il borne les intersections hors ligne,
+refuse les entrées futures et la moyenne sur support incomplet ou ambigu.
+La cible Docker explicite `feature-job` porte les dépendances géographiques ;
+le runtime API par défaut reste léger. Les fixtures sont synthétiques ; aucune
+source réelle ou sortie n'est admise scientifiquement par cette tranche.
+
 - âge des dernières données publiées et âge par source
 - taux de jobs réussis / retentatives / rejoués, temps de publication
 - couverture de cellules effectivement modélisées et ratio « données insuffisantes »
