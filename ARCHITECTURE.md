@@ -202,7 +202,7 @@ publié par cette unité.
 MR-011 ajoute un lecteur météo hors HTTP, sans nouveau service : observations
 quotidiennes aux stations Météo-France et prévision ponctuelle MET Norway
 explicitement sélectionnée. Le cache opérateur conserve empreintes et délais
-HTTP ; une revalidation ne renouvelle pas la première disponibilité connue.
+HTTP (ETag/If-None-Match et Last-Modified) ; une revalidation ne renouvelle pas la première disponibilité connue.
 Observation, jour de classement, mise à jour du produit et heure d'émission
 restent distincts. Cette dernière est inconnue pour le JSON MET utilisé :
 aucun backtesting ou résultat mycologique n'en est admis. Pas d'interpolation

@@ -41,6 +41,15 @@ def timestamp(value: object) -> datetime:
         raise WeatherError("timestamp_invalid") from None
 
 
+def valid_etag(value: object) -> bool:
+    # Conservative ASCII subset of RFC 9110 entity-tag; never forward control characters.
+    return (
+        isinstance(value, str)
+        and len(value) <= 1024
+        and re.fullmatch(r'(?:W/)?"[\x21\x23-\x7e]*"', value) is not None
+    )
+
+
 def http_time(value: str | None) -> datetime | None:
     if value is None:
         return None
@@ -232,9 +241,13 @@ class WeatherClient:
             not isinstance(k, str) or not isinstance(v, str) for k, v in previous_headers.items()
         ):
             raise WeatherError("cache_invalid")
+        etag = previous_headers.get("etag")
         modified = previous_headers.get("last-modified")
         modified_time = http_time(modified) if isinstance(modified, str) else None
-        if (
+        if body and valid_etag(etag):
+            assert isinstance(etag, str)
+            headers["If-None-Match"] = etag
+        elif (
             body
             and isinstance(modified, str)
             and modified_time is not None
@@ -270,12 +283,14 @@ class WeatherClient:
             for key, value in response_headers.items()
             if key
             in {
+                "etag",
                 "last-modified",
                 "expires",
                 "cache-control",
                 "content-type",
                 "x-mycoradar-effective-url",
             }
+            and (key != "etag" or valid_etag(value))
         }
         not_before = now + timedelta(hours=1)  # Project limit, not an invented provider quota.
         expires = http_time(safe_headers.get("expires"))
@@ -299,7 +314,11 @@ class WeatherClient:
             if not same_version:
                 cache["fetched_at"] = now.isoformat()
             cache["headers"] = safe_headers
-        elif result.status == 304 and body and "If-Modified-Since" in headers:
+        elif (
+            result.status == 304
+            and body
+            and ("If-None-Match" in headers or "If-Modified-Since" in headers)
+        ):
             cache["headers"] = {**previous_headers, **safe_headers}
         else:
             error_code = error_code or "provider_http_error"

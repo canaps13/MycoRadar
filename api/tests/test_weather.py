@@ -574,3 +574,82 @@ def test_identical_200_response_does_not_make_an_old_version_new(tmp_path: Path)
     second = WeatherClient(tmp_path, transport=queue, now=lambda: later).get(URL)
     assert second.fetched_at == first.fetched_at
     assert second.checked_at == later and digest(second.body) == digest(first.body)
+
+
+@pytest.mark.parametrize("tag", ['"v1"', 'W/"v1"', '""'])
+def test_etag_only_revalidation_preserves_first_availability(tmp_path, tag):
+    queue = QueueTransport(HTTPResult(200, b"original", {"ETag": tag}), HTTPResult(304, b""))
+    first = WeatherClient(tmp_path, transport=queue, now=lambda: NOW).get(URL)
+    later = NOW + timedelta(hours=2)
+    second = WeatherClient(tmp_path, transport=queue, now=lambda: later).get(URL)
+    assert queue.requests[1][1]["If-None-Match"] == tag
+    assert "If-Modified-Since" not in queue.requests[1][1]
+    assert second.body == first.body
+    assert second.fetched_at == first.fetched_at == NOW
+    assert second.checked_at == later and second.cache_state == "revalidated"
+
+
+@pytest.mark.parametrize(
+    "tag", ["*", "unquoted", '"v1"\r\nX-Private: sentinel', '"has space"', '"' + "a" * 1024 + '"']
+)
+def test_invalid_etag_is_not_stored_or_sent_and_date_validator_remains_usable(tmp_path, tag):
+    modified = format_datetime(NOW - timedelta(days=1))
+    queue = QueueTransport(
+        HTTPResult(200, b"original", {"ETag": tag, "Last-Modified": modified}), HTTPResult(304, b"")
+    )
+    WeatherClient(tmp_path, transport=queue, now=lambda: NOW).get(URL)
+    stored = json.loads(next(tmp_path.glob("*.json")).read_bytes())
+    assert "etag" not in stored["headers"]
+    WeatherClient(tmp_path, transport=queue, now=lambda: NOW + timedelta(hours=2)).get(URL)
+    assert "If-None-Match" not in queue.requests[1][1]
+    assert queue.requests[1][1]["If-Modified-Since"] == modified
+
+
+def test_etag_has_precedence_and_new_version_replaces_validator(tmp_path):
+    queue = QueueTransport(
+        HTTPResult(200, b"old", {"ETag": '"v1"', "Last-Modified": format_datetime(NOW)}),
+        HTTPResult(200, b"new", {"ETag": '"v2"'}),
+        HTTPResult(304, b""),
+    )
+    WeatherClient(tmp_path, transport=queue, now=lambda: NOW).get(URL)
+    later = NOW + timedelta(hours=2)
+    changed = WeatherClient(tmp_path, transport=queue, now=lambda: later).get(URL)
+    assert "If-Modified-Since" not in queue.requests[1][1]
+    assert changed.body == b"new" and changed.fetched_at == later
+    unchanged = WeatherClient(tmp_path, transport=queue, now=lambda: NOW + timedelta(hours=4)).get(
+        URL
+    )
+    assert queue.requests[2][1]["If-None-Match"] == '"v2"'
+    assert unchanged.fetched_at == later
+
+
+def test_etag_304_no_store_discards_body_and_validator(tmp_path):
+    queue = QueueTransport(
+        HTTPResult(200, b"original", {"ETag": '"v1"'}),
+        HTTPResult(304, b"", {"Cache-Control": "no-store"}),
+    )
+    WeatherClient(tmp_path, transport=queue, now=lambda: NOW).get(URL)
+    later = NOW + timedelta(hours=2)
+    current = WeatherClient(tmp_path, transport=queue, now=lambda: later).get(URL)
+    assert current.body == b"original" and current.fetched_at == NOW
+    stored = json.loads(next(tmp_path.glob("*.json")).read_bytes())
+    assert stored["body"] == "" and stored["headers"] == {}
+    with pytest.raises(WeatherError, match="provider_cooldown"):
+        WeatherClient(tmp_path, transport=queue, now=lambda: later).get(URL)
+    assert len(queue.requests) == 2
+
+
+def test_etag_revalidation_keeps_no_cache_and_updated_weak_validator(tmp_path):
+    queue = QueueTransport(
+        HTTPResult(200, b"same", {"ETag": '"v1"', "Cache-Control": "no-cache"}),
+        HTTPResult(304, b"", {"ETag": 'W/"v1"'}),
+        HTTPResult(304, b""),
+    )
+    WeatherClient(tmp_path, transport=queue, now=lambda: NOW).get(URL)
+    later = NOW + timedelta(hours=2)
+    WeatherClient(tmp_path, transport=queue, now=lambda: later).get(URL)
+    with pytest.raises(WeatherError, match="provider_revalidation_required"):
+        WeatherClient(tmp_path, transport=queue, now=lambda: later).get(URL)
+    final = WeatherClient(tmp_path, transport=queue, now=lambda: NOW + timedelta(hours=4)).get(URL)
+    assert queue.requests[2][1]["If-None-Match"] == 'W/"v1"'
+    assert final.fetched_at == NOW
