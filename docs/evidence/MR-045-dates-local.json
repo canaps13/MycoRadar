@@ -1,0 +1,42 @@
+{
+  "task": "MR-045",
+  "date": "2026-11-10",
+  "main_sha": "65a05e9",
+  "merge_commit": "5eb08ac",
+  "python": {
+    "passed": 411,
+    "integration_deselected": 51,
+    "coverage_tests": 36,
+    "new_tests": 12
+  },
+  "negative_regression": {
+    "original_loader_failed": 6,
+    "original_loader_passed": 4,
+    "deselected": 26,
+    "corrected_coverage_suite_passed": 36,
+    "original_restored_temporarily_only": true,
+    "initial_harness_expectation_corrected": "Expected five failures, observed six because a space separator was also accepted previously"
+  },
+  "checks_passed": [
+    "ruff check .",
+    "ruff format --check .",
+    "mypy (21 sources)",
+    "prepare_catalog.py --check",
+    "exploration --check-bundle",
+    "git diff --check"
+  ],
+  "not_run_locally": {
+    "docker": "LinuxEngine pipe absent",
+    "postgis": "No isolated local database",
+    "frontend": "Unchanged; synchronized suites run in CI"
+  },
+  "live_requests": {
+    "dataset_metadata": 1,
+    "taxon_metadata": 1,
+    "month_facets": 3,
+    "occurrence_rows_retained": 0
+  },
+  "scientific_status": "blocked",
+  "selected_pilot_taxon": null,
+  "deployment": false
+}

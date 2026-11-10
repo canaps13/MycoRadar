@@ -201,3 +201,50 @@ def test_duplicate_scopes_are_not_counted_twice(capture):
     manifest["captures"].append(dict(manifest["captures"][0]))
     with pytest.raises(ValueError):
         audit(write())
+
+
+@pytest.mark.parametrize(
+    "value",
+    [
+        0,
+        946684800,
+        946684800.5,
+        "946684800",
+        True,
+        None,
+        "2000-01-01",
+        "2000-01-01T00:00:00",
+        "2000-01-01 00:00:00Z",
+    ],
+)
+def test_capture_date_is_never_coerced_from_epoch_or_implicit_timezone(capture, value):
+    _, manifest, write = capture
+    manifest["captures"][0]["fetched_at"] = value
+    with pytest.raises(ValueError):
+        audit(write())
+
+
+@pytest.mark.parametrize(
+    "value,expected",
+    [
+        ("2000-01-01T00:00:00Z", "2000-01-01T00:00:00+00:00"),
+        ("2000-01-01T01:00:00.123456+01:00", "2000-01-01T01:00:00.123456+01:00"),
+    ],
+)
+def test_explicit_capture_timestamps_keep_their_declared_offset(capture, value, expected):
+    _, manifest, write = capture
+    manifest["captures"][0]["fetched_at"] = value
+    assert audit(write())["regions"][0]["fetched_at"] == expected
+
+
+def test_cli_refuses_epoch_capture_without_inventing_a_receipt(capture):
+    _, manifest, write = capture
+    manifest["captures"][0]["fetched_at"] = 946684800
+    result = subprocess.run(
+        [sys.executable, "-m", "mycoradar.coverage_audit", "--manifest", str(write())],
+        capture_output=True,
+        text=True,
+        env={**os.environ, "PYTHONPATH": str(Path(__file__).resolve().parents[1] / "src")},
+    )
+    assert result.returncode == 2 and result.stderr == ""
+    assert json.loads(result.stdout) == {"status": "unavailable", "error": "coverage_input_invalid"}

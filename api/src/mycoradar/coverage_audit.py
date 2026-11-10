@@ -10,7 +10,7 @@ from typing import Annotated, Any, NoReturn
 from urllib.parse import parse_qs, urlsplit
 from uuid import UUID
 
-from pydantic import AwareDatetime, BaseModel, ConfigDict, Field
+from pydantic import AwareDatetime, BaseModel, BeforeValidator, ConfigDict, Field
 
 MAX_MANIFEST = 128 * 1024
 MAX_RESPONSE = 100_000
@@ -30,11 +30,21 @@ class Contract(BaseModel):
     model_config = ConfigDict(extra="forbid", hide_input_in_errors=True)
 
 
+def explicit_timestamp(value: object) -> str:
+    if not isinstance(value, str) or not re.fullmatch(
+        r"[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}"
+        r"(?:\.[0-9]{1,6})?(?:Z|[+-][0-9]{2}:[0-9]{2})",
+        value,
+    ):
+        raise ValueError("An explicit ISO capture timestamp with timezone is required")
+    return value
+
+
 class Capture(Contract):
     region_id: Annotated[str, Field(pattern=r"^[A-Za-z0-9:_-]{1,80}$")]
     path: str
     sha256: Annotated[str, Field(pattern=r"^[a-f0-9]{64}$")]
-    fetched_at: AwareDatetime
+    fetched_at: Annotated[AwareDatetime, BeforeValidator(explicit_timestamp)]
     request_url: str
 
 

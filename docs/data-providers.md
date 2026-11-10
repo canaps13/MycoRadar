@@ -113,3 +113,28 @@ collecte datée du 29 octobre 2026, aucune fraîcheur déduite de la notice.
 Le lot est réutilisé sans appel WFS ; quotas non établis, aucun polling activé.
 Pas de donnée personnelle ni de masque forestier. [Manifeste et preuves](MR-009.md).
 Cette admission ne concerne aucun autre produit IGN ni taxon/occurrence.
+
+## Comptages ONF/GBIF — revue bornée MR-045 du 10 novembre 2026
+
+Jeu `017f23ba-bf04-4eb7-a076-04ab2e5de250`, DOI
+[10.15468/tgap4x](https://doi.org/10.15468/tgap4x) : le registre GBIF relu
+indique CC BY 4.0. Attribution : Inventaire National du Patrimoine Naturel (2022),
+ONF — Observations opportunistes et inventaires, UAR PatriNat (OFB-MNHN-CNRS-IRD),
+via GBIF, consulté le 10 novembre 2026. Les conditions d'attribution du
+[texte CC BY 4.0](https://creativecommons.org/licenses/by/4.0/legalcode.en)
+ont été relues ; aucun abandon des autres droits n'est supposé.
+
+Trois requêtes `limit=0` de facettes mensuelles portent sur le taxon historique
+*Boletus edulis* et les enveloppes IGN publiques 13/83/84, avec filtre de licence
+CC BY 4.0. Elles répondent 200 sans occurrence. Usage/cache local des captures
+et publication du seul reçu transformé en classes grossières sont admis pour
+cet audit, avec attribution, indication des filtres, inconnus et transformations.
+Aucune donnée brute ni compte positif exact n'est publié. Les captures restent
+dans un espace ignoré par Git ; ce choix n'introduit aucune restriction de
+licence supplémentaire sur les données du producteur.
+
+Cette revue ne couvre ni téléchargement massif, ni autre jeu/taxon, ni diffusion
+de localisations d'occurrences, ni admission scientifique. Aucun polling ni
+garantie de disponibilité ou de quota n'est établi par trois réponses réussies.
+Les anciens HTTP 500 restent historiques. Voir [périmètre et limites](MR-045.md)
+et [reçu daté](evidence/MR-045-real-coverage.json).
