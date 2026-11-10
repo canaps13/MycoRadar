@@ -1,0 +1,64 @@
+{
+  "reviewed_at": "2026-11-01T18:20:00.576932+00:00",
+  "source_year": 2008,
+  "year_meaning": "acquisition",
+  "scope": "Source aerial-photography year of the matched departmental BD Foret V2 objects, not current ground cover or individual tree age.",
+  "edition_date": "2014-04-01",
+  "metadata_date_stamp": "2022-09-14",
+  "metadata_lineage": "PVA_2008,",
+  "resource_url": "https://data.geopf.fr/telechargement/resource/BDFORET/BDFORET_2-0__SHP_LAMB93_D013_2014-04-01",
+  "download_url": "https://data.geopf.fr/telechargement/download/BDFORET/BDFORET_2-0__SHP_LAMB93_D013_2014-04-01/BDFORET_2-0__SHP_LAMB93_D013_2014-04-01.7z",
+  "archive_bytes": 50495458,
+  "archive_sha256": "a7e7dc2c3e09f5b8ae07f0953c139cfdbb1e21fd437505769829606969688ef7",
+  "archive_md5_from_feed": "82ec01e1ede063aced377825fdb4300d",
+  "archive_md5_observed": "82ec01e1ede063aced377825fdb4300d",
+  "metadata_path": "data/landcover/bdforet-sample/department-metadata.xml",
+  "metadata_sha256": "30471c87b30ea1630b121b256ceafe0447cb8d18024cb22ad2894e150e879438",
+  "metadata_member": "BDFORET_2-0__SHP_LAMB93_D013_2014-04-01/BDFORET/2_METADONNEES_LIVRAISON/BDF_2-0_SHP_LAMB93_D013/IGNF_BDF_2-0_SHP_LAMB93_D013.xml",
+  "source_members": {
+    "BDFORET_2-0__SHP_LAMB93_D013_2014-04-01/BDFORET/1_DONNEES_LIVRAISON/BDF_2-0_SHP_LAMB93_D013/FORMATION_VEGETALE.cpg": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824",
+    "BDFORET_2-0__SHP_LAMB93_D013_2014-04-01/BDFORET/1_DONNEES_LIVRAISON/BDF_2-0_SHP_LAMB93_D013/FORMATION_VEGETALE.dbf": "c2479aa558ca0d187674bcbcccf5b2557f0e640ff0911c5d57ff5b338508c491",
+    "BDFORET_2-0__SHP_LAMB93_D013_2014-04-01/BDFORET/1_DONNEES_LIVRAISON/BDF_2-0_SHP_LAMB93_D013/FORMATION_VEGETALE.prj": "b93bc752c484a528d8d0d3a544dfb6218bcac2e180c36f6da1bbd9ef9d02bfa3",
+    "BDFORET_2-0__SHP_LAMB93_D013_2014-04-01/BDFORET/1_DONNEES_LIVRAISON/BDF_2-0_SHP_LAMB93_D013/FORMATION_VEGETALE.shp": "c11644191a34805c63f714595ba5daa54f249e21c478868aaf9561990a37fec0",
+    "BDFORET_2-0__SHP_LAMB93_D013_2014-04-01/BDFORET/1_DONNEES_LIVRAISON/BDF_2-0_SHP_LAMB93_D013/FORMATION_VEGETALE.shx": "a3dd6d4692eda426debfc81033a7ce518efd78ad763091eb17cbbba5c1398c8e"
+  },
+  "wfs_entity_sha256": "30efa1578e8b4899a96bcf5d14dbdcfde922d51768389623d06c65c3752de506",
+  "reference_path": "data/landcover/bdforet-sample/reference-lambert93.geojson.gz",
+  "reference_sha256": "7bacb9396859e21b28b280bb7b15e517825253e99fdc77a483d50a0d96bf67c8",
+  "reference_entity_sha256": "9e4d2510f48ef7852f83c4b57c9cd3f6cb585b730cbefd22ef7b5239c90514a8",
+  "comparison": {
+    "matched_ids": 48,
+    "attributes_identical": [
+      "ID",
+      "CODE_TFV",
+      "TFV",
+      "TFV_G11",
+      "ESSENCE"
+    ],
+    "vertex_counts_identical": true,
+    "comparison_crs": "EPSG:2154",
+    "numeric_comparison_tolerance_m": 0.001,
+    "observed_max_hausdorff_distance_m": 0.0006857750865906272,
+    "tolerance_is_ground_accuracy": false,
+    "method": "Transform WFS CRS84 geometries into the archive-declared Lambert93 CRS with always_xy, compare all five attributes, IDs, vertex counts and Hausdorff distance for all 48 received objects. No simplification or rounding.",
+    "inference": "The frozen WFS objects correspond to the dated departmental source. The 2008 photography year is assigned only to this reviewed extract, never inferred from a department code by the engine."
+  },
+  "rights": {
+    "license": "Etalab-2.0",
+    "catalog_url": "https://www.data.gouv.fr/datasets/bd-foret-r",
+    "attribution": "IGN - BD Foret V2, PVA 2008, edition 2014-04-01; archive retrieved separately in 2026.",
+    "pdfs_redistributed": false
+  },
+  "historical_corroboration": {
+    "url": "https://foretbois-sud.org/wp-content/uploads/2013/09/20130909_intercalaireBDforet_13_light.pdf",
+    "sha256": "c593f5b89e587733a7ce38648ffce866564e485f16d56a8f3a3a16aacc8c7ec8",
+    "review": "Both pages visually reviewed; page 1 describes aerial photographs from 2008 and availability from February 2013. The leaflet alone does not establish the link to the WFS extract.",
+    "redistribution": "Not included: reproduction and diffusion rights reserved in the leaflet."
+  },
+  "remaining_limitations": [
+    "not_current_ground_cover_validation",
+    "no_binary_forest_or_negative_inference",
+    "no_source_effective_resolution_established",
+    "no_fungal_presence_or_scientific_pilot_admission"
+  ]
+}

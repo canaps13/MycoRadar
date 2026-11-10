@@ -1,0 +1,79 @@
+{
+  "area_crs": "EPSG:6933",
+  "coverage_status": "partial",
+  "forest_fraction": null,
+  "geometry_crs": "EPSG:4326",
+  "grid_mask_status": "unavailable",
+  "job_id": "f61de8fb7ec77e2be8d5028877261d8ec4c8c825847e50b790bc81f27e493c42",
+  "negative_inference_allowed": false,
+  "quality": {
+    "duplicate_identities": 0,
+    "legacy_punctuation_transcoded": 9,
+    "non_polygon_parts_removed": 0,
+    "output": 45,
+    "outside_or_boundary_only": 3,
+    "overlap_area_m2": 9.313225746154785e-10,
+    "received": 48,
+    "repaired_geometries": 0,
+    "summed_mapped_area_m2": 1692692.0740737636,
+    "union_mapped_area_m2": 1692692.0740737626,
+    "unknown_source_year": 0,
+    "vegetation_counts": {
+      "FF1-00-00": 2,
+      "FF2-00": 6,
+      "FF2-57-57": 9,
+      "FF31": 4,
+      "FF32": 10,
+      "FO1": 3,
+      "FO3": 6,
+      "LA4": 5
+    }
+  },
+  "schema_version": "landcover-artifact-v1",
+  "source": {
+    "attribution": "IGN - BD Foret V2, aerial photography 2008, edition 2014-04-01; WFS capture in 2026, not current ground cover.",
+    "effective_resolution_m": null,
+    "fetched_at": "2026-10-31T15:14:06.211502Z",
+    "license": "Etalab-2.0",
+    "license_url": "https://github.com/etalab/licence-ouverte/blob/master/LO.md",
+    "product": "BD Foret V2 - formation vegetale",
+    "provider": "IGN",
+    "source_published_at": null,
+    "source_url": "https://data.geopf.fr/wfs/ows?SERVICE=WFS&VERSION=2.0.0&REQUEST=GetFeature&TYPENAMES=LANDCOVER.FORESTINVENTORY.V2%3Aformation_vegetale&OUTPUTFORMAT=application%2Fjson&SRSNAME=CRS%3A84&BBOX=5.55%2C43.30%2C5.57%2C43.32%2CCRS%3A84&COUNT=500",
+    "version": "wfs-snapshot-sha256:30efa1578e8b4899a96bcf5d14dbdcfde922d51768389623d06c65c3752de506",
+    "visibility": "public"
+  },
+  "transformations": [
+    "Allowlisted properties; NFC/legacy punctuation; NC taxa remain unknown",
+    "Optional explicit make_valid; 2D Polygon/MultiPolygon only",
+    "MR-007 projection to equal-area EPSG:6933, bbox clipping, MultiPolygon normalization",
+    "No simplification, binary forest classification, interpolation or score"
+  ],
+  "type": "FeatureCollection",
+  "vintage": {
+    "note": "Product production period is not a per-feature acquisition year.",
+    "product_metadata_url": "https://cartes.gouv.fr/aide/fr/partenaires/ign/referentiels-description-territoire/foret/bd-foret-v2/",
+    "product_production_period": [
+      2007,
+      2018
+    ],
+    "source_year": 2008,
+    "year_evidence_url": "https://data.geopf.fr/telechargement/resource/BDFORET/BDFORET_2-0__SHP_LAMB93_D013_2014-04-01",
+    "year_meaning": "acquisition"
+  },
+  "normalized_artifact": "data/landcover/bdforet-sample/normalized.geojson",
+  "normalized_sha256": "a8b658c632dce9a9e0185049f198d31cd5f0f4224c7670d1c06f6f5baf764746",
+  "source_archive": "data/landcover/bdforet-sample/source.geojson.gz",
+  "engine_versions": {
+    "adapter": "landcover-v1",
+    "geos": "3.14.1",
+    "implementation_sha256": "846a78bb59eebcb28aa2d615216de6a400aeb4f2092c42a356983651629c2e2d",
+    "machine": "AMD64",
+    "platform": "Windows",
+    "proj": "9.8.1",
+    "pyproj": "3.8.0",
+    "python": "3.12.16",
+    "shapely": "2.2.0"
+  },
+  "vintage_evidence": "docs/evidence/MR-012-vintage.json"
+}
