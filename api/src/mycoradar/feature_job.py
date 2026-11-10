@@ -5,6 +5,7 @@ import hashlib
 import json
 import math
 import platform
+import re
 from collections import Counter
 from pathlib import Path
 from typing import Annotated, Any, Literal, Self
@@ -13,7 +14,7 @@ import numpy as np
 import pydantic
 import pyproj
 import shapely
-from pydantic import AwareDatetime, Field, model_validator
+from pydantic import AwareDatetime, BeforeValidator, Field, model_validator
 from pyproj.exceptions import ProjError
 from shapely.errors import GEOSException
 from shapely.geometry import shape
@@ -27,6 +28,25 @@ from mycoradar.grid_job import canonical_json, write_artifact
 MAX_BYTES = 2 * 1024 * 1024
 MAX_PAIRS = 100_000
 Number = Annotated[float, Field(strict=True, allow_inf_nan=False)]
+
+
+def explicit_timestamp(value: object) -> str:
+    if not isinstance(value, str) or not re.fullmatch(
+        r"[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}"
+        r"(?:\.[0-9]{1,6})?(?:Z|[+-][0-9]{2}:[0-9]{2})",
+        value,
+    ):
+        raise ValueError("An explicit ISO timestamp with timezone is required")
+    return value
+
+
+Timestamp = Annotated[AwareDatetime, BeforeValidator(explicit_timestamp)]
+
+
+class FeatureSource(Source):
+    # Keep strict join-file dates isolated from the public catalogue contracts.
+    fetched_at: Timestamp
+    source_published_at: Timestamp | None
 
 
 class Footprint(Contract):
@@ -72,10 +92,10 @@ class Layer(Contract):
     aggregation: Literal["area_weighted_mean"]
     value_kind: Literal["continuous_intensive"]
     temporal_kind: Literal["historical_observation", "static"]
-    valid_from: AwareDatetime
-    valid_until: AwareDatetime
-    source_data_cutoff: AwareDatetime | None
-    source: Source
+    valid_from: Timestamp
+    valid_until: Timestamp
+    source_data_cutoff: Timestamp | None
+    source: FeatureSource
     patches: Annotated[tuple[Patch, ...], Field(max_length=1000)]
 
     @model_validator(mode="after")
@@ -100,8 +120,8 @@ class Manifest(Contract):
     schema_version: Literal["feature-join-manifest-v1"]
     input_kind: Literal["synthetic", "public_environmental"]
     geometry_crs: Literal["EPSG:4326"]
-    as_of: AwareDatetime
-    target_at: AwareDatetime
+    as_of: Timestamp
+    target_at: Timestamp
     cells: Annotated[tuple[Cell, ...], Field(min_length=1, max_length=500)]
     layers: Annotated[tuple[Layer, ...], Field(min_length=1, max_length=20)]
 

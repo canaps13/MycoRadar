@@ -4,6 +4,7 @@ import json
 import socket
 import sys
 from copy import deepcopy
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
@@ -409,3 +410,64 @@ def test_layer_order_does_not_change_values(tmp_path: Path, definition: dict[str
     assert first["features"] == other["features"]
     # Input bytes are intentionally part of identity, even for a mere reordering.
     assert first["job_id"] != other["job_id"]
+
+
+TIME_PATHS = [
+    ("as_of",),
+    ("target_at",),
+    ("layers", 0, "valid_from"),
+    ("layers", 0, "valid_until"),
+    ("layers", 0, "source_data_cutoff"),
+    ("layers", 0, "source", "fetched_at"),
+    ("layers", 0, "source", "source_published_at"),
+]
+
+
+@pytest.mark.parametrize("path", TIME_PATHS)
+@pytest.mark.parametrize("representation", ["integer", "float", "epoch_string", "space"])
+def test_dates_require_explicit_strings_even_when_epoch_would_be_equivalent(
+    tmp_path, definition, path, representation
+):
+    parent = definition
+    for key in path[:-1]:
+        parent = parent[key]
+    value = parent[path[-1]]
+    epoch = int(datetime.fromisoformat(value).timestamp())
+    parent[path[-1]] = {
+        "integer": epoch,
+        "float": float(epoch),
+        "epoch_string": str(epoch),
+        "space": value.replace("T", " "),
+    }[representation]
+    with pytest.raises(ValueError):
+        run(tmp_path, definition)
+
+
+def test_all_explicit_offsets_preserve_the_same_join_instants(tmp_path, definition):
+    for path in TIME_PATHS:
+        parent = definition
+        for key in path[:-1]:
+            parent = parent[key]
+        parent[path[-1]] = (
+            datetime.fromisoformat(parent[path[-1]])
+            .astimezone(timezone(timedelta(hours=5, minutes=30)))
+            .isoformat()
+        )
+    assert run(tmp_path, definition)["features"][0]["value"] == pytest.approx(5)
+
+
+def test_epoch_source_date_never_publishes_partial_artifact(
+    tmp_path, definition, monkeypatch, capsys
+):
+    source = definition["layers"][0]["source"]
+    source["fetched_at"] = int(datetime.fromisoformat(source["fetched_at"]).timestamp())
+    path = tmp_path / "PRIVATE_MANIFEST.json"
+    path.write_bytes(canonical_json(definition))
+    output = tmp_path / "output.json"
+    monkeypatch.setattr(
+        sys, "argv", ["feature-job", "--manifest", str(path), "--output", str(output)]
+    )
+    assert main() == 2 and not output.exists()
+    captured = capsys.readouterr()
+    assert captured.err == "" and json.loads(captured.out) == {"error": "feature_job_failed"}
+    assert "PRIVATE_MANIFEST" not in captured.out

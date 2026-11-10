@@ -43,9 +43,9 @@ jobs:
           docker run --rm --network none \
             --mount "type=bind,source=$GITHUB_WORKSPACE/data/features/offline-synthetic,target=/input,readonly" \
             --mount "type=bind,source=$GITHUB_WORKSPACE/scripts/check_feature_job.py,target=/smoke.py,readonly" \
-            mycoradar-features:ci python /smoke.py --manifest /input/manifest.json
+            mycoradar-features:ci python /smoke.py --manifest /input/manifest.json --require-container-user
           docker compose --env-file .env.example exec -T api python -c \
-            "import importlib.util,os; assert os.getuid() == 10001; assert importlib.util.find_spec('shapely') is None; assert importlib.util.find_spec('pyproj') is None; print('API remains non-root without geo dependencies')"
+            "import importlib.util,os; from pathlib import Path; assert os.getuid() == 10001; assert all(importlib.util.find_spec(m) is None for m in ('numpy', 'shapely', 'pyproj')); assert b'--no-access-log' in Path('/proc/1/cmdline').read_bytes().split(bytes([0])); print('API remains non-root without geo dependencies and access logs')"
       - id: postgis_tests
         run: uv run --locked pytest -m integration
       - id: migration_replay
