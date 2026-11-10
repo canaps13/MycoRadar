@@ -1,0 +1,38 @@
+{
+  "observed_at": "2026-11-02T17:19:54.221928+00:00",
+  "base_head": "306a10fcec1d995f63da84fa19ad25017d0da211",
+  "scope": "Client rejects incomplete geometry and ambiguous or absent provenance before publishing a map response.",
+  "parser_sha256": "dfcafe6623904f917d9ae25023ad94ddd17edd2e9e43e14d008f8b5c28451e0d",
+  "negative_control": {
+    "parser": "HEAD version restored temporarily; changed bytes restored in finally",
+    "command": "npm exec -- vitest run src/map/exploration.test.tsx -t \"rejects.*before initializing|rejects ambiguous|retains only\"",
+    "failed": 7,
+    "passed": 1,
+    "skipped": 14,
+    "note": "Unresolved source reference was already rejected; seven new regression cases fail on the original parser."
+  },
+  "positive_validation": {
+    "python_passed": 362,
+    "postgis_deselected": 51,
+    "react_passed": 32,
+    "node_passed": 4,
+    "browser_passed": 16,
+    "browser_retries": 0,
+    "ruff_lint": "passed",
+    "ruff_format": "passed",
+    "mypy": "passed (20 source files)",
+    "eslint": "passed",
+    "prettier": "passed",
+    "typescript_and_build": "passed",
+    "asset_verification": "passed",
+    "diff_check": "passed"
+  },
+  "limitations": [
+    "Species pilot not admitted; MR-010/MR-045 still required.",
+    "No scientific geometry validity proof: client checks only bounded structural consistency.",
+    "Docker local daemon unavailable; Compose/PostGIS verified in CI separately.",
+    "MapLibre bundle warning over 500 kB remains."
+  ],
+  "merge_performed": false,
+  "deployment_performed": false
+}

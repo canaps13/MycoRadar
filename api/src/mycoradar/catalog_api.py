@@ -28,7 +28,11 @@ class CatalogError(Exception):
         self,
         status_code: int,
         code: Literal[
-            "invalid_query", "region_not_found", "catalog_version_conflict", "catalog_unavailable"
+            "invalid_query",
+            "region_not_found",
+            "catalog_version_conflict",
+            "catalog_unavailable",
+            "taxon_not_admitted",
         ],
         message: str,
     ) -> None:
