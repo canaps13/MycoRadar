@@ -1,0 +1,22 @@
+{
+  "observed_at": "2026-10-31T18:12:29.587432+00:00",
+  "scope": "Deterministic mocked camera boundary; not a reconstructed trace of the original CI browser run.",
+  "map_view_sha256_before_and_after": "ce9e754cafbc2fad08c8e7cc1582d122d41b39f9a13dfcf814ab4f344ba893c0",
+  "negative_control": {
+    "change": "Temporarily restore only isStyleLoaded guard; retain stop().fitBounds to isolate the guard.",
+    "expected_failure_observed": true,
+    "style_pending": "failed: camera retains zoom-in-progress extent and animation",
+    "style_loaded": "passed",
+    "exit_code": 1
+  },
+  "positive_control": {
+    "change": "Restore exact original MR-044 component bytes.",
+    "style_pending": "passed",
+    "style_loaded": "passed",
+    "exit_code": 0
+  },
+  "renderer_reused": true,
+  "selection_not_invented": true,
+  "production_component_modified": false,
+  "pull_request_merged_to_main": false
+}

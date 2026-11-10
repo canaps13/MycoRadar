@@ -4,9 +4,10 @@
 
 **État du socle :** FastAPI/Pydantic expose la santé HTTP et, avec MR-003,
 la disponibilité de PostGIS et des migrations. React/TypeScript/Vite affiche
-une page reliée à la santé HTTP. Les ADR-001 à ADR-004 restent les règles du
-développement à venir ; les pipelines, scores, features, MapLibre, cache
-et orchestration décrits ci-dessous ne sont pas encore implémentés.
+une page reliée à la santé HTTP. MR-008 ajoute MapLibre ; MR-009 et MR-044
+relient les territoires et leur provenance à une publication API pré-calculée.
+Les ADR-001 à ADR-004 restent les règles du développement à venir ; les
+pipelines, scores, features, cache CDN et orchestration restent à implémenter.
 
 MR-006 ajoute le schéma géographique et de provenance par migration Alembic,
 sans données de référence préchargées ni tables de scores/features. Voir ADR-006
@@ -102,6 +103,15 @@ requête. Voir le [contrat, limites et exploitation](docs/MR-009.md).
 Les routes `/v1/regions`, `/v1/species`, `/v1/cells`, `/v1/metadata` sont ajoutées
 par MR-009 ; l'absence de publication de taxonomie/grille est explicite. Les
 endpoints de prédiction ci-dessous restent des cibles, sans score publié.
+
+MR-044 ajoute `GET /v1/exploration` : une vue bornée et cohérente de la
+publication pilote, avec géométries d'affichage, provenance, sélection et date
+calendaire du territoire. Le contexte pilote est configuré dans le manifeste,
+validé au démarrage et embarqué dans le package API. Le navigateur vérifie le
+contrat et transmet les filtres ; il ne calcule aucun indice écologique.
+Habitat et fructification restent séparément `unavailable`, avec valeurs null.
+Le sélecteur espèce reste vide tant qu'aucun taxon pilote n'est admis. Voir
+[le contrat et les limites MR-044](docs/MR-044.md).
 
 - `GET /health`, `GET /ready`
 - `GET /v1/regions?country=FR`
