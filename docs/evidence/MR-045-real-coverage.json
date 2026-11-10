@@ -1,0 +1,170 @@
+{
+  "observed_at": "2026-11-10T09:08:10.342239+00:00",
+  "source": {
+    "url": "https://api.gbif.org/v1/dataset/017f23ba-bf04-4eb7-a076-04ab2e5de250",
+    "http_status": 200,
+    "sha256": "baaa87fa74aeb08f8b653b58e7cb450dfa1feca21b3f448ef5364c216e25d75e",
+    "fetched_at": "2026-11-10T09:08:10.689292+00:00",
+    "title": "ONF - Observations et inventaires MOA ONF-ONF - Observations opportunistes et inventaires",
+    "license": "http://creativecommons.org/licenses/by/4.0/legalcode",
+    "doi": "10.15468/tgap4x",
+    "modified": "2023-07-12T13:55:56.092+00:00",
+    "citation": {
+      "text": "Inventaire National du Patrimoine Naturel (2022). ONF - Observations et inventaires MOA ONF-ONF - Observations opportunistes et inventaires. UAR PatriNat (OFB-MNHN-CNRS-IRD), Paris. Occurrence dataset https://doi.org/10.15468/tgap4x accessed via GBIF.org on 2026-11-10.",
+      "citationProvidedBySource": false
+    }
+  },
+  "queries": [
+    {
+      "url": "https://api.gbif.org/v1/occurrence/search?datasetKey=017f23ba-bf04-4eb7-a076-04ab2e5de250&taxonKey=5954958&checklistKey=d7dddbf4-2cf0-4f39-9b2a-bb099caae36c&country=FR&hasCoordinate=true&hasGeospatialIssue=false&license=CC_BY_4_0&geometry=POLYGON%28%284.23021603+43.15742622%2C5.81343366+43.15742622%2C5.81343366+43.92413424%2C4.23021603+43.92413424%2C4.23021603+43.15742622%29%29&facet=month&facetLimit=12&facetMincount=1&limit=0&offset=0",
+      "scope": "FR-13 public IGN display envelope, not exact department",
+      "http_status": 200,
+      "sha256": "28463326a7f3e9d87aa748b9eb7a978954cc3d81a73d2b511f6d8cf670ab4e9e",
+      "fetched_at": "2026-11-10T09:08:10.886290+00:00",
+      "aggregate_only": true
+    },
+    {
+      "url": "https://api.gbif.org/v1/occurrence/search?datasetKey=017f23ba-bf04-4eb7-a076-04ab2e5de250&taxonKey=5954958&checklistKey=d7dddbf4-2cf0-4f39-9b2a-bb099caae36c&country=FR&hasCoordinate=true&hasGeospatialIssue=false&license=CC_BY_4_0&geometry=POLYGON%28%285.65590617+42.98202923%2C6.93344824+42.98202923%2C6.93344824+43.80888176%2C5.65590617+43.80888176%2C5.65590617+42.98202923%29%29&facet=month&facetLimit=12&facetMincount=1&limit=0&offset=0",
+      "scope": "Public display envelope FR-83",
+      "http_status": 200,
+      "sha256": "24265c24b9d99119f217da597f6ebdf0ee90d1f7f62f780c17c888491b42995d",
+      "fetched_at": "2026-11-10T09:09:40.405091+00:00",
+      "aggregate_only": true
+    },
+    {
+      "url": "https://api.gbif.org/v1/occurrence/search?datasetKey=017f23ba-bf04-4eb7-a076-04ab2e5de250&taxonKey=5954958&checklistKey=d7dddbf4-2cf0-4f39-9b2a-bb099caae36c&country=FR&hasCoordinate=true&hasGeospatialIssue=false&license=CC_BY_4_0&geometry=POLYGON%28%284.6491467+43.65871903%2C5.75733772+43.65871903%2C5.75733772+44.43153331%2C4.6491467+44.43153331%2C4.6491467+43.65871903%29%29&facet=month&facetLimit=12&facetMincount=1&limit=0&offset=0",
+      "scope": "Public display envelope FR-84",
+      "http_status": 200,
+      "sha256": "28463326a7f3e9d87aa748b9eb7a978954cc3d81a73d2b511f6d8cf670ab4e9e",
+      "fetched_at": "2026-11-10T09:09:40.694490+00:00",
+      "aggregate_only": true
+    }
+  ],
+  "counts_obtained": true,
+  "scientific_status": "blocked",
+  "private_locations_sent": false,
+  "new_occurrence_rows_retained": 0,
+  "rights_review": "Metadata licence rechecked before bounded aggregate attempt; historical ONF/PatriNat attribution and DOI retained. No occurrence redistribution or scientific admission.",
+  "taxonomy": {
+    "url": "https://api.gbif.org/v1/species/5954958",
+    "http_status": 200,
+    "sha256": "5a7093f381023a4605a2c8c409bdf241bbe3e1634d97369cd7d6136bc31ece4f",
+    "fetched_at": "2026-11-10T09:09:40.173790+00:00",
+    "key": 5954958,
+    "canonicalName": "Boletus edulis",
+    "taxonomicStatus": "ACCEPTED",
+    "rank": "SPECIES",
+    "kingdom": "Fungi"
+  },
+  "public_scopes": [
+    {
+      "region_id": "bbox-FR-13",
+      "public_bounds": [
+        4.23021603,
+        43.15742622,
+        5.81343366,
+        43.92413424
+      ],
+      "geometry_basis": "Envelope of verified IGN display contour; not exact department"
+    },
+    {
+      "region_id": "bbox-FR-83",
+      "public_bounds": [
+        5.65590617,
+        42.98202923,
+        6.93344824,
+        43.80888176
+      ],
+      "geometry_basis": "Envelope of verified IGN display contour; not exact department"
+    },
+    {
+      "region_id": "bbox-FR-84",
+      "public_bounds": [
+        4.6491467,
+        43.65871903,
+        5.75733772,
+        44.43153331
+      ],
+      "geometry_basis": "Envelope of verified IGN display contour; not exact department"
+    }
+  ],
+  "coarse_report": {
+    "schema_version": "pilot-coverage-audit-v1",
+    "adapter_version": "gbif-month-facets-audit-v1",
+    "status": "partial",
+    "capture_kind": "operator_supplied",
+    "manifest_sha256": "2fa8d0fb7c7cf2fbcac570e4cad10c1fbab048fb90ec14d5c51617da6e57339d",
+    "dataset_key": "017f23ba-bf04-4eb7-a076-04ab2e5de250",
+    "declared_taxon": "Boletus edulis",
+    "scientific_status": "blocked",
+    "release_review_required": true,
+    "selected_pilot_taxon": null,
+    "unmeasured": [
+      "sampling_effort",
+      "coordinate_uncertainty",
+      "duplicates",
+      "identification_quality",
+      "non_detections"
+    ],
+    "count_semantics": "Indexed rows in declared query scope; not abundance or biological absence. Scopes may overlap; never sum regions.",
+    "disclosure": "Only zero, 1-4 withheld or at least 5; no exact positive counts, URLs, coordinates or occurrence rows.",
+    "rights_review": "Required separately; checksums and query filters are not source signatures.",
+    "regions": [
+      {
+        "region_id": "bbox-FR-13",
+        "source_sha256": "28463326a7f3e9d87aa748b9eb7a978954cc3d81a73d2b511f6d8cf670ab4e9e",
+        "fetched_at": "2026-11-10T09:08:10.886290+00:00",
+        "indexed_count_band": "0_indexed",
+        "unknown_month_band": "0_indexed",
+        "seasons": {
+          "winter": "0_indexed",
+          "spring": "0_indexed",
+          "summer": "0_indexed",
+          "autumn": "0_indexed"
+        }
+      },
+      {
+        "region_id": "bbox-FR-83",
+        "source_sha256": "24265c24b9d99119f217da597f6ebdf0ee90d1f7f62f780c17c888491b42995d",
+        "fetched_at": "2026-11-10T09:09:40.405091+00:00",
+        "indexed_count_band": "5_or_more",
+        "unknown_month_band": "0_indexed",
+        "seasons": {
+          "winter": "1_to_4_withheld",
+          "spring": "0_indexed",
+          "summer": "0_indexed",
+          "autumn": "1_to_4_withheld"
+        }
+      },
+      {
+        "region_id": "bbox-FR-84",
+        "source_sha256": "28463326a7f3e9d87aa748b9eb7a978954cc3d81a73d2b511f6d8cf670ab4e9e",
+        "fetched_at": "2026-11-10T09:09:40.694490+00:00",
+        "indexed_count_band": "0_indexed",
+        "unknown_month_band": "0_indexed",
+        "seasons": {
+          "winter": "0_indexed",
+          "spring": "0_indexed",
+          "summer": "0_indexed",
+          "autumn": "0_indexed"
+        }
+      }
+    ]
+  },
+  "collected_scope_count": 3,
+  "replay_equal": true,
+  "raw_capture_storage": "Private ignored local workspace; not committed",
+  "source_terms": [
+    {
+      "url": "https://creativecommons.org/licenses/by/4.0/legalcode.en",
+      "reviewed_on": "2026-11-10",
+      "scope": "Attribution and licence obligations; no endorsement or waiver of other rights inferred"
+    }
+  ],
+  "release_review": {
+    "decision": "Coarse aggregate audit report only; no source rows or exact positive counts released",
+    "reviewed_on": "2026-11-10",
+    "conditions": "Large public display envelopes; preserve ONF/PatriNat attribution and DOI; state query scope and minimization limits; retain scientific block",
+    "not_authorized": "Occurrence publication, pilot admission, precision or effort inference"
+  }
+}

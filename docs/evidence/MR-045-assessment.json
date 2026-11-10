@@ -1,0 +1,115 @@
+{
+  "schema_version": "pilot-feasibility-assessment-v1",
+  "assessed_at": "2026-10-31T06:46:26Z",
+  "status": "BLOCKED",
+  "selected_pilot_taxon": null,
+  "examined_taxon": "Boletus edulis",
+  "scope": "Audit of the existing aggregate receipt only; no new occurrence request.",
+  "input": {
+    "path": "docs/evidence/MR-045-input.json",
+    "sha256": "c1eaf74cae0506d8e63920b6b6763f84d5683f56b747ff3031117a079298d43d",
+    "source_commit": "4b70465a4b26ee3465d787bae08b317b8d1d35d1",
+    "source_path": "docs/evidence/MR-010-sample.json",
+    "source_url": "https://github.com/canaps13/MycoRadar/blob/4b70465a4b26ee3465d787bae08b317b8d1d35d1/docs/evidence/MR-010-sample.json",
+    "fetched_at": "2026-10-30T18:33:47.842719+00:00",
+    "sample_version": "45ca83eedc3e1de85febb6739060f8cd0854267666d65b1789e2aed62b06d489"
+  },
+  "observed_quality": {
+    "duplicate_identities": 0,
+    "generalized": 0,
+    "normalized": 20,
+    "provider_issue_counts": {
+      "CONTINENT_DERIVED_FROM_COORDINATES": 20,
+      "FOOTPRINT_WKT_MISMATCH": 18,
+      "TAXON_ID_NOT_FOUND": 20
+    },
+    "received": 20,
+    "record_license_counts": {
+      "CC-BY-4.0": 20
+    },
+    "unique_identities": 20,
+    "unknown_calendar_dates": 0,
+    "unknown_coordinate_uncertainty": 20,
+    "unusable_records": 0
+  },
+  "observed_admission": {
+    "accepted": 0,
+    "excluded": 20,
+    "processed": 20,
+    "reasons": {
+      "policy_unavailable": 20
+    }
+  },
+  "coverage": {
+    "query_country": "FR",
+    "transport_end_of_records": false,
+    "season_convention": {
+      "winter": [
+        12,
+        1,
+        2
+      ],
+      "spring": [
+        3,
+        4,
+        5
+      ],
+      "summer": [
+        6,
+        7,
+        8
+      ],
+      "autumn": [
+        9,
+        10,
+        11
+      ]
+    },
+    "counts_by_region_and_season": {
+      "FR-13": {
+        "winter": null,
+        "spring": null,
+        "summer": null,
+        "autumn": null
+      },
+      "FR-83": {
+        "winter": null,
+        "spring": null,
+        "summer": null,
+        "autumn": null
+      },
+      "FR-84": {
+        "winter": null,
+        "spring": null,
+        "summer": null,
+        "autumn": null
+      }
+    },
+    "counts_by_year": null,
+    "unknown_note": "Not measured in the input receipt; null never means zero observations."
+  },
+  "not_measured": {
+    "spatiotemporal_duplicates": null,
+    "cross_dataset_duplicates": null,
+    "verified_non_detections": null,
+    "sampling_effort": null,
+    "ecological_abundance": null,
+    "effective_resolution_m": null,
+    "uncertainty_quantiles_m": null
+  },
+  "blocking_reasons": [
+    "regional_and_seasonal_coverage_not_measured",
+    "all_coordinate_uncertainties_unknown",
+    "sampling_effort_and_non_detection_protocol_not_audited",
+    "spatiotemporal_and_cross_dataset_duplicates_not_audited",
+    "taxonomic_and_footprint_issues_require_review"
+  ],
+  "limitations": [
+    "one_dataset_two_first_pages_not_a_representative_sample",
+    "mutable_search_index_not_an_atomic_snapshot",
+    "source_bytes_not_archived_only_original_page_hashes",
+    "no_evidence_of_species_absence_or_global_provider_failure"
+  ],
+  "public_points_added": 0,
+  "scores_added": 0
+}

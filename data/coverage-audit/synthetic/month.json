@@ -1,0 +1,1 @@
+{"limit": 0, "offset": 0, "count": 15, "results": [], "facets": [{"field": "MONTH", "counts": [{"name": "12", "count": 3}, {"name": "1", "count": 4}, {"name": "7", "count": 2}, {"name": "10", "count": 5}]}]}
