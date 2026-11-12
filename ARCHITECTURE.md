@@ -199,6 +199,15 @@ publié par cette unité.
 
 ## Indicateurs d'exploitation
 
+La tranche [MR-023](docs/MR-023.md) fournit un audit hors HTTP et une reprise
+du catalogue public MR-009 par copie vérifiée vers un fichier nouveau. Les
+diagnostics agrégés distinguent âge de publication, âge source connu et âge de
+collecte, avec alerte pour les inconnus et horloges incohérentes. Aucun fichier
+actif n'est remplacé. Un [exercice PostGIS synthétique](docs/postgis-recovery.md)
+teste dump/restauration sur trois bases neuves de test et annulation sur conflit.
+Sauvegarde PostGIS d'exploitation, rétention hors machine, métriques des jobs
+et transport des alertes restent à mettre en place.
+
 - âge des dernières données publiées et âge par source
 - taux de jobs réussis / retentatives / rejoués, temps de publication
 - couverture de cellules effectivement modélisées et ratio « données insuffisantes »

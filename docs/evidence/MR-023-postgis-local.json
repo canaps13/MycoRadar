@@ -1,0 +1,20 @@
+{
+  "task": "MR-023",
+  "scope": "synthetic-PostGIS-recovery-drill-guard-tests",
+  "observed_on": "2026-11-07",
+  "platform": "Windows",
+  "python_unit_passed": 392,
+  "new_guard_cases_passed": 23,
+  "postgis_deselected": 51,
+  "ruff_lint": "passed",
+  "ruff_format": "passed",
+  "mypy": {"status": "passed", "source_files": 22},
+  "git_diff_check": "passed",
+  "local_real_dump_restore": "not_executed_Docker_Desktop_LinuxEngine_pipe_unavailable",
+  "ci": "pending_at_commit_see_PR_for_observed_results",
+  "guard_tests_are_real_recovery_proof": false,
+  "scientific_admission_changed": false,
+  "production_database_changed": false,
+  "http_image_dependencies_changed": false,
+  "remaining": ["production backup policy", "off-machine storage", "job metrics", "hosted alert delivery"]
+}
