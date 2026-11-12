@@ -227,6 +227,10 @@ La procédure est décrite dans [CLOUDFLARE_PREVIEW](docs/CLOUDFLARE_PREVIEW.md)
 
 ## Organisation et limites
 
+MR-015 prépare le [catalogue interne de noms candidats et associations sourcées](docs/MR-015.md).
+Lecture hors réseau, réponses taxonomiques capturées et paramètres explicites ;
+aucune espèce pilote admise ou ajoutée au catalogue public, aucun score.
+
 MR-048 fournit le [filtre de prépublication des occurrences](docs/occurrence-privacy.md)
 et une CLI hors réseau : sources/localisations/taxons non autorisés retenus,
 floutage conservé, sorties et journaux contrôlés. Le profil livré refuse tout ;

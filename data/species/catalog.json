@@ -1,0 +1,293 @@
+{
+  "schema_version": "species-ecology-v1",
+  "content_kind": "real_bibliographic_catalog",
+  "reference": {
+    "dataset_key": "d7dddbf4-2cf0-4f39-9b2a-bb099caae36c",
+    "scope": "gbif_backbone_legacy",
+    "license": "CC-BY-4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "citation": "GBIF Secretariat (2023). GBIF Backbone Taxonomy. Checklist dataset https://doi.org/10.15468/39omei accessed via GBIF.org on 2026-11-01.",
+    "registry_published_at": "2023-08-28T00:00:00.000+00:00",
+    "registry_modified_at": "2023-11-17T17:05:37.477+00:00",
+    "reviewed_at": "2026-11-01T17:42:16.388460+00:00",
+    "matching_service_build_sha": "2e33c6ef0768b75f39cccdbfd17b7a8439d6602f",
+    "index_clb_dataset_key": "53147",
+    "index_before_after_equal": true,
+    "snapshot_atomic": false
+  },
+  "evidence": [
+    {
+      "id": "tang-2021",
+      "citation": "Tang N, Lebreton A, Xu W, Dai Y, Yu F, Martin FM (2021). Transcriptome Profiling Reveals Differential Gene Expression of Secreted Proteases and Highly Specific Gene Repertoires Involved in Lactarius?Pinus Symbioses. Frontiers in Plant Science 12:714393. doi:10.3389/fpls.2021.714393",
+      "url": "https://www.frontiersin.org/journals/plant-science/articles/10.3389/fpls.2021.714393/full",
+      "published_year": 2021,
+      "access_basis": "full_text",
+      "text_license": "CC-BY-4.0",
+      "consulted_at": "2026-11-01T17:42:16.388460+00:00",
+      "document_body_included": false,
+      "training_use": "not_admitted"
+    },
+    {
+      "id": "agueda-2008",
+      "citation": "?gueda B, Parlad? J, Fern?ndez-Toir?n LM, Cisneros ?, de Miguel AM, Modrego MP, Mart?nez-Pe?a F, Pera J (2008). Mycorrhizal synthesis between Boletus edulis species complex and rockroses (Cistus sp.). Mycorrhiza 18:443?449. doi:10.1007/s00572-008-0192-3",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/18695982/",
+      "published_year": 2008,
+      "access_basis": "abstract",
+      "text_license": "unknown_copyright",
+      "consulted_at": "2026-11-01T17:42:16.388460+00:00",
+      "document_body_included": false,
+      "training_use": "not_admitted"
+    },
+    {
+      "id": "moore-1989",
+      "citation": "Moore LM, Jansen AE, van Griensven LJLD (1989). Pure culture synthesis of ectomycorrhizas with Cantharellus cibarius. Acta Botanica Neerlandica 38(3):273?278.",
+      "url": "https://natuurtijdschriften.nl/pub/540739",
+      "published_year": 1989,
+      "access_basis": "abstract",
+      "text_license": "CC-BY-3.0-NL",
+      "consulted_at": "2026-11-01T17:42:16.388460+00:00",
+      "document_body_included": false,
+      "training_use": "not_admitted"
+    },
+    {
+      "id": "olariaga-2016",
+      "citation": "Olariaga I, Moreno G, Manj?n JL, Salcedo I, Hofstetter V, Rodr?guez D, Buyck B (online 2016). Cantharellus (Cantharellales, Basidiomycota) revisited in Europe through a multigene phylogeny. doi:10.1007/s13225-016-0376-7",
+      "url": "https://ira.agroscope.ch/de-CH/publication/36209",
+      "published_year": 2016,
+      "access_basis": "abstract",
+      "text_license": "unknown_copyright",
+      "consulted_at": "2026-11-01T17:42:16.388460+00:00",
+      "document_body_included": false,
+      "training_use": "not_admitted"
+    }
+  ],
+  "candidates": [
+    {
+      "id": "candidate:lactarius-sanguifluus",
+      "canonical_name": "Lactarius sanguifluus",
+      "usage_key": "5248648",
+      "match": {
+        "path": "taxonomy/lactarius-sanguifluus-match.json",
+        "url": "https://api.gbif.org/v2/species/match?scientificName=Lactarius%20sanguifluus&kingdom=Fungi&rank=SPECIES",
+        "fetched_at": "2026-11-01T17:40:49.0788671Z",
+        "sha256": "111b9f1a8522981bee558515df76ba507a4b61d54ee93521593d089d53355755"
+      },
+      "usage": {
+        "path": "taxonomy/lactarius-sanguifluus-usage.json",
+        "url": "https://api.gbif.org/v1/species/5248648",
+        "fetched_at": "2026-11-01T17:40:49.1564163Z",
+        "sha256": "55751d980b84c19f2f84c60d36eb03ef8587f44ebe0bfa4758489a7d245e7f96"
+      },
+      "associations": [
+        {
+          "host_name": "Pinus sylvestris",
+          "host_rank": "species",
+          "vegetation_form": "tree",
+          "evidence_kind": "experimental_synthesis",
+          "source_ids": [
+            "tang-2021"
+          ],
+          "source_locator": "Results: In vitro Formation of Lactarius EcM Symbioses; Supplementary Figure 2C",
+          "concept_alignment": "not_verified",
+          "transfer_to_pilot": "unvalidated",
+          "exhaustive_host_list": false
+        }
+      ],
+      "thresholds": [
+        {
+          "variable": "soil_ph",
+          "unit": "pH",
+          "lower": null,
+          "upper": null,
+          "source_ids": [],
+          "scoring_enabled": false
+        },
+        {
+          "variable": "elevation_m",
+          "unit": "m",
+          "lower": null,
+          "upper": null,
+          "source_ids": [],
+          "scoring_enabled": false
+        }
+      ],
+      "concept_review_source_ids": [],
+      "name_concept": "name_in_reference_not_verified_against_study_material",
+      "pilot_admission": "not_admitted"
+    },
+    {
+      "id": "candidate:boletus-aereus",
+      "canonical_name": "Boletus aereus",
+      "usage_key": "8733688",
+      "match": {
+        "path": "taxonomy/boletus-aereus-match.json",
+        "url": "https://api.gbif.org/v2/species/match?scientificName=Boletus%20aereus&kingdom=Fungi&rank=SPECIES",
+        "fetched_at": "2026-11-01T17:40:49.2194497Z",
+        "sha256": "d4106d51067799d29e28a2cdbecd57662b9b8d8bb42192f7a049e098d1715fb9"
+      },
+      "usage": {
+        "path": "taxonomy/boletus-aereus-usage.json",
+        "url": "https://api.gbif.org/v1/species/8733688",
+        "fetched_at": "2026-11-01T17:40:49.2809947Z",
+        "sha256": "f0b358f2aa1e458de25a6f813dd64cf29a8d16d33ee826789a539696432354c0"
+      },
+      "associations": [
+        {
+          "host_name": "Cistus",
+          "host_rank": "genus",
+          "vegetation_form": "shrub",
+          "evidence_kind": "experimental_synthesis",
+          "source_ids": [
+            "agueda-2008"
+          ],
+          "source_locator": "Abstract: experimental synthesis; Cistus sp., no host species inferred from this abstract",
+          "concept_alignment": "not_verified",
+          "transfer_to_pilot": "unvalidated",
+          "exhaustive_host_list": false
+        }
+      ],
+      "thresholds": [
+        {
+          "variable": "soil_ph",
+          "unit": "pH",
+          "lower": null,
+          "upper": null,
+          "source_ids": [],
+          "scoring_enabled": false
+        },
+        {
+          "variable": "elevation_m",
+          "unit": "m",
+          "lower": null,
+          "upper": null,
+          "source_ids": [],
+          "scoring_enabled": false
+        }
+      ],
+      "concept_review_source_ids": [],
+      "name_concept": "name_in_reference_not_verified_against_study_material",
+      "pilot_admission": "not_admitted"
+    },
+    {
+      "id": "candidate:boletus-edulis",
+      "canonical_name": "Boletus edulis",
+      "usage_key": "5954958",
+      "match": {
+        "path": "taxonomy/boletus-edulis-match.json",
+        "url": "https://api.gbif.org/v2/species/match?scientificName=Boletus%20edulis&kingdom=Fungi&rank=SPECIES",
+        "fetched_at": "2026-11-01T17:40:49.3401817Z",
+        "sha256": "896050c3747fa6b5efbe2715d178bd4098167be6833904d9a170616a7051c7a9"
+      },
+      "usage": {
+        "path": "taxonomy/boletus-edulis-usage.json",
+        "url": "https://api.gbif.org/v1/species/5954958",
+        "fetched_at": "2026-11-01T17:40:49.4013139Z",
+        "sha256": "4dbb149186ef186ca98e6d59cac19e242b9a80e5a82bcbbc5f0645bf275bfc77"
+      },
+      "associations": [
+        {
+          "host_name": "Cistus",
+          "host_rank": "genus",
+          "vegetation_form": "shrub",
+          "evidence_kind": "experimental_synthesis",
+          "source_ids": [
+            "agueda-2008"
+          ],
+          "source_locator": "Abstract: experimental synthesis; Cistus sp., no host species inferred from this abstract",
+          "concept_alignment": "not_verified",
+          "transfer_to_pilot": "unvalidated",
+          "exhaustive_host_list": false
+        }
+      ],
+      "thresholds": [
+        {
+          "variable": "soil_ph",
+          "unit": "pH",
+          "lower": null,
+          "upper": null,
+          "source_ids": [],
+          "scoring_enabled": false
+        },
+        {
+          "variable": "elevation_m",
+          "unit": "m",
+          "lower": null,
+          "upper": null,
+          "source_ids": [],
+          "scoring_enabled": false
+        }
+      ],
+      "concept_review_source_ids": [],
+      "name_concept": "name_in_reference_not_verified_against_study_material",
+      "pilot_admission": "not_admitted"
+    },
+    {
+      "id": "candidate:cantharellus-cibarius",
+      "canonical_name": "Cantharellus cibarius",
+      "usage_key": "5249504",
+      "match": {
+        "path": "taxonomy/cantharellus-cibarius-match.json",
+        "url": "https://api.gbif.org/v2/species/match?scientificName=Cantharellus%20cibarius&kingdom=Fungi&rank=SPECIES",
+        "fetched_at": "2026-11-01T17:40:49.4624555Z",
+        "sha256": "e6f39aeb26eca7c96b500a67d58ffcc688284aae8956b74158aa097cfacf0593"
+      },
+      "usage": {
+        "path": "taxonomy/cantharellus-cibarius-usage.json",
+        "url": "https://api.gbif.org/v1/species/5249504",
+        "fetched_at": "2026-11-01T17:40:49.5221087Z",
+        "sha256": "8629d55329ebdea20be0f0b750fdaec0c67263f6cf16bba40a7390d0a6de8142"
+      },
+      "associations": [
+        {
+          "host_name": "Pinus sylvestris",
+          "host_rank": "species",
+          "vegetation_form": "tree",
+          "evidence_kind": "experimental_synthesis",
+          "source_ids": [
+            "moore-1989"
+          ],
+          "source_locator": "Abstract: pure culture synthesis under the name used in 1989",
+          "concept_alignment": "not_verified",
+          "transfer_to_pilot": "unvalidated",
+          "exhaustive_host_list": false
+        },
+        {
+          "host_name": "Betula pubescens",
+          "host_rank": "species",
+          "vegetation_form": "tree",
+          "evidence_kind": "experimental_synthesis",
+          "source_ids": [
+            "moore-1989"
+          ],
+          "source_locator": "Abstract: pure culture synthesis under the name used in 1989",
+          "concept_alignment": "not_verified",
+          "transfer_to_pilot": "unvalidated",
+          "exhaustive_host_list": false
+        }
+      ],
+      "thresholds": [
+        {
+          "variable": "soil_ph",
+          "unit": "pH",
+          "lower": null,
+          "upper": null,
+          "source_ids": [],
+          "scoring_enabled": false
+        },
+        {
+          "variable": "elevation_m",
+          "unit": "m",
+          "lower": null,
+          "upper": null,
+          "source_ids": [],
+          "scoring_enabled": false
+        }
+      ],
+      "concept_review_source_ids": [
+        "olariaga-2016"
+      ],
+      "name_concept": "name_in_reference_not_verified_against_study_material",
+      "pilot_admission": "not_admitted"
+    }
+  ]
+}

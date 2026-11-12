@@ -1,7 +1,16 @@
 # Registre des fournisseurs de données
 
-**Revue : 29 octobre 2026 — MR-005, complété par MR-007.** Ce registre documentaire couvre des
-produits candidats France/monde, sans activer un fournisseur ni ingérer ses données.
+MR-015 ajoute une admission limitée des [huit réponses taxonomiques GBIF](../data/species/README.md)
+capturées le 1er novembre 2026 sous CC BY 4.0, référence historique explicitée.
+Les faits bibliographiques sont cités sans corps d'article et restent non admis
+pour entraînement. Cette revue ne concerne aucune occurrence ni publication de
+scores ; [sources, droits et limites](MR-015.md).
+
+**Revue initiale : 29 octobre 2026 — MR-005, complété par MR-007 ; complément
+taxonomique MR-015 du 1er novembre 2026.** Le registre initial documentait des
+produits candidats France/monde sans les activer. Les admissions ultérieures
+ont le périmètre précis indiqué dans leurs notices et ne renouvellent pas la
+revue de tous les autres produits.
 La Provence ne détermine pas les droits des autres territoires. Une autorisation
 sur un produit ne s'étend pas aux autres produits d'un même organisme.
 
