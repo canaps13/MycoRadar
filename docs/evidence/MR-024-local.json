@@ -1,0 +1,33 @@
+{
+  "task": "MR-024",
+  "scope": "private-quality-audit-invented-fixture-only",
+  "observed_on": "2026-11-07",
+  "platform": "Windows",
+  "python_unit_passed": 391,
+  "new_quality_cases_passed": 48,
+  "postgis_deselected": 51,
+  "ruff_lint": "passed",
+  "ruff_format": "passed",
+  "mypy": {"status": "passed", "source_files": 21},
+  "git_diff_check": "passed",
+  "native_cli_smoke": {
+    "status": "ok",
+    "input_rows": 7,
+    "representatives_for_audit_only": 3,
+    "identical_duplicate_rows": 1,
+    "conflicting_identity_groups": 1,
+    "invalid_rows": 1,
+    "rejected_identity_rows": 3,
+    "coincident_event_candidate_groups": 1,
+    "records_emitted": 0,
+    "publication_allowed": false,
+    "deterministic_cli": true
+  },
+  "local_docker": "not_executed_LinuxEngine_pipe_unavailable",
+  "ci": "pending_at_commit_see_PR_for_observed_results",
+  "real_observation_audit_performed": false,
+  "scientific_admission": "not_performed",
+  "sampling_effort": "unknown",
+  "spatial_bias_assessment": "not_performed",
+  "database_or_http_changed": false
+}
