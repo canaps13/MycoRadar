@@ -199,6 +199,12 @@ publié par cette unité.
 
 ## Indicateurs d'exploitation
 
+[ADR-010](docs/adr/010-private-atomic-snapshots.md) définit la tranche MR-021 de
+snapshots privés : objets immuables, identités de cible région/taxon/échéance/
+couche, tête atomique avec précondition et rollback validé sur un seul hôte.
+Le mécanisme ne calcule ni n'admet de résultat scientifique et n'ajoute aucune
+route HTTP. Voir le [contrat MR-021](docs/MR-021.md).
+
 - âge des dernières données publiées et âge par source
 - taux de jobs réussis / retentatives / rejoués, temps de publication
 - couverture de cellules effectivement modélisées et ratio « données insuffisantes »
