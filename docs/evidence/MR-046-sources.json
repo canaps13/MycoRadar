@@ -1,0 +1,40 @@
+{
+  "recorded_at": "2026-11-01T17:07:54.136291+00:00",
+  "purpose": "Scientific references for design; no source dataset admission or numeric thresholds derived",
+  "references": [
+    {
+      "doi": "10.1111/ecog.02881",
+      "authors": "Roberts et al.",
+      "year": 2017,
+      "title": "Cross-validation strategies for data with temporal, spatial, hierarchical, or phylogenetic structure",
+      "url": "https://doi.org/10.1111/ecog.02881",
+      "observed_access": "Indexed abstract read. Direct publisher URL returned HTTP 403; indexed WSL PDF URL returned HTTP 404. Full article not claimed read.",
+      "used_for": "Dependence can bias random validation; match blocking to the transfer objective, considering extrapolation."
+    },
+    {
+      "doi": "10.1111/2041-210X.13107",
+      "authors": "Valavi et al.",
+      "year": 2019,
+      "first_online": "2018-10-12",
+      "title": "blockCV: An R package for generating spatially or environmentally separated folds for k-fold cross-validation of species distribution models",
+      "url": "https://besjournals.onlinelibrary.wiley.com/doi/10.1111/2041-210X.13107",
+      "observed_access": "Full publisher HTML accessible; abstract and sections on folds, blocks, autocorrelation and buffers consulted.",
+      "used_for": "Block construction and distance scale require a data-informed design. No R package installed or copied."
+    },
+    {
+      "doi": "10.1111/j.1600-0587.2013.00321.x",
+      "authors": "Hastie and Fithian",
+      "year": 2013,
+      "title": "Inference from presence-only data; the ongoing controversy",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/25492992/",
+      "observed_access": "PubMed abstract and bibliographic record accessible. Direct PMC view showed a browser check; it was not bypassed.",
+      "used_for": "Presence-only and background data do not identify occurrence probability without additional assumptions."
+    }
+  ],
+  "project_choices_not_established_by_these_papers": [
+    "numeric distances and sample thresholds",
+    "minimum capture gain or area fraction",
+    "pilot taxon and territory",
+    "validated model or probability calibration"
+  ]
+}

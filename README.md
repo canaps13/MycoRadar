@@ -227,6 +227,11 @@ La procédure est décrite dans [CLOUDFLARE_PREVIEW](docs/CLOUDFLARE_PREVIEW.md)
 
 ## Organisation et limites
 
+MR-046 prépare le [protocole d'évaluation indépendant](docs/MR-046.md) et sa CLI
+hors réseau : audit des partitions, fuites temporelles et groupes dépendants.
+Le [plan pilote](data/evaluation/pilot-plan.json) demeure bloqué, sans seuils
+scientifiques justifiés ni jeu de test réel gelé. Les exemples sont inventés.
+
 MR-048 fournit le [filtre de prépublication des occurrences](docs/occurrence-privacy.md)
 et une CLI hors réseau : sources/localisations/taxons non autorisés retenus,
 floutage conservé, sorties et journaux contrôlés. Le profil livré refuse tout ;
