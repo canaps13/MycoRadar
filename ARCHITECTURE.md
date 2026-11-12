@@ -199,6 +199,12 @@ publié par cette unité.
 
 ## Indicateurs d'exploitation
 
+[ADR-009](docs/adr/009-local-job-queue.md) ajoute le socle MR-020 de cadence et
+file SQLite persistante sur un seul hôte, hors requêtes HTTP. Il conserve baux,
+cooldowns et clés de jobs ; les adaptateurs doivent rendre leurs écritures
+idempotentes. Aucun provider ni déclencheur hébergé n'est activé par ce socle.
+Le stockage métier reste PostGIS. Voir le [contrat MR-020](docs/MR-020.md).
+
 - âge des dernières données publiées et âge par source
 - taux de jobs réussis / retentatives / rejoués, temps de publication
 - couverture de cellules effectivement modélisées et ratio « données insuffisantes »

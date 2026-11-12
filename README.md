@@ -1,5 +1,11 @@
 # MycoRadar
 
+Le [socle de jobs MR-020](docs/MR-020.md) ajoute une file locale persistante,
+des échéances horaires, des reprises et des cooldowns fournisseur hors HTTP.
+Aucun provider ou déclencheur hébergé n'est activé. Recette synthétique :
+`PYTHONPATH=api/src python scripts/check_job_queue.py` (PowerShell : définir
+`$env:PYTHONPATH='api/src'` puis lancer Python).
+
 Plateforme de favorabilité écologique et de conditions de fructification des
 champignons, conçue pour la France puis d'autres pays. La Provence est le pilote.
 
