@@ -3,8 +3,8 @@
 from typing import Annotated, Literal
 from urllib.parse import urlencode
 
-from fastapi import APIRouter, Depends, Query, Request
-from fastapi.responses import JSONResponse
+from fastapi import APIRouter, Depends, Header, Query, Request
+from fastapi.responses import JSONResponse, Response
 
 from mycoradar.catalog import Catalog
 from mycoradar.catalog_models import (
@@ -21,6 +21,7 @@ from mycoradar.catalog_models import (
     Source,
     Species,
 )
+from mycoradar.http_cache import CACHE_POLICY, etag, not_modified
 
 
 class CatalogError(Exception):
@@ -58,7 +59,19 @@ async def query_error_handler(_request: Request, _exc: Exception) -> JSONRespons
     )
 
 
-def get_catalog(request: Request) -> Catalog:
+def get_catalog(
+    request: Request,
+    _if_none_match: Annotated[
+        str | None,
+        Header(
+            alias="If-None-Match",
+            description=(
+                "Optional weak/strong ETag list or *. Validated successes only; "
+                "maximum 4096 characters and 32 tags."
+            ),
+        ),
+    ] = None,
+) -> Catalog:
     allowed = {"limit", "offset", "bbox", "country", "region_id", "catalog_version"}
     if set(request.query_params) - allowed or any(
         len(request.query_params.getlist(key)) != 1 for key in request.query_params
@@ -114,7 +127,22 @@ class Filters:
 router = APIRouter(
     prefix="/v1",
     tags=["public-catalogue"],
-    responses={code: {"model": ErrorResponse} for code in (404, 409, 422, 503)},
+    responses={
+        **{code: {"model": ErrorResponse} for code in (404, 409, 422, 503)},
+        200: {
+            "headers": {
+                "ETag": {"schema": {"type": "string"}},
+                "Cache-Control": {"schema": {"type": "string"}},
+            }
+        },
+        304: {
+            "description": "Validated catalogue representation unchanged; no response body",
+            "headers": {
+                "ETag": {"schema": {"type": "string"}},
+                "Cache-Control": {"schema": {"type": "string"}},
+            },
+        },
+    },
 )
 CatalogDep = Annotated[Catalog, Depends(get_catalog)]
 FiltersDep = Annotated[Filters, Depends()]
@@ -182,11 +210,33 @@ def page_for(
     )
 
 
+def catalogue_response(
+    kind: Literal["regions", "species", "cells", "metadata"],
+    request: Request,
+    catalog: Catalog,
+    query: Filters,
+) -> Response:
+    # Validate availability, version and filters before considering any conditional header.
+    page = page_for(kind, request, catalog, query)
+    response = JSONResponse(page.model_dump(mode="json"))
+    headers = {"Cache-Control": CACHE_POLICY, "ETag": etag(bytes(response.body))}
+    candidates = request.headers.getlist("if-none-match")
+    conditional = (
+        ",".join(candidates)
+        if candidates and len(candidates) <= 32 and sum(map(len, candidates)) <= 4096
+        else None
+    )
+    if not_modified(conditional, headers["ETag"]):
+        return Response(status_code=304, headers=headers)
+    response.headers.update(headers)
+    return response
+
+
 @router.get(
     "/regions", response_model=Page[Region], summary="List public administrative display geometries"
 )
 def regions(request: Request, catalog: CatalogDep, query: FiltersDep) -> object:
-    return page_for("regions", request, catalog, query)
+    return catalogue_response("regions", request, catalog, query)
 
 
 @router.get(
@@ -195,7 +245,7 @@ def regions(request: Request, catalog: CatalogDep, query: FiltersDep) -> object:
     summary="List admitted public taxa, never inferred occurrences",
 )
 def species(request: Request, catalog: CatalogDep, query: FiltersDep) -> object:
-    return page_for("species", request, catalog, query)
+    return catalogue_response("species", request, catalog, query)
 
 
 @router.get(
@@ -204,7 +254,7 @@ def species(request: Request, catalog: CatalogDep, query: FiltersDep) -> object:
     summary="List precomputed public cells; no HTTP grid generation",
 )
 def cells(request: Request, catalog: CatalogDep, query: FiltersDep) -> object:
-    return page_for("cells", request, catalog, query)
+    return catalogue_response("cells", request, catalog, query)
 
 
 @router.get(
@@ -213,4 +263,4 @@ def cells(request: Request, catalog: CatalogDep, query: FiltersDep) -> object:
     summary="List source versions, rights, dates and transformations",
 )
 def metadata(request: Request, catalog: CatalogDep, query: FiltersDep) -> object:
-    return page_for("metadata", request, catalog, query)
+    return catalogue_response("metadata", request, catalog, query)

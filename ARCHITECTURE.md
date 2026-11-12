@@ -36,6 +36,12 @@ Pour toute prédiction : modèle, version, jeux sources, run, timestamp calcul/p
 
 ## ADR-004 — Cadence hybride, pas de recalcul mondial chaque heure
 
+La tranche [MR-022](docs/MR-022.md) ajoute la revalidation ETag des GET du
+catalogue public MR-009. La politique `private, no-cache` conserve une validation
+serveur avant réutilisation ; les erreurs restent non stockables et aucune
+fraîcheur scientifique n'est déduite d'un `304`. Publication quotidienne et
+activation CDN restent distinctes et non livrées par cette tranche.
+
 - Cron horaire : **polling léger** version/horodatage et mise en file des changements.
 - Job métier : validation, ingestion par tranche et recalcul **incrémental**.
 - Quotidien : contrôle de complétude, reprise des échecs, nouveau snapshot si pertinent.
